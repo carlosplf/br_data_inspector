@@ -10,7 +10,7 @@ class CSVConverter():
         """
         Convert a CSV to a dict.
         Args:
-            filename: str filename.
+            filename: (str) filename.
         """
         with open(filename, encoding='ISO-8859-1') as csv_file:
             csv_reader = csv.DictReader(csv_file, delimiter=";")

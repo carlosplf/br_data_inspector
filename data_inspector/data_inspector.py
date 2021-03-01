@@ -17,25 +17,24 @@ class DataInspector():
             date: (str) "YYYYMM"
         """
         #WARNING: date filtering not implemented
-
         if not entity_type:
             print ("Superior ou Subordinado not select! Return empty list.")
             return []
 
         query_filter = {
             "Código Órgão " + entity_type: str(entity_id)
-            
         }
 
         result = self.db_connector.query(filter=query_filter)
         return self.__transform_data_in_list(query_result=result)
 
-    def get_all_entities(self, entity_type=None):
+    def get_all_entities(self, entity_type=None, date=""):
         """
         Get all entities names and IDs.
         Args:
             entity_type: (str) "Superior" or "Subordinado"
         """
+        #WARNING: date filtering not implemented
         query_filter = {}
         query_fields = {
             "Código Órgão " + entity_type: 1,
@@ -67,6 +66,7 @@ class DataInspector():
         all_data = {}
         id_key_field = "Código Órgão " + entity_type
         for data_entry in query_result:
+            data_entry.pop("_id", None)
             all_data[data_entry[id_key_field]] = data_entry
         return all_data
 
