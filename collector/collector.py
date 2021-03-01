@@ -3,6 +3,7 @@ from csv_converter import csv_converter
 from db_connector import db_connector
 from data_inspector import data_inspector
 import json
+import logging
 
 TASKS_FILENAME = "task_list.json"
 
@@ -29,10 +30,10 @@ class Collector():
             self.__insert_to_db(data_as_dict)
 
     def __start_db_connection(self):
-        print ( "Connecting do DB...")
+        logging.debug("Connecting do DB...")
         self.db_connection = db_connector.DbConnector()
         self.db_connection.connect()
-        print ("Done")
+        logging.debug("Done")
 
     def __parse_tasklist(self):
         json_file = open(TASKS_FILENAME)
@@ -41,21 +42,21 @@ class Collector():
         self.task_list = json_as_dict
 
     def __collect_reports(self):
-        print ("Collecting data from gov...")
+        logging.debug("Collecting data from gov...")
         self.report_downloader.download_multiple_reports(self.task_list)
-        print ("Extracting...")
+        logging.debug("Extracting...")
         self.report_downloader.extract_all_files()
-        print ("Done")
+        logging.debug("Done")
         self.extracted_reports = self.report_downloader.get_extracted_reports()
 
     def __convert_report(self, report_name):
-        print ("Converting report: ", report_name)
+        logging.debug("Converting report: ", report_name)
         data_as_dict = self.csv_converter.csv_to_dict(report_name)
-        print ("Done")
+        logging.debug("Done")
         return data_as_dict
 
     def __insert_to_db(self, data_as_dict):
-        print ("Saving to Db...")
+        logging.debug("Saving to Db...")
         for data_key in data_as_dict.keys():
             self.db_connection.insert_data(data_as_dict[data_key])
-        print ("Done")
+        logging.debug("Done")

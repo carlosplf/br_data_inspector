@@ -14,7 +14,7 @@ class DbConnector():
     def insert_data(self, data):
         #need to deal with possible key duplication
         db_response = self.mycol.insert_one(data)
-        print("Document inserted with id: ", db_response.inserted_id)
+        logging.debug("Document inserted with id: ", db_response.inserted_id)
 
     def delete_all(self):
         result = self.mycol.delete_many({})

@@ -17,7 +17,7 @@ class DataInspector():
             date: (str) "YYYYMM"
         """
         if not entity_type:
-            print ("Superior ou Subordinado not select! Return empty list.")
+            logging.warning("Superior ou Subordinado not select! Return empty list.")
             return []
 
         query_filter = {
@@ -38,7 +38,7 @@ class DataInspector():
             entity_type: (str) "Superior" or "Subordinado"
         """
         if not entity_type:
-            print ("Superior ou Subordinado not select! Return empty list.")
+            logging.warning("Superior ou Subordinado not select! Return empty list.")
             return []
             
         query_filter = {}

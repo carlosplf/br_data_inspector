@@ -13,7 +13,7 @@ class ReportDownloader():
         Receives a Dict containing instructions to download reports from gov.
         All reports are stored as a ZIP file.
         """
-        print ("Downloading multiple reports...")
+        logging.debug("Downloading multiple reports...")
         for key in task_list:
             url = task_list[key]["link"]
             for arg in task_list[key]["args"]:
@@ -28,17 +28,17 @@ class ReportDownloader():
         """
         link = link + arg
         zip_filename = arg + "-repot.zip"
-        print ("Link:", link)
-        print ("Output filename: ", zip_filename)
+        logging.debug("Link:", link)
+        logging.debug("Output filename: ", zip_filename)
         urllib.request.urlretrieve(link, zip_filename)
-        print ("Done")
+        logging.debug("Done")
         
     def extract_all_files(self):
         """
         Extract all ZIP files inside project folder.
         """
         all_files = glob.glob("./*.zip")
-        print (all_files)
+        logging.debug(all_files)
         for file in all_files:
             self.extract_file(file)
 
