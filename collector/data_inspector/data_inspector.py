@@ -1,4 +1,4 @@
-from db_connector import db_connector
+from collector.db_connector import db_connector
 
 class DataInspector():
 

@@ -1,6 +1,6 @@
 from flask import Flask
-from data_inspector import data_inspector
-from db_connector import db_connector
+from collector.data_inspector import data_inspector
+from collector.db_connector import db_connector
 
 app = Flask(__name__)
 db = db_connector.DbConnector()

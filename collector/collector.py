@@ -1,7 +1,7 @@
-from report_downloader import report_downloader
-from csv_converter import csv_converter
-from db_connector import db_connector
-from data_inspector import data_inspector
+from collector.report_downloader import report_downloader
+from collector.csv_converter import csv_converter
+from collector.db_connector import db_connector
+from collector.data_inspector import data_inspector
 import json
 import logging
 
@@ -50,7 +50,7 @@ class Collector():
         self.extracted_reports = self.report_downloader.get_extracted_reports()
 
     def __convert_report(self, report_name):
-        logging.debug("Converting report: ", report_name)
+        logging.debug("Converting report: %s", report_name)
         data_as_dict = self.csv_converter.csv_to_dict(report_name)
         logging.debug("Done")
         return data_as_dict

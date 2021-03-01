@@ -2,6 +2,7 @@ import zipfile
 import time
 import glob
 import urllib.request
+import logging
 
 
 class ReportDownloader():
@@ -28,8 +29,8 @@ class ReportDownloader():
         """
         link = link + arg
         zip_filename = arg + "-repot.zip"
-        logging.debug("Link:", link)
-        logging.debug("Output filename: ", zip_filename)
+        logging.debug("Link: %s", link)
+        logging.debug("Output filename: %s", zip_filename)
         urllib.request.urlretrieve(link, zip_filename)
         logging.debug("Done")
         time.sleep(1)
