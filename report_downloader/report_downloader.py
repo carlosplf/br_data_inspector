@@ -32,6 +32,7 @@ class ReportDownloader():
         logging.debug("Output filename: ", zip_filename)
         urllib.request.urlretrieve(link, zip_filename)
         logging.debug("Done")
+        time.sleep(1)
         
     def extract_all_files(self):
         """
