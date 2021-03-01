@@ -16,7 +16,6 @@ class DataInspector():
             entity_type: (str) "Superior" or "Subordinado"
             date: (str) "YYYYMM"
         """
-        #WARNING: date filtering not implemented
         if not entity_type:
             print ("Superior ou Subordinado not select! Return empty list.")
             return []
@@ -25,23 +24,38 @@ class DataInspector():
             "Código Órgão " + entity_type: str(entity_id)
         }
 
+        if date:
+            filter_date = self.__parse_date(date)
+            query_filter["Ano e mês do lançamento"] = filter_date
+
         result = self.db_connector.query(filter=query_filter)
         return self.__transform_data_in_list(query_result=result)
 
-    def get_all_entities(self, entity_type=None, date=""):
+    def get_all_entities(self, entity_type=None, date=None):
         """
         Get all entities names and IDs.
         Args:
             entity_type: (str) "Superior" or "Subordinado"
         """
-        #WARNING: date filtering not implemented
+        if not entity_type:
+            print ("Superior ou Subordinado not select! Return empty list.")
+            return []
+            
         query_filter = {}
+       
+        if date:
+            filter_date = self.__parse_date(date)
+            query_filter = {"Ano e mês do lançamento": filter_date}
+
         query_fields = {
             "Código Órgão " + entity_type: 1,
             "Nome Órgão " + entity_type: 1
         }
         result = self.db_connector.query(filter=query_filter, fields=query_fields)
         return self.__transform_data_in_dict(query_result=result, entity_type=entity_type)
+
+    def __parse_date(self, date):
+        return date[:4] + "/" + date[4:]
 
     def __transform_data_in_list(self, query_result):
         """
