@@ -24,8 +24,11 @@ class DbConnector():
         result = self.mycol.count_documents({})
         return result
 
-    def query(self, filter={}):
-        result = self.mycol.find(filter)
+    def query(self, filter={}, fields=None):
+        if not fields:
+            result = self.mycol.find(filter)
+        else:
+            result = self.mycol.find(filter, fields)
         return result
     
 
