@@ -65,9 +65,9 @@ class DataInspector():
         """
         all_data = []
         for data_entry in query_result:
-            all_data.append(
-                dict(data_entry)
-            )
+            data_as_dict = dict(data_entry)
+            data_as_dict.pop("_id", None)
+            all_data.append(data_as_dict)
         return all_data
     
     def __transform_data_in_dict(self, query_result, entity_type):
