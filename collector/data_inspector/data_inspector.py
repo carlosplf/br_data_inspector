@@ -54,6 +54,27 @@ class DataInspector():
         result = self.db_connector.query(filter=query_filter, fields=query_fields)
         return self.__transform_data_in_dict(query_result=result, entity_type=entity_type)
 
+    def search_entity(self, search_term=None, entity_type=None, date=None):
+        """
+        Search for an entity, 'Subirdonado' ou 'Superior' in DB.
+        Args:
+            search_term: (str) search term for entity name
+            entity_type: (str) "Superior" or "Subordinado"
+            date: (str) "YYYYMM"
+        """
+        query_filter = {
+            str("Nome Órgão " + entity_type): {"$regex": search_term} 
+        }
+       
+        if date:
+            filter_date = self.__parse_date(date)
+            query_filter["Ano e mês do lançamento"] =  filter_date
+
+        print (query_filter)
+
+        result = self.db_connector.query(filter=query_filter)
+        return self.__transform_data_in_list(query_result=result)
+
     def __parse_date(self, date):
         return date[:4] + "/" + date[4:]
 
