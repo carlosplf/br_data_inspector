@@ -29,7 +29,7 @@ class ReportDownloader():
         """
         link = link + arg
         zip_filename = arg + "-repot.zip"
-        logging.debug("Link: %s", link)
+        logging.debug("Downloading from Link: %s", link)
         logging.debug("Output filename: %s", zip_filename)
         urllib.request.urlretrieve(link, zip_filename)
         logging.debug("Done")
