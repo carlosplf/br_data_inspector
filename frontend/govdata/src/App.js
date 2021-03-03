@@ -1,13 +1,17 @@
-import './App.css';
+//Comented to use styled-components in DataTable.js
+//import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <p>
-        GovData React App
-      </p>
-    </div>
-  );
+import React from 'react';
+import DataTable from './DataTable';
+
+class App extends React.Component {
+  render (){
+    return (
+      <div className="App">
+        <DataTable />
+      </div>
+    );
+  }
 }
 
 export default App;

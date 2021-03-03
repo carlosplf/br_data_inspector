@@ -1,4 +1,5 @@
 from collector.db_connector import db_connector
+import logging
 
 class DataInspector():
 
@@ -52,7 +53,7 @@ class DataInspector():
             "Nome Órgão " + entity_type: 1
         }
         result = self.db_connector.query(filter=query_filter, fields=query_fields)
-        return self.__transform_data_in_dict(query_result=result, entity_type=entity_type)
+        return self.__transform_data_in_list(query_result=result, entity_type=entity_type, remove_duplicated=True)
 
     def search_entity(self, search_term=None, entity_type=None, date=None):
         """
@@ -76,7 +77,7 @@ class DataInspector():
     def __parse_date(self, date):
         return date[:4] + "/" + date[4:]
 
-    def __transform_data_in_list(self, query_result):
+    def __transform_data_in_list(self, query_result, entity_type, remove_duplicated=False):
         """
         Return a LIST with all data collected.
         Args:
@@ -87,7 +88,25 @@ class DataInspector():
             data_as_dict = dict(data_entry)
             data_as_dict.pop("_id", None)
             all_data.append(data_as_dict)
+        
+        if remove_duplicated:
+            all_data = self.__remove_duplicated(all_data, entity_type)
         return all_data
+
+    def __remove_duplicated(self, original_list, entity_type):
+        logging.warning("Removing duplicated")
+        logging.warning("List started with %d entries.", len(original_list))
+        buffer_ids_list = []
+        new_data_list = []
+        id_key_field = "Código Órgão " + entity_type
+        
+        for data in original_list:
+            if data[id_key_field] not in buffer_ids_list:
+                buffer_ids_list.append(data[id_key_field])
+                new_data_list.append(data)
+        
+        logging.warning("List finished with %d entries.", len(new_data_list))
+        return new_data_list
     
     def __transform_data_in_dict(self, query_result, entity_type):
         """

@@ -1,9 +1,11 @@
 from flask import Flask
 from flask import request
+from flask_cors import CORS
 from collector.data_inspector import data_inspector
 from collector.db_connector import db_connector
 
 app = Flask(__name__)
+CORS(app)
 db = db_connector.DbConnector()
 db.connect()
 
@@ -14,17 +16,20 @@ def index():
 @app.route('/superior/<date>')
 def get_all_superior(date):
     di = data_inspector.DataInspector(db)
-    return di.get_all_entities("Superior", date)
+    response = {"data": di.get_all_entities("Superior", date)}
+    return response
 
 @app.route('/subordinado/<date>')
 def get_all_subordinado(date):
     di = data_inspector.DataInspector(db)
-    return di.get_all_entities("Subordinado", date)
+    response = {"data": di.get_all_entities("Subordinado", date)}
+    return response
 
-@app.route('/superior/<date>/<d>')
+@app.route('/superior/<date>/<id>')
 def get_superior_data(date, id):
     di = data_inspector.DataInspector(db)
-    return {"data": di.get_entity_data(id, "Superior", date)}
+    response = {"data": di.get_entity_data(id, "Superior", date)}
+    return response
 
 @app.route('/subordinado/<date>/<id>')
 def get_subordinado_data(date, id):
