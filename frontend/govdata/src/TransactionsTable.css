@@ -1,8 +1,12 @@
-.DataTable{
+.TransactionsTable{
     padding: 1rem;
     font-size: large;  
 }
 
 table {
     color: #202020;
+}
+
+td {
+    text-align: center;
 }

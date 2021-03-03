@@ -1,9 +1,8 @@
 import React from 'react';
-import './DataTable.css'
 import { useTable } from 'react-table'
+import './TransactionsTable.css'
 
 function Table({ columns, data }) {
-  // Use the state and functions returned from useTable to build your UI
   const {
     getTableProps,
     getTableBodyProps,
@@ -15,7 +14,6 @@ function Table({ columns, data }) {
     data,
   })
 
-  // Render the UI for your table
   return (
     <table {...getTableProps()}>
       <thead>
@@ -43,19 +41,55 @@ function Table({ columns, data }) {
   )
 }
 
-function TableBuilder(data) {
+function TableBuilder(entity_type, data) {
 
-  console.log("Building table...");
+  console.log("Building table2...");
   console.log(data);
 
   const columns = [
     {
-      Header: 'ID Órgão Subordinado',
-      accessor: 'Código Órgão Subordinado',
+      Header: 'ID Órgão Superior',
+      accessor: 'Código Órgão Superior',
+    },
+    {
+        Header: 'Nome Órgão Superior',
+        accessor: 'Nome Órgão Superior',
+    },
+    {
+        Header: 'Ano e mês do lançamento',
+        accessor: 'Ano e mês do lançamento',
+    },
+    {
+        Header: 'ID Órgão Subordinado',
+        accessor: 'Código Órgão Subordinado',
     },
     {
       Header: 'Nome Órgão Subordinado',
       accessor: 'Nome Órgão Subordinado',
+    },
+    {
+        Header: 'Valor Empenhado (R$)',
+        accessor: 'Valor Empenhado (R$)',
+    },
+    {
+        Header: 'Valor Liquidado (R$)',
+        accessor: 'Valor Liquidado (R$)',
+    },
+    {
+        Header: 'Valor Pago (R$)',
+        accessor: 'Valor Pago (R$)',
+    },
+    {
+        Header: 'Valor Restos a Pagar Cancelado (R$)',
+        accessor: 'Valor Restos a Pagar Cancelado (R$)',
+    },
+    {
+        Header: 'Valor Restos a Pagar Inscritos (R$)',
+        accessor: 'Valor Restos a Pagar Inscritos (R$)',
+    },
+    {
+        Header: 'Valor Restos a Pagar Pagos (R$)',
+        accessor: 'Valor Restos a Pagar Pagos (R$)',
     },
   ];
 
@@ -66,7 +100,7 @@ function TableBuilder(data) {
   );
 }
 
-class DataTable extends React.Component{
+class TransactionsTable extends React.Component{
   constructor(props) {
     super(props);
     this.state = {loading: true, data: undefined};
@@ -82,7 +116,8 @@ class DataTable extends React.Component{
   }
 
   requestDataFromAPI(){
-    fetch("http://localhost:8080/subordinado/202001")
+    var request_url = "http://localhost:8080/" + this.props.entity_type.toLowerCase() + "/202001/26280";
+    fetch(request_url)
     .then(response => response.json())
     .then(data => this.setState({ data: data["data"], loading: false}));
   }
@@ -92,10 +127,10 @@ class DataTable extends React.Component{
         return (<p>Loading...</p>);
     }
     else{
-      let table_builder = TableBuilder(this.state.data);
-      return (<div className="DataTable">{table_builder}</div>)
+      let table_builder = TableBuilder(this.props.entity_type, this.state.data);
+      return (<div className="TransactionsTable">{table_builder}</div>)
     }
   }
 }
 
-export default DataTable;
+export default TransactionsTable;

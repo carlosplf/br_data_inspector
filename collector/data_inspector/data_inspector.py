@@ -30,7 +30,7 @@ class DataInspector():
             query_filter["Ano e mês do lançamento"] = filter_date
 
         result = self.db_connector.query(filter=query_filter)
-        return self.__transform_data_in_list(query_result=result)
+        return self.__transform_data_in_list(query_result=result, entity_type=entity_type, remove_duplicated=False)
 
     def get_all_entities(self, entity_type=None, date=None):
         """
@@ -94,6 +94,12 @@ class DataInspector():
         return all_data
 
     def __remove_duplicated(self, original_list, entity_type):
+        """
+        Remove duplicated entries from BD.
+        Args:
+            original_list: (list) List with all elements.
+            entity_type: (str) "Superior" or "Subordinado"
+        """
         logging.warning("Removing duplicated")
         logging.warning("List started with %d entries.", len(original_list))
         buffer_ids_list = []
