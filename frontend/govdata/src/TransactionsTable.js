@@ -43,9 +43,6 @@ function Table({ columns, data }) {
 
 function TableBuilder(entity_type, data) {
 
-  console.log("Building table2...");
-  console.log(data);
-
   const columns = [
     {
       Header: 'ID Órgão Superior',
@@ -111,7 +108,6 @@ class TransactionsTable extends React.Component{
       console.log("Requesting data...")
       this.setState({loading: true});
       this.requestDataFromAPI();
-      console.log("Done");
     }
   }
 
