@@ -1,4 +1,5 @@
 import React from 'react';
+import './Search.css'
 
 
 class Search extends React.Component{
@@ -16,11 +17,8 @@ class Search extends React.Component{
     render(){
         return(
             <div>
-                <form onSubmit={(event) => this.props.handleSubmit(event, this.state.value)}>
-                    <label>
-                        Entity ID :
-                        <input type="text" value={this.state.value} onChange={(event) => this.handleChange(event)} />
-                    </label>
+                <form class="Search" onSubmit={(event) => this.props.handleSubmit(event, this.state.value)}> 
+                    <input placeholder="ID do Órgão..." type="text" value={this.state.value} onChange={(event) => this.handleChange(event)} />
                     <input type="submit" value="Submit"/>
                 </form>
             </div>

@@ -122,13 +122,27 @@ class TransactionsTable extends React.Component{
     .then(data => this.setState({ data: data["data"], loading: false}));
   }
 
+  sumData(){
+    var total = 0;
+    this.state.data.forEach(element => {
+      total += parseFloat(element['Valor Pago (R$)']);
+    });
+    return total;
+  }
+
   render(){
     if (this.state.loading){
         return (<p>Loading...</p>);
     }
     else{
+      var total = this.sumData();
       var table_builder = TableBuilder(this.props.entity_type, this.state.data);
-      return (<div className="TransactionsTable">{table_builder}</div>)
+      return (
+        <div className="TransactionsTable">
+          <p>TOTAL (Valor Pago (R$)): {total}</p>
+          {table_builder}
+        </div>
+      )
     }
   }
 }
