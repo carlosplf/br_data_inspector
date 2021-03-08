@@ -69,7 +69,6 @@ class EntityTable extends React.Component{
 
   componentDidMount(){
     if (!this.state.data){
-      console.log("Requesting data...")
       this.setState({loading: true});
       this.requestDataFromAPI();
     }

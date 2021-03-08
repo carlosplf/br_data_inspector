@@ -100,19 +100,23 @@ function TableBuilder(entity_type, data) {
 class TransactionsTable extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {loading: true, data: undefined};
+    this.state = {
+      loading: true, 
+      data: undefined
+    };
   }
 
   componentDidMount(){
-    if (!this.state.data){
-      console.log("Requesting data...")
+    if (!this.state.data && this.props.entity_id !== ''){
       this.setState({loading: true});
       this.requestDataFromAPI();
     }
   }
 
   requestDataFromAPI(){
-    var request_url = "http://localhost:8080/" + this.props.entity_type.toLowerCase() + "/202001/26280";
+    console.log("requesting data...");
+    var request_url = "http://localhost:8080/" + this.props.entity_type.toLowerCase() + "/202001/" + this.props.entity_id;
+    console.log(request_url);
     fetch(request_url)
     .then(response => response.json())
     .then(data => this.setState({ data: data["data"], loading: false}));
@@ -123,7 +127,7 @@ class TransactionsTable extends React.Component{
         return (<p>Loading...</p>);
     }
     else{
-      let table_builder = TableBuilder(this.props.entity_type, this.state.data);
+      var table_builder = TableBuilder(this.props.entity_type, this.state.data);
       return (<div className="TransactionsTable">{table_builder}</div>)
     }
   }
