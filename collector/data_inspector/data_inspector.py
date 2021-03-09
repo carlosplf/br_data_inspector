@@ -100,8 +100,6 @@ class DataInspector():
             original_list: (list) List with all elements.
             entity_type: (str) "Superior" or "Subordinado"
         """
-        logging.warning("Removing duplicated")
-        logging.warning("List started with %d entries.", len(original_list))
         buffer_ids_list = []
         new_data_list = []
         id_key_field = "Código Órgão " + entity_type
@@ -111,7 +109,6 @@ class DataInspector():
                 buffer_ids_list.append(data[id_key_field])
                 new_data_list.append(data)
         
-        logging.warning("List finished with %d entries.", len(new_data_list))
         return new_data_list
     
     def __transform_data_in_dict(self, query_result, entity_type):
