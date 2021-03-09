@@ -32,8 +32,8 @@ class App extends React.Component {
       return (
         <div className="App">
           <Search value={this.state.value} handleSubmit={this.handleSubmit}/>
-          <EntityTable entity_type="Superior"/>
           <TransactionsTable key={this.state.search_id} entity_type="Subordinado" entity_id={this.state.search_id} tableLoaded={this.tableLoaded}/>
+
         </div>
       );
     }
@@ -42,6 +42,7 @@ class App extends React.Component {
         <div className="App">
           <Search value={this.state.value} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
           <EntityTable entity_type="Superior"/>
+          <EntityTable entity_type="Subordinado"/>
         </div>
       );
     }

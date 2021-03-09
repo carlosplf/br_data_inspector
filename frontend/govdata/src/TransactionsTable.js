@@ -1,8 +1,10 @@
 import React from 'react';
 import { useTable } from 'react-table'
 import './TransactionsTable.css'
+import table_columns from './TransactionsTableColumns.js'
+import DataSummary from "./DataSummary.js"
 
-function Table({ columns, data }) {
+function Table({columns, data}) {
   const {
     getTableProps,
     getTableBodyProps,
@@ -42,54 +44,7 @@ function Table({ columns, data }) {
 }
 
 function TableBuilder(entity_type, data) {
-
-  const columns = [
-    {
-      Header: 'ID Órgão Superior',
-      accessor: 'Código Órgão Superior',
-    },
-    {
-        Header: 'Nome Órgão Superior',
-        accessor: 'Nome Órgão Superior',
-    },
-    {
-        Header: 'Ano e mês do lançamento',
-        accessor: 'Ano e mês do lançamento',
-    },
-    {
-        Header: 'ID Órgão Subordinado',
-        accessor: 'Código Órgão Subordinado',
-    },
-    {
-      Header: 'Nome Órgão Subordinado',
-      accessor: 'Nome Órgão Subordinado',
-    },
-    {
-        Header: 'Valor Empenhado (R$)',
-        accessor: 'Valor Empenhado (R$)',
-    },
-    {
-        Header: 'Valor Liquidado (R$)',
-        accessor: 'Valor Liquidado (R$)',
-    },
-    {
-        Header: 'Valor Pago (R$)',
-        accessor: 'Valor Pago (R$)',
-    },
-    {
-        Header: 'Valor Restos a Pagar Cancelado (R$)',
-        accessor: 'Valor Restos a Pagar Cancelado (R$)',
-    },
-    {
-        Header: 'Valor Restos a Pagar Inscritos (R$)',
-        accessor: 'Valor Restos a Pagar Inscritos (R$)',
-    },
-    {
-        Header: 'Valor Restos a Pagar Pagos (R$)',
-        accessor: 'Valor Restos a Pagar Pagos (R$)',
-    },
-  ];
-
+  const columns = table_columns;
   return (
     <div>
       <Table columns={columns} data={data} />
@@ -123,11 +78,17 @@ class TransactionsTable extends React.Component{
   }
 
   sumData(){
-    var total = 0;
-    this.state.data.forEach(element => {
-      total += parseFloat(element['Valor Pago (R$)']);
+    var value_keys = ["Valor Empenhado (R$)", "Valor Liquidado (R$)", "Valor Pago (R$)", "Valor Restos a Pagar Cancelado (R$)", "Valor Restos a Pagar Inscritos (R$)", "Valor Restos a Pagar Pagos (R$)"];
+    var all_sums = {};
+    this.state.data.forEach(single_line => {
+      value_keys.forEach(key => {
+        if (!all_sums[key]) { all_sums[key] = 0; }
+        all_sums[key] += parseFloat(single_line[key]);
+        console.log(parseFloat(single_line[key]));
+      })
     });
-    return total;
+    console.log(all_sums);
+    return all_sums;
   }
 
   render(){
@@ -139,7 +100,7 @@ class TransactionsTable extends React.Component{
       var table_builder = TableBuilder(this.props.entity_type, this.state.data);
       return (
         <div className="TransactionsTable">
-          <p>TOTAL (Valor Pago (R$)): {total}</p>
+          <DataSummary data={this.state.data}/>
           {table_builder}
         </div>
       )
