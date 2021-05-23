@@ -1,8 +1,17 @@
 import React from 'react';
-import { useTable } from 'react-table'
-import './TransactionsTable.css'
-import table_columns from './TransactionsTableColumns.js'
-import DataSummary from "./DataSummary.js"
+import { useTable } from 'react-table';
+import './TransactionsTable.css';
+import table_columns from './TransactionsTableColumns.js';
+import DataSummary from "./DataSummary.js";
+import { withRouter } from 'react-router-dom'
+
+import queryString from 'query-string';
+import {
+  BrowserRouter as Router,
+  Link,
+  useLocation
+} from "react-router-dom";
+
 
 function Table({columns, data}) {
   const {
@@ -61,8 +70,14 @@ class TransactionsTable extends React.Component{
     };
   }
 
+  entity_id = 0;
+
   componentDidMount(){
-    if (!this.state.data && this.props.entity_id !== ''){
+    const value=queryString.parse(this.props.location.search);
+    const entity_id=value.id;
+    this.entity_id = entity_id;
+    console.log("Entity ID: " + entity_id);
+    if (!this.state.data && this.entity_id !== ''){
       this.setState({loading: true});
       this.requestDataFromAPI();
     }
@@ -73,7 +88,7 @@ class TransactionsTable extends React.Component{
     /* Date rande not implemented yet */
     var data_range = "202001";
     var base_url = "http://localhost:8080/";
-    var request_url = base_url + this.props.entity_type.toLowerCase() + "/" + data_range + "/" + this.props.entity_id;
+    var request_url = base_url + this.props.entity_type.toLowerCase() + "/" + data_range + "/" + this.entity_id;
     console.log(request_url);
     fetch(request_url)
     .then(response => response.json())
@@ -101,9 +116,9 @@ class TransactionsTable extends React.Component{
       var total = this.sumData();
       var table_builder = TableBuilder(this.props.entity_type, this.state.data);
       return (
-        <div className="TransactionsTable">
+        <div className="App-Results">
           <h1>Resultados da pesquisa:</h1>
-          <DataSummary data={this.state.data}/>
+          <DataSummary key={this.entity_id} data={this.state.data}/>
           {table_builder}
         </div>
       )
@@ -111,4 +126,4 @@ class TransactionsTable extends React.Component{
   }
 }
 
-export default TransactionsTable;
+export default  withRouter(TransactionsTable);

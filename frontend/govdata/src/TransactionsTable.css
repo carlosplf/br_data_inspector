@@ -1,10 +1,11 @@
 .TransactionsTable{
     padding: 1rem;
-    font-size: large;  
+    font-size: large;
 }
 
 table {
     color: #202020;
+    margin-top: 20px;
 }
 
 td {

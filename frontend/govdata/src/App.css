@@ -13,18 +13,12 @@
 .App-Results {
   text-align: left;
   background-color: #EEEEEE;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: #000000
 }
 
 .App-Results h1{
   text-align: left;
-  margin-top: -10px;
+  font-size: 40pt;
   color: #202020;
 }
 
@@ -39,5 +33,12 @@
   background-color: #EEEEEE;
   color: #606060;
   margin: 8px;
+}
+
+.Data-Summary {
+  text-align: left;
+  background-color: #EEEEEE;
+  font-size: 12pt;
+  color: #000000
 }
 

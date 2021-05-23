@@ -4,69 +4,46 @@ import './App.css';
 
 import React from 'react';
 import SearchEntity from './SearchEntity';
-import EntityTable from './EntityTable';
 import TransactionsTable from './TransactionsTable';
+import Home from './Home';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) { 
     super(props);
     this.state = {
-      'data': '',
-      'value': '',
-      'search_id': '',
-      'loading': true,
-      'first_load': true,
-      'show_results': false,
-      'show_results_type': ''
+      'search_id': ''
     };
   }
 
-  items = [];
-
-  handleSubmitPagador = (event, value) => {
-    console.log("Pesquisa PAGADOR");
-    console.log("Searched: " + value);
-    this.setState({
-      search_id: value,
-      show_results: true,
-      show_results_type: 'Superior'
-    });
-    event.preventDefault();
+  render(){
+    return(
+      <Router>
+        <Switch>
+          <Route path="/home">
+            <Home />
+          </Route>
+          <Route path="/table">
+            <TransactionsTable key={this.state.search_id} entity_type="Subordinado" entity_id={this.state.search_id}/>
+          </Route>  
+        </Switch>
+      </Router>
+    );
   }
+}
 
-  handleSubmitRecebedor = (item) => {
-    console.log("Pesquisa RECEBEDOR");
-    console.log("Searched: " + item["id"]);
-    this.setState({
-      search_id: item["id"],
-      show_results: true,
-      show_results_type: 'Subordinado'
-    });
-  }
-
-  //Get all Subordinados and Superior Órgãos from backend API.
-  getNamesList(entity_type){
-    console.log("First load. Geting entities names and IDs...");
-    var request_url = "http://localhost:8080/" + entity_type.toLowerCase() + "/202001";
-    fetch(request_url)
-    .then(response => response.json())
-    .then(data => this.setState({ data: data["data"], loading: false}));
-  }
-
-  //Parse Entities list so they can be used in autocomplete search.
-  prepareItems(entity_type){
-    console.log("Transforming items for autocomplete.");
-    var items = [];
-    for (let [key, value] of Object.entries(this.state.data)) {
-      items.push({
-        'id':  value["Código Órgão " + entity_type],
-        'name': value["Nome Órgão " + entity_type]
-      })
-    }
-    this.items = items;
-  }
+export default App;
 
 
+
+
+
+  /*
   render (){
     if (this.state.show_results){
       return(
@@ -102,6 +79,6 @@ class App extends React.Component {
       )
     }
   }
-}
+  */
 
-export default App;
+
