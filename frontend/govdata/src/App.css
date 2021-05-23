@@ -1,4 +1,4 @@
-.App {
+.App-Search {
   text-align: left;
   background-color: #303030;
   min-height: 100vh;
@@ -9,3 +9,35 @@
   font-size: calc(10px + 2vmin);
   color: #ffffff
 }
+
+.App-Results {
+  text-align: left;
+  background-color: #EEEEEE;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #000000
+}
+
+.App-Results h1{
+  text-align: left;
+  margin-top: -10px;
+  color: #202020;
+}
+
+.App-Results h2{
+  text-align: left;
+  margin-top: -10px;
+  color: #404040;
+}
+
+.App-Results p{
+  text-align: left;
+  background-color: #EEEEEE;
+  color: #606060;
+  margin: 8px;
+}
+

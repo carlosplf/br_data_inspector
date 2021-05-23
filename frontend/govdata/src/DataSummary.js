@@ -1,5 +1,4 @@
 import React from "react";
-import "./DataSummary.css";
 
 
 class DataSummary extends React.Component{
@@ -21,17 +20,15 @@ class DataSummary extends React.Component{
             value_keys.forEach(key => {
             if (!all_sums[key]) { all_sums[key] = 0; }
             all_sums[key] += parseFloat(single_line[key]);
-            console.log(parseFloat(single_line[key]));
             })
         });
-        console.log(all_sums);
         this.setState({"values_summary": all_sums});
     }
 
     render(){
         return(
             <div class="DataSummary">
-                <h2> TOTAL: </h2>
+                <h2> Resumo de valores: </h2>
                 {this.data_keys.map(key => (
                     <p>{key}: {this.state.values_summary[key]}</p>
                     ))}

@@ -1,64 +1,105 @@
 //Comented to use styled-components in EntityTable.js
-//import './App.css';
+
+import './App.css';
 
 import React from 'react';
+import SearchEntity from './SearchEntity';
 import EntityTable from './EntityTable';
 import TransactionsTable from './TransactionsTable';
-import Search from './Search';
 
 class App extends React.Component {
   constructor(props) { 
     super(props);
     this.state = {
+      'data': '',
       'value': '',
       'search_id': '',
-      'should_update_table': false,
+      'loading': true,
+      'first_load': true,
       'show_results': false,
-      'show_results_type': 'Subordinado'
+      'show_results_type': ''
     };
-
   }
+
+  items = [];
 
   handleSubmitPagador = (event, value) => {
     console.log("Pesquisa PAGADOR");
     console.log("Searched: " + value);
     this.setState({
       search_id: value,
-      should_update_table: true,
       show_results: true,
       show_results_type: 'Superior'
     });
     event.preventDefault();
   }
 
-  handleSubmitRecebedor = (event, value) => {
+  handleSubmitRecebedor = (item) => {
     console.log("Pesquisa RECEBEDOR");
-    console.log("Searched: " + value);
+    console.log("Searched: " + item["id"]);
     this.setState({
-      search_id: value,
-      should_update_table: true,
+      search_id: item["id"],
       show_results: true,
       show_results_type: 'Subordinado'
     });
-    event.preventDefault();
   }
 
+  //Get all Subordinados and Superior Órgãos from backend API.
+  getNamesList(entity_type){
+    console.log("First load. Geting entities names and IDs...");
+    var request_url = "http://localhost:8080/" + entity_type.toLowerCase() + "/202001";
+    fetch(request_url)
+    .then(response => response.json())
+    .then(data => this.setState({ data: data["data"], loading: false}));
+  }
+
+  //Parse Entities list so they can be used in autocomplete search.
+  prepareItems(entity_type){
+    console.log("Transforming items for autocomplete.");
+    var items = [];
+    for (let [key, value] of Object.entries(this.state.data)) {
+      items.push({
+        'id':  value["Código Órgão " + entity_type],
+        'name': value["Nome Órgão " + entity_type]
+      })
+    }
+    this.items = items;
+  }
+
+
   render (){
-    if (!this.state.show_results){
+    if (this.state.show_results){
       return(
-        <div class="searches">
-          <p> Pesquisar Órgão PAGADOR</p>
-          <Search type="pagador" value={this.state.value} handleChange={this.handleChange} handleSubmit={this.handleSubmitPagador}/>
-          <br/>
-          <p> Pesquisar Órgão RECEBEDOR</p>
-          <Search type="recebedor" value={this.state.value} handleChange={this.handleChange} handleSubmit={this.handleSubmitRecebedor}/>
+        <div className="App-Results">
+          <TransactionsTable key={this.state.search_id} entity_type={this.state.show_results_type} entity_id={this.state.search_id} tableLoaded={this.tableLoaded}/>
         </div>
       );
     }
-    else{
+
+    if (this.state.first_load){
+      this.getNamesList("Subordinado");
+      this.setState({first_load: false});
+    }
+
+    if (this.state.loading){
       return(
-        <TransactionsTable key={this.state.search_id} entity_type={this.state.show_results_type} entity_id={this.state.search_id} tableLoaded={this.tableLoaded}/>
-      );
+        <p>Loading...</p>
+      )
+    }
+
+    if(!this.first_load && !this.state.loading && !this.show_results){
+      if (this.items.length == 0){
+        this.prepareItems("Subordinado");
+      }
+      return(
+        <div className="App-Search">
+          <p>Pesquisar por Órgão Recebedor:</p>
+          <SearchEntity
+            items={this.items}
+            handleOnSelect={this.handleSubmitRecebedor}
+          />
+        </div>
+      )
     }
   }
 }

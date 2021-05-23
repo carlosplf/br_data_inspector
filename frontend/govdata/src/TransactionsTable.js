@@ -87,7 +87,6 @@ class TransactionsTable extends React.Component{
       value_keys.forEach(key => {
         if (!all_sums[key]) { all_sums[key] = 0; }
         all_sums[key] += parseFloat(single_line[key]);
-        console.log(parseFloat(single_line[key]));
       })
     });
     console.log(all_sums);
@@ -103,6 +102,7 @@ class TransactionsTable extends React.Component{
       var table_builder = TableBuilder(this.props.entity_type, this.state.data);
       return (
         <div className="TransactionsTable">
+          <h1>Resultados da pesquisa:</h1>
           <DataSummary data={this.state.data}/>
           {table_builder}
         </div>
