@@ -13,37 +13,51 @@ class App extends React.Component {
       'value': '',
       'search_id': '',
       'should_update_table': false,
+      'show_results': false,
+      'show_results_type': 'Subordinado'
     };
 
   }
 
-  handleSubmit = (event, value) => {
-    console.log(value);
+  handleSubmitPagador = (event, value) => {
+    console.log("Pesquisa PAGADOR");
+    console.log("Searched: " + value);
     this.setState({
       search_id: value,
-      should_update_table: true
+      should_update_table: true,
+      show_results: true,
+      show_results_type: 'Superior'
     });
     event.preventDefault();
+  }
 
+  handleSubmitRecebedor = (event, value) => {
+    console.log("Pesquisa RECEBEDOR");
+    console.log("Searched: " + value);
+    this.setState({
+      search_id: value,
+      should_update_table: true,
+      show_results: true,
+      show_results_type: 'Subordinado'
+    });
+    event.preventDefault();
   }
 
   render (){
-    if(this.state.should_update_table){
-      return (
-        <div className="App">
-          <Search value={this.state.value} handleSubmit={this.handleSubmit}/>
-          <TransactionsTable key={this.state.search_id} entity_type="Subordinado" entity_id={this.state.search_id} tableLoaded={this.tableLoaded}/>
-
+    if (!this.state.show_results){
+      return(
+        <div class="searches">
+          <p> Pesquisar Órgão PAGADOR</p>
+          <Search type="pagador" value={this.state.value} handleChange={this.handleChange} handleSubmit={this.handleSubmitPagador}/>
+          <br/>
+          <p> Pesquisar Órgão RECEBEDOR</p>
+          <Search type="recebedor" value={this.state.value} handleChange={this.handleChange} handleSubmit={this.handleSubmitRecebedor}/>
         </div>
       );
     }
     else{
-      return (
-        <div className="App">
-          <Search value={this.state.value} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
-          <EntityTable entity_type="Superior"/>
-          <EntityTable entity_type="Subordinado"/>
-        </div>
+      return(
+        <TransactionsTable key={this.state.search_id} entity_type={this.state.show_results_type} entity_id={this.state.search_id} tableLoaded={this.tableLoaded}/>
       );
     }
   }

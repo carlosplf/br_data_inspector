@@ -70,7 +70,10 @@ class TransactionsTable extends React.Component{
 
   requestDataFromAPI(){
     console.log("requesting data...");
-    var request_url = "http://localhost:8080/" + this.props.entity_type.toLowerCase() + "/202001/" + this.props.entity_id;
+    /* Date rande not implemented yet */
+    var data_range = "202001";
+    var base_url = "http://localhost:8080/";
+    var request_url = base_url + this.props.entity_type.toLowerCase() + "/" + data_range + "/" + this.props.entity_id;
     console.log(request_url);
     fetch(request_url)
     .then(response => response.json())
