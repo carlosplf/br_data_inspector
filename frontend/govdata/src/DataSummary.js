@@ -3,6 +3,8 @@ import React from "react";
 
 class DataSummary extends React.Component{
 
+    /* This Component show the sums of values for the rendered Transactions Table. */
+
     constructor(props){
         super(props);
         this.state = {values_summary: {}}
@@ -12,14 +14,18 @@ class DataSummary extends React.Component{
     componentDidMount(){
         this.sumData();
     }
-
+    
+    //TODO: Check if the numbers are being formated in a proper way for decimals.
+    formatNumbers(x) {
+        if (!x) {return 0}
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
     sumData(){
-        var value_keys = this.data_keys;
         var all_sums = {};
         this.props.data.forEach(single_line => {
-            value_keys.forEach(key => {
-            if (!all_sums[key]) { all_sums[key] = 0; }
-            all_sums[key] += parseFloat(single_line[key]);
+            this.data_keys.forEach(key => {
+                if (!all_sums[key]) { all_sums[key] = 0; }
+                all_sums[key] += parseFloat(single_line[key]);
             })
         });
         this.setState({"values_summary": all_sums});
@@ -30,7 +36,7 @@ class DataSummary extends React.Component{
             <div className="Data-Summary">
                 <h2> Resumo de valores: </h2>
                 {this.data_keys.map(key => (
-                    <p>{key}: {this.state.values_summary[key]}</p>
+                    <p>{key}: { this.formatNumbers(this.state.values_summary[key])}</p>
                     ))}
             </div>
         )

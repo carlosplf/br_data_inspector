@@ -1,8 +1,8 @@
 import React from 'react';
 import SearchEntity from './SearchEntity';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import MonthPicker from './MonthPicker';
 import { Redirect } from "react-router-dom";
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 
 
 class Home extends React.Component{
@@ -14,11 +14,32 @@ class Home extends React.Component{
             'loading': true,
             'first_load': true,
             'show_results': false,
-            'show_results_type': ''
+            'show_results_type': '',
           };
     }
 
+    //Should be a state.
     items = [];
+    selected_dates = [];
+    dates_url_param = "";
+
+    //Callback from MonthPicker checkbox click.
+    selectDate = (cb) => {
+        if(cb.target.checked){
+            this.selected_dates.push(cb.target.name);
+        }
+        else{
+            this.selected_dates = this.removeDateFromList(cb.target.name);
+        }
+        console.log(this.selected_dates);
+    }
+
+    //Simple method to remove an item from array.
+    removeDateFromList(date) { 
+        return this.selected_dates.filter(function(ele){ 
+            return ele != date; 
+        });
+    }
 
     handleSearch = (item) => {
         console.log("Pesquisa RECEBEDOR");
@@ -51,11 +72,19 @@ class Home extends React.Component{
         this.items = items;
     }
 
+    buildTableDateParam(){
+        this.selected_dates.map( single_date => {
+            var new_param = single_date + "-";
+            this.dates_url_param += new_param;
+        });
+        this.dates_url_param = this.dates_url_param.slice(0, -1);
+    }
 
     render(){
         if (this.state.show_results){
             console.log("should show table...");
-            var url_string = "/table?id=" + this.state.search_id
+            this.buildTableDateParam();
+            var url_string = "/table?id=" + this.state.search_id + "&dates=" + this.dates_url_param;
             return (
                 <Redirect to={url_string}/>
             );
@@ -83,6 +112,7 @@ class Home extends React.Component{
                     items={this.items}
                     handleOnSelect={this.handleSearch}
                 />
+                <MonthPicker selectDate={this.selectDate}/>
                 </div>
             )
         }

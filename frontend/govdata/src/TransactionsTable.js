@@ -4,6 +4,7 @@ import './TransactionsTable.css';
 import table_columns from './TransactionsTableColumns.js';
 import DataSummary from "./DataSummary.js";
 import { withRouter } from 'react-router-dom'
+import Button from './Button';
 
 import queryString from 'query-string';
 import {
@@ -70,42 +71,35 @@ class TransactionsTable extends React.Component{
     };
   }
 
+  //Should be a state.
   entity_id = 0;
+  dates_to_search = [];
 
   componentDidMount(){
-    const value=queryString.parse(this.props.location.search);
-    const entity_id=value.id;
-    this.entity_id = entity_id;
-    console.log("Entity ID: " + entity_id);
+    this.getURLParams();
     if (!this.state.data && this.entity_id !== ''){
       this.setState({loading: true});
-      this.requestDataFromAPI();
+      //TODO: Need a better logic to collect from multiple dates.
+      this.requestDataFromAPI(this.dates_to_search[0]);
     }
   }
+  
+  getURLParams(){
+    const value = queryString.parse(this.props.location.search);
+    const entity_id = value.id;
+    this.entity_id = entity_id;
+    this.dates_to_search = value.dates.split("-");
+    console.log("Dates got from URL params: " + this.dates_to_search);
+  }
 
-  requestDataFromAPI(){
+  requestDataFromAPI(month_date){
     console.log("requesting data...");
-    /* Date rande not implemented yet */
-    var data_range = "202001";
     var base_url = "http://localhost:8080/";
-    var request_url = base_url + this.props.entity_type.toLowerCase() + "/" + data_range + "/" + this.entity_id;
+    var request_url = base_url + this.props.entity_type.toLowerCase() + "/" + month_date + "/" + this.entity_id;
     console.log(request_url);
     fetch(request_url)
     .then(response => response.json())
     .then(data => this.setState({ data: data["data"], loading: false}));
-  }
-
-  sumData(){
-    var value_keys = ["Valor Empenhado (R$)", "Valor Liquidado (R$)", "Valor Pago (R$)", "Valor Restos a Pagar Cancelado (R$)", "Valor Restos a Pagar Inscritos (R$)", "Valor Restos a Pagar Pagos (R$)"];
-    var all_sums = {};
-    this.state.data.forEach(single_line => {
-      value_keys.forEach(key => {
-        if (!all_sums[key]) { all_sums[key] = 0; }
-        all_sums[key] += parseFloat(single_line[key]);
-      })
-    });
-    console.log(all_sums);
-    return all_sums;
   }
 
   render(){
@@ -113,11 +107,11 @@ class TransactionsTable extends React.Component{
         return (<p>Loading...</p>);
     }
     else{
-      var total = this.sumData();
       var table_builder = TableBuilder(this.props.entity_type, this.state.data);
       return (
         <div className="App-Results">
           <h1>Resultados da pesquisa:</h1>
+          <Button/>
           <DataSummary key={this.entity_id} data={this.state.data}/>
           {table_builder}
         </div>
@@ -126,4 +120,4 @@ class TransactionsTable extends React.Component{
   }
 }
 
-export default  withRouter(TransactionsTable);
+export default withRouter(TransactionsTable);
