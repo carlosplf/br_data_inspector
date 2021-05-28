@@ -37,10 +37,11 @@ class Home extends React.Component{
     //Simple method to remove an item from array.
     removeDateFromList(date) { 
         return this.selected_dates.filter(function(ele){ 
-            return ele != date; 
+            return ele !== date; 
         });
     }
 
+    // Callback when a Entity is selected from Autocomplete search field.
     handleSearch = (item) => {
         console.log("Pesquisa RECEBEDOR");
         console.log("Searched: " + item["id"]);

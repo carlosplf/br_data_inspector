@@ -1,66 +1,12 @@
 import React from 'react';
-import { useTable } from 'react-table';
 import './TransactionsTable.css';
-import table_columns from './TransactionsTableColumns.js';
 import DataSummary from "./DataSummary.js";
 import { withRouter } from 'react-router-dom'
 import Button from './Button';
+import TableBuilder from './TableBuilder';
 
 import queryString from 'query-string';
-import {
-  BrowserRouter as Router,
-  Link,
-  useLocation
-} from "react-router-dom";
 
-
-function Table({columns, data}) {
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable({
-    columns,
-    data,
-  })
-
-  return (
-    <table {...getTableProps()}>
-      <thead>
-        {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row, i) => {
-          prepareRow(row)
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map(cell => {
-                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-              })}
-            </tr>
-          )
-        })}
-      </tbody>
-    </table>
-  )
-}
-
-function TableBuilder(entity_type, data) {
-  const columns = table_columns;
-  return (
-    <div>
-      <Table columns={columns} data={data} />
-    </div>
-  );
-}
 
 class TransactionsTable extends React.Component{
   constructor(props) {
@@ -85,6 +31,8 @@ class TransactionsTable extends React.Component{
   }
   
   getURLParams(){
+    // This route URL receives the Entity ID and the Dates for query as arguments.
+    // Example: "http://localhost:3000/table?id=26236&dates=202001-202003-202002"
     const value = queryString.parse(this.props.location.search);
     const entity_id = value.id;
     this.entity_id = entity_id;
@@ -93,7 +41,9 @@ class TransactionsTable extends React.Component{
   }
 
   requestDataFromAPI(month_date){
+    // Call Backend API and retrieve data about Entities
     console.log("requesting data...");
+    //TODO: need a better logic to store backend URL.
     var base_url = "http://localhost:8080/";
     var request_url = base_url + this.props.entity_type.toLowerCase() + "/" + month_date + "/" + this.entity_id;
     console.log(request_url);
