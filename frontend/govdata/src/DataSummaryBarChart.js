@@ -5,8 +5,7 @@ import {
   YAxis,
   VerticalGridLines,
   HorizontalGridLines,
-  VerticalBarSeries,
-  VerticalBarSeriesCanvas
+  VerticalBarSeries
 } from 'react-vis';
 
 
@@ -17,17 +16,24 @@ class DataSummaryBarChart extends React.Component{
     }
 
     render(){
-        const {useCanvas} = this.state;
-        const content = useCanvas ? 'TOGGLE TO SVG' : 'TOGGLE TO CANVAS';
-        const BarSeries = useCanvas ? VerticalBarSeriesCanvas : VerticalBarSeries;
+
+        //Create a BarSeries for each dataset passed as props.
+        //More info at ModalContent:createDatasetBarGraph().
+        const all_data_series = this.props.data.map(data_serie =>{
+          return(
+            <VerticalBarSeries style={{strokeWidth: 12}, {marginLeft: 10}} data={data_serie}/>
+          );
+        });
         return (
-            <XYPlot xType="ordinal" width={600} height={600} xDistance={100}>
-              <VerticalGridLines />
-              <HorizontalGridLines />
-              <XAxis />
-              <YAxis />
-              <BarSeries data={this.props.data} />
-            </XYPlot>
+            <div className="DataBarChart">
+              <XYPlot xType="ordinal" style={{marginTop: 60}} width={1200} height={600} margin={{left: 120}}>
+                <VerticalGridLines />
+                <HorizontalGridLines />
+                <XAxis />
+                <YAxis />
+                {all_data_series}
+              </XYPlot>
+            </div>
         )
     }
 }

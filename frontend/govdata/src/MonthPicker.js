@@ -49,16 +49,17 @@ class MonthPicker extends React.Component{
                 </tr>
             );
         });
-        console.log(table_lines);
         return(
             <div className="Month-picker">
                 <table>
-                    <tr>
-                        <th>Mês</th>
-                        <th>Ano</th>
-                        <th>Include</th>
-                    </tr>
-                    {table_lines}
+                    <thead>
+                        <tr>
+                            <th>Mês</th>
+                            <th>Ano</th>
+                            <th>Include</th>
+                        </tr>
+                    </thead>
+                    <tbody>{table_lines}</tbody>
                 </table>
             </div>
         )

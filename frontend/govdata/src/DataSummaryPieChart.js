@@ -12,8 +12,8 @@ class DataSummaryPieChart extends React.Component{
         data={this.props.data}
         showLabels={true}
         labelsAboveChildren={true}
-        width={500}
-        height={500}/>
+        width={400}
+        height={400}/>
     }
 }
 

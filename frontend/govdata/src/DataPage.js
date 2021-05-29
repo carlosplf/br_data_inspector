@@ -109,7 +109,7 @@ class DataPage extends React.Component{
       return (
         <div className="App-Results">
 
-          <ReactModal isOpen={this.state.show_modal} contentLabel="Minimal Modal Example">
+          <ReactModal isOpen={this.state.show_modal}>
               <button className="ShowModal" onClick={this.handleCloseDataModal}>Close Modal</button>
               <ModalContent 
                 values_summary={this.state.values_summary}
@@ -128,6 +128,7 @@ class DataPage extends React.Component{
           <DataSummary key={this.entity_id} data={this.state.data} values_summary={this.state.values_summary} data_keys={this.state.data_keys}/>
 
           {table_builder}
+          
         </div>
       )
     }

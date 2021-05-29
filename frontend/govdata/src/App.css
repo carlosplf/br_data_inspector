@@ -56,9 +56,13 @@
 .Month-picker table{
   margin-top: 60px;
   color: #EEEEEE;
-  text-align: center;
+  text-align: center; 
 }
 
 .Month-picker td{
   min-width: 80px;
+}
+
+.DataBarChart {
+  margin-left: 10px;
 }

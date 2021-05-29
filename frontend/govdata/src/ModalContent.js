@@ -7,6 +7,12 @@ class ModalContent extends React.Component{
         super(props);
     }
 
+    keys_to_show = [
+        "Valor Empenhado (R$)",
+        "Valor Liquidado (R$)",
+        "Valor Pago (R$)"
+    ]
+
     prepareDataForChart(){
         /* 
             Expected data format:
@@ -25,7 +31,7 @@ class ModalContent extends React.Component{
 
     sumByMonth(key){
         /*
-            Sum data[key] by month date. X-Axis is Month axis and Y-Axis is total_value Axis. Expected result:
+            Sum data[key] by month date. X-Axis is Month axis and Y-Axis is total_value Axis. Expected return:
             [
                 {
                     x: '202001',
@@ -55,16 +61,26 @@ class ModalContent extends React.Component{
             })
             sum_value = 0;
         })
-        console.log("data by Month: " + sum_by_month);
         return sum_by_month;
+    }
+
+    createDatasetBarGraph(){
+        /*
+            Put together the total value for each month and each key (table column).
+            Expected return is a Array with sumByMonth results for each key.
+        */
+        var dataset_all_months_and_keys = [];
+        this.keys_to_show.forEach(single_key => {
+            dataset_all_months_and_keys.push(this.sumByMonth(single_key));
+        });
+        return dataset_all_months_and_keys;
     }
 
     render(){
         return(
             <div>
-                <h1>Data Modal</h1>
                 <DataSummaryPieChart data={this.prepareDataForChart()}/>
-                <DataSummaryBarChart data={this.sumByMonth("Valor Empenhado (R$)")}/>
+                <DataSummaryBarChart data_labels={this.keys_to_show} data={this.createDatasetBarGraph(this.props.date_keys)}/>
             </div>
         )
     }

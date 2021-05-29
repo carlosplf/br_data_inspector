@@ -3,6 +3,7 @@ import SearchEntity from './SearchEntity';
 import MonthPicker from './MonthPicker';
 import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
+import logo from './GovDataLogo.jpg';
 
 
 class Home extends React.Component{
@@ -31,7 +32,6 @@ class Home extends React.Component{
         else{
             this.selected_dates = this.removeDateFromList(cb.target.name);
         }
-        console.log(this.selected_dates);
     }
 
     //Simple method to remove an item from array.
@@ -44,6 +44,11 @@ class Home extends React.Component{
     // Callback when a Entity is selected from Autocomplete search field.
     handleSearch = (item) => {
         console.log("Searched: " + item["id"]);
+        if (this.selected_dates.length === 0){
+            //TODO: Implement real user alert.
+            console.log("Alert, no date selected!");
+            return;
+        }
         this.setState({
             search_id: item["id"],
             show_results: true
@@ -52,7 +57,6 @@ class Home extends React.Component{
 
     //Get all Subordinados and Superior Órgãos from backend API.
     getNamesList(entity_type){
-        console.log("First load. Geting entities names and IDs...");
         var request_url = "http://localhost:8080/" + entity_type.toLowerCase() + "/202001";
         fetch(request_url)
         .then(response => response.json())
@@ -61,7 +65,6 @@ class Home extends React.Component{
 
     //Parse Entities list so they can be used in autocomplete search.
     prepareItems(entity_type){
-        console.log("Transforming items for autocomplete function.");
         var items = [];
         for (let [key, value] of Object.entries(this.state.data)) {
         items.push({
@@ -82,7 +85,6 @@ class Home extends React.Component{
 
     render(){
         if (this.state.show_results){
-            console.log("should show table...");
             this.buildTableDateParam();
             var url_string = "/table?id=" + this.state.search_id + "&dates=" + this.dates_url_param;
             return (
@@ -107,12 +109,13 @@ class Home extends React.Component{
             }
             return(
                 <div className="App-Search">
-                <p>Pesquisar por Órgão Recebedor:</p>
-                <SearchEntity
-                    items={this.items}
-                    handleOnSelect={this.handleSearch}
-                />
-                <MonthPicker selectDate={this.selectDate}/>
+                    <img src={logo}/>
+                    <p>Pesquisar por Órgão Recebedor:</p>
+                    <SearchEntity
+                        items={this.items}
+                        handleOnSelect={this.handleSearch}
+                    />
+                    <MonthPicker selectDate={this.selectDate}/>
                 </div>
             )
         }
