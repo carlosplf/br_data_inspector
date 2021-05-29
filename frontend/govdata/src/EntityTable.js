@@ -43,9 +43,6 @@ function Table({ columns, data }) {
 
 function TableBuilder(entity_type, data) {
 
-  console.log("Building table...");
-  console.log(data);
-
   const columns = [
     {
       Header: 'ID Órgão ' + entity_type,
@@ -72,10 +69,8 @@ class EntityTable extends React.Component{
 
   componentDidMount(){
     if (!this.state.data){
-      console.log("Requesting data...")
       this.setState({loading: true});
       this.requestDataFromAPI();
-      console.log("Done");
     }
   }
 
