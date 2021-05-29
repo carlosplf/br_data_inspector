@@ -13,8 +13,8 @@ class DataSummaryChart extends React.Component{
         data={this.props.data}
         showLabels={true}
         labelsAboveChildren={true}
-        width={400}
-        height={400}/>
+        width={500}
+        height={500}/>
     }
 }
 

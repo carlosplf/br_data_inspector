@@ -54,6 +54,7 @@
 }
 
 .Month-picker table{
+  margin-top: 60px;
   color: #EEEEEE;
   text-align: center;
 }

@@ -43,7 +43,6 @@ class Home extends React.Component{
 
     // Callback when a Entity is selected from Autocomplete search field.
     handleSearch = (item) => {
-        console.log("Pesquisa RECEBEDOR");
         console.log("Searched: " + item["id"]);
         this.setState({
             search_id: item["id"],
