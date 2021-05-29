@@ -12,6 +12,10 @@ const table_columns = [
         accessor: 'Ano e mês do lançamento',
     },
     {
+        Header: 'Nome Elemento de Despesa',
+        accessor: 'Nome Elemento de Despesa',
+    },
+    {
         Header: 'ID Órgão Subordinado',
         accessor: 'Código Órgão Subordinado',
     },
