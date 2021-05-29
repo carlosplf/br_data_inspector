@@ -2,8 +2,7 @@ import React from 'react';
 import {RadialChart} from 'react-vis';
 
 
-// Not implemented yet
-class DataSummaryChart extends React.Component{
+class DataSummaryPieChart extends React.Component{
     constructor(props){
         super(props);
     }
@@ -18,4 +17,4 @@ class DataSummaryChart extends React.Component{
     }
 }
 
-export default DataSummaryChart;
+export default DataSummaryPieChart;

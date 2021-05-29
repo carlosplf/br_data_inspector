@@ -111,7 +111,12 @@ class DataPage extends React.Component{
 
           <ReactModal isOpen={this.state.show_modal} contentLabel="Minimal Modal Example">
               <button className="ShowModal" onClick={this.handleCloseDataModal}>Close Modal</button>
-              <ModalContent values_summary={this.state.values_summary} data_keys={this.state.data_keys}/>
+              <ModalContent 
+                values_summary={this.state.values_summary}
+                data_keys={this.state.data_keys}
+                all_transactions_data={this.state.data}
+                selected_dates={this.dates_to_search}
+              />
           </ReactModal>
 
           <h1>{this.state.data[0]["Nome Órgão Subordinado"]}</h1>
