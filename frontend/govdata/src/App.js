@@ -3,7 +3,7 @@
 import './App.css';
 
 import React from 'react';
-import TransactionsTable from './TransactionsTable';
+import DataPage from './DataPage';
 import Home from './Home';
 import {
   BrowserRouter as Router,
@@ -27,7 +27,7 @@ class App extends React.Component {
             <Home />
           </Route>
           <Route path="/table">
-            <TransactionsTable key={this.state.search_id} entity_type="Subordinado" entity_id={this.state.search_id}/>
+            <DataPage key={this.state.search_id} entity_type="Subordinado" entity_id={this.state.search_id}/>
           </Route>  
         </Switch>
       </Router>
