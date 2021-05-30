@@ -1,4 +1,6 @@
 import React from 'react';
+import { AllCheckerCheckbox, Checkbox, CheckboxGroup } from '@createnl/grouped-checkboxes';
+
 
 class MonthPicker extends React.Component{
     constructor(props){
@@ -75,12 +77,13 @@ class MonthPicker extends React.Component{
                 <tr>
                     <td>{item['month']}</td>
                     <td>{item['year']}</td>
-                    <td><input type="checkbox" name={checkbox_identifier} onClick={this.props.selectDate}/>&nbsp;</td>
+                    <td><Checkbox value={checkbox_identifier}/></td>
                 </tr>
             );
         });
         return(
             <div className="Month-picker">
+                <CheckboxGroup onChange={this.props.dateSelected}>
                 <table>
                     <thead>
                         <tr>
@@ -89,8 +92,16 @@ class MonthPicker extends React.Component{
                             <th>Include</th>
                         </tr>
                     </thead>
-                    <tbody>{table_lines}</tbody>
+                    <tbody>
+                        <tr>
+                            <td>TODOS</td>
+                            <td>2020</td>
+                            <td><AllCheckerCheckbox/></td>
+                        </tr>
+                        {table_lines}
+                    </tbody>
                 </table>
+                </CheckboxGroup>
             </div>
         )
     }

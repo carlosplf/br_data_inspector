@@ -4,6 +4,9 @@ import MonthPicker from './MonthPicker';
 import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
 import logo from './GovDataLogo.jpg';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
+
 
 
 class Home extends React.Component{
@@ -24,16 +27,6 @@ class Home extends React.Component{
     selected_dates = [];
     dates_url_param = "";
 
-    //Callback from MonthPicker checkbox click.
-    selectDate = (cb) => {
-        if(cb.target.checked){
-            this.selected_dates.push(cb.target.name);
-        }
-        else{
-            this.selected_dates = this.removeDateFromList(cb.target.name);
-        }
-    }
-
     //Simple method to remove an item from array.
     removeDateFromList(date) { 
         return this.selected_dates.filter(function(ele){ 
@@ -47,6 +40,7 @@ class Home extends React.Component{
         if (this.selected_dates.length === 0){
             //TODO: Implement real user alert.
             console.log("Alert, no date selected!");
+            NotificationManager.warning('No Months selected!', '', 2000);
             return;
         }
         this.setState({
@@ -83,6 +77,16 @@ class Home extends React.Component{
         this.dates_url_param = this.dates_url_param.slice(0, -1);
     }
 
+    //Callback funtion from MonthPicker Component.
+    dateSelected = (cbs) => {
+        this.selected_dates = [];
+        cbs.forEach(item =>{
+            if(item["checked"]){
+                this.selected_dates.push(item["value"]);
+            }
+        })
+    }
+
     render(){
         if (this.state.show_results){
             this.buildTableDateParam();
@@ -109,13 +113,14 @@ class Home extends React.Component{
             }
             return(
                 <div className="App-Search">
+                    <NotificationContainer/>
                     <img src={logo}/>
                     <p>Pesquisar por Órgão Recebedor:</p>
                     <SearchEntity
                         items={this.items}
                         handleOnSelect={this.handleSearch}
                     />
-                    <MonthPicker selectDate={this.selectDate}/>
+                    <MonthPicker dateSelected={this.dateSelected}/>
                 </div>
             )
         }
