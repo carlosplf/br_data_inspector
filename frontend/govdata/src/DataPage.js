@@ -4,7 +4,8 @@ import { withRouter } from 'react-router-dom'
 import Button from './Button';
 import TableBuilder from './TableBuilder';
 import ReactModal from 'react-modal';
-import ModalContent from './ModalContent'
+import ModalContent from './ModalContent';
+import DataBarChart from './DataBarChart';
 
 import queryString from 'query-string';
 
@@ -97,6 +98,11 @@ class DataPage extends React.Component{
     });
   }
 
+  selectedDates(){
+    return this.dates_to_search.map(d => {
+      return <spam> {d} </spam>
+    });
+  }
 
   render(){
     if (this.state.loading){
@@ -104,30 +110,33 @@ class DataPage extends React.Component{
     }
 
     else{
-      var table_builder = TableBuilder(this.props.entity_type, this.state.data);
-
       return (
-        <div className="App-Results">
-
-          <ReactModal isOpen={this.state.show_modal}>
-              <button className="ShowModal" onClick={this.handleCloseDataModal}>Close Modal</button>
-              <ModalContent 
-                values_summary={this.state.values_summary}
-                data_keys={this.state.data_keys}
-                all_transactions_data={this.state.data}
-                selected_dates={this.dates_to_search}
-              />
-          </ReactModal>
+        <div className="Search-Results">
 
           <h1>{this.state.data[0]["Nome Órgão Subordinado"]}</h1>
-
+          <br></br>
+          <spam> Months searched: </spam>
+          {this.selectedDates()}
+          <br></br>
+          <br></br>
+          <br></br>
+          
           <Button/>
 
-          <button onClick={this.handleOpenDataModal}>Data Charts</button>
+          <button onClick={this.handleOpenDataModal}>All Data</button>
 
           <DataSummary key={this.entity_id} data={this.state.data} values_summary={this.state.values_summary} data_keys={this.state.data_keys}/>
 
-          {table_builder}
+          <DataBarChart
+            data_keys={this.state.data_keys}
+            all_transactions_data={this.state.data}
+            selected_dates={this.dates_to_search}
+          />
+
+          <ReactModal isOpen={this.state.show_modal} contentLabel="All transactions modal">
+            <button className="ShowModal" onClick={this.handleCloseDataModal}>Close Modal</button>
+            <ModalContent all_transactions_data={this.state.data}/>
+          </ReactModal>
           
         </div>
       )

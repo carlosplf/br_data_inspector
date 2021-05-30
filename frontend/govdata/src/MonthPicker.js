@@ -35,7 +35,37 @@ class MonthPicker extends React.Component{
             'month': 'Junho',
             'year': '2020',
             'year_month': '202006'
-        }
+        },
+        {
+            'month': 'Julho',
+            'year': '2020',
+            'year_month': '202007'
+        },
+        {
+            'month': 'Agosto',
+            'year': '2020',
+            'year_month': '202008'
+        },
+        {
+            'month': 'Setembro',
+            'year': '2020',
+            'year_month': '202009'
+        },
+        {
+            'month': 'Outubro',
+            'year': '2020',
+            'year_month': '202010'
+        },
+        {
+            'month': 'Novembro',
+            'year': '2020',
+            'year_month': '202011'
+        },
+        {
+            'month': 'Dezembro',
+            'year': '2020',
+            'year_month': '202012'
+        },
     ]
 
     render(){

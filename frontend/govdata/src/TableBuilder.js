@@ -42,7 +42,7 @@ function Table({columns, data}) {
     )
   }
   
-  function TableBuilder(entity_type, data) {
+  function TableBuilder(data) {
     const columns = table_columns;
     return (
       <div>

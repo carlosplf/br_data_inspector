@@ -24,6 +24,13 @@ class DataSummaryBarChart extends React.Component{
             <VerticalBarSeries style={{strokeWidth: 12}, {marginLeft: 10}} data={data_serie}/>
           );
         });
+
+        const labels = this.props.data_labels.map(single_label => {
+          return(
+            <spam><br></br>{single_label}</spam>
+          );
+        });
+        
         return (
             <div className="DataBarChart">
               <XYPlot xType="ordinal" style={{marginTop: 60}} width={1200} height={600} margin={{left: 120}}>
@@ -33,6 +40,10 @@ class DataSummaryBarChart extends React.Component{
                 <YAxis />
                 {all_data_series}
               </XYPlot>
+              <br></br>
+              <br></br>
+              <br></br>
+              {labels}
             </div>
         )
     }
