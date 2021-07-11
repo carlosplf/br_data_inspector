@@ -7,6 +7,7 @@ import {
     HorizontalGridLines,
     VerticalBarSeries
   } from 'react-vis';
+import "./DataBarChart.css";
 
 
 class DataBarChart extends React.Component{
@@ -88,14 +89,20 @@ class DataBarChart extends React.Component{
               <XYPlot xType="ordinal" style={{marginTop: 60}} width={1200} height={600} margin={{left: 120}}>
                 <VerticalGridLines />
                 <HorizontalGridLines />
-                <XAxis />
-                <YAxis />
+                <XAxis 
+									style={{
+										text: {stroke: 'none', fill: '#FFFFFF', fontWeight: 600}
+								}}/>
+                <YAxis
+									style={{
+										text: {stroke: 'none', fill: '#FFFFFF', fontWeight: 600}
+								}}/>
                 {all_data_series}
               </XYPlot>
               <br></br>
               <br></br>
               <br></br>
-              {labels}
+              <br></br>
             </div>
         )
     }

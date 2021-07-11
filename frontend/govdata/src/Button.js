@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import "./Button.css"
 
+//Shouldn't be a Component
 class Button extends React.Component{
 
     render(){
         return(
-            <span className="Back-button">
-                <button><Link to="/home"> Voltar </Link></button>
+            <span className="Back-Button">
+                <button><Link to="/home"> Back </Link></button>
             </span>
         );
     }

@@ -115,10 +115,6 @@ class DataPage extends React.Component{
 
           <h1>{this.state.data[0]["Nome Órgão Subordinado"]}</h1>
           <br></br>
-          <spam> Months searched: </spam>
-          {this.selectedDates()}
-          <br></br>
-          <br></br>
           <br></br>
           
           <Button/>

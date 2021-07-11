@@ -114,7 +114,6 @@ class Home extends React.Component{
             return(
                 <div className="App-Search">
                     <NotificationContainer/>
-                    <img src={logo}/>
                     <p>Pesquisar por Órgão Recebedor:</p>
                     <SearchEntity
                         items={this.items}

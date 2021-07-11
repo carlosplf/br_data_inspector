@@ -1,4 +1,5 @@
 import React from "react";
+import "./DataSummary.css";
 
 
 class DataSummary extends React.Component{
