@@ -2,7 +2,6 @@ import React from 'react';
 import DataSummary from "./DataSummary.js";
 import { withRouter } from 'react-router-dom'
 import Button from './Button';
-import TableBuilder from './TableBuilder';
 import ReactModal from 'react-modal';
 import ModalContent from './ModalContent';
 import DataBarChart from './DataBarChart';
@@ -119,7 +118,7 @@ class DataPage extends React.Component{
 
 				<Button/>
 
-				<button onClick={this.handleOpenDataModal}>All Data</button>
+				<button id="all-data-btn" className="btn" onClick={this.handleOpenDataModal}>All Data</button>
 
 				<DataSummary key={this.entity_id} data={this.state.data} values_summary={this.state.values_summary} data_keys={this.state.data_keys}/>
 
@@ -130,7 +129,7 @@ class DataPage extends React.Component{
 				/>
 
 				<ReactModal isOpen={this.state.show_modal} contentLabel="All transactions modal">
-				<button className="ShowModal" onClick={this.handleCloseDataModal}>Close Modal</button>
+				<button id="close-modal-btn" className="modal-btn" onClick={this.handleCloseDataModal}>Close Modal</button>
 				<ModalContent all_transactions_data={this.state.data}/>
 				</ReactModal>
 

@@ -3,7 +3,6 @@ import SearchEntity from './SearchEntity';
 import MonthPicker from './MonthPicker';
 import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
-import logo from './GovDataLogo.jpg';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 
