@@ -1,4 +1,6 @@
 import React from 'react';
+import { AllCheckerCheckbox, Checkbox, CheckboxGroup } from '@createnl/grouped-checkboxes';
+
 
 class MonthPicker extends React.Component{
     constructor(props){
@@ -35,7 +37,37 @@ class MonthPicker extends React.Component{
             'month': 'Junho',
             'year': '2020',
             'year_month': '202006'
-        }
+        },
+        {
+            'month': 'Julho',
+            'year': '2020',
+            'year_month': '202007'
+        },
+        {
+            'month': 'Agosto',
+            'year': '2020',
+            'year_month': '202008'
+        },
+        {
+            'month': 'Setembro',
+            'year': '2020',
+            'year_month': '202009'
+        },
+        {
+            'month': 'Outubro',
+            'year': '2020',
+            'year_month': '202010'
+        },
+        {
+            'month': 'Novembro',
+            'year': '2020',
+            'year_month': '202011'
+        },
+        {
+            'month': 'Dezembro',
+            'year': '2020',
+            'year_month': '202012'
+        },
     ]
 
     render(){
@@ -45,21 +77,31 @@ class MonthPicker extends React.Component{
                 <tr>
                     <td>{item['month']}</td>
                     <td>{item['year']}</td>
-                    <td><input type="checkbox" name={checkbox_identifier} onClick={this.props.selectDate}/>&nbsp;</td>
+                    <td><Checkbox value={checkbox_identifier}/></td>
                 </tr>
             );
         });
-        console.log(table_lines);
         return(
             <div className="Month-picker">
+                <CheckboxGroup onChange={this.props.dateSelected}>
                 <table>
-                    <tr>
-                        <th>Mês</th>
-                        <th>Ano</th>
-                        <th>Include</th>
-                    </tr>
-                    {table_lines}
+                    <thead>
+                        <tr>
+                            <th>Mês</th>
+                            <th>Ano</th>
+                            <th>Include</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TODOS</td>
+                            <td>2020</td>
+                            <td><AllCheckerCheckbox/></td>
+                        </tr>
+                        {table_lines}
+                    </tbody>
                 </table>
+                </CheckboxGroup>
             </div>
         )
     }

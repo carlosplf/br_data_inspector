@@ -3,6 +3,9 @@ import SearchEntity from './SearchEntity';
 import MonthPicker from './MonthPicker';
 import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
+
 
 
 class Home extends React.Component{
@@ -23,17 +26,6 @@ class Home extends React.Component{
     selected_dates = [];
     dates_url_param = "";
 
-    //Callback from MonthPicker checkbox click.
-    selectDate = (cb) => {
-        if(cb.target.checked){
-            this.selected_dates.push(cb.target.name);
-        }
-        else{
-            this.selected_dates = this.removeDateFromList(cb.target.name);
-        }
-        console.log(this.selected_dates);
-    }
-
     //Simple method to remove an item from array.
     removeDateFromList(date) { 
         return this.selected_dates.filter(function(ele){ 
@@ -44,6 +36,12 @@ class Home extends React.Component{
     // Callback when a Entity is selected from Autocomplete search field.
     handleSearch = (item) => {
         console.log("Searched: " + item["id"]);
+        if (this.selected_dates.length === 0){
+            //TODO: Implement real user alert.
+            console.log("Alert, no date selected!");
+            NotificationManager.warning('No Months selected!', '', 2000);
+            return;
+        }
         this.setState({
             search_id: item["id"],
             show_results: true
@@ -52,7 +50,6 @@ class Home extends React.Component{
 
     //Get all Subordinados and Superior Órgãos from backend API.
     getNamesList(entity_type){
-        console.log("First load. Geting entities names and IDs...");
         var request_url = "http://localhost:8080/" + entity_type.toLowerCase() + "/202001";
         fetch(request_url)
         .then(response => response.json())
@@ -61,7 +58,6 @@ class Home extends React.Component{
 
     //Parse Entities list so they can be used in autocomplete search.
     prepareItems(entity_type){
-        console.log("Transforming items for autocomplete function.");
         var items = [];
         for (let [key, value] of Object.entries(this.state.data)) {
         items.push({
@@ -80,9 +76,18 @@ class Home extends React.Component{
         this.dates_url_param = this.dates_url_param.slice(0, -1);
     }
 
+    //Callback funtion from MonthPicker Component.
+    dateSelected = (cbs) => {
+        this.selected_dates = [];
+        cbs.forEach(item =>{
+            if(item["checked"]){
+                this.selected_dates.push(item["value"]);
+            }
+        })
+    }
+
     render(){
         if (this.state.show_results){
-            console.log("should show table...");
             this.buildTableDateParam();
             var url_string = "/table?id=" + this.state.search_id + "&dates=" + this.dates_url_param;
             return (
@@ -107,12 +112,13 @@ class Home extends React.Component{
             }
             return(
                 <div className="App-Search">
-                <p>Pesquisar por Órgão Recebedor:</p>
-                <SearchEntity
-                    items={this.items}
-                    handleOnSelect={this.handleSearch}
-                />
-                <MonthPicker selectDate={this.selectDate}/>
+                    <NotificationContainer/>
+                    <p>Pesquisar por Órgão Recebedor:</p>
+                    <SearchEntity
+                        items={this.items}
+                        handleOnSelect={this.handleSearch}
+                    />
+                    <MonthPicker dateSelected={this.dateSelected}/>
                 </div>
             )
         }
