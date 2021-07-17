@@ -15,7 +15,7 @@ class Home extends React.Component{
         this.state = {
             'data': '',
             'search_id': '',
-            'search_id_second': '',
+            'search_id_2': '',
             'loading': true,
             'first_load': true,
             'show_results': false,
@@ -41,7 +41,7 @@ class Home extends React.Component{
 
     //If COMPARE is enabled, set the second Entity to be compared with.
     handleOnSelectSecond = (item) => {
-        this.setState({search_id_second: item["id"]});
+        this.setState({search_id_2: item["id"]});
     }
 
     handleCompareButton = () => {
@@ -104,7 +104,12 @@ class Home extends React.Component{
     render(){
         if (this.state.show_results){
             this.buildTableDateParam();
-            var url_string = "/details?id=" + this.state.search_id + "&dates=" + this.dates_url_param;
+            if(!this.state.compare){
+                var url_string = "/details?id=" + this.state.search_id + "&dates=" + this.dates_url_param;
+            }
+            else{
+                var url_string = "/compare?id1=" + this.state.search_id + "&id2=" + this.state.search_id_2 + "&dates=" + this.dates_url_param;
+            }
             return (
                 <Redirect to={url_string}/>
             );

@@ -31,7 +31,7 @@ class App extends React.Component {
             <DataPage key={this.state.search_id} entity_type="Subordinado" entity_id={this.state.search_id}/>
           </Route> 
           <Route path="/compare">
-            <DataCompare/>
+            <DataCompare entity_type="Subordinado"/>
           </Route>
         </Switch>
       </Router>
