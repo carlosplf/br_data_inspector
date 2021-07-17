@@ -1,6 +1,7 @@
 import React from 'react'
 import './App.css'
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+import './SearchEntity.css';
 
 class SearchEntity extends React.Component{
 
@@ -19,35 +20,29 @@ class SearchEntity extends React.Component{
         // the item hovered
         //console.log(result)
     }
-    /*
-    handleOnSelect = (item) => {
-        // the item selected
-        console.log(item)
-        console.log("selected")
-    }
-    */
 
     handleOnFocus = () => {
         //console.log('Focused')
     }
   
     render(){
-        return (
-            <div className="App">
-            <header className="App-header">
-                <div style={{ width: 400 }}>
-                <ReactSearchAutocomplete
-                    items={this.props.items}
-                    onSearch={this.handleOnSearch}
-                    onHover={this.handleOnHover}
-                    onSelect={this.props.handleOnSelect}
-                    onFocus={this.handleOnFocus}
-                    autoFocus
-                />
+        if (this.props.show){
+            return (
+                <div className="SearchEntity" style={{ width: 400 }}>
+                    <ReactSearchAutocomplete
+                        items={this.props.items}
+                        onSearch={this.handleOnSearch}
+                        onHover={this.handleOnHover}
+                        onSelect={this.props.handleOnSelect}
+                        onFocus={this.handleOnFocus}
+                        autoFocus
+                    />
                 </div>
-            </header>
-            </div>
-        )
+            )
+        }
+        else{
+            return <spam/>;
+        }
     }
 }
 

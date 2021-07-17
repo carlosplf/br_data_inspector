@@ -1,7 +1,7 @@
 import React from 'react';
 import DataSummary from "./DataSummary.js";
 import { withRouter } from 'react-router-dom'
-import Button from './Button';
+import BackButton from './BackButton';
 import ReactModal from 'react-modal';
 import ModalContent from './ModalContent';
 import DataBarChart from './DataBarChart';
@@ -116,7 +116,7 @@ class DataPage extends React.Component{
 				<h1>RECEBEDOR: {this.state.data[0]["Nome Órgão Subordinado"]}</h1>
 				<br></br>
 
-				<Button/>
+				<BackButton/>
 
 				<button id="all-data-btn" className="btn" onClick={this.handleOpenDataModal}>All Data</button>
 

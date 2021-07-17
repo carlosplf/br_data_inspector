@@ -19,7 +19,7 @@ class DataSummary extends React.Component{
     render(){
         return(
             <div className="Data-Summary">
-                <h2> Resumo de valores: </h2>
+                <h2> Resumo de valores para o período: </h2>
                 {this.props.data_keys.map(key => (
                     <p>{key}: { this.formatNumbers(this.props.values_summary[key])}</p>
                     ))}
