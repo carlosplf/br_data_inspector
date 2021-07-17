@@ -5,6 +5,7 @@ import './App.css';
 import React from 'react';
 import DataPage from './DataPage';
 import Home from './Home';
+import DataCompare from './DataCompare';
 import {
   BrowserRouter as Router,
   Switch,
@@ -26,9 +27,12 @@ class App extends React.Component {
           <Route path="/home">
             <Home />
           </Route>
-          <Route path="/table">
+          <Route path="/details">
             <DataPage key={this.state.search_id} entity_type="Subordinado" entity_id={this.state.search_id}/>
-          </Route>  
+          </Route> 
+          <Route path="/compare">
+            <DataCompare/>
+          </Route>
         </Switch>
       </Router>
     );

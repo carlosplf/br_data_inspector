@@ -129,8 +129,8 @@ class DataPage extends React.Component{
 				/>
 
 				<ReactModal isOpen={this.state.show_modal} contentLabel="All transactions modal">
-				<button id="close-modal-btn" className="modal-btn" onClick={this.handleCloseDataModal}>Close Modal</button>
-				<ModalContent all_transactions_data={this.state.data}/>
+					<button id="close-modal-btn" className="modal-btn" onClick={this.handleCloseDataModal}>Close Modal</button>
+					<ModalContent all_transactions_data={this.state.data}/>
 				</ReactModal>
 
 				</div>

@@ -104,7 +104,7 @@ class Home extends React.Component{
     render(){
         if (this.state.show_results){
             this.buildTableDateParam();
-            var url_string = "/table?id=" + this.state.search_id + "&dates=" + this.dates_url_param;
+            var url_string = "/details?id=" + this.state.search_id + "&dates=" + this.dates_url_param;
             return (
                 <Redirect to={url_string}/>
             );
@@ -137,10 +137,11 @@ class Home extends React.Component{
                     <SearchEntity
                         show={this.state.compare}
                         items={this.items}
+                        handleOnSelect={this.handleOnSelectSecond}
                     />
                     <button id="compare-btn" onClick={this.handleCompareButton}>Comparar</button>
                     <MonthPicker dateSelected={this.dateSelected}/>
-                    <button id="search-btn" onClick={this.handleSearch}>Go!</button>
+                    <button id="search-btn" onClick={this.handleSearch}>Pesquisar</button>
                 </div>
             )
         }
