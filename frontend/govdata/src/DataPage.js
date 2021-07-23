@@ -120,7 +120,7 @@ class DataPage extends React.Component{
 
 				<button id="all-data-btn" className="btn" onClick={this.handleOpenDataModal}>All Data</button>
 
-				<DataSummary key={this.entity_id} data={this.state.data} values_summary={this.state.values_summary} data_keys={this.state.data_keys}/>
+				<DataSummary name={this.state.data[0]["Nome Órgão Subordinado"]} key={this.entity_id} data={this.state.data} values_summary={this.state.values_summary} data_keys={this.state.data_keys}/>
 
 				<DataBarChart
 				data_keys={this.state.data_keys}

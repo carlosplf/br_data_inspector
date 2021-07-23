@@ -187,10 +187,10 @@ class DataCompare extends React.Component{
 
 					<button id="all-data-btn" className="btn" onClick={this.handleOpenDataModal}>All Data</button>
 
-					<DataSummary key={this.entity_id1} data={this.state.data1} values_summary={this.state.values_summary1} data_keys={this.state.data_keys}/>
+					<DataSummary name={this.state.data1[0]["Nome Órgão Subordinado"]} key={this.entity_id1} data={this.state.data1} values_summary={this.state.values_summary1} data_keys={this.state.data_keys}/>
 					<br></br>
 					<br></br>
-					<DataSummary key={this.entity_id2} data={this.state.data2} values_summary={this.state.values_summary2} data_keys={this.state.data_keys}/>
+					<DataSummary name={this.state.data2[0]["Nome Órgão Subordinado"]} key={this.entity_id2} data={this.state.data2} values_summary={this.state.values_summary2} data_keys={this.state.data_keys}/>
 
 					<DataBarChartComparison
 						data_keys={this.state.data_keys}
