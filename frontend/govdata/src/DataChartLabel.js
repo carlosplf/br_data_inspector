@@ -9,13 +9,15 @@ class DataChartLabel extends React.Component{
 	
 	createLabels(){
 		var all_labels = [];
-		for(var i=0;i<this.props.keys.length; i++){
-			all_labels.push(
-				{
-					"key": this.props.keys[i],
-					"color": this.props.colors[i]
-				}
-			);
+		for (var j=0;j<this.props.entities.length; j++){
+			for(var i=0;i<this.props.keys.length; i++){
+				all_labels.push(
+					{
+						"key": this.props.keys[i] + " - " + this.props.entities[j],
+						"color": this.props.colors[i+(this.props.keys.length * j)]
+					}
+				);
+			}
 		}
 		return all_labels;
 	}

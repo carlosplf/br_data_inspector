@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import './Home.css'
 
 
 
@@ -14,6 +15,7 @@ class Home extends React.Component{
         this.state = {
             'data': '',
             'search_id': '',
+            'search_id_2': '',
             'loading': true,
             'first_load': true,
             'show_results': false,
@@ -33,17 +35,30 @@ class Home extends React.Component{
         });
     }
 
+    handleOnSelect = (item) => {
+        this.setState({search_id: item["id"]});
+    }
+
+    //If COMPARE is enabled, set the second Entity to be compared with.
+    handleOnSelectSecond = (item) => {
+        this.setState({search_id_2: item["id"]});
+    }
+
+    handleCompareButton = () => {
+        this.setState(prevState => ({
+            compare: !prevState.compare
+          }));
+    }
+
     // Callback when a Entity is selected from Autocomplete search field.
     handleSearch = (item) => {
-        console.log("Searched: " + item["id"]);
         if (this.selected_dates.length === 0){
             //TODO: Implement real user alert.
             console.log("Alert, no date selected!");
-            NotificationManager.warning('No Months selected!', '', 2000);
+            NotificationManager.warning('Nenhum mês selecionado!', '', 2000);
             return;
         }
         this.setState({
-            search_id: item["id"],
             show_results: true
         });
     }
@@ -89,7 +104,12 @@ class Home extends React.Component{
     render(){
         if (this.state.show_results){
             this.buildTableDateParam();
-            var url_string = "/table?id=" + this.state.search_id + "&dates=" + this.dates_url_param;
+            if(!this.state.compare){
+                var url_string = "/details?id=" + this.state.search_id + "&dates=" + this.dates_url_param;
+            }
+            else{
+                var url_string = "/compare?id1=" + this.state.search_id + "&id2=" + this.state.search_id_2 + "&dates=" + this.dates_url_param;
+            }
             return (
                 <Redirect to={url_string}/>
             );
@@ -115,10 +135,18 @@ class Home extends React.Component{
                     <NotificationContainer/>
                     <p>Pesquisar por Órgão Recebedor:</p>
                     <SearchEntity
+                        show={true}
                         items={this.items}
-                        handleOnSelect={this.handleSearch}
+                        handleOnSelect={this.handleOnSelect}
                     />
+                    <SearchEntity
+                        show={this.state.compare}
+                        items={this.items}
+                        handleOnSelect={this.handleOnSelectSecond}
+                    />
+                    <button id="compare-btn" onClick={this.handleCompareButton}>Comparar</button>
                     <MonthPicker dateSelected={this.dateSelected}/>
+                    <button id="search-btn" onClick={this.handleSearch}>Pesquisar</button>
                 </div>
             )
         }
