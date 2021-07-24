@@ -2,9 +2,6 @@ import React from 'react';
 import DataSummary from "./DataSummary.js";
 import { withRouter } from 'react-router-dom'
 import BackButton from './BackButton';
-import ReactModal from 'react-modal';
-import ModalContent from './ModalContent';
-import DataBarChart from './DataBarChart';
 import DataBarChartComparison from './DataBarChartComparison.js';
 import './DataCompare.css';
 
