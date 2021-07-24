@@ -1,7 +1,5 @@
 //Comented to use styled-components in EntityTable.js
 
-import './App.css';
-
 import React from 'react';
 import DataPage from './DataPage';
 import Home from './Home';

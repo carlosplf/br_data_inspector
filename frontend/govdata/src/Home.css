@@ -1,5 +1,13 @@
+.govdata-home{
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+    align-items: center;
+}
+
 #search-btn{
-	font-size: 1.2em;
+	font-size: 1.4em;
+	font-weight: bold;
 	margin-top: 30px;
 	color: #202020;
 	background-color: #1EB100;
@@ -13,15 +21,29 @@
 }
 
 #compare-btn{
-	font-size: 1.0em;
+	font-size: 1.6em;
 	margin-top: 30px;
 	color: #202020;
-	background-color: #00bbff;
+	background-color: #CCC;
 	border-radius: 4px;
 	border-width: 0px;
 }
 
 #compare-btn:hover{
-	background-color: #00ccff;
+	background-color: #DDD;
 	cursor: pointer;
+}
+
+.month-picker table{
+	margin-top: 40px;
+	color: #222;
+	text-align: left; 
+}
+
+.month-picker td{
+	min-width: 100px;
+}
+
+.select-all{
+	font-weight: bold;
 }
