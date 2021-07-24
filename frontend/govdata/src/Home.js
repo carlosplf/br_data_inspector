@@ -135,11 +135,13 @@ class Home extends React.Component{
                     <NotificationContainer/>
                     <p>Pesquisar por Órgão Recebedor:</p>
                     <SearchEntity
+                        search_id="search_1"
                         show={true}
                         items={this.items}
                         handleOnSelect={this.handleOnSelect}
                     />
                     <SearchEntity
+                        search_id="search_2"
                         show={this.state.compare}
                         items={this.items}
                         handleOnSelect={this.handleOnSelectSecond}

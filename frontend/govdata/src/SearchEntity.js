@@ -28,7 +28,7 @@ class SearchEntity extends React.Component{
     render(){
         if (this.props.show){
             return (
-                <div className="SearchEntity" style={{ width: 400 }}>
+                <div id={this.props.search_id} className="SearchEntity" style={{ width: 400 }}>
                     <ReactSearchAutocomplete
                         items={this.props.items}
                         onSearch={this.handleOnSearch}
