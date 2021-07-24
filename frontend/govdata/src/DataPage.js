@@ -114,7 +114,7 @@ class DataPage extends React.Component{
 			return (
 				<div className="search-results">
 
-					<Header header_text={header_text} handle_modal={this.handleOpenDataModal}/>
+					<Header show_table_data={true} header_text={header_text} handle_modal={this.handleOpenDataModal}/>
 
 					<div className="summary-container">
 						<DataSummary name={this.state.data[0]["Nome Órgão Subordinado"]} key={this.entity_id} data={this.state.data} values_summary={this.state.values_summary} data_keys={this.state.data_keys}/>
