@@ -1,8 +1,8 @@
 import React from 'react';
 import DataSummary from "./DataSummary.js";
 import { withRouter } from 'react-router-dom'
-import HomeButton from './HomeButton';
 import DataBarChartComparison from './DataBarChartComparison.js';
+import Header from './Header';
 import './DataCompare.css';
 
 import queryString from 'query-string';
@@ -169,10 +169,7 @@ class DataCompare extends React.Component{
 			return (
 				<div className="Search-Results">
 
-					<h1>RECEBEDOR: {this.state.data1[0]["Nome Órgão Subordinado"]} X {this.state.data2[0]["Nome Órgão Subordinado"]}</h1>
-					<br></br>
-
-					<HomeButton/>
+					<Header header_text="Comparação de Recebedores" handle_modal={this.handleOpenDataModal}/>
 
 					<div className="summary-container">
 						<DataSummary name={this.state.data1[0]["Nome Órgão Subordinado"]} key={this.entity_id1} data={this.state.data1} values_summary={this.state.values_summary1} data_keys={this.state.data_keys}/>

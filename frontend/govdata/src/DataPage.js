@@ -1,7 +1,6 @@
 import React from 'react';
 import DataSummary from "./DataSummary.js";
 import { withRouter } from 'react-router-dom'
-import HomeButton from './HomeButton';
 import ReactModal from 'react-modal';
 import ModalContent from './ModalContent';
 import DataBarChart from './DataBarChart';
@@ -113,25 +112,23 @@ class DataPage extends React.Component{
 		else{
 			const header_text = "RECEBEDOR: " + this.state.data[0]["Nome Órgão Subordinado"];
 			return (
-				<div className="Search-Results">
+				<div className="search-results">
 
-				<Header header_text={header_text}/>
+					<Header header_text={header_text} handle_modal={this.handleOpenDataModal}/>
 
-				<button id="all-data-btn" className="btn" onClick={this.handleOpenDataModal}>Mostrar tabela</button>
+					<div className="summary-container">
+						<DataSummary name={this.state.data[0]["Nome Órgão Subordinado"]} key={this.entity_id} data={this.state.data} values_summary={this.state.values_summary} data_keys={this.state.data_keys}/>
+					</div>
+					<DataBarChart
+					data_keys={this.state.data_keys}
+					all_transactions_data={this.state.data}
+					selected_dates={this.dates_to_search}
+					/>
 
-				<div className="summary-container">
-					<DataSummary name={this.state.data[0]["Nome Órgão Subordinado"]} key={this.entity_id} data={this.state.data} values_summary={this.state.values_summary} data_keys={this.state.data_keys}/>
-				</div>
-				<DataBarChart
-				data_keys={this.state.data_keys}
-				all_transactions_data={this.state.data}
-				selected_dates={this.dates_to_search}
-				/>
-
-				<ReactModal isOpen={this.state.show_modal} contentLabel="All transactions modal">
-					<button id="close-modal-btn" className="modal-btn" onClick={this.handleCloseDataModal}>Fechar</button>
-					<ModalContent all_transactions_data={this.state.data}/>
-				</ReactModal>
+					<ReactModal isOpen={this.state.show_modal} contentLabel="All transactions modal">
+						<button id="close-modal-btn" className="modal-btn" onClick={this.handleCloseDataModal}>Fechar</button>
+						<ModalContent all_transactions_data={this.state.data}/>
+					</ReactModal>
 
 				</div>
 			)

@@ -12,6 +12,7 @@ class Header extends React.Component{
             <div class="header">
                 <h1>{this.props.header_text}</h1>
                 <div class="header-btns">
+                    <button id="all-data-btn" className="btn" onClick={this.props.handle_modal}>Mostrar tabela</button>
                     <HomeButton/>
                 </div>
             </div>
