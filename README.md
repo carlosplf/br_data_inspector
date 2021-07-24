@@ -13,3 +13,4 @@ The Back-end also has an API to export the data saved.
 All Front-end is built with React. For now, the Front-end just let the user consult some investments from Brazil government to some other institutions, like Universities and Army.
 
 
+![alt text](screenshot-chart.png "Chart Screenshot")

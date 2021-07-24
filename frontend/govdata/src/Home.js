@@ -1,9 +1,11 @@
 import React from 'react';
 import SearchEntity from './SearchEntity';
 import MonthPicker from './MonthPicker';
+import Header from './Header';
 import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { FaPlus} from 'react-icons/fa';
 import 'react-notifications/lib/notifications.css';
 import './Home.css'
 
@@ -55,7 +57,7 @@ class Home extends React.Component{
         if (this.selected_dates.length === 0){
             //TODO: Implement real user alert.
             console.log("Alert, no date selected!");
-            NotificationManager.warning('Nenhum mês selecionado!', '', 2000);
+            NotificationManager.warning('Selecione um Mês', '', 2000);
             return;
         }
         this.setState({
@@ -131,20 +133,23 @@ class Home extends React.Component{
                 this.prepareItems("Subordinado");
             }
             return(
-                <div className="App-Search">
+                <div className="govdata-home">
                     <NotificationContainer/>
-                    <p>Pesquisar por Órgão Recebedor:</p>
+                    <Header header_text="Gov Data" handle_modal={this.handleOpenDataModal}/>
+                    <h2>Pesquisar por Órgão Recebedor:</h2>
                     <SearchEntity
+                        search_id="search_1"
                         show={true}
                         items={this.items}
                         handleOnSelect={this.handleOnSelect}
                     />
                     <SearchEntity
+                        search_id="search_2"
                         show={this.state.compare}
                         items={this.items}
                         handleOnSelect={this.handleOnSelectSecond}
                     />
-                    <button id="compare-btn" onClick={this.handleCompareButton}>Comparar</button>
+                    <button id="compare-btn" onClick={this.handleCompareButton}><FaPlus/></button>
                     <MonthPicker dateSelected={this.dateSelected}/>
                     <button id="search-btn" onClick={this.handleSearch}>Pesquisar</button>
                 </div>

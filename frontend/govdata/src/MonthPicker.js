@@ -82,20 +82,20 @@ class MonthPicker extends React.Component{
             );
         });
         return(
-            <div className="Month-picker">
+            <div className="month-picker">
                 <CheckboxGroup onChange={this.props.dateSelected}>
                 <table>
                     <thead>
                         <tr>
                             <th>Mês</th>
                             <th>Ano</th>
-                            <th>Include</th>
+                            <th>Selecionar</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>TODOS</td>
-                            <td>2020</td>
+                            <td className="select-all">TODOS</td>
+                            <td className="select-all">2020</td>
                             <td><AllCheckerCheckbox/></td>
                         </tr>
                         {table_lines}

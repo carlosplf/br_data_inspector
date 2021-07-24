@@ -1,11 +1,9 @@
 import React from 'react';
 import DataSummary from "./DataSummary.js";
 import { withRouter } from 'react-router-dom'
-import BackButton from './BackButton';
-import ReactModal from 'react-modal';
-import ModalContent from './ModalContent';
-import DataBarChart from './DataBarChart';
 import DataBarChartComparison from './DataBarChartComparison.js';
+import Header from './Header';
+import './DataCompare.css';
 
 import queryString from 'query-string';
 
@@ -18,7 +16,6 @@ class DataCompare extends React.Component{
 			loading: true, 
 			data1: undefined,
             data2: undefined,
-			show_modal: false,
 			values_summary1: {},
             values_summary2: {},
 			data_keys: [
@@ -36,14 +33,6 @@ class DataCompare extends React.Component{
 	entity_id1 = 0;
     entity_id2 = 0;
 	dates_to_search = [];
-
-	handleOpenDataModal = () => {
-		this.setState({ show_modal: true });
-	}
-
-	handleCloseDataModal = () => {
-		this.setState({ show_modal: false });
-	}
 
 	componentDidMount(){
 		this.getURLParams();
@@ -180,18 +169,14 @@ class DataCompare extends React.Component{
 			return (
 				<div className="Search-Results">
 
-					<h1>RECEBEDOR: {this.state.data1[0]["Nome Órgão Subordinado"]} X {this.state.data2[0]["Nome Órgão Subordinado"]}</h1>
-					<br></br>
+					<Header header_text="Comparação de Recebedores" handle_modal={this.handleOpenDataModal}/>
 
-					<BackButton/>
-
-					<button id="all-data-btn" className="btn" onClick={this.handleOpenDataModal}>All Data</button>
-
-					<DataSummary name={this.state.data1[0]["Nome Órgão Subordinado"]} key={this.entity_id1} data={this.state.data1} values_summary={this.state.values_summary1} data_keys={this.state.data_keys}/>
-					<br></br>
-					<br></br>
-					<DataSummary name={this.state.data2[0]["Nome Órgão Subordinado"]} key={this.entity_id2} data={this.state.data2} values_summary={this.state.values_summary2} data_keys={this.state.data_keys}/>
-
+					<div className="summary-container">
+						<DataSummary name={this.state.data1[0]["Nome Órgão Subordinado"]} key={this.entity_id1} data={this.state.data1} values_summary={this.state.values_summary1} data_keys={this.state.data_keys}/>
+						<br></br>
+						<br></br>
+						<DataSummary name={this.state.data2[0]["Nome Órgão Subordinado"]} key={this.entity_id2} data={this.state.data2} values_summary={this.state.values_summary2} data_keys={this.state.data_keys}/>
+					</div>
 					<DataBarChartComparison
 						data_keys={this.state.data_keys}
 						all_transactions_data_1={this.state.data1}
