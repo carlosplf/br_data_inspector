@@ -1,7 +1,7 @@
 import React from 'react';
 import DataSummary from "./DataSummary.js";
 import { withRouter } from 'react-router-dom'
-import BackButton from './BackButton';
+import HomeButton from './HomeButton';
 import DataBarChartComparison from './DataBarChartComparison.js';
 import './DataCompare.css';
 
@@ -16,7 +16,6 @@ class DataCompare extends React.Component{
 			loading: true, 
 			data1: undefined,
             data2: undefined,
-			show_modal: false,
 			values_summary1: {},
             values_summary2: {},
 			data_keys: [
@@ -34,14 +33,6 @@ class DataCompare extends React.Component{
 	entity_id1 = 0;
     entity_id2 = 0;
 	dates_to_search = [];
-
-	handleOpenDataModal = () => {
-		this.setState({ show_modal: true });
-	}
-
-	handleCloseDataModal = () => {
-		this.setState({ show_modal: false });
-	}
 
 	componentDidMount(){
 		this.getURLParams();
@@ -181,9 +172,8 @@ class DataCompare extends React.Component{
 					<h1>RECEBEDOR: {this.state.data1[0]["Nome Órgão Subordinado"]} X {this.state.data2[0]["Nome Órgão Subordinado"]}</h1>
 					<br></br>
 
-					<BackButton/>
+					<HomeButton/>
 
-					<button id="all-data-btn" className="btn" onClick={this.handleOpenDataModal}>All Data</button>
 					<div className="summary-container">
 						<DataSummary name={this.state.data1[0]["Nome Órgão Subordinado"]} key={this.entity_id1} data={this.state.data1} values_summary={this.state.values_summary1} data_keys={this.state.data_keys}/>
 						<br></br>
