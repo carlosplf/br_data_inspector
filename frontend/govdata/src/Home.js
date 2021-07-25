@@ -2,6 +2,7 @@ import React from 'react';
 import SearchEntity from './SearchEntity';
 import MonthPicker from './MonthPicker';
 import Header from './Header';
+import CompareButton from './CompareButton';
 import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
@@ -149,7 +150,7 @@ class Home extends React.Component{
                         items={this.items}
                         handleOnSelect={this.handleOnSelectSecond}
                     />
-                    <button id="compare-btn" onClick={this.handleCompareButton}><FaPlus/></button>
+                    <CompareButton handleCompareButton={this.handleCompareButton}/>
                     <MonthPicker dateSelected={this.dateSelected}/>
                     <button id="search-btn" onClick={this.handleSearch}>Pesquisar</button>
                 </div>
