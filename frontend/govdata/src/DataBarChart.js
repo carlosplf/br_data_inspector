@@ -90,24 +90,21 @@ class DataBarChart extends React.Component{
 
 		return (
 			<div className="DataBarChart">
-			<DataChartLabel entities={entities} keys={this.keys_to_show} colors={this.graph_bar_colors}/>
-			<XYPlot xType="ordinal" style={{marginTop: 20}} width={1200} height={600} margin={{left: 120}}>
-			<VerticalGridLines />
-			<HorizontalGridLines />
-			<XAxis 
-			style={{
-				text: {stroke: 'none', fill: '#FFFFFF', fontWeight: 600}
-			}}/>
-			<YAxis
-			style={{
-				text: {stroke: 'none', fill: '#FFFFFF', fontWeight: 600}
-			}}/>
-			{all_data_series}
-			</XYPlot>
-			<br></br>
-			<br></br>
-			<br></br>
-			<br></br>
+				<DataChartLabel entities={entities} keys={this.keys_to_show} colors={this.graph_bar_colors}/>
+				<XYPlot xType="ordinal" style={{marginTop: 20}} width={1200} height={600} margin={{left: 120}}>
+				<VerticalGridLines />
+				<HorizontalGridLines />
+				<XAxis 
+				style={{
+					text: {stroke: 'none', fill: '#FFFFFF', fontWeight: 600}
+				}}/>
+				<YAxis
+				style={{
+					text: {stroke: 'none', fill: '#FFFFFF', fontWeight: 600}
+				}}/>
+				{all_data_series}
+				</XYPlot>
+				<br></br>
 			</div>
 		)
 	}

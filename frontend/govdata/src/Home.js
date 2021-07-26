@@ -6,7 +6,6 @@ import CompareButton from './CompareButton';
 import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-import { FaPlus} from 'react-icons/fa';
 import 'react-notifications/lib/notifications.css';
 import './Home.css'
 
@@ -136,7 +135,7 @@ class Home extends React.Component{
             return(
                 <div className="govdata-home">
                     <NotificationContainer/>
-                    <Header header_text="Gov Data" handle_modal={this.handleOpenDataModal}/>
+                    <Header header_text="BR Data Collector" handle_modal={this.handleOpenDataModal}/>
                     <h2>Pesquisar por Órgão Recebedor:</h2>
                     <SearchEntity
                         search_id="search_1"
