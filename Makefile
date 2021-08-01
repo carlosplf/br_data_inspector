@@ -20,3 +20,4 @@ docker_build:
 	docker exec -w /home/govdata -d br_data_container uwsgi -d --ini br_data_collector.ini
 	sleep 5
 	docker exec -d br_data_container service nginx restart
+	docker exec -d br_data_container service mongodb start 
