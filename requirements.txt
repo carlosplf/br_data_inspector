@@ -1,4 +1,4 @@
 pymongo == 3.11.3
 Flask == 1.1.2
-uswgi
+uwsgi
 flask_cors
