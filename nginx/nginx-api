@@ -1,0 +1,9 @@
+server {
+    listen 5000;
+    server_name localhost;
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass unix:/home/govdata/br_data_collector.sock;
+    }
+}
