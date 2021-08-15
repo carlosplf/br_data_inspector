@@ -1,0 +1,13 @@
+#compare-btn{
+	font-size: 1.6em;
+	margin-top: 30px;
+	color: #202020;
+	background-color: #CCC;
+	border-radius: 4px;
+	border-width: 0px;
+}
+
+#compare-btn:hover{
+	background-color: #DDD;
+	cursor: pointer;
+}

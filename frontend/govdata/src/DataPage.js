@@ -119,10 +119,11 @@ class DataPage extends React.Component{
 					<div className="summary-container">
 						<DataSummary name={this.state.data[0]["Nome Órgão Subordinado"]} key={this.entity_id} data={this.state.data} values_summary={this.state.values_summary} data_keys={this.state.data_keys}/>
 					</div>
+					
 					<DataBarChart
-					data_keys={this.state.data_keys}
-					all_transactions_data={this.state.data}
-					selected_dates={this.dates_to_search}
+						data_keys={this.state.data_keys}
+						all_transactions_data={this.state.data}
+						selected_dates={this.dates_to_search}
 					/>
 
 					<ReactModal isOpen={this.state.show_modal} contentLabel="All transactions modal">
