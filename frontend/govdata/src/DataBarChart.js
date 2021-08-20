@@ -5,7 +5,8 @@ import {
 	YAxis,
 	VerticalGridLines,
 	HorizontalGridLines,
-	VerticalBarSeries
+	VerticalBarSeries,
+    Hint
 } from 'react-vis';
 import "./DataBarChart.css";
 import DataChartLabel from "./DataChartLabel";
@@ -14,6 +15,9 @@ import DataChartLabel from "./DataChartLabel";
 class DataBarChart extends React.Component{
 	constructor (props) {
 		super(props);
+        this.state = {
+            show_hint: false
+        }
 	}
 
 	keys_to_show = [
@@ -21,6 +25,11 @@ class DataBarChart extends React.Component{
 		"Valor Liquidado (R$)",
 		"Valor Pago (R$)"
 	]
+
+    hint_datapoint = {
+        x: 10,
+        y: 10
+    }
 
 	graph_bar_colors = ["#00bbff", "#33ffd7", "#ff9c33"];
 
@@ -70,6 +79,27 @@ class DataBarChart extends React.Component{
 		});
 		return dataset_all_months_and_keys;
 	}
+    
+    formatNumbers(x) {
+      if (!x) {return 0}
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    showHint(datapoint){
+        /*  Return a Hint Object based on 'show_hint' state and Datapoint values. */
+        
+        if (this.state.show_hint){
+            return(
+                <Hint className="hintBox" value={this.hint_datapoint}>
+                    <p>Valor: R${this.formatNumbers(this.hint_datapoint.y)}</p>
+                    <p>Mês: {this.hint_datapoint.x}</p>
+                </Hint>
+            );
+        }
+        else{
+            return null;
+        }
+    }
 
 	createDataSeries(){
 		//Create the VerticalDataSeries objects for the chart.
@@ -77,7 +107,16 @@ class DataBarChart extends React.Component{
 		var prepared_data = this.createDatasetBarGraph(this.keys_to_show);
 		for (var i=0; i<prepared_data.length; i++){
 			all_data_series.push(
-				<VerticalBarSeries color={this.graph_bar_colors[i]} style={{strokeWidth: 12}, {marginLeft: 10}} data={prepared_data[i]}/>
+				<VerticalBarSeries
+                    onValueMouseOver={(datapoint, event) => {
+                        this.hint_datapoint = datapoint;
+                        this.setState({show_hint: true});
+                    }}
+                    onValueMouseOut={(datapoint, event) => {this.setState({show_hint: false})}}
+                    color={this.graph_bar_colors[i]}
+                    style={{strokeWidth: 12}, {marginLeft: 10}}
+                    data={prepared_data[i]}
+                />
 			);
 		}
 		return all_data_series;
@@ -87,9 +126,11 @@ class DataBarChart extends React.Component{
 
 		const all_data_series = this.createDataSeries();
 		const entities = [this.props.all_transactions_data[0]["Nome Órgão Subordinado"]];
+        const hint = this.showHint();
 
 		return (
 			<div className="DataBarChart">
+            <link rel="stylesheet" href="https://unpkg.com/react-vis/dist/style.css"/>
 				<DataChartLabel entities={entities} keys={this.keys_to_show} colors={this.graph_bar_colors}/>
 				<XYPlot xType="ordinal" style={{marginTop: 20}} width={1200} height={600} margin={{left: 120}}>
 				<VerticalGridLines />
@@ -103,6 +144,7 @@ class DataBarChart extends React.Component{
 					text: {stroke: 'none', fill: '#FFFFFF', fontWeight: 600}
 				}}/>
 				{all_data_series}
+                {hint}
 				</XYPlot>
 				<br></br>
 			</div>
