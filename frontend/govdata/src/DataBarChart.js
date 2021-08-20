@@ -79,6 +79,11 @@ class DataBarChart extends React.Component{
 		});
 		return dataset_all_months_and_keys;
 	}
+    
+    formatNumbers(x) {
+      if (!x) {return 0}
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
 
     showHint(datapoint){
         /*  Return a Hint Object based on 'show_hint' state and Datapoint values. */
@@ -86,7 +91,7 @@ class DataBarChart extends React.Component{
         if (this.state.show_hint){
             return(
                 <Hint className="hintBox" value={this.hint_datapoint}>
-                    <p>Valor: {this.hint_datapoint.y}</p>
+                    <p>Valor: R${this.formatNumbers(this.hint_datapoint.y)}</p>
                     <p>Mês: {this.hint_datapoint.x}</p>
                 </Hint>
             );
