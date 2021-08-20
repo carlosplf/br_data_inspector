@@ -16,3 +16,11 @@
 	margin-left: 10px;
 	margin-top: 10px;
 }
+
+.hintBox {
+    color: #222222;
+    background-color: #EEEEEE;
+	border-radius: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
