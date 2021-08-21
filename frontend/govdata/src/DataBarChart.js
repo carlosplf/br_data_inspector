@@ -86,8 +86,7 @@ class DataBarChart extends React.Component{
     }
 
     showHint(datapoint){
-        /*  Return a Hint Object based on 'show_hint' state and Datapoint values. */
-        
+        /*  Return a Hint Object based on 'show_hint' state and Datapoint values. */        
         if (this.state.show_hint){
             return(
                 <Hint className="hintBox" value={this.hint_datapoint}>

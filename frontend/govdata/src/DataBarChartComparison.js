@@ -5,7 +5,8 @@ import {
 	YAxis,
 	VerticalGridLines,
 	HorizontalGridLines,
-	VerticalBarSeries
+	VerticalBarSeries,
+    Hint
 } from 'react-vis';
 import "./DataBarChart.css";
 import DataChartLabel from "./DataChartLabel";
@@ -18,6 +19,9 @@ class DataBarChartComparison extends React.Component{
     */
 	constructor (props) {
 		super(props);
+        this.state = {
+            show_hint: false
+        }
 	}
 
 	keys_to_show = [
@@ -25,6 +29,11 @@ class DataBarChartComparison extends React.Component{
 		"Valor Liquidado (R$)",
 		"Valor Pago (R$)"
 	]
+    
+    hint_datapoint = {
+        x: 10,
+        y: 10
+    }
 
 	graph_bar_colors = [
         "#00bbff",
@@ -99,6 +108,26 @@ class DataBarChartComparison extends React.Component{
 
 		return dataset_all_months_and_keys;
 	}
+    
+    formatNumbers(x) {
+      if (!x) {return 0}
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    showHint(datapoint){
+        /*  Return a Hint Object based on 'show_hint' state and Datapoint values. */    
+        if (this.state.show_hint){
+            return(
+                <Hint className="hintBox" value={this.hint_datapoint}>
+                    <p>Valor: R${this.formatNumbers(this.hint_datapoint.y)}</p>
+                    <p>Mês: {this.hint_datapoint.x}</p>
+                </Hint>
+            );
+        }
+        else{
+            return null;
+        }
+    }
 
 	createDataSeries(){
 		//Create the VerticalDataSeries objects for the chart.
@@ -106,7 +135,16 @@ class DataBarChartComparison extends React.Component{
 		var prepared_data = this.createDatasetBarGraph(this.keys_to_show);
 		for (var i=0; i<prepared_data.length; i++){
 			all_data_series.push(
-				<VerticalBarSeries color={this.graph_bar_colors[i]} style={{strokeWidth: 12}, {marginLeft: 10}} data={prepared_data[i]}/>
+				<VerticalBarSeries
+                    onValueMouseOver={(datapoint, event) => {
+                        this.hint_datapoint = datapoint;
+                        this.setState({show_hint: true});
+                    }}
+                    onValueMouseOut={(datapoint, event) => {this.setState({show_hint: false})}}
+                    color={this.graph_bar_colors[i]}
+                    style={{strokeWidth: 12}, {marginLeft: 10}}
+                    data={prepared_data[i]}
+                />
 			);
 		}
 		return all_data_series;
@@ -116,6 +154,7 @@ class DataBarChartComparison extends React.Component{
 
 		const all_data_series = this.createDataSeries();
         const entities = [this.props.all_transactions_data_1[0]["Nome Órgão Subordinado"], this.props.all_transactions_data_2[0]["Nome Órgão Subordinado"]]
+        const hint = this.showHint();
 
 		return (
 			<div className="DataBarChart">
@@ -135,6 +174,7 @@ class DataBarChartComparison extends React.Component{
                     }}
                 />
                 {all_data_series}
+                {hint}
                 </XYPlot>
                 <br></br>
 			</div>
