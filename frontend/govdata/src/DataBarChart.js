@@ -81,8 +81,8 @@ class DataBarChart extends React.Component{
 	}
     
     formatNumbers(x) {
-      if (!x) {return 0}
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        if (!x) {return 0}
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
     showHint(datapoint){

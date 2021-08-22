@@ -48,14 +48,14 @@ class DataBarChartComparison extends React.Component{
 		/*
 			Sum data[key] by month date. X-Axis is Month axis and Y-Axis is total_value Axis. Expected return:
 			[
-					{
-							x: '202001',
-							y: XXXX,
-					},
-					{
-							x: '202002',
-							y: YYYY,
-					}
+			    {
+				    x: '202001',
+					y: XXXX,
+				},
+				{
+				    x: '202002',
+					y: YYYY,
+				}
 			]
 		*/
 		var sum_by_month = [];
@@ -110,8 +110,8 @@ class DataBarChartComparison extends React.Component{
 	}
     
     formatNumbers(x) {
-      if (!x) {return 0}
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        if (!x) {return 0}
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
     showHint(datapoint){
