@@ -1,4 +1,4 @@
-# Govdata - "Portal da Transparência" data collector.
+# BR Data Inspector - "Portal da Transparência" data collector and Analyzer
 
 Data collector from Brazil government open reports.
 
