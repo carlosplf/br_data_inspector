@@ -69,7 +69,7 @@ class DataInspector():
        
         if date:
             filter_date = self.__parse_date(date)
-            query_filter["Ano e mês do lançamento"] =  filter_date
+            query_filter["Ano e mês do lançamento"] = filter_date
 
         result = self.db_connector.query(filter=query_filter)
         return self.__transform_data_in_list(query_result=result)

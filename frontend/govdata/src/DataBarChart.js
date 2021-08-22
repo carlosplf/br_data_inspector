@@ -81,13 +81,12 @@ class DataBarChart extends React.Component{
 	}
     
     formatNumbers(x) {
-      if (!x) {return 0}
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        if (!x) {return 0}
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
     showHint(datapoint){
-        /*  Return a Hint Object based on 'show_hint' state and Datapoint values. */
-        
+        /*  Return a Hint Object based on 'show_hint' state and Datapoint values. */        
         if (this.state.show_hint){
             return(
                 <Hint className="hintBox" value={this.hint_datapoint}>
