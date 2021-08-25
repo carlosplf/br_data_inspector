@@ -5,9 +5,6 @@ clear:
 	rm -f ./*.zip
 	rm -f downloads/*
 
-backend_install:
-	pip install -r requirements.txt
-
 docker_clear:
 	docker stop backend_container
 	docker rm backend_container
