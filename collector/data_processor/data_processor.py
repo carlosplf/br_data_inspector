@@ -4,12 +4,14 @@ import json
 from collector.db_connector import db_connector
 from collector.db_connector import redis_connector
 
+
 """
-    REDIS DB mapping:
-        1: Entities list
-        2: Ranks
+REDIS DB mapping:
+1: Entities list
+2: Ranks
 """
 
+# TODO: Build other constructors with db connections as args
 class DataProcessor():
     def __init__(self):
         self.db_connector = None
@@ -18,17 +20,19 @@ class DataProcessor():
 
     def create_biggest_receivers_rank(self, rank_size=10, date_filter=[]):
         """
-            Create a Rank for the Entities that recevied the most money.
-            This built rank should be stored in the RedisDB.
-            Args:
-                rank_size: number os entities to put in the rank.
-                date_filter: list of two dates to use as filter in DB query.
+        Create a Rank for the Entities that recevied the most money.
+        This built rank should be stored in the RedisDB.
+        Args:
+            rank_size: number os entities to put in the rank.
+            date_filter: list of two dates to use as filter in DB query.
         """
         pass
 
     def create_entities_list(self):
         """
-            Create a list with all Entities (name, ID), removind duplicated.
+        Create a list with all Entities (name, ID), removind duplicated.
+        Save this list inside a RedisDB (db=1) to be used as a cache system
+        by the API.
         """
         all_entities = self.__get_all_entities(entity_type='Subordinado',
                                                date=None)
