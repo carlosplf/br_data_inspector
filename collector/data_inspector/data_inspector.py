@@ -1,6 +1,8 @@
 from collector.db_connector import db_connector
 import logging
 
+# TODO: some methods are being copied to DataProcessor class and must be
+# removed.
 class DataInspector():
 
     def __init__(self):
