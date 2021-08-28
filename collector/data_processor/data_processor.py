@@ -27,17 +27,37 @@ class DataProcessor():
             rank_size: number os entities to put in the rank.
             date_filter: list of two dates to use as filter in DB query.
         """
-        logging.debug("Creating Receivers Rank")
+        logging.debug("Creating Receivers Rank...")
         self.__connect_redis(db=1)
+        receivers_rank = []
         
         receivers_redis_key = "Subordinado_list"
         receivers_list = json.loads(self.redis_connector.get(receivers_redis_key))
         for receiver in receivers_list:
             r_data = self.__get_data_for_single_receiver(receiver['Código Órgão Subordinado'], "Subordinado") 
             r_total_value = self.__sum_receiver_values(r_data, "Valor Pago (R$)")
+            new_rank_line = {
+                        "Nome Órgão Subordinado": receiver['Nome Órgão Subordinado'],
+                        "Código Órgão Subordinado": receiver['Código Órgão Subordinado'],
+                        "Total received": r_total_value
+                    }
+            receivers_rank.append(new_rank_line)
 
         logging.debug("Done.")
-        return
+        sorted_rank = self.__sort_rank(receivers_rank, "Total received")
+        sized_rank = sorted_rank[:rank_size]
+
+        #TODO use date filter as part of key name.
+        return self.redis_connector.set("receivers_rank", json.dumps(sized_rank))
+
+    def __sort_rank(self, rank, key_value):
+        """
+        Sort the rank information and limit it size.
+        Args:
+            rank: LIST of dicts. The rank.
+            key_value: STR dict key for the value to sort.
+        """
+        return sorted(rank, key=lambda k: k[key_value]) 
 
     def __sum_receiver_values(self, receiver_data, value_key):
         """
