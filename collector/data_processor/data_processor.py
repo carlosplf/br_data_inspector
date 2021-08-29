@@ -6,13 +6,6 @@ from collector.db_connector import redis_connector
 from collector.data_inspector import data_inspector
 
 
-"""
-REDIS DB mapping:
-1: Entities list
-2: Ranks
-"""
-
-# TODO: Build other constructors with db connections as args
 class DataProcessor():
     def __init__(self):
         self.db_connector = None
@@ -131,7 +124,7 @@ class DataProcessor():
         logging.debug("DONE")
 
     def __connect_redis(self, db=1):
-        logging.debug("Connecting REDIS DB")
+        logging.debug("Connecting Redis DB")
         self.redis_connector = redis_connector.RedisConnector()
         self.redis_connector.connect(db=db)
         logging.debug("DONE")

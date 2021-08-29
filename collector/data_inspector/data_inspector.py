@@ -1,15 +1,14 @@
 from collector.db_connector import db_connector
+from collector.db_connector import redis_connector
 import logging
+import json
 
-# TODO: some methods are being copied to DataProcessor class and must be
-# removed.
+
 class DataInspector():
-
-    def __init__(self):
-        self.db_connector = None
 
     def __init__(self, db_connector):
         self.db_connector = db_connector
+        self.redis_connector = None
 
     def get_entity_data(self, entity_id="", entity_type=None, date=""):
         """
@@ -33,6 +32,24 @@ class DataInspector():
 
         result = self.db_connector.query(filter=query_filter)
         return self.__transform_data_in_list(query_result=result, entity_type=entity_type, remove_duplicated=False)
+
+    #TODO could be an option for the get_all_entitites method, Redis ou Mongo
+    def get_all_entities_from_redis(self, entity_type=None, date=None):
+        """
+        Get all Entities list from Redis DB, instead of Mongo DB.
+        Args:
+            entity_type: (str) "Superior" or "Subordinado"
+        """
+        if not entity_type:
+            logging.warning("Entity type is None. Returning empty list...")
+            return []
+
+        key_name = "all_" + entity_type + "_list_all-time"
+        self.redis_connector = redis_connector.RedisConnector()
+        self.redis_connector.connect()
+
+        entities_list = self.redis_connector.get(key_name)
+        return json.loads(entities_list)
 
     def get_all_entities(self, entity_type=None, date=None):
         """
