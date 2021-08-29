@@ -33,6 +33,8 @@ class DataProcessor():
         
         receivers_redis_key = "Subordinado_list"
         receivers_list = json.loads(self.redis_connector.get(receivers_redis_key))
+        print("Building rank for ", len(receivers_list), " entities...")
+        counter = 0
         for receiver in receivers_list:
             r_data = self.__get_data_for_single_receiver(receiver['Código Órgão Subordinado'], "Subordinado") 
             r_total_value = self.__sum_receiver_values(r_data, "Valor Pago (R$)")
@@ -42,13 +44,33 @@ class DataProcessor():
                         "Total received": r_total_value
                     }
             receivers_rank.append(new_rank_line)
+            counter += 1
+            print(counter)
 
         logging.debug("Done.")
         sorted_rank = self.__sort_rank(receivers_rank, "Total received")
         sized_rank = sorted_rank[:rank_size]
 
-        #TODO use date filter as part of key name.
-        return self.redis_connector.set("receivers_rank", json.dumps(sized_rank))
+        key_name = self.__build_key_name("receivers_rank", date_filter)
+        return self.redis_connector.set(key_name, json.dumps(sized_rank))
+
+    def __build_key_name(self, base_name, date_filter):
+        """
+        Build the KEY to be used in Redis insertion. It is a independent method because this can be way 
+        more complex in future.
+        Args:
+            rank_type: STR base name to be used as part of key_value.
+            date_filter: LIST date used as query filtering.
+        """
+
+        if not date_filter:
+            date_filter_str = "all-time"
+        else:
+            date_filter_str = date_filter[0] + "-" + date_filter[1]
+        
+        key_name = base_name + "_" + date_filter_str
+
+        return key_name
 
     def __sort_rank(self, rank, key_value):
         """
@@ -57,7 +79,7 @@ class DataProcessor():
             rank: LIST of dicts. The rank.
             key_value: STR dict key for the value to sort.
         """
-        return sorted(rank, key=lambda k: k[key_value]) 
+        return sorted(rank, key=lambda k: k[key_value], reverse=True) 
 
     def __sum_receiver_values(self, receiver_data, value_key):
         """
