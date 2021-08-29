@@ -33,8 +33,7 @@ class DataProcessor():
         
         receivers_redis_key = "Subordinado_list"
         receivers_list = json.loads(self.redis_connector.get(receivers_redis_key))
-        print("Building rank for ", len(receivers_list), " entities...")
-        counter = 0
+        logging.debug("Building rank for ", len(receivers_list), " entities...")
         for receiver in receivers_list:
             r_data = self.__get_data_for_single_receiver(receiver['Código Órgão Subordinado'], "Subordinado") 
             r_total_value = self.__sum_receiver_values(r_data, "Valor Pago (R$)")
@@ -44,8 +43,6 @@ class DataProcessor():
                         "Total received": r_total_value
                     }
             receivers_rank.append(new_rank_line)
-            counter += 1
-            print(counter)
 
         logging.debug("Done.")
         sorted_rank = self.__sort_rank(receivers_rank, "Total received")
