@@ -33,6 +33,28 @@ class DataInspector():
         result = self.db_connector.query(filter=query_filter)
         return self.__transform_data_in_list(query_result=result, entity_type=entity_type, remove_duplicated=False)
 
+    def get_entity_rank(self, entity_type=None, date=None):
+        """
+        Get the Entity Rank from RedisDB.
+        Args:
+            entity_type: (str) "Superior" or "Subordinado"
+        """
+        if not entity_type:
+            logging.warning("Superior ou Subordinado not select! Return empty list.")
+            return []
+        
+        self.redis_connector = redis_connector.RedisConnector()
+        self.redis_connector.connect()
+        
+        if entity_type == "Subordinado":
+            redis_key = "receivers_rank_all-time"
+        elif entity_type == "Superior":
+            redis_key = "payer_rank_all-time"
+        else:
+            return []
+
+        return json.loads(self.redis_connector.get(redis_key))
+
     #TODO could be an option for the get_all_entitites method, Redis ou Mongo
     def get_all_entities_from_redis(self, entity_type=None, date=None):
         """
