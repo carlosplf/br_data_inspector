@@ -87,7 +87,7 @@ class DataProcessor():
         """
         total_value = 0
         for single_d in receiver_data:
-            #parsing value, cause it comes as 'XX,XXXXX' from DB
+            #parsing value, because it comes as 'XX,XXXXX' from DB
             value_str = single_d[value_key][:-2]
             value_str = value_str.replace(",", ".")
             total_value += float(value_str)
@@ -114,85 +114,15 @@ class DataProcessor():
             logging.warning("No entity type selected at 'create_entities_list'. Returning...")
             return
 
-        all_entities = self.__get_all_entities(entity_type=entity_type,
+        di = data_inspector.DataInspector(self.db_connector)
+        all_entities = di.get_all_entities(entity_type=entity_type,
                                                date=None)
         self.__connect_redis(db=1)
         
-        #TODO use date filtering as part of the key name
-        key_name = entity_type + "_list"
+        base_name = "all_" + entity_type + "_list"
+        key_name = self.__build_key_name(base_name, [])
         
-        #TODO fix unicode in JSOM Dump str
         return self.redis_connector.set(key_name, json.dumps(all_entities))
-
-    #TODO WARNING: duplicated code. Already inside DataInspector class.
-    def __get_all_entities(self, entity_type=None, date=None):
-        """
-        Get all entities names and IDs.
-        Args:
-            entity_type: (str) "Superior" or "Subordinado"
-        """
-        if not entity_type:
-            logging.warning("Superior ou Subordinado not select! Return empty list.")
-            return []
-            
-        query_filter = {}
-       
-        if date:
-            filter_date = self.__parse_date(date)
-            query_filter = {"Ano e mês do lançamento": filter_date}
-
-        query_fields = {
-            "Código Órgão " + entity_type: 1,
-            "Nome Órgão " + entity_type: 1
-        }
-        result = self.db_connector.query(filter=query_filter, fields=query_fields)
-        return self.__transform_data_in_list(query_result=result, entity_type=entity_type, remove_duplicated=True)
-
-    #TODO WARNING: duplicated code. Already inside DataInspector class.
-    def __parse_date(self, date):
-        return date[:4] + "/" + date[4:]
-
-    #TODO WARNING: duplicated code. Already inside DataInspector class.
-    def __transform_data_in_list(self, query_result, entity_type, remove_duplicated=False):
-        """
-        Return a LIST with all data collected.
-        Args:
-            query_result: Mongo query Object.
-            remove_duplicated: Boolean. If True, call the '__remove_duplicated'
-            method.
-        """
-        all_data = []
-        results_counter = 0
-
-        for data_entry in query_result:
-            results_counter = results_counter + 1
-            data_as_dict = dict(data_entry)
-            data_as_dict.pop("_id", None)
-            all_data.append(data_as_dict)
-        logging.debug("Transforming", results_counter, " results.")
-        
-        if remove_duplicated:
-            all_data = self.__remove_duplicated(all_data, entity_type)
-        return all_data
-
-    #TODO WARNING: duplicated code. Already inside DataInspector class.
-    def __remove_duplicated(self, original_list, entity_type):
-        """
-        Remove duplicated entries from BD.
-        Args:
-            original_list: (list) List with all elements.
-            entity_type: (str) "Superior" or "Subordinado"
-        """
-        buffer_ids_list = []
-        new_data_list = []
-        id_key_field = "Código Órgão " + entity_type
-        
-        for data in original_list:
-            if data[id_key_field] not in buffer_ids_list:
-                buffer_ids_list.append(data[id_key_field])
-                new_data_list.append(data)
-        
-        return new_data_list
 
     def __connect_mongo(self):
         logging.debug("Connecting Mongo DB")
