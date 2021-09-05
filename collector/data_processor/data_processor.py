@@ -24,7 +24,7 @@ class DataProcessor():
         self.__connect_redis(db=1)
         receivers_rank = []
         
-        receivers_redis_key = "Subordinado_list"
+        receivers_redis_key = "all_Subordinado_list_all-time"
         receivers_list = json.loads(self.redis_connector.get(receivers_redis_key))
         logging.debug("Building rank for " + str(len(receivers_list)) + " entities...")
         for receiver in receivers_list:
