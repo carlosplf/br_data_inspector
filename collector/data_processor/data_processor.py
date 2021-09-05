@@ -107,6 +107,7 @@ class DataProcessor():
             logging.warning("No entity type selected at 'create_entities_list'. Returning...")
             return
 
+        logging.debug("Creating Entities list...")
         di = data_inspector.DataInspector(self.db_connector)
         all_entities = di.get_all_entities(entity_type=entity_type,
                                                date=None)
@@ -115,6 +116,8 @@ class DataProcessor():
         base_name = "all_" + entity_type + "_list"
         key_name = self.__build_key_name(base_name, [])
         
+        logging.debug("Done.")
+
         return self.redis_connector.set(key_name, json.dumps(all_entities))
 
     def __connect_mongo(self):
