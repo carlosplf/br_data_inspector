@@ -66,7 +66,7 @@ class DataInspector():
             logging.warning("Entity type is None. Returning empty list...")
             return []
 
-        key_name = "all_" + entity_type + "_list_all-time"
+        key_name = "all_" + entity_type + "_list_alltime"
         self.redis_connector = redis_connector.RedisConnector()
         self.redis_connector.connect()
 
