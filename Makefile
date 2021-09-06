@@ -15,3 +15,11 @@ docker_build:
 	docker run --name backend_container -p 5000:5000 -td backend_image
 	docker exec -w /home/govdata -d backend_container uwsgi -d --ini br_data_collector.ini
 	docker exec -d backend_container service mongodb start 
+
+start:
+	brew services start mongodb-community
+	brew services start redis
+
+stop:
+	brew services stop mongodb-community
+	brew services stop redis
