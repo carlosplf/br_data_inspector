@@ -2,6 +2,9 @@ import React from 'react';
 import DataPage from './DataPage';
 import Home from './Home';
 import DataCompare from './DataCompare';
+import Rank from './Rank';
+import About from './About';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -28,6 +31,12 @@ class App extends React.Component {
           </Route> 
           <Route path="/compare">
             <DataCompare entity_type="Subordinado"/>
+          </Route>
+          <Route path="/rank">
+            <Rank/>          
+          </Route>
+          <Route path="/about">
+            <About/>          
           </Route>
         </Switch>
       </Router>

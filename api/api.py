@@ -22,7 +22,7 @@ def get_all_superior(date):
 @app.route('/subordinado/<date>')
 def get_all_subordinado(date):
     di = data_inspector.DataInspector(db)
-    response = {"data": di.get_all_entities("Subordinado", date)}
+    response = {"data": di.get_all_entities_from_redis("Subordinado", date)}
     return response
 
 @app.route('/superior/<date>/<id>')
@@ -44,3 +44,8 @@ def search_entity():
     di = data_inspector.DataInspector(db)
     result = di.search_entity(search_term, entity_type, date)
     return {"data": result}
+
+@app.route('/rank')
+def get_subordinado_rank():
+    di = data_inspector.DataInspector(db)
+    return {"data": di.get_entity_rank("Subordinado", None)}

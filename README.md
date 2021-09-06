@@ -2,6 +2,10 @@
 
 Data collector from Brazil government open reports.
 
+
+![alt text](schema.png "Project Schema")
+
+
 ## Back-end
 
 All Back-end is built using Python, Flask and MongoDB. Software Back-end collect some reports from "Portal da Trasparência" as CSV, process and save the data at a MongoDB instance.
