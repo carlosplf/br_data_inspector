@@ -15,6 +15,11 @@ class AppButton extends React.Component{
                 <button id="rank-btn" className="page-btn"><Link to="/rank"> <FaMedal/> </Link></button>
             );
         }
+        else if(this.props.btn_type == "about-btn"){
+            return(
+                <button id="about-btn" className="page-btn"><Link to="/about"> Sobre </Link></button>
+            ); 
+        }
         else{
             return(
                 <span></span>
