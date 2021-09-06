@@ -4,7 +4,17 @@
     align-items: center;
 }
 
-.rankTable > *{
+.rankTable{
+    width: 80%;
     background-color: #dddddd;
-    border: 2px solid black;
+    border: 1px solid black;
+}
+
+.rankTable table{
+    width: 100%;
+}
+
+.rankTable th{
+    background-color: #222222;
+    color: #ffffff;
 }
