@@ -26,7 +26,7 @@ class Rank extends React.Component{
                 <tr>
                     <td>{row["Código Órgão Subordinado"]}</td>
                     <td>{row["Nome Órgão Subordinado"]}</td>
-                    <td>R$ {this.formatNumbers(row["Total received"])}</td>
+                    <td>R$ {this.formatNumbers(row["Total received"].toFixed(0))},00</td>
                 </tr>
             )
         })
