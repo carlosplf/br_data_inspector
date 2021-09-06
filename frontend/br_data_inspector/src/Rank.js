@@ -26,7 +26,7 @@ class Rank extends React.Component{
                 <tr>
                     <td>{row["Código Órgão Subordinado"]}</td>
                     <td>{row["Nome Órgão Subordinado"]}</td>
-                    <td>{row["Total received"]}</td>
+                    <td>R$ {this.formatNumbers(row["Total received"])}</td>
                 </tr>
             )
         })
@@ -61,6 +61,12 @@ class Rank extends React.Component{
 				this.setState({ data: data, loading: false})
 			});
 	}
+    
+    //TODO: Check if the numbers are being formated in a proper way for decimals.
+    formatNumbers(x) {
+        if (!x) {return 0}
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
 
     render(){
         if(this.state.loading){
@@ -76,7 +82,7 @@ class Rank extends React.Component{
             return(
                 <div className="rankPage">
                     <Header header_text="BR Data Collector"/>
-                    <h1>Rank Page Loaded!</h1>
+                    <h1>Maiores recebedores:</h1>
                     {data_table}
                 </div>
             )
