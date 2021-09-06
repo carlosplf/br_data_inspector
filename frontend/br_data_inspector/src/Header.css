@@ -12,17 +12,16 @@
 }
 
 .header-btns{
-    float: right;
-    width: 20%;
+	position:absolute; right: 0;	
+    float: right;	
+    width: 40%;
 }
 
 .header-btns span{
-    position:absolute; right:10;
     margin-top: 20px;
 }
 
 .header-btns button{
-    position:absolute; right:10;
     margin-top: 20px;
 }
 
@@ -42,8 +41,8 @@
 	cursor: pointer;
 }
 
-#back-btn button{
-	font-size: 18px;
+.page-btn{
+	height: 0px;
 	margin-left: 20px;
 	margin-right: 10px;
 	margin-top: 0px;
@@ -54,12 +53,12 @@
 	border-width: 0px;
 }
 
-#back-btn a{
+.page-btn a{
 	text-decoration: none;
-	font-size: 2.0em;
+	font-size: 2.2em;
 	color: #222;
 }
 
-#back-btn button:hover{
+.page-btn button:hover{
 	background-color: #EEE;
 }

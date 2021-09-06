@@ -1,6 +1,6 @@
 import React from "react";
 import './Header.css';
-import HomeButton from './HomeButton';
+import AppButton from './AppButton';
 
 class Header extends React.Component{
     constructor(props){
@@ -14,7 +14,8 @@ class Header extends React.Component{
                     <h1>{this.props.header_text}</h1>
                     <div class="header-btns">
                         <button id="all-data-btn" className="btn" onClick={this.props.handle_modal}>Mostrar tabela</button>
-                        <HomeButton/>
+                        <AppButton btn_type="rank-btn"/>
+                        <AppButton btn_type="home-btn"/>
                     </div>
                 </div>
             )
@@ -24,7 +25,8 @@ class Header extends React.Component{
                 <div class="header">
                     <h1>{this.props.header_text}</h1>
                     <div class="header-btns">
-                        <HomeButton/>
+                        <AppButton btn_type="rank-btn"/>
+                        <AppButton btn_type="home-btn"/>
                     </div>
                 </div>
             )
