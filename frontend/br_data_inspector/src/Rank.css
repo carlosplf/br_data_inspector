@@ -6,13 +6,21 @@
 
 .rankTable{
     width: 80%;
-    background-color: #dddddd;
+    background-color: #eeeeee;
     border: 1px solid black;
 }
 
 .rankTable table{
     width: 100%;
 }
+
+.value-column{
+    text-align: right;
+}
+
+.rankTable tr:hover{
+    background-color: #dddddd;
+}   
 
 .rankTable th{
     background-color: #222222;
