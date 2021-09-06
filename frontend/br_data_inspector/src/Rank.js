@@ -83,6 +83,10 @@ class Rank extends React.Component{
                 <div className="rankPage">
                     <Header header_text="BR Data Collector"/>
                     <h1>Maiores recebedores:</h1>
+                    <p>
+                        Tabela com entidades classificadas como Subordinadas, ordenadas
+                        por valores recebidos somados.
+                    </p>
                     {data_table}
                 </div>
             )
