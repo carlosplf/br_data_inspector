@@ -45,7 +45,7 @@ def search_entity():
     result = di.search_entity(search_term, entity_type, date)
     return {"data": result}
 
-@app.route('/subordinado/rank')
+@app.route('/rank')
 def get_subordinado_rank():
     di = data_inspector.DataInspector(db)
     return {"data": di.get_entity_rank("Subordinado", None)}

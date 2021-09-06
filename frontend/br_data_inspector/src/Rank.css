@@ -1,0 +1,10 @@
+.rankPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rankTable > *{
+    background-color: #dddddd;
+    border: 2px solid black;
+}
