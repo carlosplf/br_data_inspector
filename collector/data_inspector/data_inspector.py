@@ -33,7 +33,7 @@ class DataInspector():
         result = self.db_connector.query(filter=query_filter)
         return self.__transform_data_in_list(query_result=result, entity_type=entity_type, remove_duplicated=False)
 
-    def get_entity_rank(self, entity_type=None, date=None):
+    def get_entity_rank(self, entity_type=None, rank_size=10, date=None):
         """
         Get the Entity Rank from RedisDB.
         Args:
@@ -47,7 +47,7 @@ class DataInspector():
         self.redis_connector.connect()
         
         if entity_type == "Subordinado":
-            redis_key = "receivers_rank_all-time"
+            redis_key = "recebedores_rank_alltime"
         elif entity_type == "Superior":
             redis_key = "payer_rank_all-time"
         else:

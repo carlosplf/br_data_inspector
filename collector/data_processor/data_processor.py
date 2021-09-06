@@ -24,24 +24,29 @@ class DataProcessor():
         self.__connect_redis(db=1)
         receivers_rank = []
         
-        receivers_redis_key = "all_Subordinado_list_all-time"
+        receivers_redis_key = "all_Subordinado_list_alltime"
         receivers_list = json.loads(self.redis_connector.get(receivers_redis_key))
+
         logging.debug("Building rank for " + str(len(receivers_list)) + " entities...")
+
+        loop_counter = 0
         for receiver in receivers_list:
+            logging.debug(str(loop_counter) + ": Somando valores de " + receiver["Nome Órgão Subordinado"])
             r_data = self.__get_data_for_single_receiver(receiver['Código Órgão Subordinado'], "Subordinado") 
             r_total_value = self.__sum_receiver_values(r_data, "Valor Pago (R$)")
             new_rank_line = {
                         "Nome Órgão Subordinado": receiver['Nome Órgão Subordinado'],
                         "Código Órgão Subordinado": receiver['Código Órgão Subordinado'],
-                        "Total received": r_total_value
+                        "Total Recebido": r_total_value
                     }
             receivers_rank.append(new_rank_line)
+            loop_counter += 1
 
         logging.debug("Done.")
-        sorted_rank = self.__sort_rank(receivers_rank, "Total received")
+        sorted_rank = self.__sort_rank(receivers_rank, "Total Recebido")
         sized_rank = sorted_rank[:rank_size]
 
-        key_name = self.__build_key_name("receivers_rank", date_filter)
+        key_name = self.__build_key_name("recebedores_rank", date_filter)
         return self.redis_connector.set(key_name, json.dumps(sized_rank))
 
     def __build_key_name(self, base_name, date_filter):
@@ -54,7 +59,7 @@ class DataProcessor():
         """
 
         if not date_filter:
-            date_filter_str = "all-time"
+            date_filter_str = "alltime"
         else:
             date_filter_str = date_filter[0] + "-" + date_filter[1]
         
