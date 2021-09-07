@@ -30,7 +30,7 @@ class About extends React.Component{
                         e sem qualquer ligação com qualquer empresa ou negócio.
                     </p>
                     <br></br>
-                    <p><a href="#"><FaTwitter/></a><a href="https://github.com/carlosplf"><FaGithub/></a></p>
+                    <p><a href="#"><FaTwitter/></a><a href="https://github.com/carlosplf/br_data_inspector"><FaGithub/></a></p>
                     <br></br>
                     <h3>O Projeto</h3>
                     <p>
