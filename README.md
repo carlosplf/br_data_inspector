@@ -63,6 +63,16 @@ To collect data from "Portal da Transparência", run:
 
     python run.py --collect
 
-To run the DataProcessor routine and create sime acche listing, run:
+To run the DataProcessor routine and create some cache listing, run:
 
     python run.py --update
+
+Now, to run the API as dev enviroment, run:
+    
+    python run_api.py
+
+Note that this will run Flask in a development enviroment. The API default port is 8080.
+
+To run the frontend part for development enviroment, just run the following command inside the *frontend/br_data_collector* folder.
+
+    npm start
