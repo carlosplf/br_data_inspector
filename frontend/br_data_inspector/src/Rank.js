@@ -37,7 +37,7 @@ class Rank extends React.Component{
                     <tr>
                         <th> ID </th>
                         <th> Nome </th>
-                        <th> Valor </th>
+                        <th> Valor PAGO </th>
                     </tr>
                     {data_table}
                 </tbody>
@@ -85,7 +85,7 @@ class Rank extends React.Component{
                     <h1>Maiores recebedores:</h1>
                     <p>
                         Tabela com entidades classificadas como Subordinadas, ordenadas
-                        por valores recebidos somados.
+                        por valores recebidos (Valor PAGO) somados.
                     </p>
                     {data_table}
                 </div>

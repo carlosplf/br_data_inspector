@@ -8,7 +8,6 @@ import queryString from 'query-string';
 import Header from './Header';
 import "./DataPage.css";
 import CreateCustomLink from './CreateCustomLink.js';
-import { FaSortAlphaDownAlt } from 'react-icons/fa';
 
 
 class DataPage extends React.Component{
