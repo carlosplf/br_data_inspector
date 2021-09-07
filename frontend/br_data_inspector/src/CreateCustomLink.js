@@ -54,12 +54,12 @@ class CreateCustomLink extends React.Component{
         return(
             <div className="CustomLinkModal" style={this.showModal()}>
                 <div className="CustomLinkModalContent">
-                    <button onClick={this.props.handleClose}>X</button>
+                    <button onClick={this.props.handleClose} id="closeBtn">X</button>
                     <h2>Criar link para análise:</h2>
                     <p>Crie um link personalizado e compartilhe sua análise!</p>
                     <form onSubmit={this.handleSubmit}>
                         <label>Link: BRDataCollector/</label><input name="custom_url" type="text"/>
-                        <button>Submit</button>
+                        <button id="submitBtn">Submit</button>
                     </form>
                 </div>
             </div>

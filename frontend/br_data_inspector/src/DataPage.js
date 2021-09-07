@@ -1,6 +1,6 @@
 import React from 'react';
 import DataSummary from "./DataSummary.js";
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import ReactModal from 'react-modal';
 import ModalContent from './ModalContent';
 import DataBarChart from './DataBarChart';
@@ -128,14 +128,12 @@ class DataPage extends React.Component{
 			return (
 				<div className="search-results">
 
-					<Header show_table_data={true} header_text={header_text} handle_modal={this.handleOpenDataModal}/>
-
-					<button className="shareBtn" onClick={this.handleShareButton}>Compartilhar</button>
+					<Header handleShareButton={this.handleShareButton} show_share_button={true} show_table_data={true} header_text="Valores Recebidos" handle_modal={this.handleOpenDataModal}/>
 
 					<CreateCustomLink show={this.state.show_custom_link_modal} handleClose={this.handleCloseCLModal}/>
 
 					<div className="summary-container">
-						<DataSummary name={this.state.data[0]["Nome Órgão Subordinado"]} key={this.entity_id} data={this.state.data} values_summary={this.state.values_summary} data_keys={this.state.data_keys}/>
+						<DataSummary dates={this.dates_to_search} name={this.state.data[0]["Nome Órgão Subordinado"]} key={this.entity_id} data={this.state.data} values_summary={this.state.values_summary} data_keys={this.state.data_keys}/>
 					</div>
 					
 					<DataBarChart

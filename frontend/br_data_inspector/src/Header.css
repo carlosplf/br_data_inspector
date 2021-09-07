@@ -35,14 +35,14 @@
 	margin-left: 20px;
 	margin-right: 10px;
 	color: #202020;
-	background-color: #fff176;
+	background-color: #26c6da;
 	border-radius: 4px;
 	border-width: 0px;
     height: 40px;
 }
 
 #all-data-btn:hover{
-	background-color: #EEE;
+	background-color: #2acadf;
 	cursor: pointer;
 }
 
@@ -56,14 +56,23 @@
 	background-color: #DDD;
 	border-radius: 4px;
 	border-width: 0px;
+	font-size: 20pt;
 }
 
 .page-btn a{
 	text-decoration: none;
-	font-size: 2.2em;
 	color: #222;
 }
 
-.page-btn button:hover{
+.page-btn:hover{
 	background-color: #EEE;
+}
+
+#shareBtn{
+	background-color: #42a5f5;
+}
+
+#shareBtn:hover{
+	cursor: pointer;
+	background-color: #46a9f9;
 }

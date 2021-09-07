@@ -172,10 +172,10 @@ class DataCompare extends React.Component{
 					<Header header_text="Comparação de Recebedores" handle_modal={this.handleOpenDataModal}/>
 
 					<div className="summary-container">
-						<DataSummary name={this.state.data1[0]["Nome Órgão Subordinado"]} key={this.entity_id1} data={this.state.data1} values_summary={this.state.values_summary1} data_keys={this.state.data_keys}/>
+						<DataSummary dates={this.dates_to_search} name={this.state.data1[0]["Nome Órgão Subordinado"]} key={this.entity_id1} data={this.state.data1} values_summary={this.state.values_summary1} data_keys={this.state.data_keys}/>
 						<br></br>
 						<br></br>
-						<DataSummary name={this.state.data2[0]["Nome Órgão Subordinado"]} key={this.entity_id2} data={this.state.data2} values_summary={this.state.values_summary2} data_keys={this.state.data_keys}/>
+						<DataSummary dates={this.dates_to_search} name={this.state.data2[0]["Nome Órgão Subordinado"]} key={this.entity_id2} data={this.state.data2} values_summary={this.state.values_summary2} data_keys={this.state.data_keys}/>
 					</div>
 					<DataBarChartComparison
 						data_keys={this.state.data_keys}
