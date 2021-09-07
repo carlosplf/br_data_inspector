@@ -56,3 +56,8 @@ def create_custom_link():
     if op_return:
         return "OK"
     return "Error"
+
+@app.route('/get_real_url/<custom_url>')
+def get_real_url(custom_url):
+    my_custom_link = custom_link.CustomLink()
+    return {"real_url": str(my_custom_link.get(custom_url))}

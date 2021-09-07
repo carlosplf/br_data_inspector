@@ -32,7 +32,7 @@ class CreateCustomLink extends React.Component{
                 'Access-Control-Allow-Origin':'*' 
             },
             body: JSON.stringify({
-                custom_url: "/custom_link/" + custom_url,
+                custom_url: custom_url,
                 real_url: window.location.href
             })
         };
