@@ -1,6 +1,7 @@
 import React from "react";
 import './Header.css';
 import AppButton from './AppButton';
+import { FaShareAlt } from 'react-icons/fa';
 
 class Header extends React.Component{
     constructor(props){
@@ -9,7 +10,7 @@ class Header extends React.Component{
 
     showShareButton(){
         if(this.props.show_share_button){
-            return <button id="shareBtn" className="page-btn" onClick={this.props.handleShareButton}>Share</button>
+            return <button id="shareBtn" className="page-btn" onClick={this.props.handleShareButton}><FaShareAlt/></button>
         }
         else{
             <spam/>
