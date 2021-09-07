@@ -5,9 +5,10 @@
 }
 
 .rankTable{
+    border-radius: 10px;
+    padding: 20px;
     width: 80%;
     background-color: #eeeeee;
-    border: 1px solid black;
 }
 
 .rankTable table{
