@@ -1,0 +1,29 @@
+.rankPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rankTable{
+    border-radius: 10px;
+    padding: 20px;
+    width: 80%;
+    background-color: #eeeeee;
+}
+
+.rankTable table{
+    width: 100%;
+}
+
+.value-column{
+    text-align: right;
+}
+
+.rankTable tr:hover{
+    background-color: #dddddd;
+}   
+
+.rankTable th{
+    background-color: #222222;
+    color: #ffffff;
+}
