@@ -42,8 +42,7 @@ class CustomLinkRouter extends React.Component{
 
     render(){
         if(!this.state.loading){
-            const path = (this.adjustRealURL()).replace("\%27", "");
-            console.log(path);
+            const path = this.adjustRealURL();
             return(
                     <Redirect to={path}/>
             )
