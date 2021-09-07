@@ -3,9 +3,11 @@ from flask import request
 from flask_cors import CORS
 from collector.data_inspector import data_inspector
 from collector.db_connector import db_connector
+from collector.custom_link import custom_link
 
 app = Flask(__name__)
 CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 db = db_connector.DbConnector()
 db.connect()
 
@@ -36,16 +38,21 @@ def get_subordinado_data(date, id):
     di = data_inspector.DataInspector(db)
     return {"data": di.get_entity_data(id, "Subordinado", date)}
 
-@app.route('/search_entity', methods=['POST'])
-def search_entity():
-    search_term = request.form.get('search_term')
-    entity_type = request.form.get('entity_type')
-    date = request.form.get('date')
-    di = data_inspector.DataInspector(db)
-    result = di.search_entity(search_term, entity_type, date)
-    return {"data": result}
-
 @app.route('/rank')
 def get_subordinado_rank():
     di = data_inspector.DataInspector(db)
     return {"data": di.get_entity_rank("Subordinado", None)}
+
+@app.route('/save_custom_link', methods=['OPTIONS'])
+def pre_create_custom_link():
+    return {"Response": "OK"}
+
+@app.route('/save_custom_link', methods=['POST'])
+def create_custom_link():
+    custom_url = request.get_json()["custom_url"]
+    real_url = request.get_json()["real_url"]
+    my_custom_link = custom_link.CustomLink()
+    op_return = my_custom_link.create(custom_url, real_url)
+    if op_return:
+        return "OK"
+    return "Error"

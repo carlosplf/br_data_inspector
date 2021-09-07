@@ -7,6 +7,8 @@ import DataBarChart from './DataBarChart';
 import queryString from 'query-string';
 import Header from './Header';
 import "./DataPage.css";
+import CreateCustomLink from './CreateCustomLink.js';
+import { FaSortAlphaDownAlt } from 'react-icons/fa';
 
 
 class DataPage extends React.Component{
@@ -16,6 +18,7 @@ class DataPage extends React.Component{
 			loading: true, 
 			data: undefined,
 			show_modal: false,
+			show_custom_link_modal: false,
 			values_summary: {},
 			data_keys: [
 				"Valor Empenhado (R$)",
@@ -38,6 +41,10 @@ class DataPage extends React.Component{
 
 	handleCloseDataModal = () => {
 		this.setState({ show_modal: false });
+	}
+
+	handleShareButton = () => {
+		this.setState({show_custom_link_modal: true});
 	}
 
 	componentDidMount(){
@@ -103,6 +110,12 @@ class DataPage extends React.Component{
 		});
 	}
 
+	handleCloseCLModal = () => {
+		this.setState({
+			show_custom_link_modal: false
+		})
+	}
+
 	render(){
 		
 		if (this.state.loading){
@@ -111,10 +124,15 @@ class DataPage extends React.Component{
 		
 		else{
 			const header_text = "RECEBEDOR: " + this.state.data[0]["Nome Órgão Subordinado"];
+			//TODO: Check if Modal content is nof loading even when Modal is not showing.
 			return (
 				<div className="search-results">
 
 					<Header show_table_data={true} header_text={header_text} handle_modal={this.handleOpenDataModal}/>
+
+					<button className="shareBtn" onClick={this.handleShareButton}>Compartilhar</button>
+
+					<CreateCustomLink show={this.state.show_custom_link_modal} handleClose={this.handleCloseCLModal}/>
 
 					<div className="summary-container">
 						<DataSummary name={this.state.data[0]["Nome Órgão Subordinado"]} key={this.entity_id} data={this.state.data} values_summary={this.state.values_summary} data_keys={this.state.data_keys}/>

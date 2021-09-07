@@ -20,3 +20,22 @@
     flex-wrap: wrap;
 	flex-direction: column;
 }
+
+.shareBtn{
+	align-self:flex-end;
+	width: 180px;
+	height: 40px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	margin-right: 30px;
+	color: #202020;
+	background-color: #66bb6a;
+	border-radius: 4px;
+	border-width: 0px;
+	font-size: 16pt;
+}
+
+.shareBtn:hover{
+	cursor: pointer;
+	background-color: #77cc7b;
+}
