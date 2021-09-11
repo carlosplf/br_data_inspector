@@ -22,10 +22,15 @@ class About extends React.Component{
                     </p>
                     <p align="justify">
                         O sistema construído coleta os dados de alguns relatórios específicos periodicamente,
-                        e disponibiliza através de Páginas Web algumas informações para que os usuários possam
+                        e disponibiliza através de suas páginas algumas informações para que os usuários possam
                         consultar e visualizar.
                     </p>
-                    <p><a href="#"><FaTwitter/></a><a href="https://github.com/carlosplf"><FaGithub/></a></p>
+                    <p align="justify">
+                        O BR Data Collector é um sistema de código aberto, criado por Carlos Pereira Lopes Filho,
+                        e sem qualquer ligação com qualquer empresa ou negócio.
+                    </p>
+                    <br></br>
+                    <p><a href="#"><FaTwitter/></a><a href="https://github.com/carlosplf/br_data_inspector"><FaGithub/></a></p>
                     <br></br>
                     <h3>O Projeto</h3>
                     <p>

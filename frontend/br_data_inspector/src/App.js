@@ -4,6 +4,7 @@ import Home from './Home';
 import DataCompare from './DataCompare';
 import Rank from './Rank';
 import About from './About';
+import CustomLinkRouter from './CustomLinkRouter';
 
 import {
   BrowserRouter as Router,
@@ -37,6 +38,9 @@ class App extends React.Component {
           </Route>
           <Route path="/about">
             <About/>          
+          </Route>
+          <Route path="/custom_link">
+            <CustomLinkRouter/>
           </Route>
         </Switch>
       </Router>
