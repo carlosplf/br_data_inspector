@@ -19,7 +19,7 @@ class Header extends React.Component{
 
     showTableData(){
         if(this.props.show_table_data){
-            return <button id="all-data-btn" className="page-btn" onClick={this.props.handle_modal}>Mostrar tabela</button>
+            return <button id="all-data-btn" className="page-btn" onClick={this.props.handle_modal}>Mostrar dados</button>
         }
         else{
             return <spam/>
