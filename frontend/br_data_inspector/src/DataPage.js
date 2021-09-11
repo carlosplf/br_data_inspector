@@ -8,7 +8,7 @@ import queryString from 'query-string';
 import Header from './Header';
 import "./DataPage.css";
 import CreateCustomLink from './CreateCustomLink.js';
-
+import ExpensesTable from './ExpensesTable.js';
 
 class DataPage extends React.Component{
 	constructor(props) {
@@ -51,7 +51,6 @@ class DataPage extends React.Component{
 		if (!this.state.data && this.entity_id !== ''){
 			this.setState({loading: true});
 			//TODO: Need a better logic to collect from multiple dates.
-			console.log("Dates: " + this.dates_to_search);
 			this.dates_to_search.forEach(single_date =>{
 				this.requestDataFromAPI(single_date);
 			})
@@ -103,6 +102,24 @@ class DataPage extends React.Component{
 			});
 	}
 
+	buildExpensesDict(){
+		//Using the data from API, calculate the biggest expenses.
+		var expenses_summary = {}
+		this.state.data.forEach(single_line => {
+			var previous_total_value = 0;
+			if (expenses_summary[single_line["Código Elemento de Despesa"]]){
+				//Project already with a value. Should sum values.
+				previous_total_value = parseFloat(expenses_summary[single_line["Código Elemento de Despesa"]]["Valor Pago"]);
+			}
+			var new_entry = {
+				"Nome": single_line["Nome Elemento de Despesa"],
+				"Valor Pago": parseFloat(single_line["Valor Pago (R$)"]) + previous_total_value
+			}
+			expenses_summary[single_line["Código Elemento de Despesa"]] = new_entry
+		});
+		return expenses_summary;
+	}
+
 	selectedDates(){
 		return this.dates_to_search.map(d => {
 			return <spam> {d} </spam>
@@ -122,6 +139,8 @@ class DataPage extends React.Component{
 		}
 		
 		else{
+			const expenses_summary = this.buildExpensesDict();
+
 			const header_text = "RECEBEDOR: " + this.state.data[0]["Nome Órgão Subordinado"];
 			//TODO: Check if Modal content is nof loading even when Modal is not showing.
 			return (
@@ -140,6 +159,8 @@ class DataPage extends React.Component{
 						all_transactions_data={this.state.data}
 						selected_dates={this.dates_to_search}
 					/>
+
+					<ExpensesTable data={expenses_summary}/>
 
 					<ReactModal isOpen={this.state.show_modal} contentLabel="All transactions modal">
 						<button id="close-modal-btn" className="modal-btn" onClick={this.handleCloseDataModal}>Fechar</button>
