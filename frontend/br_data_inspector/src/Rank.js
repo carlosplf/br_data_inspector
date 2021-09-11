@@ -85,7 +85,7 @@ class Rank extends React.Component{
                     <h1>Maiores recebedores:</h1>
                     <p>
                         Tabela com entidades classificadas como Subordinadas, ordenadas
-                        por valores recebidos (Valor PAGO) somados.
+                        por valores recebidos (Valor PAGO) somados em 2020.
                     </p>
                     {data_table}
                 </div>
