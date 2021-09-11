@@ -20,7 +20,7 @@ class DataSummary extends React.Component{
         console.log("Dates: ", this.props.dates);
         var date_spam = this.props.dates.map( (d) => {
             return(
-                <spam> {d} </spam>
+                <spam> {d.slice(-2)} </spam>
             )
         })
         return date_spam;
