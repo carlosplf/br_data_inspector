@@ -31,7 +31,7 @@ class DataBarChart extends React.Component{
         y: 10
     }
 
-	graph_bar_colors = ["#00bbff", "#33ffd7", "#ff9c33"];
+	graph_bar_colors = ["#58508d", "#bc5090", "#ff6361"];
 
 	sumByMonth(key){
 		/*

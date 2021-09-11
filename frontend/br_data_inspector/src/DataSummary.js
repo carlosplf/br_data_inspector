@@ -16,11 +16,23 @@ class DataSummary extends React.Component{
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
+    processDates(){
+        console.log("Dates: ", this.props.dates);
+        var date_spam = this.props.dates.map( (d) => {
+            return(
+                <spam> {d.slice(-2)} </spam>
+            )
+        })
+        return date_spam;
+    }
+
     render(){
+        const date_spam = this.processDates();
         return(
             <div className="data-summary">
-                <h2> Resumo de valores para o período: </h2>
-                <h4>{this.props.name}</h4>
+                <h2>{this.props.name}</h2>
+                <spam className="monthsList">Meses selecionados: {date_spam}</spam>
+                <h3>Valores recebidos no período:</h3>
                 {this.props.data_keys.map(key => (
                     <p>{key}: { this.formatNumbers(this.props.values_summary[key])}</p>
                     ))}

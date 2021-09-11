@@ -9,10 +9,10 @@ class RedisConnector():
         self.db_connection = redis.Redis(host=host, port=port, db=db)
 
     def set(self, key, value):
-        self.db_connection.set(key, value)
+        return self.db_connection.set(key, value)
     
     def hmset(self, key, value):
-        self.db_connection.hmset(key, value)
+        return self.db_connection.hmset(key, value)
 
     def get(self, key):
         return self.db_connection.get(key)

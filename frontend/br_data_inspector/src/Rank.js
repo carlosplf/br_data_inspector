@@ -24,7 +24,7 @@ class Rank extends React.Component{
         var data_table = this.state.data["data"].map((row, i)=> {
             return(
                 <tr>
-                    <td>{row["Código Órgão Subordinado"]}</td>
+                    <td><a href={"http://localhost:3000/details?id=" + row["Código Órgão Subordinado"] + "&dates=202001-202002-202003-202004-202005-202006-202007-202008-202009-202010-202011-202012"}>{row["Código Órgão Subordinado"]}</a></td>
                     <td>{row["Nome Órgão Subordinado"]}</td>
                     <td className="value-column">R$ {this.formatNumbers(row["Total Recebido"].toFixed(0))},00</td>
                 </tr>
@@ -37,7 +37,7 @@ class Rank extends React.Component{
                     <tr>
                         <th> ID </th>
                         <th> Nome </th>
-                        <th> Valor </th>
+                        <th> Valor PAGO </th>
                     </tr>
                     {data_table}
                 </tbody>
@@ -85,7 +85,7 @@ class Rank extends React.Component{
                     <h1>Maiores recebedores:</h1>
                     <p>
                         Tabela com entidades classificadas como Subordinadas, ordenadas
-                        por valores recebidos somados.
+                        por valores recebidos (Valor PAGO) somados.
                     </p>
                     {data_table}
                 </div>
