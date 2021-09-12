@@ -28,7 +28,7 @@ Softwares needed for the application:
 
 ### Databases
 
-The software runs using **Python 3.8** and **NPM 7.21**.
+The software uses **Python 3.8** and **NPM 7.21**.
 
 **MongoDB**
 

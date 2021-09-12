@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
-import queryString, { stringify } from 'query-string';
+import queryString from 'query-string';
 
 
 class CustomLinkRouter extends React.Component{
