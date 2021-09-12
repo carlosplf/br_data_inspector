@@ -55,9 +55,7 @@ MacOS (homebrew):
 
 As a softwares that is currently being developed,the software does not have a production environment.
 
-To run the back-end, simply run the *run.py* file.
-
-MAKE SURE YOU ARE USING THE ENV WITH REQUIREMENTS INSTALLED!
+To run the back-end, simply run the *run.py* file. All requirements are inside requirements.txt file.
 
 To collect data from "Portal da Transparência", run:
 
