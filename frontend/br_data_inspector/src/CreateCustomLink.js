@@ -5,6 +5,9 @@ import "./CreateCustomLink.css";
 class CreateCustomLink extends React.Component{
     constructor(props){
         super(props);
+        this.state = {
+            "custom_link": null
+        }
     }
 
     showModal(){
@@ -19,7 +22,7 @@ class CreateCustomLink extends React.Component{
     handleSubmit = (e) => {
         e.preventDefault();
         this.sendToAPI(e.target.elements.custom_url.value)
-        this.props.handleClose()
+        this.setState({"custom_link": e.target.elements.custom_url.value})
         return "";
     }
 
@@ -58,7 +61,10 @@ class CreateCustomLink extends React.Component{
                     <p>Crie um link personalizado e compartilhe sua análise!</p>
                     <form onSubmit={this.handleSubmit}>
                         <label>Link: BRDataCollector/</label><input name="custom_url" type="text"/>
-                        <button id="submitBtn">Submit</button>
+                        <br></br>
+                        <br></br>
+                        <spam id="newURL">http://localhost:3000/custom_link?link_name={this.state.custom_link}</spam>
+                        <button id="submitBtn">Criar</button>
                     </form>
                 </div>
             </div>
