@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaWpforms } from 'react-icons/fa';
 import "./CreateCustomLink.css";
 
 
