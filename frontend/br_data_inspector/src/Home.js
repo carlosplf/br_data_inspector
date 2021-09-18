@@ -138,7 +138,7 @@ class Home extends React.Component{
             return(
                 <div className="govdata-home">
                     <NotificationContainer/>
-                    <Header header_text="BR Data Collector" handle_modal={this.handleOpenDataModal}/>
+                    <Header header_text="BR Data Collector - ALPHA" handle_modal={this.handleOpenDataModal}/>
                     <h2>Pesquisar por Órgão Recebedor:</h2>
                     <SearchEntity
                         search_id="search_1"
