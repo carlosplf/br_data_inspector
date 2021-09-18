@@ -30,9 +30,10 @@ class DataPage extends React.Component{
 		};
 	}
 
-	//Should be a state.
 	entity_id = 0;
 	dates_to_search = [];
+    api_url = process.env.REACT_APP_API_URL;
+    api_port = process.env.REACT_APP_API_PORT; 
 
 	handleOpenDataModal = () => {
 		this.setState({ show_modal: true });
@@ -91,8 +92,8 @@ class DataPage extends React.Component{
 		// Call Backend API and retrieve data about Entities
 		console.log("requesting data...");
 		//TODO: need a better logic to store backend URL.
-		var base_url = "http://localhost:8080/";
-		var request_url = base_url + this.props.entity_type.toLowerCase() + "/" + month_date + "/" + this.entity_id;
+		var base_url = this.api_url + ":" + this.api_port;
+		var request_url = base_url + "/" + this.props.entity_type.toLowerCase() + "/" + month_date + "/" + this.entity_id;
 		console.log(request_url);
 		fetch(request_url)
 			.then(response => response.json())

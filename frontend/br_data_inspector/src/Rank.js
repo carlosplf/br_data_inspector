@@ -11,6 +11,11 @@ class Rank extends React.Component{
             data: null
         }
     }
+    
+    api_url = process.env.REACT_APP_API_URL;
+    api_port = process.env.REACT_APP_API_PORT; 
+    frontend_url = process.env.REACT_APP_FRONTEND_URL; 
+    frontend_port = process.env.REACT_APP_FRONTEND_PORT; 
 
     componentDidMount(){
         this.requestDataFromAPI();
@@ -24,7 +29,7 @@ class Rank extends React.Component{
         var data_table = this.state.data["data"].map((row, i)=> {
             return(
                 <tr>
-                    <td><a href={"http://localhost:3000/details?id=" + row["Código Órgão Subordinado"] + "&dates=202001-202002-202003-202004-202005-202006-202007-202008-202009-202010-202011-202012"}>{row["Código Órgão Subordinado"]}</a></td>
+                    <td><a href={this.frontend_url + ":" + this.frontend_port + "/details?id=" + row["Código Órgão Subordinado"] + "&dates=202001-202002-202003-202004-202005-202006-202007-202008-202009-202010-202011-202012"}>{row["Código Órgão Subordinado"]}</a></td>
                     <td>{row["Nome Órgão Subordinado"]}</td>
                     <td className="value-column">R$ {this.formatNumbers(row["Total Recebido"].toFixed(0))},00</td>
                 </tr>
@@ -50,10 +55,8 @@ class Rank extends React.Component{
         this.setState({loading: true});
 		// Call Backend API and retrieve data
 		console.log("Requesting data...");
-        var api_address = "http://localhost"
-        var api_port = ":8080"
         var api_request = "/rank"
-		var request_url = api_address + api_port + api_request;
+        var request_url = this.api_url + ":" + this.api_port + "/" + api_request;
 		console.log(request_url);
 		fetch(request_url)
 			.then(response => response.json())

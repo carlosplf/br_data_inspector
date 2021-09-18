@@ -9,6 +9,11 @@ class CreateCustomLink extends React.Component{
             "custom_link": null
         }
     }
+    
+    api_url = process.env.REACT_APP_API_URL;
+    api_port = process.env.REACT_APP_API_PORT; 
+    frontend_url = process.env.REACT_APP_FRONTEND_URL;
+    frontend_port = process.env.REACT_APP_FRONTEND_PORT;
 
     showModal(){
         if(this.props.show){
@@ -42,10 +47,8 @@ class CreateCustomLink extends React.Component{
         this.setState({loading: true});
 		// Call Backend API and retrieve data
 		console.log("Sending data... Custom link: ", custom_url);
-        var api_address = "http://localhost"
-        var api_port = ":8080"
         var api_request = "/save_custom_link"
-		var request_url = api_address + api_port + api_request;
+        var request_url = this.api_url + ":" + this.api_port + api_request;
 		console.log(request_url);
 
 		fetch(request_url, request_options)
@@ -63,7 +66,7 @@ class CreateCustomLink extends React.Component{
                         <label>Link: BRDataCollector/</label><input name="custom_url" type="text"/>
                         <br></br>
                         <br></br>
-                        <spam id="newURL">http://localhost:3000/custom_link?link_name={this.state.custom_link}</spam>
+                        <spam id="newURL">{this.frontend_url + ":" + this.frontend_port + "/custom_link?link_name=" + this.state.custom_link}</spam>
                         <button id="submitBtn">Criar</button>
                     </form>
                 </div>
