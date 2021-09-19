@@ -3,6 +3,7 @@ import time
 import glob
 import urllib.request
 import logging
+import ssl
 
 
 class ReportDownloader():
@@ -27,6 +28,7 @@ class ReportDownloader():
             link: File base URL
             arg: URL last part (date)
         """
+        ssl._create_default_https_context = ssl._create_unverified_context
         link = link + arg
         zip_filename = arg + "-repot.zip"
         logging.debug("Downloading from Link: %s", link)
