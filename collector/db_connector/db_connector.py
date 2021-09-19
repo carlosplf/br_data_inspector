@@ -7,7 +7,7 @@ class DbConnector():
         self.mucol = None
 
     def connect(self):
-        self.myclient = pymongo.MongoClient(connect=False, host='localhost', port=27017)
+        self.myclient = pymongo.MongoClient(connect=False, host='mongo', port=27017)
         self.mydb = self.myclient["govdata"]
         self.mycol = self.mydb["reports-data"]
 
