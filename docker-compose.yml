@@ -6,6 +6,12 @@ services:
       dockerfile: ./Docker/backend_dockerfile
     ports:
       - "8080:8080"
+  frontend:
+    build:
+      context: ./
+      dockerfile: ./Docker/frontend_dockerfile
+    ports:
+      - "3000:3000"
   redis:
     image: "redis"
     ports:

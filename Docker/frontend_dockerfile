@@ -1,0 +1,5 @@
+FROM node:12-alpine
+RUN apk add --no-cache npm nginx
+WORKDIR /br_data_inspector
+COPY ../ .
+#RUN npm run build --prefix ./frontend/br_data_inspector
