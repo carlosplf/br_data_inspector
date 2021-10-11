@@ -20,7 +20,10 @@ All Front-end is built with React. For now, the Front-end just let the user cons
 
 ![alt text](page-screenshot.png "Application Screenshot")
 
-# How to run it
+
+![alt text](page-screenshot-2.png "Application Screenshot 2")
+
+# How to run
 
 ## Pre-requisites
 
@@ -74,3 +77,23 @@ Note that this will run Flask in a development enviroment. The API default port 
 To run the frontend part for development enviroment, just run the following command inside the *frontend/br_data_collector* folder.
 
     npm start
+
+
+### Run with Docker Compose
+
+Before get the containers running, a `.env` file is needed inside `frontend/br_data_inspector/` folder. This file shoud contain:
+
+    REACT_APP_API_URL = "API_ADDRESS"
+    REACT_APP_API_PORT = "API_PORT"
+
+Get all containers running:
+
+    docker-compose up
+
+To get the DB populated with data, simply run:
+
+    docker exec -it 'backend_container_name' sh
+    python3 run.py --collect
+    python3 run.py --update
+
+

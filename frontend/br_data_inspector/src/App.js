@@ -12,7 +12,7 @@ import {
   Route
 } from "react-router-dom";
 
-require('dotenv').config()
+require('dotenv').config({ path: require('find-config')('.env') })
 
 class App extends React.Component {
   constructor(props) { 
