@@ -23,7 +23,7 @@ All Front-end is built with React. For now, the Front-end just let the user cons
 
 ![alt text](page-screenshot-2.png "Application Screenshot 2")
 
-# How to run it
+# How to run
 
 ## Pre-requisites
 
