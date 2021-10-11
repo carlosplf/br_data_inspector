@@ -11,7 +11,7 @@ services:
       context: ./
       dockerfile: ./Docker/frontend_dockerfile
     ports:
-      - "3000:3000"
+      - "3000:80"
   redis:
     image: "redis"
     ports:
