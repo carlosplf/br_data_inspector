@@ -34,6 +34,8 @@ class DataCompare extends React.Component{
 	entity_id1 = 0;
     entity_id2 = 0;
 	dates_to_search = [];
+    api_url = process.env.REACT_APP_API_URL;
+    api_port = process.env.REACT_APP_API_PORT; 
 
 	componentDidMount(){
 		this.getURLParams();
@@ -123,8 +125,8 @@ class DataCompare extends React.Component{
 			DATA_SLOT: this is the argument to tell the component if we are collecting
 			data for the Entity 1 ou 2, since it is a Comparison component.
 		*/
-        var base_url = "http://localhost:8080/";
-		var request_url = base_url + this.props.entity_type.toLowerCase() + "/" + month_date + "/" + entity_id;
+        var base_url = this.api_url + ":" + this.api_port;
+		var request_url = base_url + "/" + this.props.entity_type.toLowerCase() + "/" + month_date + "/" + entity_id;
 		console.log(request_url);
 		fetch(request_url)
 			.then(response => response.json())

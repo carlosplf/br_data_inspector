@@ -29,6 +29,8 @@ class Home extends React.Component{
     items = [];
     selected_dates = [];
     dates_url_param = "";
+    api_url = process.env.REACT_APP_API_URL;
+    api_port = process.env.REACT_APP_API_PORT; 
 
     //Simple method to remove an item from array.
     removeDateFromList(date) { 
@@ -67,8 +69,9 @@ class Home extends React.Component{
 
     //Get all Subordinados and Superior Órgãos from backend API.
     getNamesList(entity_type){
-        var request_url = "http://localhost:8080/" + entity_type.toLowerCase() + "/202001";
-        fetch(request_url)
+        var base_url = this.api_url + ":" + this.api_port;
+        var final_url = base_url + "/" + entity_type.toLowerCase() + "/202001";
+        fetch(final_url)
         .then(response => response.json())
         .then(data => this.setState({ data: data["data"], loading: false}));
     }
@@ -135,7 +138,7 @@ class Home extends React.Component{
             return(
                 <div className="govdata-home">
                     <NotificationContainer/>
-                    <Header header_text="BR Data Collector" handle_modal={this.handleOpenDataModal}/>
+                    <Header header_text="BR Data Collector - ALPHA" handle_modal={this.handleOpenDataModal}/>
                     <h2>Pesquisar por Órgão Recebedor:</h2>
                     <SearchEntity
                         search_id="search_1"

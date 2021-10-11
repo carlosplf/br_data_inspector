@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
-import queryString, { stringify } from 'query-string';
+import queryString from 'query-string';
 
 
 class CustomLinkRouter extends React.Component{
@@ -12,6 +12,9 @@ class CustomLinkRouter extends React.Component{
             data: null
         }
     }
+    
+    api_url = process.env.REACT_APP_API_URL;
+    api_port = process.env.REACT_APP_API_PORT; 
 
     componentDidMount(){
         const values = queryString.parse(this.props.location.search);
@@ -29,10 +32,7 @@ class CustomLinkRouter extends React.Component{
         this.setState({loading: true});
 		// Call Backend API and get the real URL from custom_url
 		console.log("Requesting data...");
-        var api_address = "http://localhost"
-        var api_port = ":8080"
-        var api_request = "/get_real_url/" + custom_url
-		var request_url = api_address + api_port + api_request;
+        var request_url = this.api_url + ":" + this.api_port + "/get_real_url/" + custom_url
 		fetch(request_url)
 			.then(response => response.json())
 			.then(data => {

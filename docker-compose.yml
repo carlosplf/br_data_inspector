@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  backend:
+    build:
+      context: ./
+      dockerfile: ./Docker/backend_dockerfile
+    ports:
+      - "8080:8080"
+  frontend:
+    build:
+      context: ./
+      dockerfile: ./Docker/frontend_dockerfile
+    ports:
+      - "3000:80"
+  redis:
+    image: "redis"
+    ports:
+      - "6379:6379"
+  mongo:
+    image: "mongo"
+    ports:
+      - "27017:27017"

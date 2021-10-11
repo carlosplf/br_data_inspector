@@ -1,12 +1,19 @@
 import React from 'react';
-import { FaWpforms } from 'react-icons/fa';
 import "./CreateCustomLink.css";
 
 
 class CreateCustomLink extends React.Component{
     constructor(props){
         super(props);
+        this.state = {
+            "custom_link": null
+        }
     }
+    
+    api_url = process.env.REACT_APP_API_URL;
+    api_port = process.env.REACT_APP_API_PORT; 
+    frontend_url = process.env.REACT_APP_FRONTEND_URL;
+    frontend_port = process.env.REACT_APP_FRONTEND_PORT;
 
     showModal(){
         if(this.props.show){
@@ -20,7 +27,7 @@ class CreateCustomLink extends React.Component{
     handleSubmit = (e) => {
         e.preventDefault();
         this.sendToAPI(e.target.elements.custom_url.value)
-        this.props.handleClose()
+        this.setState({"custom_link": e.target.elements.custom_url.value})
         return "";
     }
 
@@ -40,10 +47,8 @@ class CreateCustomLink extends React.Component{
         this.setState({loading: true});
 		// Call Backend API and retrieve data
 		console.log("Sending data... Custom link: ", custom_url);
-        var api_address = "http://localhost"
-        var api_port = ":8080"
         var api_request = "/save_custom_link"
-		var request_url = api_address + api_port + api_request;
+        var request_url = this.api_url + ":" + this.api_port + api_request;
 		console.log(request_url);
 
 		fetch(request_url, request_options)
@@ -59,7 +64,10 @@ class CreateCustomLink extends React.Component{
                     <p>Crie um link personalizado e compartilhe sua análise!</p>
                     <form onSubmit={this.handleSubmit}>
                         <label>Link: BRDataCollector/</label><input name="custom_url" type="text"/>
-                        <button id="submitBtn">Submit</button>
+                        <br></br>
+                        <br></br>
+                        <spam id="newURL">{this.frontend_url + ":" + this.frontend_port + "/custom_link?link_name=" + this.state.custom_link}</spam>
+                        <button id="submitBtn">Criar</button>
                     </form>
                 </div>
             </div>

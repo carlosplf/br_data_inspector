@@ -17,6 +17,7 @@
     padding: 20px;
     border: 1px solid #888;
     width: 40%;
+    height: 180px;
   }
 
   .CustomLinkModalContent button{
@@ -44,7 +45,6 @@
   }
 
   #submitBtn{
-    display:none;
     background-color: #66bb6a;
   }
 
