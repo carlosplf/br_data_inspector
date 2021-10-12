@@ -69,7 +69,7 @@ To run the DataProcessor routine and create some cache listing, run:
     python run.py --update
 
 Now, to run the API as dev enviroment, run:
-    
+
     python run_api.py
 
 Note that this will run Flask in a development enviroment. The API default port is 8080.
@@ -81,7 +81,7 @@ To run the frontend part for development enviroment, just run the following comm
 
 ### Run with Docker Compose
 
-Before get the containers running, a `.env` file is needed inside `frontend/br_data_inspector/` folder. This file shoud contain:
+Before get the containers running, a `.env` file is needed inside `frontend/br_data_inspector/` folder. This file should contain:
 
     REACT_APP_API_URL = "API_ADDRESS"
     REACT_APP_API_PORT = "API_PORT"
