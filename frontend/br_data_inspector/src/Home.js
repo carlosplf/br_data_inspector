@@ -12,7 +12,7 @@ import './Home.css'
 
 
 class Home extends React.Component{
-    constructor(props) { 
+    constructor(props) {
         super(props);
         this.state = {
             'data': '',
@@ -30,12 +30,12 @@ class Home extends React.Component{
     selected_dates = [];
     dates_url_param = "";
     api_url = process.env.REACT_APP_API_URL;
-    api_port = process.env.REACT_APP_API_PORT; 
+    api_port = process.env.REACT_APP_API_PORT;
 
     //Simple method to remove an item from array.
-    removeDateFromList(date) { 
-        return this.selected_dates.filter(function(ele){ 
-            return ele !== date; 
+    removeDateFromList(date) {
+        return this.selected_dates.filter(function(ele){
+            return ele !== date;
         });
     }
 
@@ -133,13 +133,13 @@ class Home extends React.Component{
             this.getNamesList("Subordinado");
             this.setState({first_load: false});
         }
-    
+
         if (this.state.loading){
             return(
                 <p>Loading...</p>
             )
         }
-    
+
         if(!this.first_load && !this.state.loading && !this.show_results){
             if (this.items.length == 0){
                 this.prepareItems("Subordinado");

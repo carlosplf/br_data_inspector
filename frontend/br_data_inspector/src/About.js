@@ -15,6 +15,7 @@ class About extends React.Component{
         return(
             <div className="aboutPage">
                 <Header header_text="Sobre"/>
+                <div className="container">
                 <div className="pureText">
                     <p align="justify">
                         O BR Data Collector coleta dados abertos do Governo Federal do Brasil, através
@@ -30,9 +31,13 @@ class About extends React.Component{
                         e sem qualquer ligação com qualquer empresa ou negócio.
                     </p>
                     <br></br>
-                    <p><a href="https://github.com/carlosplf/br_data_inspector"><FaGithub/></a></p>
+                    <p><a id="githubIcon" href="https://github.com/carlosplf/br_data_inspector"><FaGithub/></a></p>
+                    <br></br>
+                    <p><a href="https://www.portaltransparencia.gov.br">Portal da Transparência </a></p>
+                    <p><a href="https://www.portaltransparencia.gov.br/entenda-a-gestao-publica/execucao-despesa-publica">EMPENHADO, PAGO E LIQUIDADO. </a></p>
                     <br></br>
                     <img src="schema.png"/>
+                </div>
                 </div>
             </div>
         )
