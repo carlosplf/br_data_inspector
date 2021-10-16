@@ -57,9 +57,18 @@ class Home extends React.Component{
     // Callback when a Entity is selected from Autocomplete search field.
     handleSearch = (item) => {
         if (this.selected_dates.length === 0){
-            //TODO: Implement real user alert.
             console.log("Alert, no date selected!");
             NotificationManager.warning('Selecione um Mês', '', 2000);
+            return;
+        }
+        if (this.state.search_id === ''){
+            console.log("Alert, no entity selected!");
+            NotificationManager.warning('Selecione uma entidade para busca', '', 2000);
+            return;
+        }
+        if (this.state.compare && this.state.search_id_2 === ''){
+            console.log("Alert, no second entity selected!");
+            NotificationManager.warning('Selecione uma entidade para comparação', '', 2000);
             return;
         }
         this.setState({
@@ -138,7 +147,7 @@ class Home extends React.Component{
             return(
                 <div className="govdata-home">
                     <NotificationContainer/>
-                    <Header header_text="BR Data Collector - ALPHA" handle_modal={this.handleOpenDataModal}/>
+                    <Header header_text="BR Data Collector - 0.0.1" handle_modal={this.handleOpenDataModal}/>
                     <h2>Pesquisar por Órgão Recebedor:</h2>
                     <SearchEntity
                         search_id="search_1"

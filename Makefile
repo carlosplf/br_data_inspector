@@ -13,12 +13,18 @@ stop_macos_services:
 	brew services stop mongodb-community
 	brew services stop redis
 
-docker_build:
-	# Build Images and Container for the Application
-	docker run -p 27017:27017 --name mongo-container -d mongo
-	docker run -p 6379:6379 --name redis-container -d redis
-	# Build Image for Python API
-	docker build -t backend_image -f Docker/build_docker_api .
-	# Build and run Python API Container
-	docker run --name backend_container -p 8080:8080 -td bacend_image
+docker_build_from_scratch:
+	rm -f frontend/br_data_inspector/.env
+	@read -p "Enter API IP: " api_ip; \
+		echo "REACT_APP_API_URL = \"HTTP://$$api_ip\"" > frontend/br_data_inspector/.env
+	echo "REACT_APP_API_PORT = \"8080\"" >> frontend/br_data_inspector/.env
+	rm -rf frontend/br_data_inspector/build/
+	npm run build --prefix ./frontend/br_data_inspector
+	docker-compose build
+	docker-compose up -d
+
+docker_collect_data:
+	docker exec br_data_inspector_backend_1 python3 run.py --collect
+	docker exec br_data_inspector_backend_1 python3 run.py --update
+
 
