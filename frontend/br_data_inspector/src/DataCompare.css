@@ -1,12 +1,17 @@
 .summary-container{
     display: flex;
     flex-wrap: nowrap;
-    margin: 20px;
-    width: 100%;
+    width: 90%;
+    margin-top: 20px;
 }
 
 .summary-container.data-summary{
     display: inline;
+    margin-right: 10px;
+}
+
+.summary-separator{
+    width: 2%;
 }
 
 #summary2{

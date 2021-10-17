@@ -12,7 +12,7 @@ import './Home.css'
 
 
 class Home extends React.Component{
-    constructor(props) { 
+    constructor(props) {
         super(props);
         this.state = {
             'data': '',
@@ -22,7 +22,7 @@ class Home extends React.Component{
             'first_load': true,
             'show_results': false,
             'show_results_type': '',
-          };
+        };
     }
 
     //Should be a state.
@@ -30,12 +30,12 @@ class Home extends React.Component{
     selected_dates = [];
     dates_url_param = "";
     api_url = process.env.REACT_APP_API_URL;
-    api_port = process.env.REACT_APP_API_PORT; 
+    api_port = process.env.REACT_APP_API_PORT;
 
     //Simple method to remove an item from array.
-    removeDateFromList(date) { 
-        return this.selected_dates.filter(function(ele){ 
-            return ele !== date; 
+    removeDateFromList(date) {
+        return this.selected_dates.filter(function(ele){
+            return ele !== date;
         });
     }
 
@@ -51,7 +51,7 @@ class Home extends React.Component{
     handleCompareButton = () => {
         this.setState(prevState => ({
             compare: !prevState.compare
-          }));
+        }));
     }
 
     // Callback when a Entity is selected from Autocomplete search field.
@@ -81,18 +81,18 @@ class Home extends React.Component{
         var base_url = this.api_url + ":" + this.api_port;
         var final_url = base_url + "/" + entity_type.toLowerCase() + "/202001";
         fetch(final_url)
-        .then(response => response.json())
-        .then(data => this.setState({ data: data["data"], loading: false}));
+            .then(response => response.json())
+            .then(data => this.setState({ data: data["data"], loading: false}));
     }
 
     //Parse Entities list so they can be used in autocomplete search.
     prepareItems(entity_type){
         var items = [];
         for (let [key, value] of Object.entries(this.state.data)) {
-        items.push({
-            'id':  value["Código Órgão " + entity_type],
-            'name': value["Nome Órgão " + entity_type]
-        })
+            items.push({
+                'id':  value["Código Órgão " + entity_type],
+                'name': value["Nome Órgão " + entity_type]
+            })
         }
         this.items = items;
     }
@@ -133,13 +133,13 @@ class Home extends React.Component{
             this.getNamesList("Subordinado");
             this.setState({first_load: false});
         }
-    
+
         if (this.state.loading){
             return(
                 <p>Loading...</p>
             )
         }
-    
+
         if(!this.first_load && !this.state.loading && !this.show_results){
             if (this.items.length == 0){
                 this.prepareItems("Subordinado");
