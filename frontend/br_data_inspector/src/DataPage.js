@@ -151,10 +151,8 @@ class DataPage extends React.Component{
 
 					<CreateCustomLink show={this.state.show_custom_link_modal} handleClose={this.handleCloseCLModal}/>
 
-					<div className="summary-container">
-						<DataSummary dates={this.dates_to_search} name={this.state.data[0]["Nome Órgão Subordinado"]} key={this.entity_id} data={this.state.data} values_summary={this.state.values_summary} data_keys={this.state.data_keys}/>
-					</div>
-					
+                    <DataSummary dates={this.dates_to_search} name={this.state.data[0]["Nome Órgão Subordinado"]} key={this.entity_id} data={this.state.data} values_summary={this.state.values_summary} data_keys={this.state.data_keys}/>
+                
 					<DataBarChart
 						data_keys={this.state.data_keys}
 						all_transactions_data={this.state.data}
