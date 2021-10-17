@@ -9,6 +9,8 @@ import Header from './Header';
 import "./DataPage.css";
 import CreateCustomLink from './CreateCustomLink.js';
 import ExpensesTable from './ExpensesTable.js';
+import LoadingBar from 'react-top-loading-bar'
+
 
 class DataPage extends React.Component{
 	constructor(props) {
@@ -19,6 +21,7 @@ class DataPage extends React.Component{
 			show_modal: false,
 			show_custom_link_modal: false,
 			values_summary: {},
+            all_requests: 0,
 			data_keys: [
 				"Valor Empenhado (R$)",
 				"Valor Liquidado (R$)",
@@ -90,15 +93,12 @@ class DataPage extends React.Component{
 
 	requestDataFromAPI(month_date){
 		// Call Backend API and retrieve data about Entities
-		console.log("requesting data...");
-		//TODO: need a better logic to store backend URL.
 		var base_url = this.api_url + ":" + this.api_port;
 		var request_url = base_url + "/" + this.props.entity_type.toLowerCase() + "/" + month_date + "/" + this.entity_id;
-		console.log(request_url);
 		fetch(request_url)
 			.then(response => response.json())
 			.then(data => {
-				this.setState({ data: this.processData(data), loading: false})
+                this.setState({ data: this.processData(data), loading: false, all_requests: this.state.all_requests + 1})
 				this.sumData();
 			});
 	}
@@ -144,12 +144,23 @@ class DataPage extends React.Component{
 
 			const header_text = "RECEBEDOR: " + this.state.data[0]["Nome Órgão Subordinado"];
 			//TODO: Check if Modal content is nof loading even when Modal is not showing.
-			return (
+
+            // Define progress for ProgressBar. <number_of_requests>/<total_requests_to_do>
+            const progress = 100*(this.state.all_requests/this.dates_to_search.length);
+			
+            return (
 				<div className="search-results">
 
 					<Header handleShareButton={this.handleShareButton} show_share_button={true} show_table_data={true} header_text="Valores Recebidos" handle_modal={this.handleOpenDataModal}/>
 
 					<CreateCustomLink show={this.state.show_custom_link_modal} handleClose={this.handleCloseCLModal}/>
+
+                    <LoadingBar
+                        color='#00bbff'
+                        progress={progress}
+                        height={6}
+                        onLoaderFinished={() => {console.log("Finished loading.")}}
+                    />
 
                     <DataSummary dates={this.dates_to_search} name={this.state.data[0]["Nome Órgão Subordinado"]} key={this.entity_id} data={this.state.data} values_summary={this.state.values_summary} data_keys={this.state.data_keys}/>
                 

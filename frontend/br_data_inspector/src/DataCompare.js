@@ -5,8 +5,8 @@ import DataBarChartComparison from './DataBarChartComparison.js';
 import Header from './Header';
 import './DataCompare.css';
 import CreateCustomLink from './CreateCustomLink.js';
-
 import queryString from 'query-string';
+import LoadingBar from 'react-top-loading-bar'
 
 
 /* Component for the page that shows two Entities data comparison. */
@@ -19,6 +19,7 @@ class DataCompare extends React.Component{
             data2: undefined,
 			values_summary1: {},
             values_summary2: {},
+            all_requests: 0,
 			data_keys: [
 				"Valor Empenhado (R$)",
 				"Valor Liquidado (R$)",
@@ -89,6 +90,8 @@ class DataCompare extends React.Component{
 		else{
 			this.setState({values_summary2: all_sums});
 		}
+
+        this.setState({all_requests: this.state.all_requests + 1});
 
 	}
 
@@ -179,17 +182,29 @@ class DataCompare extends React.Component{
 		}
 
 		else{
-			return (
+            // Define progress for ProgressBar. <number_of_requests>/<total_requests_to_do>
+            const progress = 100*(this.state.all_requests/(this.dates_to_search.length*2));
+			
+            return (
 				<div className="Search-Results">
 
 					<Header handleShareButton={this.handleShareButton} show_share_button={true} header_text="Comparação de Recebedores" handle_modal={this.handleOpenDataModal}/>
-					<CreateCustomLink show={this.state.show_custom_link_modal} handleClose={this.handleCloseCLModal}/>
+
+                    <CreateCustomLink show={this.state.show_custom_link_modal} handleClose={this.handleCloseCLModal}/>
+                    
+                    <LoadingBar
+                        color='#00bbff'
+                        progress={progress}
+                        height={6}
+                        onLoaderFinished={() => {console.log("Finished loading.")}}
+                    />
 
 					<div className="summary-container">
 						<DataSummary dates={this.dates_to_search} name={this.state.data1[0]["Nome Órgão Subordinado"]} key={this.entity_id1} data={this.state.data1} values_summary={this.state.values_summary1} data_keys={this.state.data_keys}/>
                         <div className="summary-separator"></div>
                         <DataSummary dates={this.dates_to_search} name={this.state.data2[0]["Nome Órgão Subordinado"]} key={this.entity_id2} data={this.state.data2} values_summary={this.state.values_summary2} data_keys={this.state.data_keys}/>
 					</div>
+
 					<DataBarChartComparison
 						data_keys={this.state.data_keys}
 						all_transactions_data_1={this.state.data1}
