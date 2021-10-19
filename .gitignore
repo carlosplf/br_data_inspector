@@ -13,7 +13,7 @@ __pycache__/
 #Downloaded files
 ./downloads/*
 ./*.zip
-./data
+./data/*
 
 #Testing Script
 test.py
