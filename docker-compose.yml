@@ -14,6 +14,8 @@ services:
       - "80:80"
   redis:
     image: "redis"
+    hostname: redis
+    command: ["redis-server", "--appendonly", "yes"]
     ports:
       - "6379:6379"
   mongo:
