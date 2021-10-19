@@ -3,8 +3,8 @@ RUN apk add --no-cache npm nginx
 WORKDIR /br_data_inspector
 COPY ./ .
 RUN mkdir /run/nginx
-RUN cp -r /br_data_inspector/frontend/br_data_inspector/build /var/www/
-RUN cp /br_data_inspector/Docker/frontend_nginx.conf /etc/nginx/conf.d/default.conf 
+RUN mkdir /var/www/brdata.online/
+RUN cp -r /br_data_inspector/frontend/br_data_inspector/build /var/www/brdata.online/
 #RUN npm run build --prefix ./frontend/br_data_inspector
 CMD ["nginx", "-g", "daemon off;"]
 
