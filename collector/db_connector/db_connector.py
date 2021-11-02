@@ -1,5 +1,8 @@
 import pymongo
 
+
+MONGO_ADDRESS="127.0.0.1"
+
 class DbConnector():
     def __init__(self):
         self.myclient = None
@@ -7,7 +10,7 @@ class DbConnector():
         self.mucol = None
 
     def connect(self):
-        self.myclient = pymongo.MongoClient(connect=False, host='mongo', port=27017)
+        self.myclient = pymongo.MongoClient(connect=False, host=MONGO_ADDRESS, port=27017)
         self.mydb = self.myclient["govdata"]
         self.mycol = self.mydb["reports-data"]
 
