@@ -1,0 +1,13 @@
+FROM node:12-alpine
+RUN apk add --no-cache npm nginx
+WORKDIR /br_data_inspector
+COPY ./ .
+RUN mkdir /run/nginx
+RUN mkdir /var/www/brdata.online/
+RUN npm install --prefix /br_data_inspector/frontend/br_data_inspector
+RUN npm run build --prefix /br_data_inspector/frontend/br_data_inspector
+RUN echo "REACT_APP_API_URL = \"127.0.0.1\"" > /br_data_inspector/frontend/br_data_inspector/.env
+RUN echo "REACT_APP_API_PORT = \"80\"" >> /br_data_inspector/frontend/br_data_inspector/.env
+RUN cp -r /br_data_inspector/frontend/br_data_inspector/build /var/www/brdata.online/
+CMD ["nginx", "-g", "daemon off;"]
+

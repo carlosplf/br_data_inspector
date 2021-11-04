@@ -35,14 +35,14 @@
 	margin-left: 20px;
 	margin-right: 10px;
 	color: #202020;
-	background-color: #26c6da;
+	background-color: #8d8d8d;
 	border-radius: 4px;
 	border-width: 0px;
     height: 40px;
 }
 
 #all-data-btn:hover{
-	background-color: #2acadf;
+	background-color: #9d9d9d;
 	cursor: pointer;
 }
 

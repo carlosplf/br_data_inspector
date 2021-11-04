@@ -1,3 +1,9 @@
+@media only screen and (max-width: 1340px) {
+    .DataBarChart {
+        display:none;
+    }
+}
+
 .DataBarChart {
 	font-size: 1em;
 	margin-top: 20px;

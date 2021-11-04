@@ -106,7 +106,7 @@ class DataBarChart extends React.Component{
 		var prepared_data = this.createDatasetBarGraph(this.keys_to_show);
 		for (var i=0; i<prepared_data.length; i++){
 			all_data_series.push(
-				<VerticalBarSeries
+				<VerticalBarSeries key={i}
                     onValueMouseOver={(datapoint, event) => {
                         this.hint_datapoint = datapoint;
                         this.setState({show_hint: true});

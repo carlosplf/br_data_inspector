@@ -2,26 +2,35 @@ import React from 'react';
 import './ExpensesTable.css';
 
 class ExpensesTable extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
     formatNumbers(x) {
         if (!x) {return 0}
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
     buildTable(){
-        console.log(this.props.data);
-        var data_table = Object.keys(this.props.data).map((key, i)=> {
+        
+        var data_array = Object.keys(this.props.data).map((key, i)=> {
+            return {
+                "Key": key,
+                "Name": this.props.data[key]["Nome"],
+                "Value": this.props.data[key]["Valor Pago"]
+            }
+        })
+
+        var sorted_data_array = data_array.sort((a, b) => {
+            return b["Value"] - a["Value"]    
+        })
+
+        var data_table = sorted_data_array.map(x => {
             return(
-                <tr>
-                    <td className="idColumn">{key}</td>
-                    <td className="nameColumn">{this.props.data[key]["Nome"]}</td>
-                    <td className="valueColumn">R$ {this.formatNumbers(this.props.data[key]["Valor Pago"])},00</td>
+                <tr key={x["Key"]}>
+                    <td className="idColumn">{x["Key"]}</td>
+                    <td className="nameColumn">{x["Name"]}</td>
+                    <td className="valueColumn">R$ {this.formatNumbers(x["Value"])},00</td>
                 </tr>
             )
         })
+
         return (
             <div className="expensesTable">
                 <table>

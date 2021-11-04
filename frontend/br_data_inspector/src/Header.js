@@ -30,9 +30,9 @@ class Header extends React.Component{
         const table_data_button = this.showTableData();
         const share_button = this.showShareButton();
         return(
-            <div class="header">
+            <div className="header">
                 <h1>{this.props.header_text}</h1>
-                <div class="header-btns">
+                <div className="header-btns">
                     {table_data_button}
                     {share_button}
                     <AppButton btn_type="about-btn"/>

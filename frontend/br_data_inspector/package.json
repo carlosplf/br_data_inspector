@@ -21,6 +21,7 @@
     "react-scripts": "4.0.3",
     "react-search-autocomplete": "^5.2.2",
     "react-table": "^7.6.3",
+    "react-top-loading-bar": "^2.0.1",
     "react-vis": "^1.11.7",
     "styled-components": "^5.2.1",
     "web-vitals": "^1.1.0"
