@@ -1,9 +1,23 @@
+.Loading {
+    width: 100px;
+    height: 100px;
+
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+}
+
 .Loading p{
     font-size: 20px;
+    width: 200px;
 }
 
 .Loading svg {
-  width: 4.25em;
+  width: 8.25em;
   transform-origin: center;
   animation: rotate 2s linear infinite;
 }

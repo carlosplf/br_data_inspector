@@ -9,7 +9,7 @@ class Loading extends React.Component{
                 <svg viewBox="25 25 50 50">
                     <circle cx="50" cy="50" r="20"></circle>
                 </svg>
-                <p>Buscando Dados</p>
+                <p>Buscando Dados...</p>
             </div>
         )
     }
