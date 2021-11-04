@@ -3,6 +3,7 @@ import SearchEntity from './SearchEntity';
 import MonthPicker from './MonthPicker';
 import Header from './Header';
 import CompareButton from './CompareButton';
+import Warnings from './Warnings';
 import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -53,7 +54,7 @@ class Home extends React.Component{
         }));
     }
 
-    // Callback when a Entity is selected from Autocomplete search field.
+    //Callback when a Entity is selected from Autocomplete search.
     handleSearch = (item) => {
         if (this.selected_dates.length === 0){
             console.log("Alert, no date selected!");
@@ -183,6 +184,9 @@ class Home extends React.Component{
                     />
 
                     <Header header_text="BR Data Collector - 0.0.1" handle_modal={this.handleOpenDataModal}/>
+                    
+                    <Warnings/>
+                    
                     <h2 className="pageTitle">Pesquisar por Órgão Recebedor:</h2>
                     <SearchEntity
                         search_id="search_1"
