@@ -3,6 +3,7 @@ import DataSummary from "./DataSummary.js";
 import { withRouter } from 'react-router-dom'
 import DataBarChartComparison from './DataBarChartComparison.js';
 import Header from './Header';
+import Loading from './Loading';
 import './DataCompare.css';
 import CreateCustomLink from './CreateCustomLink.js';
 import queryString from 'query-string';
@@ -178,7 +179,7 @@ class DataCompare extends React.Component{
 
 	render(){
         if (this.state.loading){
-			return (<p>Loading...</p>);
+			return (<Loading/>);
 		}
 
 		else{
@@ -193,7 +194,7 @@ class DataCompare extends React.Component{
                     <CreateCustomLink show={this.state.show_custom_link_modal} handleClose={this.handleCloseCLModal}/>
                     
                     <LoadingBar
-                        color='#00bbff'
+                        color='#009C3B'
                         progress={progress}
                         height={6}
                         onLoaderFinished={() => {console.log("Finished loading.")}}

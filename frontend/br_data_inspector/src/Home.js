@@ -4,6 +4,7 @@ import MonthPicker from './MonthPicker';
 import Header from './Header';
 import CompareButton from './CompareButton';
 import Warnings from './Warnings';
+import Loading from './Loading';
 import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -160,7 +161,7 @@ class Home extends React.Component{
 
         if (this.state.loading){
             return(
-                <p>Loading...</p>
+                <Loading/>
             )
         }
 

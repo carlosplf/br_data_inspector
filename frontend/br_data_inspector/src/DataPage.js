@@ -6,6 +6,7 @@ import ModalContent from './ModalContent';
 import DataBarChart from './DataBarChart';
 import queryString from 'query-string';
 import Header from './Header';
+import Loading from './Loading';
 import "./DataPage.css";
 import CreateCustomLink from './CreateCustomLink.js';
 import ExpensesTable from './ExpensesTable.js';
@@ -136,7 +137,7 @@ class DataPage extends React.Component{
 	render(){
 		
 		if (this.state.loading){
-			return (<p>Loading...</p>);
+            return (<Loading/>);
 		}
 		
 		else{
@@ -156,7 +157,7 @@ class DataPage extends React.Component{
 					<CreateCustomLink show={this.state.show_custom_link_modal} handleClose={this.handleCloseCLModal}/>
 
                     <LoadingBar
-                        color='#00bbff'
+                        color='#009C3B'
                         progress={progress}
                         height={6}
                         onLoaderFinished={() => {console.log("Finished loading.")}}
