@@ -19,7 +19,7 @@ class DataSummary extends React.Component{
     processDates(){
         var date_spam = this.props.dates.map( (d) => {
             return(
-                <spam> {d.slice(-2)} </spam>
+                <spam key={d.slice(-2)} > {d.slice(-2)} </spam>
             )
         })
         return date_spam;
@@ -33,7 +33,7 @@ class DataSummary extends React.Component{
                 <spam className="monthsList">Meses selecionados: {date_spam}</spam>
                 <h3>Valores recebidos no período:</h3>
                 {this.props.data_keys.map(key => (
-                    <p>{key}: { this.formatNumbers(this.props.values_summary[key])}</p>
+                    <p key={key}>{key}: { this.formatNumbers(this.props.values_summary[key])}</p>
                     ))}
             </div>
         )

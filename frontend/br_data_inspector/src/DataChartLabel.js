@@ -25,7 +25,7 @@ class DataChartLabel extends React.Component{
 	render(){
 		const all_labels = this.createLabels();
 		return(
-			all_labels.map((s_lable) => <div className="ChartLabel"><span style={{color: s_lable.color}}>{s_lable.key}</span></div>)
+			all_labels.map((s_label) => <div key={s_label.key} className="ChartLabel"><span style={{color: s_label.color}}>{s_label.key}</span></div>)
 		)
 	}
 }

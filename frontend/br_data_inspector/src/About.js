@@ -1,16 +1,12 @@
 import React from 'react';
 import Header from './Header.js';
 import './About.css';
-import { FaTwitter } from 'react-icons/fa';
 import { FaGithub } from 'react-icons/fa';
 
 
 
 class About extends React.Component{
-    constructor(props){
-        super(props)    
-    }
-
+    
     render(){
         return(
             <div className="aboutPage">
@@ -36,7 +32,7 @@ class About extends React.Component{
                     <p><a href="https://www.portaltransparencia.gov.br">Portal da Transparência </a></p>
                     <p><a href="https://www.portaltransparencia.gov.br/entenda-a-gestao-publica/execucao-despesa-publica">EMPENHADO, PAGO E LIQUIDADO. </a></p>
                     <br></br>
-                    <img src="schema.png"/>
+                    <img src="schema.png" alt="Schema."/>
                 </div>
                 </div>
             </div>
