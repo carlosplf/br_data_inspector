@@ -37,6 +37,7 @@ class DataSummary extends React.Component{
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
+    //Creates a HTML list of elements for the Dates slecteds.
     processDates(){
         var dates_list = this.props.dates.map( (d) => {
             return(
