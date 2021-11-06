@@ -154,7 +154,7 @@ class DataPage extends React.Component{
             return (
 				<div className="search-results">
 
-					<Header handleShareButton={this.handleShareButton} show_share_button={true} show_table_data={true} header_text="Valores Recebidos" handle_modal={this.handleOpenDataModal}/>
+					<Header handleShareButton={this.handleShareButton} show_share_button={true} show_table_data={false} header_text="Valores Recebidos" handle_modal={this.handleOpenDataModal}/>
 
 					<CreateCustomLink show={this.state.show_custom_link_modal} handleClose={this.handleCloseCLModal}/>
 
@@ -174,11 +174,6 @@ class DataPage extends React.Component{
 					/>
 
 					<ExpensesTable data={expenses_summary}/>
-
-					<ReactModal isOpen={this.state.show_modal} contentLabel="All transactions modal">
-						<button id="close-modal-btn" className="modal-btn" onClick={this.handleCloseDataModal}>Fechar</button>
-						<ModalContent all_transactions_data={this.state.data}/>
-					</ReactModal>
 
 				</div>
 			)

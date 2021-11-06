@@ -1,7 +1,7 @@
 .header{
     display: flex;
     width: 100%;
-    height: 80px;
+    height: 120px;
     background-color: #333;
     float: left;
 }
@@ -9,7 +9,8 @@
 .header h1{
     color: #FFF;
     margin-left: 20px;
-	width: 60%
+	width: 60%;
+    align-self: center;
 }
 
 .header-btns{
@@ -18,16 +19,12 @@
 	position:absolute; right: 0;	
     float: right;	
     width: 40%;
-	height: 80px;
+	height: 120px;
 	align-items: flex-start;
 }
 
-.header-btns span{
-    margin-top: 20px;
-}
-
 .header-btns button{
-    margin-top: 20px;
+    min-width: 60px;
 }
 
 #all-data-btn{
@@ -47,16 +44,16 @@
 }
 
 .page-btn{
-	height: 40px;
+	height: 60px;
 	margin-left: 20px;
 	margin-right: 10px;
 	margin-top: 0px;
-	margin-bottom: 10px;
 	color: #202020;
 	background-color: #DDD;
 	border-radius: 4px;
 	border-width: 0px;
-	font-size: 20pt;
+	font-size: 30px;
+    align-self: center;
 }
 
 .page-btn a{
