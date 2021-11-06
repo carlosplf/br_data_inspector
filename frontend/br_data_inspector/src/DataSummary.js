@@ -41,7 +41,7 @@ class DataSummary extends React.Component{
     processDates(){
         var dates_list = this.props.dates.map( (d) => {
             return(
-                <spam key={d.slice(-2)} style={{fontWeight:'normal', fontSize:'16px'}}> {this.date_map[d]} </spam>
+                <spam key={d.slice(-2)} className="monthSelected"> {this.date_map[d]} </spam>
             )
         })
         return dates_list;

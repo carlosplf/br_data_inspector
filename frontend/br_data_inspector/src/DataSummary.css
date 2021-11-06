@@ -16,3 +16,39 @@ h2{
 	font-size: 20pt;
 	margin-bottom: 10px;
 }
+
+.monthSelected{
+    font-weight: normal;
+    font-size: 16px;
+}
+
+@media only screen 
+and (max-width : 1080px){ 
+    .data-summary{
+        margin-top: 40px;
+    }
+    
+    .monthsList{
+        font-size: 12pt;
+    }
+    
+    .monthSelected{
+        font-weight: normal;
+        font-size: 10pt;
+    }
+
+    h2{
+        font-size: 18pt;
+        margin-bottom: 20px;
+    }
+    
+    h3{
+        font-size: 12pt;
+        margin-bottom: 20px;
+        margin-top: 40px;
+    }
+    
+    p{
+        font-size: 10pt;
+    }
+}

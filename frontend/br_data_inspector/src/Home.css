@@ -39,3 +39,25 @@
 .pageTitle{
     margin-top: 60px;
 }
+
+@media only screen 
+and (max-width : 1080px){ 
+    .month-picker td{
+        min-width: 200px;
+        font-size: 24px;
+    }
+    .month-picker tr{
+        min-width: 200px;
+        font-size: 28px;
+    }
+    input[type=checkbox] {
+        transform: scale(1.8);
+    }
+    #search-btn{
+        font-size: 1.8em;
+        width: 400px;
+        height: 60px;
+        margin-top: 80px;
+    }
+}
+
