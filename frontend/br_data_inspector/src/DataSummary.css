@@ -29,26 +29,26 @@ and (max-width : 1080px){
     }
     
     .monthsList{
-        font-size: 12pt;
+        font-size: 12px;
     }
     
     .monthSelected{
         font-weight: normal;
-        font-size: 10pt;
+        font-size: 10px;
     }
 
     h2{
-        font-size: 18pt;
+        font-size: 16px;
         margin-bottom: 20px;
     }
     
     h3{
-        font-size: 12pt;
+        font-size: 14px;
         margin-bottom: 20px;
         margin-top: 40px;
     }
     
     p{
-        font-size: 10pt;
+        font-size: 10px;
     }
 }
