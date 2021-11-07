@@ -3,14 +3,15 @@ import DataSummary from "./DataSummary.js";
 import { withRouter } from 'react-router-dom'
 import DataBarChartComparison from './DataBarChartComparison.js';
 import Header from './Header';
+import Loading from './Loading';
 import './DataCompare.css';
 import CreateCustomLink from './CreateCustomLink.js';
 import queryString from 'query-string';
 import LoadingBar from 'react-top-loading-bar'
 
 
-/* Component for the page that shows two Entities data comparison. */
 class DataCompare extends React.Component{
+    //Component responsible for showing two Entities data as a comparison.
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -31,7 +32,6 @@ class DataCompare extends React.Component{
 		};
 	}
 
-	//Should be a state.
 	entity_id1 = 0;
     entity_id2 = 0;
 	dates_to_search = [];
@@ -64,11 +64,13 @@ class DataCompare extends React.Component{
 	sumData(data_slot){
 		//Sum data from table lines, building a data summary dict.
         //Now, for this Component, two data summary are created, one for each Entity searched.
-		
-        //Build data summary for the Entity 1
+
+        //data_slot refers to 1st or 2nd Entity beeing compare.
+
         var all_sums = {};
 		var data_state = [];
-		if(data_slot === 1){
+		
+        if(data_slot === 1){
 			data_state = this.state.data1;
 		}
 		else if(data_slot === 2){
@@ -77,7 +79,8 @@ class DataCompare extends React.Component{
 		else{
 			return;
 		}
-		data_state.forEach(single_line => {
+		
+        data_state.forEach(single_line => {
 			this.state.data_keys.forEach(key => {
 				if (!all_sums[key]) { all_sums[key] = 0; }
 				all_sums[key] += parseFloat(single_line[key]);
@@ -113,7 +116,7 @@ class DataCompare extends React.Component{
 	}
 
 	requestDataFromAPI(){
-		// Call Backend API and retrieve data about Entities
+		//Call Backend API and retrieve data about Entities
         this.dates_to_search.forEach(month_date =>{
             this.doAPIRequest(this.entity_id1, 1, month_date);
             this.doAPIRequest(this.entity_id2, 2, month_date);
@@ -178,11 +181,11 @@ class DataCompare extends React.Component{
 
 	render(){
         if (this.state.loading){
-			return (<p>Loading...</p>);
+			return (<Loading/>);
 		}
 
 		else{
-            // Define progress for ProgressBar. <number_of_requests>/<total_requests_to_do>
+            //Define progress for ProgressBar. <number_of_requests>/<total_requests_to_do>
             const progress = 100*(this.state.all_requests/(this.dates_to_search.length*2));
 			
             return (
@@ -193,7 +196,7 @@ class DataCompare extends React.Component{
                     <CreateCustomLink show={this.state.show_custom_link_modal} handleClose={this.handleCloseCLModal}/>
                     
                     <LoadingBar
-                        color='#00bbff'
+                        color='#009C3B'
                         progress={progress}
                         height={6}
                         onLoaderFinished={() => {console.log("Finished loading.")}}

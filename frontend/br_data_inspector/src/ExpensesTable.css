@@ -25,3 +25,10 @@
 .idColumn{
     width: 60px;
 }
+
+@media only screen 
+and (max-width : 1080px){ 
+    .expensesBlock  {
+        margin-top: 60px;
+    }
+}

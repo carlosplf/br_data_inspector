@@ -14,6 +14,7 @@
 	border-radius: 4px;
 	border-width: 0px;
 	height: 40px;
+    margin-top: 40px;
 }
 
 #search-btn:hover{
@@ -34,3 +35,30 @@
 .select-all{
 	font-weight: bold;
 }
+
+.pageTitle{
+    margin-top: 60px;
+}
+
+@media only screen 
+and (max-width : 1080px){ 
+    .month-picker td{
+        min-width: 200px;
+        font-size: 28px;
+    }
+    
+    input[type=checkbox] {
+        transform: scale(2);
+    }
+    
+    #search-btn{
+        font-size: 30px;
+        width: 60%;
+        height: 60px;
+        margin-top: 80px;
+    }
+    .pageTitle{
+        font-size: 40px;
+    }
+}
+

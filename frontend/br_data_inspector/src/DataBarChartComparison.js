@@ -6,7 +6,8 @@ import {
 	VerticalGridLines,
 	HorizontalGridLines,
 	VerticalBarSeries,
-    Hint
+    Hint,
+    FlexibleWidthXYPlot
 } from 'react-vis';
 import "./DataBarChart.css";
 import DataChartLabel from "./DataChartLabel";
@@ -160,7 +161,7 @@ class DataBarChartComparison extends React.Component{
 			<div className="DataBarChart">
                 <link rel="stylesheet" href="https://unpkg.com/react-vis/dist/style.css"/>
                 <DataChartLabel entities={entities} keys={this.keys_to_show} colors={this.graph_bar_colors}/>
-                <XYPlot xType="ordinal" style={{marginTop: 20}} width={1200} height={600} margin={{left: 120}}>
+                <FlexibleWidthXYPlot xType="ordinal" style={{marginTop: 20}} height={600} margin={{left: 120}}>
                 <VerticalGridLines />
                 <HorizontalGridLines />
                 <XAxis 
@@ -175,7 +176,7 @@ class DataBarChartComparison extends React.Component{
                 />
                 {all_data_series}
                 {hint}
-                </XYPlot>
+                </FlexibleWidthXYPlot>
                 <br></br>
 			</div>
 		)

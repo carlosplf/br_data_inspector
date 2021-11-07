@@ -68,6 +68,36 @@ class MonthPicker extends React.Component{
             'year': '2020',
             'year_month': '202012'
         },
+        {
+            'month': 'Janeiro',
+            'year': '2021',
+            'year_month': '202101'
+        },
+        {
+            'month': 'Fevereiro',
+            'year': '2021',
+            'year_month': '202102'
+        },
+        {
+            'month': 'Março',
+            'year': '2021',
+            'year_month': '202103'
+        },
+        {
+            'month': 'Abril',
+            'year': '2021',
+            'year_month': '202104'
+        },
+        {
+            'month': 'Maio',
+            'year': '2021',
+            'year_month': '202105'
+        },
+        {
+            'month': 'Junho',
+            'year': '2021',
+            'year_month': '202106'
+        }
     ]
 
     render(){
@@ -85,13 +115,6 @@ class MonthPicker extends React.Component{
             <div className="month-picker">
                 <CheckboxGroup onChange={this.props.dateSelected}>
                 <table>
-                    <thead>
-                        <tr>
-                            <th>Mês</th>
-                            <th>Ano</th>
-                            <th>Selecionar</th>
-                        </tr>
-                    </thead>
                     <tbody>
                         <tr>
                             <td className="select-all">TODOS</td>

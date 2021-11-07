@@ -1,5 +1,6 @@
 .SearchEntity {
-    margin-top: 20px;
+    margin-top: 40px;
+    width: 60%;
 }
 
 #search_1{
@@ -9,3 +10,4 @@
 #search_2{
     z-index: 1;
 }
+

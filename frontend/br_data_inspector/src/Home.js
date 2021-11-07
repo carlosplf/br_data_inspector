@@ -3,10 +3,12 @@ import SearchEntity from './SearchEntity';
 import MonthPicker from './MonthPicker';
 import Header from './Header';
 import CompareButton from './CompareButton';
+import Warnings from './Warnings';
+import Loading from './Loading';
 import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
-import 'react-notifications/lib/notifications.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './Home.css'
 
 
@@ -25,7 +27,6 @@ class Home extends React.Component{
         };
     }
 
-    //Should be a state.
     items = [];
     selected_dates = [];
     dates_url_param = "";
@@ -54,21 +55,45 @@ class Home extends React.Component{
         }));
     }
 
-    // Callback when a Entity is selected from Autocomplete search field.
+    //Callback when a Entity is selected from Autocomplete search.
     handleSearch = (item) => {
         if (this.selected_dates.length === 0){
             console.log("Alert, no date selected!");
-            NotificationManager.warning('Selecione um Mês', '', 2000);
+            toast.warn('Selecione uma data', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
             return;
         }
         if (this.state.search_id === ''){
             console.log("Alert, no entity selected!");
-            NotificationManager.warning('Selecione uma entidade para busca', '', 2000);
+            toast.warn('Selecione uma entidade para busca', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
             return;
         }
         if (this.state.compare && this.state.search_id_2 === ''){
             console.log("Alert, no second entity selected!");
-            NotificationManager.warning('Selecione uma entidade para comparação', '', 2000);
+            toast.warn('Selecione uma segunda entidade para busca', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
             return;
         }
         this.setState({
@@ -136,7 +161,7 @@ class Home extends React.Component{
 
         if (this.state.loading){
             return(
-                <p>Loading...</p>
+                <Loading/>
             )
         }
 
@@ -146,9 +171,24 @@ class Home extends React.Component{
             }
             return(
                 <div className="govdata-home">
-                    <NotificationContainer/>
+                    
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                    />
+
                     <Header header_text="BR Data Collector - 0.0.1" handle_modal={this.handleOpenDataModal}/>
-                    <h2>Pesquisar por Órgão Recebedor:</h2>
+                    
+                    <Warnings/>
+                    
+                    <h2 className="pageTitle">Pesquisar por Órgão Recebedor:</h2>
                     <SearchEntity
                         search_id="search_1"
                         show={true}
