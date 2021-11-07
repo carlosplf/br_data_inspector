@@ -1,0 +1,15 @@
+.rankPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rankPage p{
+    font-size: 20px;
+}
+
+.pageTitle{
+    width: 80%;
+    margin-top: 20px;
+    text-align:center;
+}

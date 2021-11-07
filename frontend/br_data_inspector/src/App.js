@@ -2,7 +2,7 @@ import React from 'react';
 import DataPage from './DataPage';
 import Home from './Home';
 import DataCompare from './DataCompare';
-import Rank from './Rank';
+import RankPage from './RankPage';
 import About from './About';
 import CustomLinkRouter from './CustomLinkRouter';
 
@@ -38,7 +38,7 @@ class App extends React.Component {
             <DataCompare entity_type="Subordinado"/>
           </Route>
           <Route path="/rank">
-            <Rank/>          
+            <RankPage/>          
           </Route>
           <Route path="/about">
             <About/>          
