@@ -105,7 +105,7 @@ class RankTable extends React.Component{
                 <div className="tableDiv">
                     <p>
                         Tabela com entidades classificadas como Subordinadas, ordenadas
-                        por valores recebidos (Valor PAGO) somados em {this.props.date_year}.
+                        pela soma de valores recebidos (PAGO) em {this.props.date_year}.
                     </p>
                     {data_table}
                 </div>
