@@ -36,11 +36,18 @@ class RankTable extends React.Component{
             dates_param = this.url_dates_2021;
         }
 
+        if (this.frontend_port == 80){
+            var table_row_base_url = this.frontend_url + "/details?id=";
+        }
+        else{
+            var table_row_base_url = this.frontend_url + ":" + this.frontend_port + "/details?id=";
+        }
+
         var data_table = this.state.data["data"].map((row, i)=> {
             return(
                 <tr>
                     <td><a href={
-                            this.frontend_url + "/details?id=" + row["Código Órgão Subordinado"] + dates_param
+                           table_row_base_url + row["Código Órgão Subordinado"] + dates_param
                         }>{row["Código Órgão Subordinado"]}</a></td>
                     <td>{row["Nome Órgão Subordinado"]}</td>
                     <td className="value-column">R$ {this.formatNumbers(row["Total Recebido"].toFixed(0))},00</td>
