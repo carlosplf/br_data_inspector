@@ -40,9 +40,7 @@ class RankTable extends React.Component{
             return(
                 <tr>
                     <td><a href={
-                            this.frontend_url + ":" + this.frontend_port + 
-                            "/details?id=" + row["Código Órgão Subordinado"] + 
-                            dates_param
+                            this.frontend_url + "/details?id=" + row["Código Órgão Subordinado"] + dates_param
                         }>{row["Código Órgão Subordinado"]}</a></td>
                     <td>{row["Nome Órgão Subordinado"]}</td>
                     <td className="value-column">R$ {this.formatNumbers(row["Total Recebido"].toFixed(0))},00</td>
