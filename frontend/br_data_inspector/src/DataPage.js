@@ -173,7 +173,7 @@ class DataPage extends React.Component{
                     <LoadingBar
                         color='#009C3B'
                         progress={progress}
-                        height={6}
+                        height={12}
                         onLoaderFinished={() => {console.log("Finished loading.")}}
                     />
 
