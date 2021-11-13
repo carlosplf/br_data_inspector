@@ -38,10 +38,10 @@ def get_subordinado_data(date, id):
     di = data_inspector.DataInspector(db)
     return {"data": di.get_entity_data(id, "Subordinado", date)}
 
-@app.route('/rank')
-def get_subordinado_rank():
+@app.route('/rank/<date_year>')
+def get_subordinado_rank(date_year):
     di = data_inspector.DataInspector(db)
-    return {"data": di.get_entity_rank("Subordinado", None)}
+    return {"data": di.get_entity_rank(entity_type="Subordinado", rank_size=20, date_year=date_year)}
 
 @app.route('/save_custom_link', methods=['OPTIONS'])
 def pre_create_custom_link():

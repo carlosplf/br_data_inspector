@@ -85,6 +85,8 @@ Before get the containers running, a `.env` file is needed inside `frontend/br_d
 
     REACT_APP_API_URL = "API_ADDRESS"
     REACT_APP_API_PORT = "API_PORT"
+    REACT_APP_FRONTEND_URL = "APP_URL"
+    REACT_APP_FRONTEND_PORT = "APP_PORT"
 
 Get all containers running:
 

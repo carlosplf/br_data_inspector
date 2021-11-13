@@ -8,13 +8,14 @@
 #search-btn{
 	font-size: 1.4em;
 	font-weight: bold;
-	margin-top: 30px;
 	color: #202020;
 	background-color: #1EB100;
 	border-radius: 4px;
 	border-width: 0px;
 	height: 40px;
-    margin-top: 40px;
+    margin-top: 60px;
+    width: 40%;
+    margin-bottom: 80px;
 }
 
 #search-btn:hover{

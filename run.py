@@ -19,7 +19,8 @@ def call_collector():
 def call_data_processor():
     my_dp = data_processor.DataProcessor()
     my_dp.create_entities_list("Subordinado")
-    my_dp.create_biggest_receivers_rank(20, [])
+    my_dp.create_biggest_receivers_rank(20, 2020)
+    my_dp.create_biggest_receivers_rank(20, 2021)
 
 if args.update:
     call_data_processor()

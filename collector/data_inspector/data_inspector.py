@@ -10,7 +10,7 @@ class DataInspector():
         self.db_connector = db_connector
         self.redis_connector = None
 
-    def get_entity_data(self, entity_id="", entity_type=None, date=""):
+    def get_entity_data(self, entity_id="", entity_type=None, date="", date_regex=False):
         """
         Get all data from an entity within a specific date.
         Args:
@@ -27,17 +27,22 @@ class DataInspector():
         }
 
         if date:
-            filter_date = self.__parse_date(date)
-            query_filter["Ano e mês do lançamento"] = filter_date
+            if date_regex:
+                query_filter["Ano e mês do lançamento"] = {"$regex": str(date)}
+            else:
+                query_filter["Ano e mês do lançamento"] = self.__parse_date(date)
+
+        logging.debug(query_filter)
 
         result = self.db_connector.query(filter=query_filter)
         return self.__transform_data_in_list(query_result=result, entity_type=entity_type, remove_duplicated=False)
 
-    def get_entity_rank(self, entity_type=None, rank_size=10, date=None):
+    def get_entity_rank(self, entity_type=None, rank_size=20, date_year=2020):
         """
         Get the Entity Rank from RedisDB.
         Args:
             entity_type: (str) "Superior" or "Subordinado"
+            date_year: (str) Year for the Rank selected.
         """
         if not entity_type:
             logging.warning("Superior ou Subordinado not select! Return empty list.")
@@ -47,11 +52,13 @@ class DataInspector():
         self.redis_connector.connect()
         
         if entity_type == "Subordinado":
-            redis_key = "recebedores_rank_alltime"
+            redis_key = "recebedores_rank_" + str(date_year)
         elif entity_type == "Superior":
-            redis_key = "payer_rank_all-time"
+            redis_key = "pagadores_rank_" + date_year
         else:
             return []
+
+        logging.debug(redis_key)
 
         return json.loads(self.redis_connector.get(redis_key))
 

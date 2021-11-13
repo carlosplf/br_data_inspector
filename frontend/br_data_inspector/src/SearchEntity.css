@@ -11,3 +11,8 @@
     z-index: 1;
 }
 
+.SearchEntity input{
+    font-size: 24px;
+    height: 60px;
+}
+

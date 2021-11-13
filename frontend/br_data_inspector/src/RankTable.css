@@ -1,13 +1,7 @@
-.rankPage{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .rankTable{
     border-radius: 10px;
     padding: 20px;
-    width: 80%;
+    width: 100%;
     background-color: #eeeeee;
 }
 
@@ -26,4 +20,14 @@
 .rankTable th{
     background-color: #222222;
     color: #ffffff;
+}
+
+.tableDiv{
+    width: 80%;
+}
+
+.tableDiv p{
+    margin-top: 40px;
+    font-size: 14px;
+    width: 80%;
 }
