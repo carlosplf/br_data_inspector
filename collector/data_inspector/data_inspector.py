@@ -10,6 +10,23 @@ class DataInspector():
         self.db_connector = db_connector
         self.redis_connector = None
 
+    def get_count_for_date(self, date=""):
+        """
+        Given a specific date, check how many entries we have at the DB.
+        Args:
+            date: (str)"YYYYMM" 
+        """
+        log_message = "Checking if we have data for " + date
+        logging.debug(log_message)
+        filter_date = date[:4] + "/" + date[4:] 
+        db_filter = {
+            "Ano e mês do lançamento": filter_date
+        }
+        my_db = db_connector.DbConnector()
+        my_db.connect()
+        count_result = my_db.count_entries(query_filter=db_filter)
+        return count_result
+
     def get_entity_data(self, entity_id="", entity_type=None, date="", date_regex=False):
         """
         Get all data from an entity within a specific date.
