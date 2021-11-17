@@ -22,7 +22,7 @@ class ReportDownloader():
             url = task_list[key]["link"]
             for arg in task_list[key]["args"]:
                 self.download_report(url, arg)
-                
+
     def download_report(self, link, arg):
         """
         Download a single report.
@@ -36,13 +36,13 @@ class ReportDownloader():
         logging.debug("Downloading from Link: %s", link)
         logging.debug("Output filename: %s", zip_filename)
 
-        #TODO: implement some retry method!
+        # TODO: implement some retry method!
         urllib.request.urlretrieve(link, zip_filename)
         logging.debug("Done")
         time.sleep(1)
-        
+
         self.reports_downloaded.append(zip_filename)
-        
+
     def extract_all_files(self):
         """
         Extract all ZIP files inside project folder.
@@ -52,8 +52,8 @@ class ReportDownloader():
             return
 
         logging.debug("Cleaning downloads folder...")
-        self.__clear_download_folder()
-        
+        self.clear_download_folder()
+
         logging.debug(self.reports_downloaded)
         for file in self.reports_downloaded:
             self.extract_file(file)
@@ -73,7 +73,7 @@ class ReportDownloader():
         all_files = glob.glob(CSV_folder_path + "*.csv")
         return all_files
 
-    def __clear_download_folder(self):
+    def clear_download_folder(self):
         """
         Remove all files from download folder.
         """
@@ -81,4 +81,3 @@ class ReportDownloader():
         all_files = glob.glob(CSV_folder_path + "*.csv")
         for single_file in all_files:
             os.remove(single_file)
-

@@ -1,7 +1,8 @@
 import pymongo
 
 
-MONGO_ADDRESS="127.0.0.1"
+MONGO_ADDRESS = "127.0.0.1"
+
 
 class DbConnector():
     def __init__(self):
@@ -15,8 +16,8 @@ class DbConnector():
         self.mycol = self.mydb["reports-data"]
 
     def insert_data(self, data):
-        #need to deal with possible key duplication
-        db_response = self.mycol.insert_one(data)
+        # need to deal with possible key duplication
+        self.mycol.insert_one(data)
 
     def delete_all(self):
         result = self.mycol.delete_many({})
@@ -32,5 +33,3 @@ class DbConnector():
         else:
             result = self.mycol.find(filter, fields)
         return result
-    
-

@@ -33,7 +33,6 @@ class DataUpdater():
             logging.debug(log_message)
             return False
 
-        logging.debug(str("Found " + str(count_result) + " entries!"))  
+        logging.debug(str("Found " + str(count_result) + " entries!"))
 
         return True
-        

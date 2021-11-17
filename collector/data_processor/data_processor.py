@@ -23,7 +23,7 @@ class DataProcessor():
         logging.debug("Creating Receivers Rank...")
         self.__connect_redis(db=1)
         receivers_rank = []
-        
+
         receivers_redis_key = "all_Subordinado_list_alltime"
         receivers_list = json.loads(self.redis_connector.get(receivers_redis_key))
 
@@ -32,10 +32,15 @@ class DataProcessor():
         loop_counter = 0
         date_filter_regex = str(date_year) + "/*"
 
-        #TODO: put this loop in another method
+        # TODO: put this loop in another method
         for receiver in receivers_list:
             logging.debug(str(loop_counter) + ": Somando valores de " + receiver["Nome Órgão Subordinado"])
-            r_data = self.__get_data_for_single_receiver(receiver['Código Órgão Subordinado'], "Subordinado", date_filter_regex, True) 
+            r_data = self.__get_data_for_single_receiver(
+                receiver['Código Órgão Subordinado'],
+                "Subordinado",
+                date_filter_regex,
+                True
+            )
             r_total_value = self.__sum_receiver_values(r_data, "Valor Pago (R$)")
             new_rank_line = {
                         "Nome Órgão Subordinado": receiver['Nome Órgão Subordinado'],
@@ -54,7 +59,7 @@ class DataProcessor():
 
     def __build_key_name(self, base_name, date_year=None):
         """
-        Build the KEY to be used in Redis insertion. It is a independent method because this can be way 
+        Build the KEY to be used in Redis insertion. It is a independent method because this can be way
         more complex in future.
         Args:
             rank_type: STR base name to be used as part of key_value.
@@ -65,7 +70,7 @@ class DataProcessor():
             date_filter_str = "alltime"
         else:
             date_filter_str = str(date_year)
-        
+
         key_name = base_name + "_" + date_filter_str
 
         return key_name
@@ -77,7 +82,7 @@ class DataProcessor():
             rank: LIST of dicts. The rank.
             key_value: STR dict key for the value to sort.
         """
-        return sorted(rank, key=lambda k: k[key_value], reverse=True) 
+        return sorted(rank, key=lambda k: k[key_value], reverse=True)
 
     def __sum_receiver_values(self, receiver_data, value_key):
         """
@@ -88,14 +93,13 @@ class DataProcessor():
         """
         total_value = 0
         for single_d in receiver_data:
-            #parsing value, because it comes as 'XX,XXXXX' from DB
+            # parsing value, because it comes as 'XX,XXXXX' from DB
             value_str = single_d[value_key][:-2]
             value_str = value_str.replace(",", ".")
             total_value += float(value_str)
 
         logging.debug("Valor total: " + str(total_value))
         return total_value
-
 
     def __get_data_for_single_receiver(self, receiver_id, entity_type, date="", date_regex=False):
         """
@@ -105,7 +109,6 @@ class DataProcessor():
         """
         di = data_inspector.DataInspector(self.db_connector)
         return di.get_entity_data(entity_id=receiver_id, entity_type=entity_type, date=date, date_regex=date_regex)
-
 
     def create_entities_list(self, entity_type=None):
         """
@@ -119,14 +122,14 @@ class DataProcessor():
 
         logging.debug("Creating Entities list...")
         di = data_inspector.DataInspector(self.db_connector)
-        all_entities = di.get_all_entities(entity_type=entity_type,
-                                               date=None)
+        all_entities = di.get_all_entities(
+            entity_type=entity_type,
+            date=None
+        )
         self.__connect_redis(db=1)
-        
+
         base_name = "all_" + entity_type + "_list"
         key_name = self.__build_key_name(base_name)
-        
-        logging.debug("Done.")
 
         return self.redis_connector.set(key_name, json.dumps(all_entities))
 
@@ -141,5 +144,3 @@ class DataProcessor():
         self.redis_connector = redis_connector.RedisConnector()
         self.redis_connector.connect(db=db)
         logging.debug("DONE")
-
-

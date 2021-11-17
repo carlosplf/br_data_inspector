@@ -1,7 +1,6 @@
 from collector.report_downloader import report_downloader
 from collector.csv_converter import csv_converter
 from collector.db_connector import db_connector
-from collector.data_inspector import data_inspector
 from collector.data_updater import data_updater
 import json
 import logging
@@ -23,13 +22,14 @@ class Collector():
         Collect all reports based on the Task List (task_list.json file).
         Collect, parse as dict and save to DB.
         """
-        
         self.csv_converter = csv_converter.CSVConverter()
         self.report_downloader = report_downloader.ReportDownloader()
-        
+
         self.__parse_tasklist()
         self.__collect_reports()
         self.__extract_and_proccess_reports()
+
+        self.report_downloader.clear_download_folder()
 
     def update_all_dates_in_task_list(self):
         """
@@ -40,7 +40,6 @@ class Collector():
         for single_date in self.task_list["task_1"]["args"]:
             self.update_single_date(single_date)
 
-
     def update_single_date(self, date):
         """
         Collect data for a single date.
@@ -49,15 +48,13 @@ class Collector():
         """
         self.csv_converter = csv_converter.CSVConverter()
         self.report_downloader = report_downloader.ReportDownloader()
-        
+
         du = data_updater.DataUpdater()
         if not du.check_data_for_date(date, 0):
             logging.debug(str("Should collect data for date: " + date))
-            
             self.report_downloader.download_report(
                 self.task_list["task_1"]["link"], date
             )
-            
             self.__extract_and_proccess_reports()
 
     def __start_db_connection(self):
