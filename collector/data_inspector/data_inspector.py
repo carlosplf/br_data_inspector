@@ -1,7 +1,7 @@
-from collector.db_connector import db_connector
-from collector.db_connector import redis_connector
 import logging
 import json
+from collector.db_connector import db_connector
+from collector.db_connector import redis_connector
 
 
 class DataInspector():
@@ -14,9 +14,9 @@ class DataInspector():
         """
         Given a specific date, check how many entries we have at the DB.
         Args:
-            date: (str)"YYYYMM" 
+            date: (str)"YYYYMM"
         """
-        filter_date = date[:4] + "/" + date[4:] 
+        filter_date = date[:4] + "/" + date[4:]
         db_filter = {
             "Ano e mês do lançamento": filter_date
         }
@@ -62,10 +62,10 @@ class DataInspector():
         if not entity_type:
             logging.warning("Superior ou Subordinado not select! Return empty list.")
             return []
-        
+
         self.redis_connector = redis_connector.RedisConnector()
         self.redis_connector.connect()
-        
+
         if entity_type == "Subordinado":
             redis_key = "recebedores_rank_" + str(date_year)
         elif entity_type == "Superior":
@@ -77,7 +77,7 @@ class DataInspector():
 
         return json.loads(self.redis_connector.get(redis_key))
 
-    #TODO could be an option for the get_all_entitites method, Redis ou Mongo
+    # TODO could be an option for the get_all_entitites method, Redis ou Mongo
     def get_all_entities_from_redis(self, entity_type=None, date=None):
         """
         Get all Entities list from Redis DB, instead of Mongo DB.
@@ -104,9 +104,9 @@ class DataInspector():
         if not entity_type:
             logging.warning("Superior ou Subordinado not select! Return empty list.")
             return []
-            
+
         query_filter = {}
-       
+
         if date:
             filter_date = self.__parse_date(date)
             query_filter = {"Ano e mês do lançamento": filter_date}
@@ -127,9 +127,9 @@ class DataInspector():
             date: (str) "YYYYMM"
         """
         query_filter = {
-            str("Nome Órgão " + entity_type): {"$regex": search_term} 
+            str("Nome Órgão " + entity_type): {"$regex": search_term}
         }
-       
+
         if date:
             filter_date = self.__parse_date(date)
             query_filter["Ano e mês do lançamento"] = filter_date
@@ -151,7 +151,7 @@ class DataInspector():
             data_as_dict = dict(data_entry)
             data_as_dict.pop("_id", None)
             all_data.append(data_as_dict)
-        
+
         if remove_duplicated:
             all_data = self.__remove_duplicated(all_data, entity_type)
         return all_data
@@ -166,14 +166,14 @@ class DataInspector():
         buffer_ids_list = []
         new_data_list = []
         id_key_field = "Código Órgão " + entity_type
-        
+
         for data in original_list:
             if data[id_key_field] not in buffer_ids_list:
                 buffer_ids_list.append(data[id_key_field])
                 new_data_list.append(data)
-        
+
         return new_data_list
-    
+
     def __transform_data_in_dict(self, query_result, entity_type):
         """
         Return a DICT with all data collected. Each dict key is the Entity ID, removing duplicates.
@@ -187,5 +187,3 @@ class DataInspector():
             data_entry.pop("_id", None)
             all_data[data_entry[id_key_field]] = data_entry
         return all_data
-
-
