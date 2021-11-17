@@ -22,8 +22,8 @@ class DbConnector():
         result = self.mycol.delete_many({})
         return result
 
-    def count_entries(self):
-        result = self.mycol.count_documents({})
+    def count_entries(self, query_filter={}):
+        result = self.mycol.count_documents(query_filter)
         return result
 
     def query(self, filter={}, fields=None):

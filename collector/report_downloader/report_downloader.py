@@ -4,11 +4,12 @@ import glob
 import urllib.request
 import logging
 import ssl
+import os
 
 
 class ReportDownloader():
     def __init__(self):
-        pass
+        self.reports_downloaded = []
 
     def download_multiple_reports(self, task_list):
         """
@@ -16,6 +17,7 @@ class ReportDownloader():
         All reports are stored as a ZIP file.
         """
         logging.debug("Downloading multiple reports...")
+        self.reports_downloaded = []
         for key in task_list:
             url = task_list[key]["link"]
             for arg in task_list[key]["args"]:
@@ -33,17 +35,27 @@ class ReportDownloader():
         zip_filename = arg + "-repot.zip"
         logging.debug("Downloading from Link: %s", link)
         logging.debug("Output filename: %s", zip_filename)
+
+        #TODO: implement some retry method!
         urllib.request.urlretrieve(link, zip_filename)
         logging.debug("Done")
         time.sleep(1)
+        
+        self.reports_downloaded.append(zip_filename)
         
     def extract_all_files(self):
         """
         Extract all ZIP files inside project folder.
         """
-        all_files = glob.glob("./*.zip")
-        logging.debug(all_files)
-        for file in all_files:
+        if not self.reports_downloaded:
+            logging.warning("No files to extract.")
+            return
+
+        logging.debug("Cleaning downloads folder...")
+        self.__clear_download_folder()
+        
+        logging.debug(self.reports_downloaded)
+        for file in self.reports_downloaded:
             self.extract_file(file)
 
     def extract_file(self, filename):
@@ -60,3 +72,13 @@ class ReportDownloader():
         CSV_folder_path = "./downloads/"
         all_files = glob.glob(CSV_folder_path + "*.csv")
         return all_files
+
+    def __clear_download_folder(self):
+        """
+        Remove all files from download folder.
+        """
+        CSV_folder_path = "./downloads/"
+        all_files = glob.glob(CSV_folder_path + "*.csv")
+        for single_file in all_files:
+            os.remove(single_file)
+
