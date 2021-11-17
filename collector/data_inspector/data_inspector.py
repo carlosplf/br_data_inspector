@@ -16,8 +16,6 @@ class DataInspector():
         Args:
             date: (str)"YYYYMM" 
         """
-        log_message = "Checking if we have data for " + date
-        logging.debug(log_message)
         filter_date = date[:4] + "/" + date[4:] 
         db_filter = {
             "Ano e mês do lançamento": filter_date

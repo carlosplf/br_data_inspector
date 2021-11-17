@@ -26,10 +26,8 @@ def call_data_processor():
     my_dp.create_biggest_receivers_rank(20, 2021)
 
 def call_updater():
-    my_dbc = db_connector.DbConnector()
-    my_dbc.connect()
-    my_dai = data_inspector.DataInspector(my_dbc)
-    my_dai.get_count_for_date("202001")
+    my_collector = collector.Collector()
+    my_collector.update_all_dates_in_task_list()
 
 if args.createlists:
     call_data_processor()
