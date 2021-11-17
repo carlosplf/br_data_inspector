@@ -16,8 +16,6 @@ class Collector():
         self.extracted_reports = None
         self.task_list = None
 
-        self.csv_converter = csv_converter.CSVConverter()
-        self.report_downloader = report_downloader.ReportDownloader()
         self.__start_db_connection()
 
     def collect_all(self):
@@ -25,11 +23,13 @@ class Collector():
         Collect all reports based on the Task List (task_list.json file).
         Collect, parse as dict and save to DB.
         """
+        
+        self.csv_converter = csv_converter.CSVConverter()
+        self.report_downloader = report_downloader.ReportDownloader()
+        
         self.__parse_tasklist()
         self.__collect_reports()
-        for single_report in self.extracted_reports:
-            data_as_dict = self.__convert_report(single_report)
-            self.__insert_to_db(data_as_dict)
+        self.__extract_and_proccess_reports()
 
     def update_all_dates_in_task_list(self):
         """
@@ -40,15 +40,25 @@ class Collector():
         for single_date in self.task_list["task_1"]["args"]:
             self.update_single_date(single_date)
 
+
     def update_single_date(self, date):
         """
         Collect data for a single date.
         Args:
             date: (str) YYYYMM
         """
+        self.csv_converter = csv_converter.CSVConverter()
+        self.report_downloader = report_downloader.ReportDownloader()
+        
         du = data_updater.DataUpdater()
         if not du.check_data_for_date(date, 0):
             logging.debug(str("Should collect data for date: " + date))
+            
+            self.report_downloader.download_report(
+                self.task_list["task_1"]["link"], date
+            )
+            
+            self.__extract_and_proccess_reports()
 
     def __start_db_connection(self):
         logging.debug("Connecting do DB...")
@@ -65,10 +75,15 @@ class Collector():
     def __collect_reports(self):
         logging.debug("Collecting data from gov...")
         self.report_downloader.download_multiple_reports(self.task_list)
+
+    def __extract_and_proccess_reports(self):
         logging.debug("Extracting...")
         self.report_downloader.extract_all_files()
         logging.debug("Done")
         self.extracted_reports = self.report_downloader.get_extracted_reports()
+        for single_report in self.extracted_reports:
+            data_as_dict = self.__convert_report(single_report)
+            self.__insert_to_db(data_as_dict)
 
     def __convert_report(self, report_name):
         logging.debug("Converting report: %s", report_name)
