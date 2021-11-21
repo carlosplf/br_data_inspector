@@ -35,6 +35,7 @@ class SearchEntity extends React.Component{
                         onHover={this.handleOnHover}
                         onSelect={this.props.handleOnSelect}
                         onFocus={this.handleOnFocus}
+                        styling={{fontSize: "24px"}}
                         autoFocus
                     />
                 </div>
