@@ -27,7 +27,7 @@
 @media only screen 
 and (max-width : 1080px){ 
     .ChartLabel {
-        font-size: 8px;
+        font-size: 14px;
     }
     .DataBarChart {
         margin-top: 60px;
