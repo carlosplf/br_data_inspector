@@ -166,7 +166,7 @@ class DataPage extends React.Component{
             return (
 				<div className="search-results">
 
-					<Header handleShareButton={this.handleShareButton} show_share_button={true} show_table_data={false} header_text="Valores Recebidos" handle_modal={this.handleOpenDataModal}/>
+					<Header handleShareButton={this.handleShareButton} show_share_button={false} show_table_data={false} header_text="Valores Recebidos" handle_modal={this.handleOpenDataModal}/>
 
 					<CreateCustomLink show={this.state.show_custom_link_modal} handleClose={this.handleCloseCLModal}/>
 
@@ -177,7 +177,14 @@ class DataPage extends React.Component{
                         onLoaderFinished={() => {console.log("Finished loading.")}}
                     />
 
-                    <DataSummary dates={this.dates_to_search} name={this.state.data[0]["Nome Órgão Subordinado"]} key={this.entity_id} data={this.state.data} values_summary={this.state.values_summary} data_keys={this.state.data_keys}/>
+                    <DataSummary
+                        dates={this.dates_to_search}
+                        name={this.state.data[0]["Nome Órgão Subordinado"]}
+                        key={this.entity_id}
+                        data={this.state.data}
+                        values_summary={this.state.values_summary}
+                        data_keys={this.state.data_keys}
+                    />
                 
 					<DataBarChart
 						data_keys={this.state.data_keys}

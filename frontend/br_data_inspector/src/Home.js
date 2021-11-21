@@ -188,7 +188,7 @@ class Home extends React.Component{
                     
                     <Warnings/>
                     
-                    <h2 className="pageTitle">Pesquisar por Órgão Recebedor:</h2>
+                    <h2 className="pageTitle">Pesquisar por Órgão Subordinado:</h2>
                     <SearchEntity
                         search_id="search_1"
                         show={true}
