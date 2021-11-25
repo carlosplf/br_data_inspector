@@ -1,0 +1,39 @@
+version: "3.1"
+
+services:
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./certs/certbot/conf:/etc/letsencrypt
+      - ./certs/certbot/www:/var/www/certbot
+  
+  backend:
+    build:
+      context: ../
+      dockerfile: ./docker/backend-dockerfile
+    ports:
+      - "8080:8080"
+  
+  frontend:
+    build:
+      context: ../
+      dockerfile: ./docker/frontend-dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./certs/certbot/conf:/etc/letsencrypt
+      - ./certs/certbot/www:/var/www/certbot
+  
+  redis:
+    image: "redis"
+    hostname: redis
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
+  
+  mongo:
+    image: "mongo"
+    ports:
+      - "27017:27017"
+    volumes:
+      - './data:/data/db'
