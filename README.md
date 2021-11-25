@@ -1,10 +1,9 @@
 # BR Data Inspector - "Portal da Transparência" data collector and Analyzer
 
-Data collector from Brazil government open reports. [BRDATA.ONLINE](https://brdata.online)
+Data collector from Brazil government open reports. [brdata.online](https://brdata.online)
 
 
-![alt text](schema.png "Project Schema")
-
+![alt text](screenshots/schema.png "Project Schema")
 
 ## Back-end
 
@@ -18,10 +17,10 @@ The Back-end also has an API to export the data saved.
 
 All Front-end is built with React. For now, the Front-end just let the user consult some investments from Brazil government to some other institutions, like Universities and Army.
 
-![alt text](page-screenshot.png "Application Screenshot")
+![alt text](screenshots/page-screenshot.png "Application Screenshot")
 
 
-![alt text](page-screenshot-2.png "Application Screenshot 2")
+![alt text](screenshots/page-screenshot-2.png "Application Screenshot 2")
 
 # How to run
 
@@ -58,7 +57,7 @@ MacOS (homebrew):
 
 As a softwares that is currently being developed,the software does not have a production environment.
 
-To run the back-end, simply run the *run.py* file. All requirements are inside requirements.txt file.
+To run the back-end, simply run the *backend/run.py* file. All requirements are inside requirements.txt file.
 
 To collect data from "Portal da Transparência", run:
 

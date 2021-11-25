@@ -1,0 +1,10 @@
+FROM node:12-alpine
+RUN apk add --no-cache python3-dev py3-setuptools  make build-base linux-headers pcre-dev nginx
+RUN apk add cmd:pip3
+WORKDIR /br_data_inspector
+COPY ./ .
+RUN pip3 install -r ./backend/requirements.txt
+RUN pip3 install supervisor
+RUN cp /br_data_inspector/docker/nginx_files/backend-nginx-dev.conf /etc/nginx/http.d/default.conf
+COPY ./docker/supervisord.conf /etc/supervisord.conf
+CMD ["supervisord"]

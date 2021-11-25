@@ -1,7 +1,7 @@
 import pymongo
 
 
-MONGO_ADDRESS = "127.0.0.1"
+MONGO_ADDRESS = "mongo"
 
 
 class DbConnector():
