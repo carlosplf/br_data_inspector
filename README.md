@@ -11,7 +11,7 @@ All Back-end is built using Python, Flask and MongoDB. Software back-end collect
 
 The back-end has a routine called DataProcessor, that is responsible for processing some data collected and creating some lists inside Redis DB, as Entities list and Receivers rank.
 
-The Back-end also has an API to export the data saved.
+The Back-end also has an API to export data.
 
 ## Front-end
 
