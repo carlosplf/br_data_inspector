@@ -1,9 +1,6 @@
-run:
-	python run.py
-
 clear:
-	rm -f ./*.zip
-	rm -f downloads/*
+	rm -f ./backend/*.zip
+	rm -f ./backend/downloads/*
 
 startup_arch:
 	sudo systemctl start mongodb.service
