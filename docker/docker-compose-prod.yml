@@ -16,6 +16,7 @@ version: "3.1"
       dockerfile: ./docker/frontend-dockerfile-prod
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
       - /etc/ssl/certs:/etc/ssl/certs
