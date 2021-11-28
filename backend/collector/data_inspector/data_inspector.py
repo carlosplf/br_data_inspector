@@ -20,9 +20,7 @@ class DataInspector():
         db_filter = {
             "Ano e mês do lançamento": filter_date
         }
-        my_db = db_connector.DbConnector()
-        my_db.connect()
-        count_result = my_db.count_entries(query_filter=db_filter)
+        count_result = self.db_connector.count_entries(query_filter=db_filter)
         return count_result
 
     def get_entity_data(self, entity_id="", entity_type=None, date="", date_regex=False):

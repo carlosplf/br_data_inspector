@@ -1,7 +1,7 @@
 import pymongo
 
 
-MONGO_ADDRESS = "mongo"
+MONGO_ADDRESS = "127.0.0.1"
 
 
 class DbConnector():
@@ -10,10 +10,10 @@ class DbConnector():
         self.mydb = None
         self.mucol = None
 
-    def connect(self):
+    def connect(self, db_name):
         self.myclient = pymongo.MongoClient(connect=False, host=MONGO_ADDRESS, port=27017)
         self.mydb = self.myclient["govdata"]
-        self.mycol = self.mydb["reports-data"]
+        self.mycol = self.mydb[db_name]
 
     def insert_data(self, data):
         # need to deal with possible key duplication
