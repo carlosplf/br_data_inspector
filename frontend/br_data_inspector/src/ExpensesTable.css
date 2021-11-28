@@ -30,5 +30,10 @@
 and (max-width : 1080px){ 
     .expensesBlock  {
         margin-top: 60px;
+        font-size: 14px;
+    }
+
+    .expensesTable tr {
+        font-size: 20px;
     }
 }

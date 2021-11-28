@@ -1,6 +1,0 @@
-{
-    "task_1":{
-        "link": "http://www.portaltransparencia.gov.br/download-de-dados/despesas-execucao/",
-        "args": ["202101", "202102", "202103", "202104", "202105", "202106"]
-    }
-}

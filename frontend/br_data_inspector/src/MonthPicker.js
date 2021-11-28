@@ -118,7 +118,7 @@ class MonthPicker extends React.Component{
                     <tbody>
                         <tr>
                             <td className="select-all">TODOS</td>
-                            <td className="select-all">2020</td>
+                            <td className="select-all">2020/01</td>
                             <td><AllCheckerCheckbox/></td>
                         </tr>
                         {table_lines}

@@ -88,6 +88,9 @@ class DataPage extends React.Component{
 
 	//For each API response data, concatenate with already collected data in state.
 	processData(api_response){
+        if(api_response["data"].length === 0){
+            console.log("Empty!");
+        }
 		if (!this.state.data){
 			return api_response["data"];
 		}
@@ -141,6 +144,15 @@ class DataPage extends React.Component{
 		if (this.state.loading){
             return (<Loading/>);
 		}
+
+        else if (this.state.data.length === 0){
+			return(
+				<div className="search-results">
+                    <Header handleShareButton={this.handleShareButton} show_share_button={true} show_table_data={false} header_text="Valores Recebidos" handle_modal={this.handleOpenDataModal}/>
+                    <h1> Oops, sem dados para o período :( </h1>
+                </div>
+            )
+        }
 		
 		else{
 			const expenses_summary = this.buildExpensesDict();
@@ -154,18 +166,25 @@ class DataPage extends React.Component{
             return (
 				<div className="search-results">
 
-					<Header handleShareButton={this.handleShareButton} show_share_button={true} show_table_data={false} header_text="Valores Recebidos" handle_modal={this.handleOpenDataModal}/>
+					<Header handleShareButton={this.handleShareButton} show_share_button={false} show_table_data={false} header_text="Valores Recebidos" handle_modal={this.handleOpenDataModal}/>
 
 					<CreateCustomLink show={this.state.show_custom_link_modal} handleClose={this.handleCloseCLModal}/>
 
                     <LoadingBar
                         color='#009C3B'
                         progress={progress}
-                        height={6}
+                        height={12}
                         onLoaderFinished={() => {console.log("Finished loading.")}}
                     />
 
-                    <DataSummary dates={this.dates_to_search} name={this.state.data[0]["Nome Órgão Subordinado"]} key={this.entity_id} data={this.state.data} values_summary={this.state.values_summary} data_keys={this.state.data_keys}/>
+                    <DataSummary
+                        dates={this.dates_to_search}
+                        name={this.state.data[0]["Nome Órgão Subordinado"]}
+                        key={this.entity_id}
+                        data={this.state.data}
+                        values_summary={this.state.values_summary}
+                        data_keys={this.state.data_keys}
+                    />
                 
 					<DataBarChart
 						data_keys={this.state.data_keys}

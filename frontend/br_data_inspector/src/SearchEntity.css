@@ -11,3 +11,14 @@
     z-index: 1;
 }
 
+.SearchEntity input{
+    height: 60px;
+}
+
+@media only screen 
+and (max-width : 1080px){
+    .SearchEntity {
+        margin-top: 80px;
+        width: 80%;
+    }
+}

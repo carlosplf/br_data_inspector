@@ -1,0 +1,33 @@
+.rankTable{
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    background-color: #eeeeee;
+}
+
+.rankTable table{
+    width: 100%;
+}
+
+.value-column{
+    text-align: right;
+}
+
+.rankTable tr:hover{
+    background-color: #dddddd;
+}   
+
+.rankTable th{
+    background-color: #222222;
+    color: #ffffff;
+}
+
+.tableDiv{
+    width: 80%;
+}
+
+.tableDiv p{
+    margin-top: 40px;
+    font-size: 14px;
+    width: 80%;
+}
