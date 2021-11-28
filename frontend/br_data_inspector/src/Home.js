@@ -3,7 +3,6 @@ import SearchEntity from './SearchEntity';
 import MonthPicker from './MonthPicker';
 import Header from './Header';
 import CompareButton from './CompareButton';
-import Warnings from './Warnings';
 import Loading from './Loading';
 import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
@@ -183,27 +182,32 @@ class Home extends React.Component{
                         draggable
                         pauseOnHover
                     />
+                    
+                    <div className="backgroundImageContainer">
+                        <img id="backgroundImage" src="home-background.jpg" alt="Background"/>
+                    </div>
 
-                    <Header header_text="BR Data Collector - 0.0.1" handle_modal={this.handleOpenDataModal}/>
-                    
-                    <Warnings/>
-                    
-                    <h2 className="pageTitle">Pesquisar por Órgão Subordinado:</h2>
-                    <SearchEntity
-                        search_id="search_1"
-                        show={true}
-                        items={this.items}
-                        handleOnSelect={this.handleOnSelect}
-                    />
-                    <SearchEntity
-                        search_id="search_2"
-                        show={this.state.compare}
-                        items={this.items}
-                        handleOnSelect={this.handleOnSelectSecond}
-                    />
-                    <CompareButton handleCompareButton={this.handleCompareButton}/>
-                    <MonthPicker dateSelected={this.dateSelected}/>
-                    <button id="search-btn" onClick={this.handleSearch}>Pesquisar</button>
+                    <div className="contentContainer">
+
+                        <Header header_text="BR Data Collector - 0.0.1" handle_modal={this.handleOpenDataModal}/>
+
+                        <h2 className="pageTitle">Pesquisar por Órgão Subordinado:</h2>
+                        <SearchEntity
+                            search_id="search_1"
+                            show={true}
+                            items={this.items}
+                            handleOnSelect={this.handleOnSelect}
+                        />
+                        <SearchEntity
+                            search_id="search_2"
+                            show={this.state.compare}
+                            items={this.items}
+                            handleOnSelect={this.handleOnSelectSecond}
+                        />
+                        <CompareButton handleCompareButton={this.handleCompareButton}/>
+                        <MonthPicker dateSelected={this.dateSelected}/>
+                        <button id="search-btn" onClick={this.handleSearch}>Pesquisar</button>
+                    </div>
                 </div>
             )
         }

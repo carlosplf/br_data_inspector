@@ -4,12 +4,15 @@
     align-items: center;
 }
 
-.rankPage p{
-    font-size: 20px;
+.pageTitleRank p{
+    font-size: 28px;
+    width: 100%;
+    text-align:center;
 }
 
-.pageTitle{
-    width: 80%;
-    margin-top: 20px;
+.pageTitleRank h2{
+    width: 100%;
+    font-size: 34px;
+    margin-top: 60px;
     text-align:center;
 }

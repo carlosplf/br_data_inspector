@@ -10,8 +10,8 @@ class RankPage extends React.Component{
         return(
             <div class="rankPage">
                 <Header header_text="Maiores Recebedores"/>
-                <div className="pageTitle">
-                    <p style={{fontWeight: 'bold'}}>Soma de valores PAGOS por Órgão Subordinado.</p>
+                <div className="pageTitleRank">
+                    <h2 style={{fontWeight: 'bold'}}>Soma de valores PAGOS por Órgão Subordinado.</h2>
                     <p>2021: Considerando dados até Junho.</p>
                 </div>
                 <RankTable date_year="2020"/>    
