@@ -1,6 +1,6 @@
 .SearchEntity {
     margin-top: 40px;
-    width: 60%;
+    width: 40%;
 }
 
 #search_1{
@@ -12,7 +12,7 @@
 }
 
 .SearchEntity input{
-    height: 60px;
+    height: 40px;
 }
 
 @media only screen 
@@ -20,5 +20,8 @@ and (max-width : 1080px){
     .SearchEntity {
         margin-top: 80px;
         width: 80%;
+    }
+    .SearchEntity input{
+        height: 60px;
     }
 }
