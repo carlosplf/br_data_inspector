@@ -166,7 +166,7 @@ class DataPage extends React.Component{
             return (
 				<div className="search-results">
 
-					<Header handleShareButton={this.handleShareButton} show_share_button={false} show_table_data={false} header_text="Valores Recebidos" handle_modal={this.handleOpenDataModal}/>
+					<Header handleShareButton={this.handleShareButton} show_share_button={false} show_table_data={false} header_text="Resumo de Despesas" handle_modal={this.handleOpenDataModal}/>
 
 					<CreateCustomLink show={this.state.show_custom_link_modal} handleClose={this.handleCloseCLModal}/>
 

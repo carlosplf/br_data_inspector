@@ -187,7 +187,7 @@ class DataCompare extends React.Component{
         else if (this.state.data1.length === 0 || this.state.data2.length === 0){
 			return(
 				<div className="search-results">
-					<Header handleShareButton={this.handleShareButton} show_share_button={true} header_text="Comparação de Recebedores" handle_modal={this.handleOpenDataModal}/>
+					<Header handleShareButton={this.handleShareButton} show_share_button={true} header_text="Comparação de Despesas" handle_modal={this.handleOpenDataModal}/>
                     <h1> Oops, sem dados para o período :( </h1>
                 </div>
             )
