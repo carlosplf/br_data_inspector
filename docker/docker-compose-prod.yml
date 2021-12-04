@@ -28,11 +28,15 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - $PWD/redis-data:/var/lib/redis
+      - redis-data:/var/lib/redis
   
   mongo:
     image: "mongo"
     ports:
       - "27017:27017"
     volumes:
-      - './data:/data/db'
+      - mongo_data:/data/db
+
+volumes:
+  redis_data:
+  mongo_data:

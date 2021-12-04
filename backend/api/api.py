@@ -5,41 +5,48 @@ from collector.data_inspector import data_inspector
 from collector.db_connector import db_connector
 from collector.custom_link import custom_link
 
+EXPENSES_DB_NAME = "expenses-data"
+CONTRACTS_DB_NAME = "contracts-data"
+
 app = Flask(__name__)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 db = db_connector.DbConnector()
-db.connect()
 
 @app.route('/')
 def index():
-    return 'Govdata: Collect data from \"Portal da Transparência - Brasil\"'
+    return 'API Govdata: Collect data from \"Portal da Transparência - Brasil\"'
 
 @app.route('/superior/<date>')
 def get_all_superior(date):
+    db.connect(EXPENSES_DB_NAME)
     di = data_inspector.DataInspector(db)
     response = {"data": di.get_all_entities("Superior", date)}
     return response
 
 @app.route('/subordinado/<date>')
 def get_all_subordinado(date):
+    db.connect(EXPENSES_DB_NAME)
     di = data_inspector.DataInspector(db)
     response = {"data": di.get_all_entities_from_redis("Subordinado", date)}
     return response
 
 @app.route('/superior/<date>/<id>')
 def get_superior_data(date, id):
+    db.connect(EXPENSES_DB_NAME)
     di = data_inspector.DataInspector(db)
     response = {"data": di.get_entity_data(id, "Superior", date)}
     return response
 
 @app.route('/subordinado/<date>/<id>')
 def get_subordinado_data(date, id):
+    db.connect(EXPENSES_DB_NAME)
     di = data_inspector.DataInspector(db)
     return {"data": di.get_entity_data(id, "Subordinado", date)}
 
 @app.route('/rank/<date_year>')
 def get_subordinado_rank(date_year):
+    db.connect(EXPENSES_DB_NAME)
     di = data_inspector.DataInspector(db)
     return {"data": di.get_entity_rank(entity_type="Subordinado", rank_size=20, date_year=date_year)}
 
