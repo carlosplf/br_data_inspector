@@ -27,10 +27,17 @@ class Header extends React.Component{
     }
 
     render(){
+        
+        var background_class = "header_light_mode";
+
+        if(this.props.dark_background){
+            background_class = "header_dark_mode";
+        }
+
         const table_data_button = this.showTableData();
         const share_button = this.showShareButton();
         return(
-            <div className="header">
+            <div className={background_class}>
                 <h1>{this.props.header_text}</h1>
                 <div className="header-btns">
                     {table_data_button}

@@ -200,14 +200,14 @@ class DataCompare extends React.Component{
             return (
 				<div className="Search-Results">
 
-					<Header handleShareButton={this.handleShareButton} show_share_button={true} header_text="Comparação de Recebedores" handle_modal={this.handleOpenDataModal}/>
+					<Header handleShareButton={this.handleShareButton} show_share_button={true} header_text="Comparação de Recebedores" handle_modal={this.handleOpenDataModal} dark_background={true}/>
 
                     <CreateCustomLink show={this.state.show_custom_link_modal} handleClose={this.handleCloseCLModal}/>
                     
                     <LoadingBar
                         color='#009C3B'
                         progress={progress}
-                        height={12}
+                        height={8}
                         onLoaderFinished={() => {console.log("Finished loading.")}}
                     />
 
