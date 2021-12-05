@@ -9,6 +9,9 @@ services:
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
       - /etc/ssl/certs:/etc/ssl/certs
+    depends_on:
+      - mongo
+      - redis
   
   frontend:
     build:
@@ -24,6 +27,9 @@ services:
   redis:
     image: "redis"
     hostname: redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
     command: ["redis-server", "--appendonly", "yes"]
     ports:
       - "6379:6379"
