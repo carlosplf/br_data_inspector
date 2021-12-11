@@ -4,6 +4,7 @@ import './ContractsTable.css';
 
 class ContractsTable extends React.Component{
     formatNumbers(x) {
+        x = x.slice(0,-2);
         if (!x) {return 0}
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
@@ -21,7 +22,7 @@ class ContractsTable extends React.Component{
                 <tr key={x["Número Licitação"]}>
                     <td className="idColumn">{x["Número Licitação"]}</td>
                     <td className="nameColumn">{x["Nome Contratado"]}</td>
-                    <td className="valueColumn">R$ {this.formatNumbers(x["Valor Final Compra"])},00</td>
+                    <td className="valueColumn">R$ {this.formatNumbers(x["Valor Final Compra"])}</td>
                 </tr>
             )
         })
@@ -47,7 +48,7 @@ class ContractsTable extends React.Component{
         const data_table = this.buildTable();
         return(
             <div className="contractsBlock">
-                <h1> Contratos assinados para o período: </h1>
+                <h1> Contratos assinados no período: </h1>
                 {data_table}
             </div>
         )
