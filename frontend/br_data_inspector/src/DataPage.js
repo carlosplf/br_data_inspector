@@ -195,7 +195,7 @@ class DataPage extends React.Component{
 					/>
 
 					<ExpensesTable data={expenses_summary}/>
-                    <ContractsData dates={this.dates_to_search} entity_id="26234"/>
+                    <ContractsData dates={this.dates_to_search} entity_id={this.state.data[0]["Código Órgão Subordinado"]}/>
 
 				</div>
 			)
