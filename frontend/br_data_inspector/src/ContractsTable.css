@@ -2,7 +2,7 @@
     border-radius: 10px;
   	background: #282828;
     color: #FFF;
-  	width: 90%;
+  	width: 100%;
     margin-top: 10px;
     margin-bottom: 20px;
     display: flex;
@@ -11,17 +11,32 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.contractsBlock table{
+.contractsTable{
+    width: 80%;
+}
+
+.contractsTable table{
+    width: 100%;
     color: #fff;
     padding-bottom: 20px;
 }
 
-.nameColumn{
-    width: 600px;
+.normalTR td:hover{
+    cursor: pointer;
 }
 
-.idColumn{
-    width: 100px;
+.expandedRow {
+    width: 100%;
+}
+
+.moreInfo{
+    border-radius: 10px;
+    background-color: #FFF;
+    color: #222;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 @media only screen 

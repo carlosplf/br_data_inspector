@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import ContractsTable from './ContractsTable';
+import ContractDetails from './ContractDetails';
+import './ContractsData.css';
 
 
 class ContractsData extends React.Component{
@@ -58,7 +60,16 @@ class ContractsData extends React.Component{
 	}
 
 	render(){
-        return (<ContractsTable contracts_data={this.state.data}/>);
+        if(this.state.data.length == 0){
+            return <h1> Loading... </h1>
+        }
+        else{
+            return (
+                <div className="contracts">
+                    <ContractsTable contracts_data={this.state.data}/>
+                </div>
+            );
+        }
 	}
 }
 
