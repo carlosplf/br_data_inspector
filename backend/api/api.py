@@ -68,3 +68,10 @@ def create_custom_link():
 def get_real_url(custom_url):
     my_custom_link = custom_link.CustomLink()
     return {"real_url": str(my_custom_link.get(custom_url))}
+
+@app.route('/contracts/<entity_id>/<date>')
+def get_contracts(entity_id, date):
+    db.connect(CONTRACTS_DB_NAME)
+    di = data_inspector.DataInspector(db)
+    response = {"data": di.get_contracts_by_entity(entity_id, date)}
+    return response

@@ -11,6 +11,7 @@ import "./DataPage.css";
 import CreateCustomLink from './CreateCustomLink.js';
 import ExpensesTable from './ExpensesTable.js';
 import LoadingBar from 'react-top-loading-bar'
+import ContractsData from './ContractsData';
 
 
 //Component responsible of showing info about a single Entity searched.
@@ -140,6 +141,7 @@ class DataPage extends React.Component{
 	}
 
 	render(){
+
 		
 		if (this.state.loading){
             return (<Loading/>);
@@ -193,6 +195,7 @@ class DataPage extends React.Component{
 					/>
 
 					<ExpensesTable data={expenses_summary}/>
+                    <ContractsData dates={this.dates_to_search} entity_id="26234"/>
 
 				</div>
 			)
