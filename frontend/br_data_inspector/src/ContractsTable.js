@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import './ContractsTable.css';
+import { FaAngleRight } from "react-icons/fa";
 
 
 class ContractsTable extends React.Component{
@@ -48,7 +49,7 @@ class ContractsTable extends React.Component{
         const clickCallback = () => this.handleRowClick(item["ID"]);
         const itemRows = [
 			<tr className="normalTR" onClick={clickCallback} key={"row-data-" + item["ID"]}>
-                <td className="columnLicitacao">{item["Número Licitação"]}</td>
+                <td className="columnLicitacao">{<FaAngleRight/>}{item["Número Licitação"]}</td>
                 <td className="columnContratado">{item["Nome Contratado"]}</td>
                 <td className="columnValor">R$ {this.formatNumbers(item["Valor Final Compra"])}</td>
 			</tr>

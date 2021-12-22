@@ -39,6 +39,14 @@
     margin-bottom: 10px;
 }
 
+.columnValor{
+    text-align: end;
+}
+
+.columnLicitacao{
+    width: 160px;
+}
+
 @media only screen 
 and (max-width : 1080px){ 
     .contractsBlock  {

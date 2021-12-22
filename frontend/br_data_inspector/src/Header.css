@@ -94,6 +94,9 @@ and (max-width : 1080px){
     .header{
         height: 120px;
     }
+    .header_dark_mode{
+        height: 120px;
+    }
     .header-btns{
         height: 120px;
     }
