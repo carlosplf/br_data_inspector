@@ -69,7 +69,7 @@ class ContractsTable extends React.Component{
                             <p>Situação: {item["Situação Contrato"]}</p>
                             <p>Valor Inicial: R$ {this.formatNumbers(item["Valor Inicial Compra"])}</p>
                             <p>Valor Final: R$ {this.formatNumbers(item["Valor Final Compra"])}</p>
-                            <p>Objeto: {item["Objeto"]}</p>
+                            <p>{item["Objeto"]}</p>
                         </div>
                     </td>
                 </tr>
@@ -113,6 +113,7 @@ class ContractsTable extends React.Component{
         return (
             <div className="contractsBlock">
                 <h1> Contratos assinados no período: </h1>
+                <p id="clickToExpand">(clique para expandir)</p>
                 {full_table}
             </div>
         );
