@@ -41,10 +41,11 @@
 
 .columnValor{
     text-align: end;
+    width: 24%;
 }
 
 .columnLicitacao{
-    width: 160px;
+    width: 20%;
 }
 
 @media only screen 
