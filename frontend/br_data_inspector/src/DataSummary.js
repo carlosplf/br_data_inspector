@@ -53,7 +53,7 @@ class DataSummary extends React.Component{
             <div className="data-summary">
                 <h2>{this.props.name}</h2>
                 <spam className="monthsList" style={{fontWeight:'bold'}}>Meses selecionados: {dates_list}</spam>
-                <h3>Valores recebidos no período:</h3>
+                <h3>Valores gastos no período:</h3>
                 {this.props.data_keys.map(key => (
                     <p key={key}>{key}: { this.formatNumbers(this.props.values_summary[key])}</p>
                     ))}

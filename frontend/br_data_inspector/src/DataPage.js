@@ -11,6 +11,7 @@ import "./DataPage.css";
 import CreateCustomLink from './CreateCustomLink.js';
 import ExpensesTable from './ExpensesTable.js';
 import LoadingBar from 'react-top-loading-bar'
+import ContractsData from './ContractsData';
 
 
 //Component responsible of showing info about a single Entity searched.
@@ -140,6 +141,7 @@ class DataPage extends React.Component{
 	}
 
 	render(){
+
 		
 		if (this.state.loading){
             return (<Loading/>);
@@ -166,14 +168,14 @@ class DataPage extends React.Component{
             return (
 				<div className="search-results">
 
-					<Header handleShareButton={this.handleShareButton} show_share_button={false} show_table_data={false} header_text="Valores Recebidos" handle_modal={this.handleOpenDataModal}/>
+					<Header handleShareButton={this.handleShareButton} show_share_button={false} show_table_data={false} header_text="Resumo de Despesas" handle_modal={this.handleOpenDataModal} dark_background={true}/>
 
 					<CreateCustomLink show={this.state.show_custom_link_modal} handleClose={this.handleCloseCLModal}/>
 
                     <LoadingBar
                         color='#009C3B'
                         progress={progress}
-                        height={12}
+                        height={8}
                         onLoaderFinished={() => {console.log("Finished loading.")}}
                     />
 
@@ -193,6 +195,7 @@ class DataPage extends React.Component{
 					/>
 
 					<ExpensesTable data={expenses_summary}/>
+                    <ContractsData dates={this.dates_to_search} entity_id={this.state.data[0]["Código Órgão Subordinado"]}/>
 
 				</div>
 			)

@@ -10,7 +10,7 @@ class About extends React.Component{
     render(){
         return(
             <div className="aboutPage">
-                <Header header_text="Sobre"/>
+                <Header header_text="Sobre" dark_background={true}/>
                 <div className="container">
                 <div className="pureText">
                     <p align="justify">

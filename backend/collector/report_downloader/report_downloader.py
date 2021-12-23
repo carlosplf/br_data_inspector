@@ -42,6 +42,7 @@ class ReportDownloader():
         time.sleep(1)
 
         self.reports_downloaded.append(zip_filename)
+        return zip_filename
 
     def extract_all_files(self):
         """
@@ -58,12 +59,29 @@ class ReportDownloader():
         for file in self.reports_downloaded:
             self.extract_file(file)
 
-    def extract_file(self, filename):
+    def extract_file(self, filename, extract_only_filename=None):
         """
         Extract a single ZIP file.
+        Args:
+            filename: (str) ZIP file name.
+            extract_only_filename: (str) if present, extract only this file
+                from ZIP.
+        Return:
+            The Name(s) of the file(s) extracted.
         """
+        logging.debug("Extracting file: " + filename)
+
+        all_files_inside = []
+        
         with zipfile.ZipFile(filename, 'r') as zip_ref:
-            zip_ref.extractall("./downloads")
+            if not extract_only_filename:
+                all_files_inside = zip_ref.namelist()
+                zip_ref.extractall("./downloads")
+            else:
+                all_files_inside = [extract_only_filename]
+                zip_ref.extract(extract_only_filename, "./downloads")
+
+        return all_files_inside
 
     def get_extracted_reports(self):
         """
