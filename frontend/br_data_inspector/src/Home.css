@@ -12,6 +12,7 @@ body, html {
 	display: flex;
 	flex-direction: column;
     align-items: center;
+    height: 100%;
 }
 
 #backgroundImage{
@@ -110,7 +111,7 @@ and (max-width : 1080px){
     }
     
     .pageTitle{
-        margin-top: 80px;
+        margin-top: 200px;
         font-size: 50px;
     }
 }

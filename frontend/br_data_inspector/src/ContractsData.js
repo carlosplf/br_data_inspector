@@ -29,22 +29,10 @@ class ContractsData extends React.Component{
 		}
 	}
 
-	//For each API response data, concatenate with already collected data in state.
-	processData(api_response){
-        if(api_response["data"].length === 0){
-            console.log("Empty!");
-        }
-		if (!this.state.data){
-			return api_response["data"];
-		}
-		return this.state.data.concat(api_response["data"]);
-	}
-
     //For each Contracts search (one search per month), append data.
     appendData(data_received){
         var new_data = this.state.data.concat(data_received);
-        this.setState({data: new_data});
-        console.log(this.state.data);
+        this.setState({data: new_data, loading: false});
     }
 
 	//Call Backend API and retrieve data about Entities
@@ -60,8 +48,11 @@ class ContractsData extends React.Component{
 	}
 
 	render(){
+        if(this.state.loading){
+            return <h1> Buscando dados de Contratos... </h1>
+        }
         if(this.state.data.length == 0){
-            return <h1> Loading... </h1>
+            return <h1> Sem contratos para o período. </h1>
         }
         else{
             return (

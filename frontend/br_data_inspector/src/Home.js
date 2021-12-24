@@ -32,13 +32,6 @@ class Home extends React.Component{
     api_url = process.env.REACT_APP_API_URL;
     api_port = process.env.REACT_APP_API_PORT;
 
-    //Simple method to remove an item from array.
-    removeDateFromList(date) {
-        return this.selected_dates.filter(function(ele){
-            return ele !== date;
-        });
-    }
-
     handleOnSelect = (item) => {
         this.setState({search_id: item["id"]});
     }
@@ -127,16 +120,12 @@ class Home extends React.Component{
             this.dates_url_param += new_param;
         });
         this.dates_url_param = this.dates_url_param.slice(0, -1);
+        console.log(this.dates_url_param);
     }
 
-    //Callback funtion from MonthPicker Component.
-    dateSelected = (cbs) => {
-        this.selected_dates = [];
-        cbs.forEach(item =>{
-            if(item["checked"]){
-                this.selected_dates.push(item["value"]);
-            }
-        })
+
+    receiveDatesList = (dates_list) => {
+        this.selected_dates = dates_list;
     }
 
     render(){
@@ -205,7 +194,11 @@ class Home extends React.Component{
                             handleOnSelect={this.handleOnSelectSecond}
                         />
                         <CompareButton handleCompareButton={this.handleCompareButton}/>
-                        <MonthPicker dateSelected={this.dateSelected}/>
+                        
+                        <MonthPicker
+                            receiveDatesList={this.receiveDatesList}
+                        />
+                        
                         <button id="search-btn" onClick={this.handleSearch}>Pesquisar</button>
                     </div>
                 </div>
