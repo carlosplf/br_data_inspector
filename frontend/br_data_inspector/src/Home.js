@@ -173,14 +173,13 @@ class Home extends React.Component{
                     />
                     
                     <div className="backgroundImageContainer">
-                        <img id="backgroundImage" src="home-background.jpg" alt="Background"/>
                     </div>
 
                     <div className="contentContainer">
 
                         <Header header_text="BR Data Collector - 0.0.1" handle_modal={this.handleOpenDataModal}/>
 
-                        <h2 className="pageTitle">Pesquisar por Órgão Subordinado:</h2>
+                        <h2 className="pageTitle">Pesquisar por Órgão Federal:</h2>
                         <SearchEntity
                             search_id="search_1"
                             show={true}
