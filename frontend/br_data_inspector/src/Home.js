@@ -114,6 +114,8 @@ class Home extends React.Component{
         this.items = items;
     }
 
+    // Based on the dates list received from MonthPicker,
+    // build the URL params to results page.
     buildTableDateParam(){
         this.selected_dates.map( single_date => {
             var new_param = single_date + "-";
@@ -123,12 +125,16 @@ class Home extends React.Component{
         console.log(this.dates_url_param);
     }
 
-
+    // Function passed as props to MonthPicker Component.
+    // MonthPicker call this function when two valid dates are
+    // selected.
     receiveDatesList = (dates_list) => {
         this.selected_dates = dates_list;
     }
 
     render(){
+       
+        // If true, we have results to show!
         if (this.state.show_results){
             this.buildTableDateParam();
             if(!this.state.compare){
@@ -142,17 +148,21 @@ class Home extends React.Component{
             );
         }
 
+        // First Load! No data, need to collect the list of entities
+        // to the search field autocomplete.
         if (this.state.first_load){
             this.getNamesList("Subordinado");
             this.setState({first_load: false});
         }
 
+        // Loading... Requesting entities list from API.
         if (this.state.loading){
             return(
                 <Loading/>
             )
         }
 
+        // Entities list collected, time to show the Home page.
         if(!this.first_load && !this.state.loading && !this.show_results){
             if (this.items.length == 0){
                 this.prepareItems("Subordinado");
