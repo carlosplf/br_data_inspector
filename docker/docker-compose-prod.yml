@@ -9,11 +9,10 @@ services:
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
       - /etc/ssl/certs:/etc/ssl/certs
+      - backend_log:/br_data_inspector/backend/logs
     depends_on:
       - mongo
       - redis
-    volumes:
-      - backend_log:/br_data_inspector/backend/logs
   
   frontend:
     build:
