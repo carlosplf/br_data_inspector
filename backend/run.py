@@ -19,7 +19,6 @@ log_handler = RotatingFileHandler(
     maxBytes=5*1024*1024,
     backupCount=1,
     encoding=None,
-    format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
     delay=0
 )
 
