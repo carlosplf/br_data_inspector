@@ -33,14 +33,14 @@ services:
       - DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
     command: ["redis-server", "--appendonly", "yes", "--save", "60"]
     ports:
-      - "6379:6379"
+      - "127.0.0.1:6379:6379"
     volumes:
       - redis_data:/data
   
   mongo:
     image: "mongo"
     ports:
-      - "27017:27017"
+      - "127.0.0.1:27017:27017"
     volumes:
       - mongo_data:/data/db
 
