@@ -5,8 +5,13 @@ from collector import collector
 from collector.data_processor import data_processor
 
 
+#Path running local
 LOG_FILE="./logs/br_data_collector_backend_log"
 
+#Path for docker container
+#LOG_FILE="/br_data_inspector/backend/logs/br_data_collector_backend_log"
+
+formatter = logging.Formatter('%(asctime)s  %(name)s  %(levelname)s: %(message)s')
 
 log_handler = RotatingFileHandler(
     LOG_FILE,
@@ -14,10 +19,12 @@ log_handler = RotatingFileHandler(
     maxBytes=5*1024*1024,
     backupCount=1,
     encoding=None,
+    format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
     delay=0
 )
 
 log_handler.setLevel(logging.DEBUG)
+log_handler.setFormatter(formatter)
 app_log = logging.getLogger()
 app_log.setLevel(logging.DEBUG)
 app_log.addHandler(log_handler)
