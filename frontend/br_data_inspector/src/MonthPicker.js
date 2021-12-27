@@ -139,8 +139,6 @@ class MonthPicker extends React.Component{
     }
 
     checkDates(){
-        console.log("Date 1: ", this.state.date_1);
-        console.log("Date 2: ", this.state.date_2);
         if(this.state.date_1 && this.state.date_2){
             if(this.state.date_1 < 0 || this.state.date_2 < 0){
                 console.log("Mês não selecionado");
