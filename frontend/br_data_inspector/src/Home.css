@@ -1,26 +1,23 @@
 body, html {
     height: 100%;
+    min-height: 100%;
 }
 
 .contentContainer{
+    background-image: url('./images/home-background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: auto;
     width: 100%;
     position: absolute;
     top: 0%;
     right: 0%;
-    background-color: rgba(0,0,0, 0.7);
     z-index: 2;
 	display: flex;
 	flex-direction: column;
     align-items: center;
-    height: 100%;
-}
-
-.backgroundImageContainer {
-    background-image: url('./images/home-background.jpg');
-    background-repeat: no-repeat;
-    min-height: 100%;
-    min-width: 1200px;
-    background-size:100% auto;
+    height: auto;
 }
 
 #backgroundImage{
@@ -72,13 +69,32 @@ body, html {
     color: #FFFFFF;
 }
 
+.helpCenter {
+    border-style: solid; 
+	border-radius: 4px;
+	border-width: 2px;
+    border-color: #FFF;
+	background-color: rgba(0,0,0,0.5);
+    color: #FFF;
+    padding: 10px;
+    width: 40%;
+    margin-bottom: 20px;
+}
+
+.helpCenter .topic{
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.helpCenter .info{
+    font-size: 20px;
+}
+
 @media only screen 
 and (max-width : 1080px){ 
 
-    .backgroundImageContainer {
-        background-image: url('./images/home-background-mobile.jpg');
-        min-height: 100%;
-        min-width: 800px;
+    .helpCenter {
+        width: 80%;
     }
 
     #backgroundImage{

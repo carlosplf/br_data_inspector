@@ -7,6 +7,7 @@ import Loading from './Loading';
 import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { FaAngleRight } from "react-icons/fa";
 import 'react-toastify/dist/ReactToastify.css';
 import './Home.css'
 
@@ -182,9 +183,6 @@ class Home extends React.Component{
                         pauseOnHover
                     />
                     
-                    <div className="backgroundImageContainer">
-                    </div>
-
                     <div className="contentContainer">
 
                         <Header header_text="BR Data Collector - 0.0.1" handle_modal={this.handleOpenDataModal}/>
@@ -209,6 +207,15 @@ class Home extends React.Component{
                         />
                         
                         <button id="search-btn" onClick={this.handleSearch}>Pesquisar</button>
+
+                        <div className="helpCenter">
+                            <p className="topic"> <FaAngleRight/> O que posso pesquisar?</p>
+                            <p className="info">Você pode pesquisar por qualquer Órgão FEDERAL.</p>
+                            <p className="info">Exemplo: Ministérios, Faculdades Federais, Polícia Federal, etc.</p>
+                            <p className="topic"> <FaAngleRight/> Quais dados o sistema me mostra?</p>
+                            <p className="info">Por enquanto, o sistema coleta e mostra dados de: Despesas, Licitações e Contratos.</p>
+                        </div>
+
                     </div>
                 </div>
             )
