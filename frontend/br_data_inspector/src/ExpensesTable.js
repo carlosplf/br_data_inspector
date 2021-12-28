@@ -50,7 +50,7 @@ class ExpensesTable extends React.Component{
         })
 
         var data_table = sorted_data_array.map(x => {
-            var share = parseFloat(x["Value"])/parseFloat(this.total_in_expenses);
+            var share = (parseFloat(x["Value"])/parseFloat(this.total_in_expenses))*100;
             share = share.toFixed(2);
 
             return(
