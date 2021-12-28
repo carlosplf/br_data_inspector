@@ -139,7 +139,7 @@ class DataPage extends React.Component{
 						handle_modal={this.handleOpenDataModal}
 						dark_background={true}
 					/>
-                    <h1> Oops, sem dados para o período :( </h1>
+                    <h1> Ops, sem dados para o período :( </h1>
                 </div>
             )
         }
