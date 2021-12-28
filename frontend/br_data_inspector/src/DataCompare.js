@@ -8,7 +8,8 @@ import './DataCompare.css';
 import CreateCustomLink from './CreateCustomLink.js';
 import ExpensesTable from './ExpensesTable.js';
 import queryString from 'query-string';
-import LoadingBar from 'react-top-loading-bar'
+import LoadingBar from 'react-top-loading-bar';
+import ContractsData from './ContractsData';
 
 
 class DataCompare extends React.Component{
@@ -241,6 +242,19 @@ class DataCompare extends React.Component{
                         <ExpensesTable entity_name={this.state.data1[0]["Nome Órgão Subordinado"]} data={this.state.data1}/>
                         <ExpensesTable entity_name={this.state.data2[0]["Nome Órgão Subordinado"]} data={this.state.data2}/>
                     </div>
+
+					<div className="contractsContainer">
+						<ContractsData
+							dates={this.dates_to_search}
+							entity_id={this.state.data1[0]["Código Órgão Subordinado"]}
+							entity_name={this.state.data1[0]["Nome Órgão Subordinado"]}
+						/>
+						<ContractsData
+							dates={this.dates_to_search}
+							entity_id={this.state.data2[0]["Código Órgão Subordinado"]}
+							entity_name={this.state.data2[0]["Nome Órgão Subordinado"]}
+						/>
+					</div>
 				</div>
 			)
 		}

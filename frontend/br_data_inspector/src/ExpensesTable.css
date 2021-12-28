@@ -19,6 +19,14 @@
     border: 1px solid black;
 }
 
+.expensesTable{
+    width: 80%;
+}
+
+.expensesTable table{
+    width: 100%;
+}
+
 .nameColumn{
     min-width: 400px;
 }

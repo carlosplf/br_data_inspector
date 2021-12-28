@@ -61,7 +61,10 @@ class ContractsData extends React.Component{
 
         else{
             return (
-                <div className="contracts">
+                <div className="contractsBlock">
+					<h1> Contratos assinados no período: </h1>
+                	<p id="clickToExpand">(clique na linha para expandir)</p>
+					<h3 id="entityName">{this.props.entity_name}</h3>
                     <ContractsTable contracts_data={this.state.data}/>
                 </div>
             );

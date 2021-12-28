@@ -1,23 +1,14 @@
-.contractsBlock  {
-    border-radius: 10px;
-  	background: #282828;
-    color: #FFF;
-  	width: 100%;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
 #clickToExpand{
     margin-top: -20px;
     margin-bottom: 60px;
 }
 
-.contractsTable{
+.contractsTableContainer{
     width: 80%;
+}
+
+.contractsTable{
+    width: 100%;
 }
 
 .contractsTable table{
@@ -63,11 +54,6 @@
 
 @media only screen 
 and (max-width : 1080px){ 
-    .contractsBlock  {
-        margin-top: 60px;
-        font-size: 14px;
-    }
-
     .contractsTable tr {
         font-size: 20px;
     }

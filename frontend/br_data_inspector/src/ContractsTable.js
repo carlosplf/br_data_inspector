@@ -29,6 +29,7 @@ class ContractsTable extends React.Component{
             new_all_contracts.push(item);
         });
 
+        //Sort the contracts data.
         var sorted_contracts_array = new_all_contracts.sort((a, b) => {
             return parseFloat(b["Valor Final Compra"]) - parseFloat(a["Valor Final Compra"])
         });
@@ -113,9 +114,7 @@ class ContractsTable extends React.Component{
         const full_table = this.buildTable(allItemRows);
 
         return (
-            <div className="contractsBlock">
-                <h1> Contratos assinados no período: </h1>
-                <p id="clickToExpand">(clique na linha para expandir)</p>
+            <div className="contractsTableContainer">
                 {full_table}
             </div>
         );
