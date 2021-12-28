@@ -124,7 +124,6 @@ class DataPage extends React.Component{
 
 	render(){
 
-		
 		if (this.state.loading){
             return (<Loading/>);
 		}
@@ -132,7 +131,14 @@ class DataPage extends React.Component{
         else if (this.state.data.length === 0){
 			return(
 				<div className="search-results">
-                    <Header handleShareButton={this.handleShareButton} show_share_button={true} show_table_data={false} header_text="Resumo de Despesas" handle_modal={this.handleOpenDataModal}/>
+                    <Header 
+						handleShareButton={this.handleShareButton}
+						show_share_button={true}
+						show_table_data={false}
+						header_text="Resumo de Despesas"
+						handle_modal={this.handleOpenDataModal}
+						dark_background={true}
+					/>
                     <h1> Oops, sem dados para o período :( </h1>
                 </div>
             )
@@ -144,7 +150,14 @@ class DataPage extends React.Component{
             return (
 				<div className="search-results">
 
-					<Header handleShareButton={this.handleShareButton} show_share_button={false} show_table_data={false} header_text="Resumo de Despesas" handle_modal={this.handleOpenDataModal} dark_background={true}/>
+					<Header
+						handleShareButton={this.handleShareButton}
+						show_share_button={false}
+						show_table_data={false}
+						header_text="Resumo de Despesas"
+						handle_modal={this.handleOpenDataModal}
+						dark_background={true}
+					/>
 
 					<CreateCustomLink show={this.state.show_custom_link_modal} handleClose={this.handleCloseCLModal}/>
 
