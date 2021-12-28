@@ -28,7 +28,6 @@ class ContractsTable extends React.Component{
         this.props.contracts_data.forEach(item => {
             item["ID"] = item["Número Licitação"] + Math.random().toString(16).slice(4)
             new_all_contracts.push(item);
-            console.log(item);
         });
 
         this.setState({all_contracts: new_all_contracts, ids_created: true});
@@ -113,7 +112,7 @@ class ContractsTable extends React.Component{
         return (
             <div className="contractsBlock">
                 <h1> Contratos assinados no período: </h1>
-                <p id="clickToExpand">(clique para expandir)</p>
+                <p id="clickToExpand">(clique na linha para expandir)</p>
                 {full_table}
             </div>
         );

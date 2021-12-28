@@ -20,11 +20,24 @@
 }
 
 .nameColumn{
-    width: 600px;
+    min-width: 400px;
 }
 
 .idColumn{
-    width: 60px;
+    min-width: 60px;
+}
+
+.valueColumn{
+    min-width: 120px;
+}
+
+.expensesBlock h3{
+    margin-top: -10px;
+}
+
+.shareColumn {
+    min-width: 80px;
+    text-align: right;
 }
 
 @media only screen 

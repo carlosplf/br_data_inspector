@@ -6,6 +6,7 @@ import Header from './Header';
 import Loading from './Loading';
 import './DataCompare.css';
 import CreateCustomLink from './CreateCustomLink.js';
+import ExpensesTable from './ExpensesTable.js';
 import queryString from 'query-string';
 import LoadingBar from 'react-top-loading-bar'
 
@@ -133,7 +134,6 @@ class DataCompare extends React.Component{
 		*/
         var base_url = this.api_url + ":" + this.api_port;
 		var request_url = base_url + "/" + this.props.entity_type.toLowerCase() + "/" + month_date + "/" + entity_id;
-		console.log(request_url);
 		fetch(request_url)
 			.then(response => response.json())
 			.then(data => {
@@ -180,6 +180,7 @@ class DataCompare extends React.Component{
 	}
 
 	render(){
+
         if (this.state.loading){
 			return (<Loading/>);
 		}
@@ -200,7 +201,7 @@ class DataCompare extends React.Component{
             return (
 				<div className="Search-Results">
 
-					<Header handleShareButton={this.handleShareButton} show_share_button={false} header_text="Comparação de Recebedores" handle_modal={this.handleOpenDataModal} dark_background={true}/>
+					<Header handleShareButton={this.handleShareButton} show_share_button={false} header_text="Comparação entre Instituições" handle_modal={this.handleOpenDataModal} dark_background={true}/>
 
                     <CreateCustomLink show={this.state.show_custom_link_modal} handleClose={this.handleCloseCLModal}/>
                     
@@ -222,7 +223,12 @@ class DataCompare extends React.Component{
 						all_transactions_data_1={this.state.data1}
 						all_transactions_data_2={this.state.data2}
 						selected_dates={this.dates_to_search}
-					/>
+                    />
+
+                    <div className="expensesContainer"> 
+                        <ExpensesTable entity_name={this.state.data1[0]["Nome Órgão Subordinado"]} data={this.state.data1}/>
+                        <ExpensesTable entity_name={this.state.data2[0]["Nome Órgão Subordinado"]} data={this.state.data2}/>
+                    </div>
 				</div>
 			)
 		}

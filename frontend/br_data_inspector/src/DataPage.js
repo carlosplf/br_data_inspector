@@ -110,24 +110,6 @@ class DataPage extends React.Component{
 			});
 	}
 
-	//Using the data from API, calculate the biggest expenses.
-	buildExpensesDict(){
-		var expenses_summary = {}
-		this.state.data.forEach(single_line => {
-			var previous_total_value = 0;
-			if (expenses_summary[single_line["Código Elemento de Despesa"]]){
-				//Project already with a value. Should sum values.
-				previous_total_value = parseFloat(expenses_summary[single_line["Código Elemento de Despesa"]]["Valor Pago"]);
-			}
-			var new_entry = {
-				"Nome": single_line["Nome Elemento de Despesa"],
-				"Valor Pago": parseFloat(single_line["Valor Pago (R$)"]) + previous_total_value
-			}
-			expenses_summary[single_line["Código Elemento de Despesa"]] = new_entry
-		});
-		return expenses_summary;
-	}
-
 	selectedDates(){
 		return this.dates_to_search.map(d => {
 			return <spam> {d} </spam>
@@ -150,19 +132,13 @@ class DataPage extends React.Component{
         else if (this.state.data.length === 0){
 			return(
 				<div className="search-results">
-                    <Header handleShareButton={this.handleShareButton} show_share_button={true} show_table_data={false} header_text="Valores Recebidos" handle_modal={this.handleOpenDataModal}/>
+                    <Header handleShareButton={this.handleShareButton} show_share_button={true} show_table_data={false} header_text="Resumo de Despesas" handle_modal={this.handleOpenDataModal}/>
                     <h1> Oops, sem dados para o período :( </h1>
                 </div>
             )
         }
 		
 		else{
-			const expenses_summary = this.buildExpensesDict();
-
-			const header_text = "RECEBEDOR: " + this.state.data[0]["Nome Órgão Subordinado"];
-			//TODO: Check if Modal content is nof loading even when Modal is not showing.
-
-            // Define progress for ProgressBar. <number_of_requests>/<total_requests_to_do>
             const progress = 100*(this.state.all_requests/this.dates_to_search.length);
 			
             return (
@@ -194,7 +170,11 @@ class DataPage extends React.Component{
 						selected_dates={this.dates_to_search}
 					/>
 
-					<ExpensesTable data={expenses_summary}/>
+                    <ExpensesTable
+                        entity_name={this.state.data[0]["Nome Órgão Subordinado"]}
+                        data={this.state.data}
+                    />
+                        
                     <ContractsData dates={this.dates_to_search} entity_id={this.state.data[0]["Código Órgão Subordinado"]}/>
 
 				</div>
