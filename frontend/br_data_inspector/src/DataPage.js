@@ -72,7 +72,6 @@ class DataPage extends React.Component{
 		const entity_id = value.id;
 		this.entity_id = entity_id;
 		this.dates_to_search = value.dates.split("-");
-		console.log("Dates got from URL params: " + this.dates_to_search);
 	}
 
 	//Sum data from table lines, building a data summary dict.

@@ -23,14 +23,17 @@ class ContractsTable extends React.Component{
 
     //For all contracts, create a unique ID for each one.
     createUniqueID(){
-
         var new_all_contracts = [];
         this.props.contracts_data.forEach(item => {
             item["ID"] = item["Número Licitação"] + Math.random().toString(16).slice(4)
             new_all_contracts.push(item);
         });
 
-        this.setState({all_contracts: new_all_contracts, ids_created: true});
+        var sorted_contracts_array = new_all_contracts.sort((a, b) => {
+            return parseFloat(b["Valor Final Compra"]) - parseFloat(a["Valor Final Compra"])
+        });
+
+        this.setState({all_contracts: sorted_contracts_array, ids_created: true});
     }
     
     handleRowClick(rowId) {
@@ -97,8 +100,8 @@ class ContractsTable extends React.Component{
 
     render() {
         let allItemRows = [];
-            
-        if(!this.state.ids_created){
+
+        if(!this.state.ids_created || this.state.all_contracts.length != this.props.contracts_data.length){
             this.createUniqueID();
         }
 

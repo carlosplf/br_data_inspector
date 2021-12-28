@@ -13,7 +13,8 @@ class ContractsData extends React.Component{
 		this.state = {
 			loading: true, 
 			data: [],
-			data_keys: []
+			data_keys: [],
+			requests_done: 0
 		};
 	}
 
@@ -32,7 +33,8 @@ class ContractsData extends React.Component{
     //For each Contracts search (one search per month), append data.
     appendData(data_received){
         var new_data = this.state.data.concat(data_received);
-        this.setState({data: new_data, loading: false});
+		var requests_done = this.state.requests_done + 1;
+        this.setState({data: new_data, loading: false, requests_done: requests_done});
     }
 
 	//Call Backend API and retrieve data about Entities
@@ -48,12 +50,15 @@ class ContractsData extends React.Component{
 	}
 
 	render(){
-        if(this.state.loading){
-            return <h1> Buscando dados de Contratos... </h1>
+        
+		if(this.state.loading || (this.state.requests_done < (this.props.dates.length - 1))){
+			return <h1> Buscando dados de Contratos... </h1>
         }
+
         if(this.state.data.length == 0){
             return <h1> Sem contratos para o período. </h1>
         }
+
         else{
             return (
                 <div className="contracts">
