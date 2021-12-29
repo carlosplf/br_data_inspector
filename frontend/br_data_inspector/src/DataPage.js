@@ -157,7 +157,7 @@ class DataPage extends React.Component{
 
 		const heavy_search = ((this.dates_to_search.length >= 6) ? true : false);
 
-		if (true){
+		if (this.state.loading){
             return (<Loading heavy_search={heavy_search}/>);
 		}
 
