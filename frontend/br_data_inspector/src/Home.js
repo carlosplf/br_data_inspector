@@ -9,8 +9,14 @@ import { withRouter } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { FaAngleRight } from "react-icons/fa";
 import 'react-toastify/dist/ReactToastify.css';
-import './Home.css'
+import './Home.css';
+import TagManager from 'react-gtm-module'
 
+const tagManagerArgs = {
+    gtmId: 'GTM-58D9KMC'
+}
+
+TagManager.initialize(tagManagerArgs)
 
 
 class Home extends React.Component{
