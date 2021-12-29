@@ -192,7 +192,7 @@ class Home extends React.Component{
 
                     <div className="contentContainer">
 
-                        <Header header_text="BR Data Collector - 0.0.1" handle_modal={this.handleOpenDataModal}/>
+                        <Header header_text="BR Data Collector - 0.1" handle_modal={this.handleOpenDataModal}/>
 
                         <div className="titleContainer">
                             <span className="pageTitle">Pesquisar por: </span>
