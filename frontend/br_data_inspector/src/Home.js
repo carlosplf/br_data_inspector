@@ -10,7 +10,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import { FaAngleRight } from "react-icons/fa";
 import 'react-toastify/dist/ReactToastify.css';
 import './Home.css';
-import TagManager from 'react-gtm-module'
+import TagManager from 'react-gtm-module';
+import Typing from 'react-typing-animation';
+
 
 const tagManagerArgs = {
     gtmId: 'GTM-58D9KMC'
@@ -190,9 +192,24 @@ class Home extends React.Component{
 
                     <div className="contentContainer">
 
-                        <Header header_text="BR Data Collector - 0.0.1" handle_modal={this.handleOpenDataModal}/>
+                        <Header header_text="BR Data Collector - 0.1" handle_modal={this.handleOpenDataModal}/>
 
-                        <h2 className="pageTitle">Pesquisar por Órgão Federal:</h2>
+                        <div className="titleContainer">
+                            <span className="pageTitle">Pesquisar por: </span>
+                            <Typing hideCursor={true} speed={30}>
+                                <div>
+                                    <span className="pageTitleSpam">Ministério da Saúde.</span>
+                                    <Typing.Backspace delay={1000} count={22} />
+                                    <span className="pageTitleSpam">Ministério da Economia.</span>
+                                    <Typing.Backspace delay={1000} count={24} />
+                                    <span className="pageTitleSpam">Comando do Exército.</span>\
+                                    <Typing.Backspace delay={1000} count={24} />
+                                    <span className="pageTitleSpam">Universidade Federal de São Carlos.</span>
+                                    <Typing.Backspace delay={1000} count={36} />
+                                    <span className="pageTitleSpam">Agência Espacial Brasileira.</span>
+                                </div>
+                            </Typing>
+                        </div>
                         <SearchEntity
                             search_id="search_1"
                             show={true}

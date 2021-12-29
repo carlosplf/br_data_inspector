@@ -204,8 +204,10 @@ class DataCompare extends React.Component{
 
 	render(){
 
-        if (this.state.loading){
-			return (<Loading/>);
+		const heavy_search = ((this.dates_to_search.length >= 6) ? true : false);
+
+		if (this.state.loading){
+            return (<Loading heavy_search={heavy_search}/>);
 		}
 
         else if (this.state.data1.length === 0 || this.state.data2.length === 0){

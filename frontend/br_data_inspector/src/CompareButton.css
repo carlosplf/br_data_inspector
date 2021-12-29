@@ -12,8 +12,8 @@
 	cursor: pointer;
 }
 
-@media only screen 
-and (max-width : 1080px){ 
+@media only screen
+and (max-width : 1080px){
     #compare-btn{
         font-size: 40px;
     }
