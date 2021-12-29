@@ -12,7 +12,7 @@ class MonthPicker extends React.Component{
             date_2: null
         };
     }
-    
+
     possible_dates = [
         {
             'array_position': -1,
@@ -133,7 +133,7 @@ class MonthPicker extends React.Component{
     firstMonthSelected = (event) => {
         this.setState({date_1: parseInt(event.target.value)});
     }
-    
+
     secondMonthSelected = (event) => {
         this.setState({date_2: parseInt(event.target.value)});
     }
@@ -145,7 +145,6 @@ class MonthPicker extends React.Component{
                 return;
             }
             if(this.state.date_1 < this.state.date_2){
-                console.log("Process dates!");
                 this.buildDatesArray();
             }
             else{
@@ -163,7 +162,7 @@ class MonthPicker extends React.Component{
     }
 
     buildMonthList(){
-        
+
         var month_list = this.possible_dates.map(item => {
             return(
                 <option value={item["array_position"]}>{item["month"]} {item["year"]}</option>
@@ -174,7 +173,7 @@ class MonthPicker extends React.Component{
     }
 
     render(){
-        
+
         const month_list = this.buildMonthList();
 
         this.checkDates();
@@ -202,4 +201,4 @@ class MonthPicker extends React.Component{
     }
 }
 
-export default withRouter(MonthPicker); 
+export default withRouter(MonthPicker);

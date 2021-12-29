@@ -41,7 +41,7 @@ class DataSummary extends React.Component{
     processDates(){
         var dates_list = this.props.dates.map( (d) => {
             return(
-                <spam key={d.slice(-2)} className="monthSelected"> {this.date_map[d]} </spam>
+                <spam key={d} className="monthSelected"> {this.date_map[d]} </spam>
             )
         })
         return dates_list;
@@ -52,7 +52,12 @@ class DataSummary extends React.Component{
         return(
             <div className="data-summary">
                 <h2>{this.props.name}</h2>
-                <spam className="monthsList" style={{fontWeight:'bold'}}>Meses selecionados: {dates_list}</spam>
+                <div className="monthsListLabel">
+                    <p id="monthsSelectedLabel">Meses selecionados:</p>
+                    <div className="listMonthsSelected">
+                        {dates_list}
+                    </div>
+                </div>
                 <h3>Valores gastos no período:</h3>
                 {this.props.data_keys.map(key => (
                     <p key={key}>{key}: { this.formatNumbers(this.props.values_summary[key])}</p>

@@ -123,7 +123,6 @@ class Home extends React.Component{
             this.dates_url_param += new_param;
         });
         this.dates_url_param = this.dates_url_param.slice(0, -1);
-        console.log(this.dates_url_param);
     }
 
     // Function passed as props to MonthPicker Component.
@@ -134,7 +133,7 @@ class Home extends React.Component{
     }
 
     render(){
-       
+
         // If true, we have results to show!
         if (this.state.show_results){
             this.buildTableDateParam();
@@ -170,7 +169,7 @@ class Home extends React.Component{
             }
             return(
                 <div className="govdata-home">
-                    
+
                     <ToastContainer
                         position="top-right"
                         autoClose={5000}
@@ -182,7 +181,7 @@ class Home extends React.Component{
                         draggable
                         pauseOnHover
                     />
-                    
+
                     <div className="contentContainer">
 
                         <Header header_text="BR Data Collector - 0.0.1" handle_modal={this.handleOpenDataModal}/>
@@ -201,11 +200,11 @@ class Home extends React.Component{
                             handleOnSelect={this.handleOnSelectSecond}
                         />
                         <CompareButton handleCompareButton={this.handleCompareButton}/>
-                        
+
                         <MonthPicker
                             receiveDatesList={this.receiveDatesList}
                         />
-                        
+
                         <button id="search-btn" onClick={this.handleSearch}>Pesquisar</button>
 
                         <div className="helpCenter">
