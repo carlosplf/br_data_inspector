@@ -10,6 +10,9 @@ __pycache__/
 # C extensions
 *.so
 
+#Dev Docker volumes
+docker/volumes/*
+
 #Downloaded files
 ./downloads/*
 ./*.zip
