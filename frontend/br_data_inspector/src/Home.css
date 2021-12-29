@@ -1,18 +1,23 @@
 body, html {
     height: 100%;
+    min-height: 100%;
 }
 
 .contentContainer{
+    background-image: url('./images/home-background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: auto;
     width: 100%;
-    height: 100%;
     position: absolute;
     top: 0%;
     right: 0%;
-    background-color: rgba(0,0,0, 0.7);
     z-index: 2;
 	display: flex;
 	flex-direction: column;
     align-items: center;
+    height: auto;
 }
 
 #backgroundImage{
@@ -36,7 +41,7 @@ body, html {
 	border-width: 0px;
 	height: 50px;
     margin-top: 30px;
-    width: 40%;
+    width: 20%;
     margin-bottom: 80px;
 }
 
@@ -64,17 +69,46 @@ body, html {
     color: #FFFFFF;
 }
 
+.helpCenter {
+    border-style: solid; 
+	border-radius: 4px;
+	border-width: 2px;
+    border-color: #FFF;
+	background-color: rgba(0,0,0,0.5);
+    color: #FFF;
+    padding: 10px;
+    width: 40%;
+    margin-bottom: 20px;
+}
+
+.helpCenter .topic{
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.helpCenter .info{
+    font-size: 20px;
+}
+
 @media only screen 
 and (max-width : 1080px){ 
+
+    .helpCenter {
+        width: 80%;
+    }
+
     #backgroundImage{
         min-height: 100%;
         
         width: 100%;
-        height: ;
         
         position: center;
         top: 0;
         left: 0;
+    }
+    .contentContainer{
+        height: 100%;
+        width: 100%;
     }
 
     .month-picker table{
@@ -109,7 +143,7 @@ and (max-width : 1080px){
     }
     
     .pageTitle{
-        margin-top: 80px;
+        margin-top: 200px;
         font-size: 50px;
     }
 }

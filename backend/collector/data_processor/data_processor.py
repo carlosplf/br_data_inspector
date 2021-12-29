@@ -5,6 +5,7 @@ from collector.db_connector import db_connector
 from collector.db_connector import redis_connector
 from collector.data_inspector import data_inspector
 
+EXPENSES_DB_NAME = "expenses-data"
 
 class DataProcessor():
     def __init__(self):
@@ -136,7 +137,7 @@ class DataProcessor():
     def __connect_mongo(self):
         logging.debug("Connecting Mongo DB")
         self.db_connector = db_connector.DbConnector()
-        self.db_connector.connect()
+        self.db_connector.connect(EXPENSES_DB_NAME)
         logging.debug("DONE")
 
     def __connect_redis(self, db=1):

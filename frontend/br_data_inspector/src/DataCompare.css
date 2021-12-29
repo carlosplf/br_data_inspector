@@ -14,6 +14,29 @@
     width: 2%;
 }
 
+.expensesContainer{
+    width: 90%;
+    margin-top: 10px;
+}
+
+.expensesContainer .expensesBlock{
+    width: 100%;
+    margin-right: 10px;
+}
+
+.expensesBlock h1{
+    text-align: center;
+}
+
+.valueColumn{
+    width: 28%;
+    text-align: right;
+}
+
 #summary2{
     margin-left: 100px;
+}
+
+.contractsContainer{
+    width: 90%;
 }

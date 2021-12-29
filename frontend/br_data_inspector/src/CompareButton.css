@@ -1,5 +1,5 @@
 #compare-btn{
-	font-size: 1.6em;
+	font-size: 20px;
 	margin-top: 60px;
 	color: #202020;
 	background-color: #CCC;
@@ -10,4 +10,11 @@
 #compare-btn:hover{
 	background-color: #DDD;
 	cursor: pointer;
+}
+
+@media only screen 
+and (max-width : 1080px){ 
+    #compare-btn{
+        font-size: 40px;
+    }
 }

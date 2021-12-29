@@ -23,8 +23,6 @@ class App extends React.Component {
   }
 
   render(){
-    console.log("URL: ", process.env.REACT_APP_API_URL);
-    console.log("PORT: ", process.env.REACT_APP_API_PORT);
     return(
       <Router>
         <Switch>

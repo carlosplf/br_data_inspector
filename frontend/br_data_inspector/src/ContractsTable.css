@@ -1,0 +1,60 @@
+#clickToExpand{
+    margin-top: -20px;
+    margin-bottom: 60px;
+}
+
+.contractsTableContainer{
+    width: 80%;
+}
+
+.contractsTable{
+    width: 100%;
+}
+
+.contractsTable table{
+    width: 100%;
+    color: #fff;
+    padding-bottom: 20px;
+    font-size: 1.2em;
+}
+
+.normalTR td:hover{
+    cursor: pointer;
+    background-color: #606060;
+}
+
+.normalTR{
+    background-color: #363636;
+    height: 30px;
+}
+
+.expandedRow {
+    width: 100%;
+}
+
+.moreInfo{
+    border-radius: 10px;
+    background-color: #EEE;
+    color: #222;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 0.8em;
+}
+
+.columnValor{
+    text-align: end;
+    width: 24%;
+}
+
+.columnLicitacao{
+    width: 20%;
+}
+
+@media only screen 
+and (max-width : 1080px){ 
+    .contractsTable tr {
+        font-size: 20px;
+    }
+}

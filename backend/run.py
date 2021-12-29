@@ -1,9 +1,33 @@
 import logging
 import argparse
+from logging.handlers import RotatingFileHandler
 from collector import collector
 from collector.data_processor import data_processor
 
-logging.basicConfig(level=logging.DEBUG)
+
+#Path running local
+LOG_FILE="./logs/br_data_collector_backend_log"
+
+#Path for docker container
+#LOG_FILE="/br_data_inspector/backend/logs/br_data_collector_backend_log"
+
+formatter = logging.Formatter('%(asctime)s  %(name)s  %(levelname)s: %(message)s')
+
+log_handler = RotatingFileHandler(
+    LOG_FILE,
+    mode='a',
+    maxBytes=5*1024*1024,
+    backupCount=1,
+    encoding=None,
+    delay=0
+)
+
+log_handler.setLevel(logging.DEBUG)
+log_handler.setFormatter(formatter)
+app_log = logging.getLogger()
+app_log.setLevel(logging.DEBUG)
+app_log.addHandler(log_handler)
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-cl", "--createlists",
@@ -42,6 +66,7 @@ if args.createlists:
 
 if args.collect:
     call_collector()
+
 
 if args.update:
     call_updater()

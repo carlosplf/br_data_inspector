@@ -11,6 +11,7 @@ import "./DataPage.css";
 import CreateCustomLink from './CreateCustomLink.js';
 import ExpensesTable from './ExpensesTable.js';
 import LoadingBar from 'react-top-loading-bar'
+import ContractsData from './ContractsData';
 
 
 //Component responsible of showing info about a single Entity searched.
@@ -18,7 +19,7 @@ class DataPage extends React.Component{
 	constructor(props) {
 		super(props);
 		this.state = {
-			loading: true, 
+			loading: true,
 			data: undefined,
 			show_modal: false,
 			show_custom_link_modal: false,
@@ -37,8 +38,9 @@ class DataPage extends React.Component{
 
 	entity_id = 0;
 	dates_to_search = [];
+	batch_request_size = 2;
     api_url = process.env.REACT_APP_API_URL;
-    api_port = process.env.REACT_APP_API_PORT; 
+    api_port = process.env.REACT_APP_API_PORT;
 
 	handleOpenDataModal = () => {
 		this.setState({ show_modal: true });
@@ -58,9 +60,33 @@ class DataPage extends React.Component{
 		this.getURLParams();
 		if (!this.state.data && this.entity_id !== ''){
 			this.setState({loading: true});
-			this.dates_to_search.forEach(single_date =>{
-				this.requestDataFromAPI(single_date);
-			})
+			this.doBatchRequests();
+		}
+	}
+
+	async doBatchRequests(){
+		var all_promises = [];
+		var month_date = "";
+
+		for(var i=0; i<this.dates_to_search.length; i++){
+			all_promises = [];
+
+			for (var j=0; j<this.batch_request_size; j++){
+
+				if(!this.dates_to_search[j+i]){
+					break;
+				}
+
+				month_date = this.dates_to_search[j+i];
+
+				//For each month_date iteration step, request data for Entity 1 and 2.
+				all_promises.push(this.requestDataFromAPI(month_date))
+
+				i += j;
+			};
+
+			//Wait a batch of requests to finish.
+			await Promise.all(all_promises);
 		}
 	}
 
@@ -71,11 +97,11 @@ class DataPage extends React.Component{
 		const entity_id = value.id;
 		this.entity_id = entity_id;
 		this.dates_to_search = value.dates.split("-");
-		console.log("Dates got from URL params: " + this.dates_to_search);
 	}
 
 	//Sum data from table lines, building a data summary dict.
-	sumData(){
+	sumData(data){
+		this.setState({ data: this.processData(data), loading: false, all_requests: this.state.all_requests + 1})
 		var all_sums = {};
 		this.state.data.forEach(single_line => {
 			this.state.data_keys.forEach(key => {
@@ -89,7 +115,7 @@ class DataPage extends React.Component{
 	//For each API response data, concatenate with already collected data in state.
 	processData(api_response){
         if(api_response["data"].length === 0){
-            console.log("Empty!");
+            console.log("Empty data. Skipping...");
         }
 		if (!this.state.data){
 			return api_response["data"];
@@ -101,30 +127,18 @@ class DataPage extends React.Component{
 	requestDataFromAPI(month_date){
 		var base_url = this.api_url + ":" + this.api_port;
 		var request_url = base_url + "/" + this.props.entity_type.toLowerCase() + "/" + month_date + "/" + this.entity_id;
-		fetch(request_url)
-			.then(response => response.json())
-			.then(data => {
-                this.setState({ data: this.processData(data), loading: false, all_requests: this.state.all_requests + 1})
-				this.sumData();
-			});
-	}
 
-	//Using the data from API, calculate the biggest expenses.
-	buildExpensesDict(){
-		var expenses_summary = {}
-		this.state.data.forEach(single_line => {
-			var previous_total_value = 0;
-			if (expenses_summary[single_line["Código Elemento de Despesa"]]){
-				//Project already with a value. Should sum values.
-				previous_total_value = parseFloat(expenses_summary[single_line["Código Elemento de Despesa"]]["Valor Pago"]);
-			}
-			var new_entry = {
-				"Nome": single_line["Nome Elemento de Despesa"],
-				"Valor Pago": parseFloat(single_line["Valor Pago (R$)"]) + previous_total_value
-			}
-			expenses_summary[single_line["Código Elemento de Despesa"]] = new_entry
-		});
-		return expenses_summary;
+		return new Promise((resolve, reject) => {
+			return fetch(request_url).then(response => response.json()).then(data => {
+				if (data) {
+					resolve(this.sumData(data))
+				} else {
+					reject(new Error('Request failed. Empty Data return.'))
+				}
+			}, error => {
+				reject(new Error('Request failed.'))
+			})
+		})
 	}
 
 	selectedDates(){
@@ -140,7 +154,7 @@ class DataPage extends React.Component{
 	}
 
 	render(){
-		
+
 		if (this.state.loading){
             return (<Loading/>);
 		}
@@ -148,32 +162,40 @@ class DataPage extends React.Component{
         else if (this.state.data.length === 0){
 			return(
 				<div className="search-results">
-                    <Header handleShareButton={this.handleShareButton} show_share_button={true} show_table_data={false} header_text="Valores Recebidos" handle_modal={this.handleOpenDataModal}/>
-                    <h1> Oops, sem dados para o período :( </h1>
+                    <Header
+						handleShareButton={this.handleShareButton}
+						show_share_button={true}
+						show_table_data={false}
+						header_text="Resumo de Despesas"
+						handle_modal={this.handleOpenDataModal}
+						dark_background={true}
+					/>
+                    <h1> Ops, sem dados para o período :( </h1>
                 </div>
             )
         }
-		
+
 		else{
-			const expenses_summary = this.buildExpensesDict();
-
-			const header_text = "RECEBEDOR: " + this.state.data[0]["Nome Órgão Subordinado"];
-			//TODO: Check if Modal content is nof loading even when Modal is not showing.
-
-            // Define progress for ProgressBar. <number_of_requests>/<total_requests_to_do>
             const progress = 100*(this.state.all_requests/this.dates_to_search.length);
-			
+
             return (
 				<div className="search-results">
 
-					<Header handleShareButton={this.handleShareButton} show_share_button={false} show_table_data={false} header_text="Valores Recebidos" handle_modal={this.handleOpenDataModal}/>
+					<Header
+						handleShareButton={this.handleShareButton}
+						show_share_button={false}
+						show_table_data={false}
+						header_text="Resumo de Despesas"
+						handle_modal={this.handleOpenDataModal}
+						dark_background={true}
+					/>
 
 					<CreateCustomLink show={this.state.show_custom_link_modal} handleClose={this.handleCloseCLModal}/>
 
                     <LoadingBar
                         color='#009C3B'
                         progress={progress}
-                        height={12}
+                        height={8}
                         onLoaderFinished={() => {console.log("Finished loading.")}}
                     />
 
@@ -185,14 +207,19 @@ class DataPage extends React.Component{
                         values_summary={this.state.values_summary}
                         data_keys={this.state.data_keys}
                     />
-                
+
 					<DataBarChart
 						data_keys={this.state.data_keys}
 						all_transactions_data={this.state.data}
 						selected_dates={this.dates_to_search}
 					/>
 
-					<ExpensesTable data={expenses_summary}/>
+                    <ExpensesTable
+                        entity_name={this.state.data[0]["Nome Órgão Subordinado"]}
+                        data={this.state.data}
+                    />
+
+                    <ContractsData dates={this.dates_to_search} entity_id={this.state.data[0]["Código Órgão Subordinado"]}/>
 
 				</div>
 			)

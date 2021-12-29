@@ -8,7 +8,7 @@ class DataUpdater():
     def __ini__(self):
         pass
 
-    def check_data_for_date(self, date="", threshold=0):
+    def check_data_for_date(self, date, db_name, threshold=0):
         """
         For a given date (str), check if we have data for that date.
         If we don't have it, we should search for it.
@@ -23,7 +23,7 @@ class DataUpdater():
         logging.debug(log_message)
 
         my_db = db_connector.DbConnector()
-        my_db.connect()
+        my_db.connect(db_name)
 
         my_dai = data_inspector.DataInspector(my_db)
         count_result = my_dai.get_count_for_date(date=date)

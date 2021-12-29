@@ -37,12 +37,12 @@ class DataBarChartComparison extends React.Component{
     }
 
 	graph_bar_colors = [
-        "#00bbff",
-        "#33ffd7",
-        "#ff9c33",
-        "#E86607",
-        "#047AFF",
-        "#D904FF"
+        "#E3F2FD",
+        "#90CAF9",
+        "#2196F3",
+        "#C8E6C9",
+        "#81C784",
+        "#43A047"
     ];
 
 	sumByMonth(entity_1_or_2, key){

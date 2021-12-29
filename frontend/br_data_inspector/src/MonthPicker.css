@@ -1,0 +1,72 @@
+.monthPicker1 {
+    margin-top: 20px;
+}
+
+.monthPicker1 select{
+    font-size: 1.2em;
+	border-radius: 6px;
+    height: 30px;
+    background-color: #fff;
+}
+
+.monthPicker2 {
+    margin-top: 20px;
+}
+
+.monthPicker2 select{
+    font-size: 1.2em;
+	border-radius: 6px;
+    height: 30px;
+    background-color: #fff;
+}
+
+.monthPickerLabel {
+    color: #fff;
+    font-size: 1.2em;
+}
+
+.monthSelector {
+    margin-top: 60px;
+}
+
+@media only screen 
+and (max-width : 1080px){
+    .monthPicker1 {
+        margin-top: 40px;
+    }
+
+    .monthPicker1 select{
+        font-size: 1.4em;
+        border-radius: 6px;
+        height: 40px;
+        background-color: #fff;
+    }
+    
+    .monthPicker1 option {
+        font-size: 0.8em;
+    }
+
+    .monthPicker2 {
+        margin-top: 40px;
+    }
+
+    .monthPicker2 select{
+        font-size: 1.4em;
+        border-radius: 6px;
+        height: 40px;
+        background-color: #fff;
+    }
+    
+    .monthPicker2 option {
+        font-size: 0.8em;
+    }
+
+    .monthPickerLabel {
+        color: #fff;
+        font-size: 1.4em;
+    }
+
+    .monthSelector {
+        margin-top: 60px;
+    }
+}

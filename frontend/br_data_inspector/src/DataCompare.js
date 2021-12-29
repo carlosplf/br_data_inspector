@@ -6,8 +6,10 @@ import Header from './Header';
 import Loading from './Loading';
 import './DataCompare.css';
 import CreateCustomLink from './CreateCustomLink.js';
+import ExpensesTable from './ExpensesTable.js';
 import queryString from 'query-string';
-import LoadingBar from 'react-top-loading-bar'
+import LoadingBar from 'react-top-loading-bar';
+import ContractsData from './ContractsData';
 
 
 class DataCompare extends React.Component{
@@ -15,7 +17,7 @@ class DataCompare extends React.Component{
 	constructor(props) {
 		super(props);
 		this.state = {
-			loading: true, 
+			loading: true,
 			data1: undefined,
             data2: undefined,
 			values_summary1: {},
@@ -34,16 +36,16 @@ class DataCompare extends React.Component{
 
 	entity_id1 = 0;
     entity_id2 = 0;
+	batch_request_size = 2;
 	dates_to_search = [];
     api_url = process.env.REACT_APP_API_URL;
-    api_port = process.env.REACT_APP_API_PORT; 
+    api_port = process.env.REACT_APP_API_PORT;
 
 	componentDidMount(){
 		this.getURLParams();
 		if ((!this.state.data1) && (!this.state.data2) && (this.entity_id1 !== '') && (this.entity_id2 !== '')){
 			this.setState({loading: true});
-			//TODO: Need a better logic to collect from multiple dates.
-			this.requestDataFromAPI();
+			this.doBatchRequests();
 		}
 	}
 
@@ -55,21 +57,18 @@ class DataCompare extends React.Component{
         const entity_id2 = value.id2;
 		this.entity_id1 = entity_id1;
         this.entity_id2 = entity_id2;
-        console.log("ID 1: ", this.entity_id1);
-        console.log("ID 2: ", this.entity_id2);
 		this.dates_to_search = value.dates.split("-");
-		console.log("Dates got from URL params: " + this.dates_to_search);
 	}
 
 	sumData(data_slot){
 		//Sum data from table lines, building a data summary dict.
         //Now, for this Component, two data summary are created, one for each Entity searched.
 
-        //data_slot refers to 1st or 2nd Entity beeing compare.
+        //data_slot refers to 1st or 2nd Entity beeing compared.
 
         var all_sums = {};
 		var data_state = [];
-		
+
         if(data_slot === 1){
 			data_state = this.state.data1;
 		}
@@ -79,7 +78,7 @@ class DataCompare extends React.Component{
 		else{
 			return;
 		}
-		
+
         data_state.forEach(single_line => {
 			this.state.data_keys.forEach(key => {
 				if (!all_sums[key]) { all_sums[key] = 0; }
@@ -98,33 +97,35 @@ class DataCompare extends React.Component{
 
 	}
 
-	processData(api_response, data_slot){
-		//For each API response, concatenate with already collected data in state.
-		if(data_slot === 1){
-			if (!this.state.data1){
-				// There is no data yet collected for this Entity. Returning the request payload as first data.
-				return api_response["data"];
-			}
-			return this.state.data1.concat(api_response["data"]);
-		}
-		else{
-			if (!this.state.data2){
-				return api_response["data"];
-			}
-			return this.state.data2.concat(api_response["data"]);
-		}
-	}
+	async doBatchRequests(){
+		var all_promises = [];
+		var month_date = "";
 
-	requestDataFromAPI(){
-		//Call Backend API and retrieve data about Entities
-        this.dates_to_search.forEach(month_date =>{
-            this.doAPIRequest(this.entity_id1, 1, month_date);
-            this.doAPIRequest(this.entity_id2, 2, month_date);
-        });
+		for(var i=0; i<this.dates_to_search.length; i++){
+			all_promises = [];
+
+			for (var j=0; j<this.batch_request_size; j++){
+
+				if(!this.dates_to_search[j+i]){
+					break;
+				}
+
+				month_date = this.dates_to_search[j+i];
+
+				//For each month_date iteration step, request data for Entity 1 and 2.
+				all_promises.push(this.doAPIRequest(this.entity_id1, 1, month_date));
+				all_promises.push(this.doAPIRequest(this.entity_id2, 2, month_date));
+
+				i += j;
+			};
+
+			//Wait a batch of requests to finish.
+			await Promise.all(all_promises);
+		}
 	}
 
     doAPIRequest(entity_id, data_slot, month_date){
-		/* 
+		/*
 			Call the backend API to collect data from Database.
 			The payload response is processed and added to the State Data variable.
 
@@ -133,16 +134,21 @@ class DataCompare extends React.Component{
 		*/
         var base_url = this.api_url + ":" + this.api_port;
 		var request_url = base_url + "/" + this.props.entity_type.toLowerCase() + "/" + month_date + "/" + entity_id;
-		console.log(request_url);
-		fetch(request_url)
-			.then(response => response.json())
-			.then(data => {
-				this.saveData(data_slot, data);
-			});
+		return new Promise((resolve, reject) => {
+			return fetch(request_url).then(response => response.json()).then(data => {
+				if (data) {
+				resolve(this.saveData(data_slot, data))
+				} else {
+				reject(new Error('Request failed. Empty Data return.'))
+				}
+			}, error => {
+				reject(new Error('Request failed.'))
+			})
+		})
     }
 
     saveData(data_slot, data){
-		/*  
+		/*
 			Process data from API request and save to the right Data state.
 			Entity 1 is state.data1;
 			Entity 2 is state.data2;
@@ -163,6 +169,23 @@ class DataCompare extends React.Component{
         return;
     }
 
+	processData(api_response, data_slot){
+		//For each API response, concatenate with already collected data in state.
+		if(data_slot === 1){
+			if (!this.state.data1){
+				// There is no data yet collected for this Entity. Returning the request payload as first data.
+				return api_response["data"];
+			}
+			return this.state.data1.concat(api_response["data"]);
+		}
+		else{
+			if (!this.state.data2){
+				return api_response["data"];
+			}
+			return this.state.data2.concat(api_response["data"]);
+		}
+	}
+
 	selectedDates(){
 		return this.dates_to_search.map(d => {
 			return <spam> {d} </spam>
@@ -180,15 +203,22 @@ class DataCompare extends React.Component{
 	}
 
 	render(){
+
         if (this.state.loading){
 			return (<Loading/>);
 		}
-        
+
         else if (this.state.data1.length === 0 || this.state.data2.length === 0){
 			return(
 				<div className="search-results">
-					<Header handleShareButton={this.handleShareButton} show_share_button={true} header_text="Comparação de Recebedores" handle_modal={this.handleOpenDataModal}/>
-                    <h1> Oops, sem dados para o período :( </h1>
+					<Header
+						handleShareButton={this.handleShareButton}
+						show_share_button={true}
+						header_text="Comparação de Despesas"
+						handle_modal={this.handleOpenDataModal}
+						dark_background={true}
+					/>
+                    <h1> Ops, sem dados para o período :( </h1>
                 </div>
             )
         }
@@ -196,18 +226,24 @@ class DataCompare extends React.Component{
 		else{
             //Define progress for ProgressBar. <number_of_requests>/<total_requests_to_do>
             const progress = 100*(this.state.all_requests/(this.dates_to_search.length*2));
-			
+
             return (
 				<div className="Search-Results">
 
-					<Header handleShareButton={this.handleShareButton} show_share_button={true} header_text="Comparação de Recebedores" handle_modal={this.handleOpenDataModal}/>
+					<Header
+						handleShareButton={this.handleShareButton}
+						show_share_button={false}
+						header_text="Comparação entre Instituições"
+						handle_modal={this.handleOpenDataModal}
+						dark_background={true}
+					/>
 
                     <CreateCustomLink show={this.state.show_custom_link_modal} handleClose={this.handleCloseCLModal}/>
-                    
+
                     <LoadingBar
                         color='#009C3B'
                         progress={progress}
-                        height={12}
+                        height={8}
                         onLoaderFinished={() => {console.log("Finished loading.")}}
                     />
 
@@ -222,7 +258,25 @@ class DataCompare extends React.Component{
 						all_transactions_data_1={this.state.data1}
 						all_transactions_data_2={this.state.data2}
 						selected_dates={this.dates_to_search}
-					/>
+                    />
+
+                    <div className="expensesContainer">
+                        <ExpensesTable entity_name={this.state.data1[0]["Nome Órgão Subordinado"]} data={this.state.data1}/>
+                        <ExpensesTable entity_name={this.state.data2[0]["Nome Órgão Subordinado"]} data={this.state.data2}/>
+                    </div>
+
+					<div className="contractsContainer">
+						<ContractsData
+							dates={this.dates_to_search}
+							entity_id={this.state.data1[0]["Código Órgão Subordinado"]}
+							entity_name={this.state.data1[0]["Nome Órgão Subordinado"]}
+						/>
+						<ContractsData
+							dates={this.dates_to_search}
+							entity_id={this.state.data2[0]["Código Órgão Subordinado"]}
+							entity_name={this.state.data2[0]["Nome Órgão Subordinado"]}
+						/>
+					</div>
 				</div>
 			)
 		}

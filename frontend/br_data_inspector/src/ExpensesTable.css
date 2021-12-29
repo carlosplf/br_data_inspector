@@ -8,6 +8,7 @@
     flex-direction: column;
     align-items: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding-bottom: 20px;
 }
 
 .expensesBlock td{
@@ -18,12 +19,33 @@
     border: 1px solid black;
 }
 
+.expensesTable{
+    width: 80%;
+}
+
+.expensesTable table{
+    width: 100%;
+}
+
 .nameColumn{
-    width: 600px;
+    min-width: 400px;
 }
 
 .idColumn{
-    width: 60px;
+    min-width: 60px;
+}
+
+.valueColumn{
+    min-width: 120px;
+}
+
+.expensesBlock h3{
+    margin-top: -10px;
+}
+
+.shareColumn {
+    min-width: 80px;
+    text-align: right;
 }
 
 @media only screen 

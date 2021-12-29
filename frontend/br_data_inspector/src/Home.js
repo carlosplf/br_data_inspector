@@ -7,9 +7,16 @@ import Loading from './Loading';
 import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { FaAngleRight } from "react-icons/fa";
 import 'react-toastify/dist/ReactToastify.css';
-import './Home.css'
+import './Home.css';
+import TagManager from 'react-gtm-module'
 
+const tagManagerArgs = {
+    gtmId: 'GTM-58D9KMC'
+}
+
+TagManager.initialize(tagManagerArgs)
 
 
 class Home extends React.Component{
@@ -31,13 +38,6 @@ class Home extends React.Component{
     dates_url_param = "";
     api_url = process.env.REACT_APP_API_URL;
     api_port = process.env.REACT_APP_API_PORT;
-
-    //Simple method to remove an item from array.
-    removeDateFromList(date) {
-        return this.selected_dates.filter(function(ele){
-            return ele !== date;
-        });
-    }
 
     handleOnSelect = (item) => {
         this.setState({search_id: item["id"]});
@@ -121,6 +121,8 @@ class Home extends React.Component{
         this.items = items;
     }
 
+    // Based on the dates list received from MonthPicker,
+    // build the URL params to results page.
     buildTableDateParam(){
         this.selected_dates.map( single_date => {
             var new_param = single_date + "-";
@@ -129,17 +131,16 @@ class Home extends React.Component{
         this.dates_url_param = this.dates_url_param.slice(0, -1);
     }
 
-    //Callback funtion from MonthPicker Component.
-    dateSelected = (cbs) => {
-        this.selected_dates = [];
-        cbs.forEach(item =>{
-            if(item["checked"]){
-                this.selected_dates.push(item["value"]);
-            }
-        })
+    // Function passed as props to MonthPicker Component.
+    // MonthPicker call this function when two valid dates are
+    // selected.
+    receiveDatesList = (dates_list) => {
+        this.selected_dates = dates_list;
     }
 
     render(){
+
+        // If true, we have results to show!
         if (this.state.show_results){
             this.buildTableDateParam();
             if(!this.state.compare){
@@ -153,24 +154,28 @@ class Home extends React.Component{
             );
         }
 
+        // First Load! No data, need to collect the list of entities
+        // to the search field autocomplete.
         if (this.state.first_load){
             this.getNamesList("Subordinado");
             this.setState({first_load: false});
         }
 
+        // Loading... Requesting entities list from API.
         if (this.state.loading){
             return(
                 <Loading/>
             )
         }
 
+        // Entities list collected, time to show the Home page.
         if(!this.first_load && !this.state.loading && !this.show_results){
             if (this.items.length == 0){
                 this.prepareItems("Subordinado");
             }
             return(
                 <div className="govdata-home">
-                    
+
                     <ToastContainer
                         position="top-right"
                         autoClose={5000}
@@ -182,16 +187,12 @@ class Home extends React.Component{
                         draggable
                         pauseOnHover
                     />
-                    
-                    <div className="backgroundImageContainer">
-                        <img id="backgroundImage" src="home-background.jpg" alt="Background"/>
-                    </div>
 
                     <div className="contentContainer">
 
                         <Header header_text="BR Data Collector - 0.0.1" handle_modal={this.handleOpenDataModal}/>
 
-                        <h2 className="pageTitle">Pesquisar por Órgão Subordinado:</h2>
+                        <h2 className="pageTitle">Pesquisar por Órgão Federal:</h2>
                         <SearchEntity
                             search_id="search_1"
                             show={true}
@@ -205,8 +206,21 @@ class Home extends React.Component{
                             handleOnSelect={this.handleOnSelectSecond}
                         />
                         <CompareButton handleCompareButton={this.handleCompareButton}/>
-                        <MonthPicker dateSelected={this.dateSelected}/>
+
+                        <MonthPicker
+                            receiveDatesList={this.receiveDatesList}
+                        />
+
                         <button id="search-btn" onClick={this.handleSearch}>Pesquisar</button>
+
+                        <div className="helpCenter">
+                            <p className="topic"> <FaAngleRight/> O que posso pesquisar?</p>
+                            <p className="info">Você pode pesquisar por qualquer Órgão FEDERAL.</p>
+                            <p className="info">Exemplo: Ministérios, Faculdades Federais, Polícia Federal, etc.</p>
+                            <p className="topic"> <FaAngleRight/> Quais dados o sistema me mostra?</p>
+                            <p className="info">Por enquanto, o sistema coleta e mostra dados de: Despesas, Licitações e Contratos.</p>
+                        </div>
+
                     </div>
                 </div>
             )

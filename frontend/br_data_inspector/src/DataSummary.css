@@ -1,6 +1,6 @@
 .data-summary{
 	border-radius: 10px;
-  	background: #AAAAAA;
+  	background: #dddddd;
   	width: 90%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin-top: 20px;
@@ -17,21 +17,38 @@ h2{
 	margin-bottom: 10px;
 }
 
+.listMonthsSelected{
+    width: 100%;
+    display: flex;
+	flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#monthsSelectedLabel {
+    font-weight: bold;
+    font-size: 1.2em;
+}
 .monthSelected{
     font-weight: normal;
     font-size: 16px;
+    background-color: #bbb;
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-top: 10px;;
+    padding: 2px;
+	border-radius: 6px;
 }
 
-@media only screen 
-and (max-width : 1080px){ 
+@media only screen
+and (max-width : 1080px){
     .data-summary{
         margin-top: 40px;
     }
-    
+
     .monthsList{
         font-size: 14px;
     }
-    
+
     .monthSelected{
         font-weight: normal;
         font-size: 14px;
@@ -41,13 +58,13 @@ and (max-width : 1080px){
         font-size: 18px;
         margin-bottom: 20px;
     }
-    
+
     h3{
         font-size: 16px;
         margin-bottom: 20px;
         margin-top: 40px;
     }
-    
+
     p{
         font-size: 14px;
     }
