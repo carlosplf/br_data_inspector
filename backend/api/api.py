@@ -75,3 +75,14 @@ def get_contracts(entity_id, date):
     di = data_inspector.DataInspector(db)
     response = {"data": di.get_contracts_by_entity(entity_id, date)}
     return response
+
+@app.route('/db_size')
+def get_engine_status():
+    status_return = {}
+    db.connect(CONTRACTS_DB_NAME)
+    di = data_inspector.DataInspector(db)
+    status_return["total_contracts"] = di.get_count_entries()
+    db.connect(EXPENSES_DB_NAME)
+    di = data_inspector.DataInspector(db)
+    status_return["total_expenses"] = di.get_count_entries()
+    return status_return

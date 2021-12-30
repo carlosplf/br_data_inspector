@@ -10,6 +10,13 @@ class DataInspector():
         self.db_connector = db_connector
         self.redis_connector = None
 
+    def get_count_entries(self):
+        """
+        Return the total number of entries for a collection.
+        """
+        count_result = self.db_connector.count_entries(query_filter={})
+        return count_result
+
     def get_count_for_date(self, date=""):
         """
         Given a specific date, check how many entries we have at the DB.
