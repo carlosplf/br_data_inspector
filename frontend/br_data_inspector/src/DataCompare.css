@@ -40,3 +40,7 @@
 .contractsContainer{
     width: 90%;
 }
+
+.contractsContainer .contractsBlock{
+    width: 100%;
+}
