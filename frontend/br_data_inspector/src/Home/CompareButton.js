@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { FaMinus } from 'react-icons/fa';
-import './CompareButton.css';
+import '../Home/CompareButton.css';
 
 
 class CompareButton extends React.Component{

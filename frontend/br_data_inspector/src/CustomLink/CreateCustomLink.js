@@ -1,5 +1,5 @@
 import React from 'react';
-import "./CreateCustomLink.css";
+import "../CustomLink/CreateCustomLink.css";
 
 
 class CreateCustomLink extends React.Component{

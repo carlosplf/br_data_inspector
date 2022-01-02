@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TableBuilder from './TableBuilder';
+import TableBuilder from '../Utils/TableBuilder';
 
 class ModalContent extends React.Component{
     constructor (props) {

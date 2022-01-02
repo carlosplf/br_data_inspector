@@ -9,8 +9,8 @@ import {
     Hint,
     FlexibleWidthXYPlot
 } from 'react-vis';
-import "./DataBarChart.css";
-import DataChartLabel from "./DataChartLabel";
+import "../DataChart/DataBarChart.css";
+import DataChartLabel from "../DataChart/DataChartLabel";
 
 
 class DataBarChart extends React.Component{

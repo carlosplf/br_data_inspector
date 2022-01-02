@@ -1,5 +1,5 @@
 import React from 'react';
-import './ExpensesTable.css';
+import '../Expenses/ExpensesTable.css';
 
 class ExpensesTable extends React.Component{
     formatNumbers(x) {

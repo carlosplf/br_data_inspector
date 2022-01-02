@@ -1,15 +1,15 @@
 import React from 'react';
-import SearchEntity from './SearchEntity';
-import MonthPicker from './MonthPicker';
-import Header from './Header';
-import CompareButton from './CompareButton';
-import Loading from './Loading';
+import SearchEntity from '../Home/SearchEntity';
+import MonthPicker from '../Home/MonthPicker';
+import Header from '../Header/Header';
+import CompareButton from '../Home/CompareButton';
+import Loading from '../Utils/Loading';
 import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { FaAngleRight } from "react-icons/fa";
 import 'react-toastify/dist/ReactToastify.css';
-import './Home.css';
+import '../Home/Home.css';
 import TagManager from 'react-gtm-module';
 import Typing from 'react-typing-animation';
 

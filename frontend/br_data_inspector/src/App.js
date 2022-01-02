@@ -1,10 +1,10 @@
 import React from 'react';
-import DataPage from './DataPage';
-import Home from './Home';
-import DataCompare from './DataCompare';
-import RankPage from './RankPage';
-import About from './About';
-import CustomLinkRouter from './CustomLinkRouter';
+import DataPage from './DataPage/DataPage';
+import Home from './Home/Home';
+import DataCompare from './DataComparePage/DataCompare';
+import RankPage from './RankPage/RankPage';
+import About from './About/About';
+import CustomLinkRouter from './CustomLink/CustomLinkRouter';
 
 import {
   BrowserRouter as Router,

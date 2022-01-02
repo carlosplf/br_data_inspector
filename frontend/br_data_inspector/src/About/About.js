@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from './Header.js';
-import './About.css';
+import Header from '../Header/Header.js';
+import '../About/About.css';
 import { FaGithub } from 'react-icons/fa';
 
 

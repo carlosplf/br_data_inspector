@@ -1,15 +1,15 @@
 import React from 'react';
-import DataSummary from "./DataSummary.js";
+import DataSummary from "../DataSummary/DataSummary.js";
 import { withRouter } from 'react-router-dom'
-import DataBarChartComparison from './DataBarChartComparison.js';
-import Header from './Header';
-import Loading from './Loading';
-import './DataCompare.css';
-import CreateCustomLink from './CreateCustomLink.js';
-import ExpensesTable from './ExpensesTable.js';
+import DataBarChartComparison from '../DataChart/DataBarChartComparison.js';
+import Header from '../Header/Header';
+import Loading from '../Utils/Loading';
+import '../DataComparePage/DataCompare.css';
+import CreateCustomLink from '../CustomLink/CreateCustomLink.js';
+import ExpensesTable from '../Expenses/ExpensesTable.js';
 import queryString from 'query-string';
 import LoadingBar from 'react-top-loading-bar';
-import ContractsData from './ContractsData';
+import ContractsData from '../ContractsData/ContractsData';
 
 
 class DataCompare extends React.Component{

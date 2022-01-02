@@ -1,6 +1,6 @@
 import React from "react";
-import './Header.css';
-import AppButton from './AppButton';
+import '../Header/Header.css';
+import AppButton from '../Utils/AppButton';
 import { FaShareAlt } from 'react-icons/fa';
 
 class Header extends React.Component{

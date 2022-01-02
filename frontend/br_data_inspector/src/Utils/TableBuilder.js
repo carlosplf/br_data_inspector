@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTable } from 'react-table';
-import table_columns from './TransactionsTableColumns.js';
+import table_columns from '../Utils/TransactionsTableColumns.js';
 
 
 function Table({columns, data}) {

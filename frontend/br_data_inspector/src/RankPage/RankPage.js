@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from './Header';
-import RankTable from './RankTable';
-import './RankPage.css';
+import Header from '../Header/Header';
+import RankTable from '../RankPage/RankTable';
+import '../RankPage/RankPage.css';
 
 
 class RankPage extends React.Component{

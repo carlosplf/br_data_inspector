@@ -1,8 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import ContractsTable from './ContractsTable';
-import ContractDetails from './ContractDetails';
-import './ContractsData.css';
+import ContractsTable from '../ContractsData/ContractsTable';
+import ContractDetails from '../ContractsData/ContractDetails';
+import '../ContractsData/ContractsData.css';
 
 
 class ContractsData extends React.Component{

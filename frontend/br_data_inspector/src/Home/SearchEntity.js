@@ -1,7 +1,7 @@
 import React from 'react'
-import './App.css'
+import '../App.css'
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
-import './SearchEntity.css';
+import '../Home/SearchEntity.css';
 
 class SearchEntity extends React.Component{
 

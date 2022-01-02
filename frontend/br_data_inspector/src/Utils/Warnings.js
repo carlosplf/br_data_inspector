@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Warnings.css";
+import "../Utils/Warnings.css";
 
 
 class Warnings extends React.Component {

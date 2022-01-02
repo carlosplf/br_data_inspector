@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import './ContractsTable.css';
+import '../ContractsData/ContractsTable.css';
 import { FaAngleRight } from "react-icons/fa";
 
 

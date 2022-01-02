@@ -1,17 +1,17 @@
 import React from 'react';
-import DataSummary from "./DataSummary.js";
+import DataSummary from "../DataSummary/DataSummary.js";
 import { withRouter } from 'react-router-dom';
 import ReactModal from 'react-modal';
-import ModalContent from './ModalContent';
-import DataBarChart from './DataBarChart';
+import ModalContent from '../DataPage/ModalContent';
+import DataBarChart from '../DataChart/DataBarChart';
 import queryString from 'query-string';
-import Header from './Header';
-import Loading from './Loading';
-import "./DataPage.css";
-import CreateCustomLink from './CreateCustomLink.js';
-import ExpensesTable from './ExpensesTable.js';
+import Header from '../Header/Header';
+import Loading from '../Utils/Loading';
+import "../DataPage/DataPage.css";
+import CreateCustomLink from '../CustomLink/CreateCustomLink.js';
+import ExpensesTable from '../Expenses/ExpensesTable.js';
 import LoadingBar from 'react-top-loading-bar'
-import ContractsData from './ContractsData';
+import ContractsData from '../ContractsData/ContractsData';
 
 
 //Component responsible of showing info about a single Entity searched.

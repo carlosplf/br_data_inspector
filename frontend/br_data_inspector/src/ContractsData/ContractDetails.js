@@ -1,5 +1,5 @@
 import React from 'react';
-import './ContractDetails.css';
+import '../ContractsData/ContractDetails.css';
 
 
 class ContractDetails extends React.Component{

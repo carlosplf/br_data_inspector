@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import './MonthPicker.css';
+import '../Home/MonthPicker.css';
 
 
 class MonthPicker extends React.Component{
