@@ -88,6 +88,12 @@ def get_contracts_by_company_name(name):
     response = {"data": ci.get_contracts_by_company_name(name)}
     return response
 
+@app.route('/contracts/rank/<year>')
+def get_contracts_rank(year):
+    ci = contracts_inspector.ContractsInspector()
+    response = {"data": ci.get_companies_rank(year)}
+    return response
+
 @app.route('/db_size')
 def get_engine_status():
     status_return = {}

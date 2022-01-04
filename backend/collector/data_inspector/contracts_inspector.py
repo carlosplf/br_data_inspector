@@ -17,16 +17,29 @@ class ContractsInspector():
     def __connect_mongo_db(self):
         if self.db_connection:
             return
-    
+
         self.db_connection = db_connector.DbConnector()
         self.db_connection.connect(CONTRACTS_DB_NAME)
-    
+
     def __connect_redis_db(self):
         if self.redis_connection:
             return
 
         self.redis_connection = redis_connector.RedisConnector()
         self.redis_connection.connect()
+
+    def get_companies_rank(self, date_year):
+        """
+        Get the Rank of the Companies that received the most.
+        Rank is saved on RedisDB and built by DataProcessor.
+        Args:
+            date_year: (int) Year to filter.
+        Return:
+            (list) of (dicts) with all data.
+        """
+        redis_key = "biggest_receivers_" + str(date_year)
+        self.__connect_redis_db()
+        return json.loads(self.redis_connection.get(redis_key))
 
     def get_contracts_by_company_name(self, company_name):
         """
@@ -44,7 +57,7 @@ class ContractsInspector():
         query_filter = {
             "Nome Contratado": str(company_name)
         }
-        
+
         query_result = self.db_connection.query(filter=query_filter)
 
         return transform_data_in_list(query_result=query_result, entity_type=None, remove_duplicated=False)
@@ -65,7 +78,7 @@ class ContractsInspector():
         query_filter = {
             "CNPJ Contratado": str(company_cnpj)
         }
-        
+
         query_result = self.db_connection.query(filter=query_filter)
 
         return transform_data_in_list(query_result=query_result, entity_type=None, remove_duplicated=False)
@@ -94,8 +107,26 @@ class ContractsInspector():
 
         query_filter["Data Assinatura Contrato"] = {"$regex": str(date_formated)}
 
-        logging.debug(query_filter)
-        print(query_filter)
+        result = self.db_connection.query(filter=query_filter)
+
+        return transform_data_in_list(query_result=result, entity_type=None, remove_duplicated=False)
+
+    def get_contracts_by_year(self, field_to_filter="Data Assinatura Contrato", date_year=2020):
+        """
+        Return all contracts for a year. Contracts have some fields related to date. This method
+        will use the 'field_to_filter' field.
+        Args:
+            date_year: (int) Year to filter the Contracts.
+            field_to_filter: (str) Contract field used to filter the Contracts.
+        """
+        logging.debug("Geting Contracts by Year: " + str(date_year) + ". Filtering by field" + field_to_filter)
+
+        if not self.db_connection:
+            self.__connect_mongo_db()
+
+        query_filter = {
+            field_to_filter: {"$regex": str(date_year)}
+        }
 
         result = self.db_connection.query(filter=query_filter)
 
