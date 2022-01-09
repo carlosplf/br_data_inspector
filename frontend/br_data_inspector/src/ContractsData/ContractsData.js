@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import ContractsTable from '../ContractsData/ContractsTable';
-import ContractDetails from '../ContractsData/ContractDetails';
 import '../ContractsData/ContractsData.css';
 
 
