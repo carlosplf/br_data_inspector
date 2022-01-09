@@ -1,6 +1,7 @@
 import redis
 
 
+#REDIS_ADDRESS = "redis"
 REDIS_ADDRESS = "127.0.0.1"
 
 

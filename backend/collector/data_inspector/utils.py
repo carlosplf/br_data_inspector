@@ -11,11 +11,11 @@ def transform_data_in_list(query_result, entity_type, remove_duplicated=False):
             all_data.append(data_as_dict)
 
         if remove_duplicated:
-            all_data = remove_duplicated(all_data, entity_type)
+            all_data = remove_duplicated_entries(all_data, entity_type)
         
         return all_data
 
-def remove_duplicated(original_list, entity_type):
+def remove_duplicated_entries(original_list, entity_type):
     """
     Remove duplicated entries from BD.
     Args:
