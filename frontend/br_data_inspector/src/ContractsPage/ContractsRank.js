@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import "../ContractsPage/ContractsRank.css";
 
 class ContractsRank extends React.Component {
     constructor(props) {
@@ -54,10 +55,10 @@ class ContractsRank extends React.Component {
                 <table>
                     <thead>
                         <tr>
-                            <th> CNPJ </th>
-                            <th> Nome </th>
-                            <th> Total Recebido </th>
-                            <th> Qtde de Contratos </th>
+                            <th className="headerCNPJ"> CNPJ </th>
+                            <th className="headerName"> Nome </th>
+                            <th className="headerTotal"> Total Recebido </th>
+                            <th className="headerContracts"> Qtde de Contratos </th>
                         </tr>
                     </thead>
                     <tbody>{table_rows}</tbody>
@@ -69,10 +70,10 @@ class ContractsRank extends React.Component {
     renderItem(item) {
         return (
             <tr>
-                <td>{item["CNPJ"]}</td>
-                <td>{item["Nome"]}</td>
-                <td>{item["Total recebido"]}</td>
-                <td>{item["Quantidade de contratos"]}</td>
+                <td className="valueCNPJ">{item["CNPJ"]}</td>
+                <td className="valueName">{item["Nome"]}</td>
+                <td className="valueTotal">R$ {parseFloat(item["Total recebido"]).toFixed(2)}</td>
+                <td className="valueContracts">{item["Quantidade de contratos"]}</td>
             </tr>
         );
     }

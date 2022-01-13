@@ -1,0 +1,21 @@
+.contractsRankTable table{
+    color: #101010;
+    padding: 20px;
+}
+
+.valueContracts{
+    text-align: right;
+}
+
+.valueTotal{
+    text-align: right;
+    width: 24%;
+}
+
+.headerContracts{
+    text-align: right;
+}
+
+.headerTotal{
+    text-align: right;
+}
