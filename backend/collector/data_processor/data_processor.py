@@ -104,7 +104,7 @@ class DataProcessor():
         sorted_rank = self.__sort_rank(spenders_rank, "Total gasto")
         sized_rank = sorted_rank[:rank_size]
 
-        key_name = self.__build_key_name("recebedores_rank", date_year)
+        key_name = self.__build_key_name("spenders_rank", date_year)
         return self.redis_connector.set(key_name, json.dumps(sized_rank))
 
     def __build_key_name(self, base_name, date_year=None):

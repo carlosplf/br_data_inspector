@@ -101,9 +101,9 @@ class DataInspector():
         self.redis_connector.connect()
 
         if entity_type == "Subordinado":
-            redis_key = "recebedores_rank_" + str(date_year)
+            redis_key = "spenders_rank_" + str(date_year)
         elif entity_type == "Superior":
-            redis_key = "pagadores_rank_" + date_year
+            redis_key = "superiors_spenders_rank_" + date_year
         else:
             return []
 
