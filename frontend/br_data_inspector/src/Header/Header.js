@@ -45,6 +45,7 @@ class Header extends React.Component{
                     <AppButton btn_type="about-btn"/>
                     <AppButton btn_type="home-btn"/>
                     <AppButton btn_type="rank-btn"/>
+                    <AppButton btn_type="contracts-btn"/>
                 </div>
             </div>
         )
