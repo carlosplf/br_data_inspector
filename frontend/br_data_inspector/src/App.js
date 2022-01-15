@@ -6,6 +6,7 @@ import RankPage from './RankPage/RankPage';
 import About from './About/About';
 import CustomLinkRouter from './CustomLink/CustomLinkRouter';
 import ContractsPage from './ContractsPage/ContractsPage';
+import CompanyPage from './CompanyPage/CompanyPage';
 
 import {
   BrowserRouter as Router,
@@ -41,6 +42,9 @@ class App extends React.Component {
           </Route>
           <Route path="/contracts">
             <ContractsPage/>          
+          </Route>
+          <Route path="/company">
+            <CompanyPage/>          
           </Route>
           <Route path="/about">
             <About/>          

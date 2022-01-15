@@ -12,7 +12,7 @@ class ContractsPage extends React.Component {
                     handleShareButton={this.handleShareButton}
                     show_share_button={false}
                     show_table_data={false}
-                    header_text="Rank de Contratos"
+                    header_text="Contratos e Empresas"
                     handle_modal={this.handleOpenDataModal}
                     dark_background={true}
                 />

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import "../ContractsPage/ContractsRank.css";
 
@@ -68,9 +69,10 @@ class ContractsRank extends React.Component {
     }
 
     renderItem(item) {
+        let link_to = "/company?cnpj=" + item["CNPJ"];
         return (
             <tr>
-                <td className="valueCNPJ">{item["CNPJ"]}</td>
+                <td className="valueCNPJ"> <Link to={link_to}> {item["CNPJ"]} </Link></td>
                 <td className="valueName">{item["Nome"]}</td>
                 <td className="valueTotal">R$ {parseFloat(item["Total recebido"]).toFixed(2)}</td>
                 <td className="valueContracts">{item["Quantidade de contratos"]}</td>
