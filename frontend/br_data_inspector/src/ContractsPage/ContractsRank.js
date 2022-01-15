@@ -6,7 +6,9 @@ import "../ContractsPage/ContractsRank.css";
 class ContractsRank extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            loading: true
+        };
     }
 
     api_url = process.env.REACT_APP_API_URL;
@@ -14,6 +16,20 @@ class ContractsRank extends React.Component {
 
     componentDidMount() {
         this.requestDataFromAPI(this.props.year);
+    }
+
+    formatNumber(x) {
+        x = parseFloat(x).toFixed(2).toString()
+        let splited_number = x.split(".");
+        let y = splited_number[0];
+        if (!y) {
+            return 0;
+        }
+        return (
+            y.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") +
+            "," +
+            splited_number[1]
+        );
     }
 
     //Call Backend API and retrieve data about Entities
@@ -45,9 +61,8 @@ class ContractsRank extends React.Component {
 
     saveDataAsState(contracts_data) {
         if (this.state.data === undefined) {
-            this.setState({ data: contracts_data["data"] });
+            this.setState({ data: contracts_data["data"], loading: false});
         }
-        console.log(this.state);
     }
 
     buildTable(table_rows) {
@@ -59,7 +74,10 @@ class ContractsRank extends React.Component {
                             <th className="headerCNPJ"> CNPJ </th>
                             <th className="headerName"> Nome </th>
                             <th className="headerTotal"> Total Recebido </th>
-                            <th className="headerContracts"> Qtde de Contratos </th>
+                            <th className="headerContracts">
+                                {" "}
+                                Qtde de Contratos{" "}
+                            </th>
                         </tr>
                     </thead>
                     <tbody>{table_rows}</tbody>
@@ -72,10 +90,17 @@ class ContractsRank extends React.Component {
         let link_to = "/company?cnpj=" + item["CNPJ"];
         return (
             <tr>
-                <td className="valueCNPJ"> <Link to={link_to}> {item["CNPJ"]} </Link></td>
+                <td className="valueCNPJ">
+                    {" "}
+                    <Link to={link_to}> {item["CNPJ"]} </Link>
+                </td>
                 <td className="valueName">{item["Nome"]}</td>
-                <td className="valueTotal">R$ {parseFloat(item["Total recebido"]).toFixed(2)}</td>
-                <td className="valueContracts">{item["Quantidade de contratos"]}</td>
+                <td className="valueTotal">
+                    R$ {this.formatNumber(item["Total recebido"])}
+                </td>
+                <td className="valueContracts">
+                    {item["Quantidade de contratos"]}
+                </td>
             </tr>
         );
     }
@@ -93,9 +118,21 @@ class ContractsRank extends React.Component {
     }
 
     render() {
+        if (this.state.loading){
+            return (<h3 className="loadingMessage"> Buscando Rank para {this.props.year}... </h3>)
+        }
+
         const all_rows = this.buildTableRows();
         const table = this.buildTable(all_rows);
-        return <div>{table}</div>;
+        return (
+            <div className="contractsRankCard">
+                <p className="cardTitle">
+                    Empresas que mais receberam considerando contratos publicados
+                    em {this.props.year}:
+                </p>
+                {table}
+            </div>
+        );
     }
 }
 

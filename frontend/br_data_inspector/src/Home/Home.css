@@ -61,7 +61,7 @@ body, html {
 	height: 50px;
     margin-top: 30px;
     width: 20%;
-    margin-bottom: 80px;
+    margin-bottom: 20px;
 }
 
 #search-btn:hover{
@@ -93,6 +93,7 @@ body, html {
     padding: 10px;
     width: 40%;
     margin-bottom: 20px;
+    margin-top: 60px;
 }
 
 .helpCenter .topic{

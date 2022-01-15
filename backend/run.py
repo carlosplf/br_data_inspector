@@ -54,6 +54,7 @@ def call_data_processor():
     my_dp.create_biggest_spenders_rank(20, 2020)
     my_dp.create_biggest_spenders_rank(20, 2021)
     my_dp.create_biggest_contracts_receivers_rank(50, 2020)
+    my_dp.create_biggest_contracts_receivers_rank(50, 2021)
 
 
 def call_updater():

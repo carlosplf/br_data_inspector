@@ -50,7 +50,7 @@ class DataInspector():
 
         date_formated = date[4:6] + "/" + date[0:4]
 
-        query_filter["Data Assinatura Contrato"] = {"$regex": str(date_formated)}
+        query_filter["Data Publicação DOU"] = {"$regex": str(date_formated)}
 
         logging.debug(query_filter)
         print(query_filter)
@@ -111,7 +111,7 @@ class DataInspector():
 
         return json.loads(self.redis_connector.get(redis_key))
 
-    # TODO could be an option for the get_all_entitites method, Redis ou Mongo
+    # TODO could be an option for the get_all_entitites method, Redis or Mongo
     def get_all_entities_from_redis(self, entity_type=None, date=None):
         """
         Get all Entities list from Redis DB, instead of Mongo DB.

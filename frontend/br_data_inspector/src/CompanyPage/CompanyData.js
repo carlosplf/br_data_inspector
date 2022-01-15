@@ -14,6 +14,20 @@ class CompanyData extends React.Component {
     componentDidMount() {
         this.requestDataFromAPI(this.props.cnpj);
     }
+    
+    formatNumber(x) {
+        x = parseFloat(x).toFixed(2).toString()
+        let splited_number = x.split(".");
+        let y = splited_number[0];
+        if (!y) {
+            return 0;
+        }
+        return (
+            y.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") +
+            "," +
+            splited_number[1]
+        );
+    }
 
     //Call Backend API and retrieve data about Entities
     requestDataFromAPI(company_cnpj) {
@@ -59,8 +73,8 @@ class CompanyData extends React.Component {
                 <p> Data da Assinatura: {contract_item["Data Assinatura Contrato"]}</p>
                 <p> Início da vigência: {contract_item["Data Início Vigência"]}</p>
                 <p> Fim da vigência: {contract_item["Data Fim Vigência"]}</p>
-                <p> Valor Inicial Compra: {contract_item["Valor Inicial Compra"]}</p>
-                <p> Valor Final Compra: {contract_item["Valor Final Compra"]}</p>
+                <p> Valor Inicial Compra: {this.formatNumber(contract_item["Valor Inicial Compra"])}</p>
+                <p> Valor Final Compra: {this.formatNumber(contract_item["Valor Final Compra"])}</p>
             </div>
         )
     }

@@ -11,6 +11,7 @@ EXPENSES_DB_NAME = "expenses-data"
 CONTRACTS_DB_NAME = "contarcts-data"
 
 
+#TODO: Break this class in two classes. ExpensesProcessor and ContractsProcessor.
 class DataProcessor():
     def __init__(self):
         self.db_connector = None
@@ -21,7 +22,7 @@ class DataProcessor():
         Create a Rank for Companies that earned most from Federal Government with Contracts.
         Collect all Contracts data from MongoDB. Process all data, sum values and create the Rank.
         The Rank created is saved on a RedisDB instance.
-        Contracts are filtered by signed date.
+        Contracts are filtered by publication date.
         Args:
             rank_size: number os entities to put in the rank.
             date_filter: list of two dates to use as filter in DB query.
@@ -30,11 +31,12 @@ class DataProcessor():
         self.__connect_redis(db=1)
         ci = contracts_inspector.ContractsInspector()
 
-        all_contracts = ci.get_contracts_by_year("Data Assinatura Contrato", date_year)
+        all_contracts = ci.get_contracts_by_year("Data Publicação DOU", date_year)
 
         contracts_summary_dict = {}
         contracts_summary_list = []
 
+        #TODO: this could be in separated method.
         for single_contract in all_contracts:
             previous_total_value = 0
             contracts_count = 0
@@ -161,7 +163,7 @@ class DataProcessor():
 
     def create_entities_list(self, entity_type=None):
         """
-        Create a list with all Entities (name, ID), removind duplicated.
+        Create a list with all Entities (name, ID), removing duplicated.
         Save this list inside a RedisDB (db=1) to be used as a cache system
         by the API.
         """
@@ -183,6 +185,35 @@ class DataProcessor():
         key_name = self.__build_key_name(base_name)
 
         return self.redis_connector.set(key_name, json.dumps(all_entities))
+    
+    def create_companies_list(self):
+        """
+        Create a list with all Companies (Name, CNPJ), removing duplicated.
+        Save this list inside a RedisDB (db=1) to be used as a cache system
+        by the API.
+        """
+        self.__connect_mongo(CONTRACTS_DB_NAME)
+
+        logging.debug("Creating Companies list based on Contracts data...")
+        ci = contracts_inspector.ContractsInspector()
+        all_contracts = ci.get_all_contracts()
+        self.__connect_redis(db=1)
+
+        companies_dict = {}
+        companies_list = []
+
+        for item in all_contracts:
+            companies_dict[item["Nome Contratado"]] = {
+                "Nome": item["Nome Contratado"],
+                "CNPJ": item["CNPJ Contratado"]
+            }
+
+        for k in companies_dict.keys():
+            companies_list.append(companies_dict[k])
+
+        key_name = "all_companies_list"
+
+        return self.redis_connector.set(key_name, json.dumps(companies_list))
 
     def __connect_mongo(self, db_name):
         logging.debug("Connecting Mongo DB")

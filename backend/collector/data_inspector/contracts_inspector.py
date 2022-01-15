@@ -85,7 +85,7 @@ class ContractsInspector():
 
     def get_contracts_by_entity(self, entity_id="", date=""):
         """
-        Return all contracts for a Single Entity for a date.
+        Return all contracts for a Single Entity for a date. Date filter is applied at publication Date.
         Args:
             entity_id: (str) ID number of the Entity
             date: (str) date format YYYYMM
@@ -105,13 +105,13 @@ class ContractsInspector():
 
         date_formated = date[4:6] + "/" + date[0:4]
 
-        query_filter["Data Assinatura Contrato"] = {"$regex": str(date_formated)}
+        query_filter["Data Publicação DOU"] = {"$regex": str(date_formated)}
 
         result = self.db_connection.query(filter=query_filter)
 
         return transform_data_in_list(query_result=result, entity_type=None, remove_duplicated=False)
 
-    def get_contracts_by_year(self, field_to_filter="Data Assinatura Contrato", date_year=2020):
+    def get_contracts_by_year(self, field_to_filter="Data Publicação DOU", date_year=2020):
         """
         Return all contracts for a year. Contracts have some fields related to date. This method
         will use the 'field_to_filter' field.
@@ -119,7 +119,7 @@ class ContractsInspector():
             date_year: (int) Year to filter the Contracts.
             field_to_filter: (str) Contract field used to filter the Contracts.
         """
-        logging.debug("Geting Contracts by Year: " + str(date_year) + ". Filtering by field" + field_to_filter)
+        logging.debug("Geting Contracts by Year: " + str(date_year) + ". Filtering by field " + field_to_filter)
 
         if not self.db_connection:
             self.__connect_mongo_db()
@@ -131,3 +131,29 @@ class ContractsInspector():
         result = self.db_connection.query(filter=query_filter)
 
         return transform_data_in_list(query_result=result, entity_type=None, remove_duplicated=False)
+
+    def get_all_contracts(self):
+        """
+        Return all Contracts inside the DB.
+        """
+        logging.debug("Geting ALL Contracts. No filtering")
+
+        if not self.db_connection:
+            self.__connect_mongo_db()
+
+        query_filter = {}
+
+        result = self.db_connection.query(filter=query_filter)
+
+        return transform_data_in_list(query_result=result, entity_type=None, remove_duplicated=False)
+
+    def get_companies_list_from_redis(self):
+        """
+        Get all Companies list from Redis DB, instead of Mongo DB.
+        """
+        key_name = "all_companies_list"
+        self.redis_connector = redis_connector.RedisConnector()
+        self.redis_connector.connect()
+
+        companies_list = self.redis_connector.get(key_name)
+        return json.loads(companies_list)

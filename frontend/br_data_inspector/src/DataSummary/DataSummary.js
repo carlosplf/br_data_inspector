@@ -31,7 +31,6 @@ class DataSummary extends React.Component{
         "202106": "Junho/21"
     }
 
-    //TODO: Check if the numbers are being formated in a proper way for decimals.
     formatNumbers(x) {
       if (!x) {return 0}
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
