@@ -43,7 +43,7 @@
 .header-btns button{
     min-width: 60px;
     max-width: 120px;
-    font-size: 20px;
+    font-size: 1.4em;
 }
 
 #all-data-btn{
@@ -107,5 +107,10 @@ and (max-width : 1080px){
     }
     .header-btns{
         height: 120px;
+    }
+    .header-btns button{
+        min-width: 100px;
+        max-width: 240px;
+        font-size: 1.2em;
     }
 }
