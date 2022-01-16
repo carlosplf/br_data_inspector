@@ -51,8 +51,11 @@ def call_collector():
 def call_data_processor():
     my_dp = data_processor.DataProcessor()
     my_dp.create_entities_list("Subordinado")
-    my_dp.create_biggest_receivers_rank(20, 2020)
-    my_dp.create_biggest_receivers_rank(20, 2021)
+    my_dp.create_biggest_spenders_rank(20, 2020)
+    my_dp.create_biggest_spenders_rank(20, 2021)
+    my_dp.create_biggest_contracts_receivers_rank(50, 2020)
+    my_dp.create_biggest_contracts_receivers_rank(50, 2021)
+    my_dp.create_companies_list()
 
 
 def call_updater():

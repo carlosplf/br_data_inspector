@@ -2,6 +2,7 @@ import logging
 import json
 from collector.db_connector import db_connector
 from collector.db_connector import redis_connector
+from collector.data_inspector.utils import transform_data_in_list
 
 
 class DataInspector():
@@ -49,14 +50,14 @@ class DataInspector():
 
         date_formated = date[4:6] + "/" + date[0:4]
 
-        query_filter["Data Assinatura Contrato"] = {"$regex": str(date_formated)}
+        query_filter["Data Publicação DOU"] = {"$regex": str(date_formated)}
 
         logging.debug(query_filter)
         print(query_filter)
 
         result = self.db_connector.query(filter=query_filter)
 
-        return self.__transform_data_in_list(query_result=result, entity_type=None, remove_duplicated=False)
+        return transform_data_in_list(query_result=result, entity_type=None, remove_duplicated=False)
 
     def get_entity_data(self, entity_id="", entity_type=None, date="", date_regex=False):
         """
@@ -83,7 +84,7 @@ class DataInspector():
         logging.debug(query_filter)
 
         result = self.db_connector.query(filter=query_filter)
-        return self.__transform_data_in_list(query_result=result, entity_type=entity_type, remove_duplicated=False)
+        return transform_data_in_list(query_result=result, entity_type=entity_type, remove_duplicated=False)
 
     def get_entity_rank(self, entity_type=None, rank_size=20, date_year=2020):
         """
@@ -100,9 +101,9 @@ class DataInspector():
         self.redis_connector.connect()
 
         if entity_type == "Subordinado":
-            redis_key = "recebedores_rank_" + str(date_year)
+            redis_key = "spenders_rank_" + str(date_year)
         elif entity_type == "Superior":
-            redis_key = "pagadores_rank_" + date_year
+            redis_key = "superiors_spenders_rank_" + date_year
         else:
             return []
 
@@ -110,7 +111,7 @@ class DataInspector():
 
         return json.loads(self.redis_connector.get(redis_key))
 
-    # TODO could be an option for the get_all_entitites method, Redis ou Mongo
+    # TODO could be an option for the get_all_entitites method, Redis or Mongo
     def get_all_entities_from_redis(self, entity_type=None, date=None):
         """
         Get all Entities list from Redis DB, instead of Mongo DB.
@@ -149,7 +150,7 @@ class DataInspector():
             "Nome Órgão " + entity_type: 1
         }
         result = self.db_connector.query(filter=query_filter, fields=query_fields)
-        return self.__transform_data_in_list(query_result=result, entity_type=entity_type, remove_duplicated=True)
+        return transform_data_in_list(query_result=result, entity_type=entity_type, remove_duplicated=True)
 
     def search_entity(self, search_term=None, entity_type=None, date=None):
         """
@@ -168,56 +169,7 @@ class DataInspector():
             query_filter["Ano e mês do lançamento"] = filter_date
 
         result = self.db_connector.query(filter=query_filter)
-        return self.__transform_data_in_list(query_result=result)
+        return transform_data_in_list(query_result=result)
 
     def __parse_date(self, date):
         return date[:4] + "/" + date[4:]
-
-    def __transform_data_in_list(self, query_result, entity_type, remove_duplicated=False):
-        """
-        Return a LIST with all data collected.
-        Args:
-            query_result: Mongo query Object.
-        """
-        all_data = []
-        for data_entry in query_result:
-            data_as_dict = dict(data_entry)
-            data_as_dict.pop("_id", None)
-            all_data.append(data_as_dict)
-
-        if remove_duplicated:
-            all_data = self.__remove_duplicated(all_data, entity_type)
-        
-        return all_data
-
-    def __remove_duplicated(self, original_list, entity_type):
-        """
-        Remove duplicated entries from BD.
-        Args:
-            original_list: (list) List with all elements.
-            entity_type: (str) "Superior" or "Subordinado"
-        """
-        buffer_ids_list = []
-        new_data_list = []
-        id_key_field = "Código Órgão " + entity_type
-
-        for data in original_list:
-            if data[id_key_field] not in buffer_ids_list:
-                buffer_ids_list.append(data[id_key_field])
-                new_data_list.append(data)
-
-        return new_data_list
-
-    def __transform_data_in_dict(self, query_result, entity_type):
-        """
-        Return a DICT with all data collected. Each dict key is the Entity ID, removing duplicates.
-        Args:
-            query_result: Mongo query Object.
-            entity_type: (str) "Superior" or "Subordinado"
-        """
-        all_data = {}
-        id_key_field = "Código Órgão " + entity_type
-        for data_entry in query_result:
-            data_entry.pop("_id", None)
-            all_data[data_entry[id_key_field]] = data_entry
-        return all_data

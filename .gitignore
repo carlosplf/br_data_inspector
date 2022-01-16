@@ -21,6 +21,9 @@ data/
 #Testing Script
 test.py
 
+#Log files
+logs/*
+
 # Distribution / packaging
 .Python
 build/

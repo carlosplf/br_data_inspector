@@ -1,10 +1,12 @@
 import React from 'react';
-import DataPage from './DataPage';
-import Home from './Home';
-import DataCompare from './DataCompare';
-import RankPage from './RankPage';
-import About from './About';
-import CustomLinkRouter from './CustomLinkRouter';
+import DataPage from './DataPage/DataPage';
+import Home from './Home/Home';
+import DataCompare from './DataComparePage/DataCompare';
+import RankPage from './RankPage/RankPage';
+import About from './About/About';
+import CustomLinkRouter from './CustomLink/CustomLinkRouter';
+import ContractsPage from './ContractsPage/ContractsPage';
+import CompanyPage from './CompanyPage/CompanyPage';
 
 import {
   BrowserRouter as Router,
@@ -37,6 +39,12 @@ class App extends React.Component {
           </Route>
           <Route path="/rank">
             <RankPage/>          
+          </Route>
+          <Route path="/contracts">
+            <ContractsPage/>          
+          </Route>
+          <Route path="/company">
+            <CompanyPage/>          
           </Route>
           <Route path="/about">
             <About/>          

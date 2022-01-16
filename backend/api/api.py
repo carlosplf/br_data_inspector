@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request
 from flask_cors import CORS
 from collector.data_inspector import data_inspector
+from collector.data_inspector import contracts_inspector
 from collector.db_connector import db_connector
 from collector.custom_link import custom_link
 
@@ -70,10 +71,33 @@ def get_real_url(custom_url):
     return {"real_url": str(my_custom_link.get(custom_url))}
 
 @app.route('/contracts/<entity_id>/<date>')
-def get_contracts(entity_id, date):
-    db.connect(CONTRACTS_DB_NAME)
-    di = data_inspector.DataInspector(db)
-    response = {"data": di.get_contracts_by_entity(entity_id, date)}
+def get_contracts_by_entity(entity_id, date):
+    ci = contracts_inspector.ContractsInspector()
+    response = {"data": ci.get_contracts_by_entity(entity_id, date)}
+    return response
+
+@app.route('/contracts/cnpj/<cnpj>')
+def get_contracts_by_cnpj(cnpj):
+    ci = contracts_inspector.ContractsInspector()
+    response = {"data": ci.get_contracts_by_cnpj(cnpj)}
+    return response
+
+@app.route('/contracts/company-name/<name>')
+def get_contracts_by_company_name(name):
+    ci = contracts_inspector.ContractsInspector()
+    response = {"data": ci.get_contracts_by_company_name(name)}
+    return response
+
+@app.route('/contracts/rank/<year>')
+def get_contracts_rank(year):
+    ci = contracts_inspector.ContractsInspector()
+    response = {"data": ci.get_companies_rank(year)}
+    return response
+
+@app.route('/companies/list')
+def get_companies_list():
+    ci = contracts_inspector.ContractsInspector()
+    response = {"data": ci.get_companies_list_from_redis()}
     return response
 
 @app.route('/db_size')
