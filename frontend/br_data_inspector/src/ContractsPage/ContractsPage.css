@@ -1,0 +1,19 @@
+.contractsDataPage{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+	flex-direction: column;
+    align-items: center;
+}
+
+.contractsDataBlock{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+	flex-direction: column;
+    align-items: center;
+}
+
+.contractsPageTitle{
+    font-size: 1.8em;
+}

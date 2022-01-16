@@ -1,0 +1,27 @@
+.SearchEntity {
+    margin-top: 10px;
+    width: 40%;
+}
+
+#search_1{
+    z-index: 2;
+}
+
+#search_2{
+    z-index: 1;
+}
+
+.SearchEntity input{
+    height: 40px;
+}
+
+@media only screen 
+and (max-width : 1080px){
+    .SearchEntity {
+        margin-top: 80px;
+        width: 80%;
+    }
+    .SearchEntity input{
+        height: 60px;
+    }
+}
