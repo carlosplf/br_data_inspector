@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { FaHome } from 'react-icons/fa';
-import { FaMedal } from 'react-icons/fa';
 
 class AppButton extends React.Component{
     render(){
