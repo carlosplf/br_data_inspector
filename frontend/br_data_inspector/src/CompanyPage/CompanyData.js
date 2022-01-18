@@ -154,6 +154,7 @@ class CompanyData extends React.Component {
 
         return(
             <div className="summaryCard">
+                <h3 className="summaryTitle">Resumo dos contratos</h3>
                 <p>Valor total fechado em contratos: R$ {this.formatNumber(summary_values["total recebido"])}</p>
                 <p>Valor total de contratos fechados: {summary_values["quantidade"]}</p>
                 <div className="buyersTable">

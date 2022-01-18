@@ -24,6 +24,11 @@
     padding: 20px;
 }
 
+.summaryTitle{
+    font-size: 1.6em;
+    text-align: center;
+}
+
 .buyersTable table{
     width: 100%;
     background-color: #eee;
