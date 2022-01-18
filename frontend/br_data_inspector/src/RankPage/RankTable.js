@@ -103,9 +103,9 @@ class RankTable extends React.Component{
             const data_table = this.buildTable();
             return(
                 <div className="tableDiv">
-                    <p>
+                    <p className="tableObs">
                         Tabela com entidades classificadas como Subordinadas, ordenadas
-                        pela soma de valores recebidos (PAGO) em {this.props.date_year}.
+                        pela soma de valores PAGOs em {this.props.date_year}.
                     </p>
                     {data_table}
                 </div>
