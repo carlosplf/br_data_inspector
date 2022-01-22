@@ -6,7 +6,7 @@ class AppButton extends React.Component{
     render(){
         if(this.props.btn_type === "home-btn"){
             return(
-                <button id="home-btn" className="page-btn"><Link to="/home"> <FaHome/> </Link></button>
+                <button id="home-btn" className="page-btn"><Link to="/home"> <p> <FaHome/> Home </p> </Link></button>
             );
         }
         else if(this.props.btn_type === "rank-btn"){
@@ -16,7 +16,7 @@ class AppButton extends React.Component{
         }
         else if(this.props.btn_type === "contracts-btn"){
             return(
-                <button id="contracts-btn" className="page-btn"><Link to="/contracts"> Contratos </Link></button>
+                <button id="contracts-btn" className="page-btn"><Link to="/contracts"> Contratos e Empresas </Link></button>
             );
         }
         else if(this.props.btn_type === "about-btn"){
@@ -26,7 +26,7 @@ class AppButton extends React.Component{
         }
         else{
             return(
-                <span></span>
+                <p></p>
             )
         }
     }

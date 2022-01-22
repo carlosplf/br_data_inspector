@@ -41,9 +41,8 @@
 }
 
 .header-btns button{
-    min-width: 60px;
-    max-width: 120px;
-    font-size: 1.4em;
+    min-width: 120px;
+    font-size: 1.2em;
 }
 
 #all-data-btn{
@@ -78,6 +77,8 @@
 .page-btn a{
 	text-decoration: none;
 	color: #222;
+    display: inline block;
+    vertical-align: middle;
 }
 
 .page-btn:hover{
@@ -109,8 +110,7 @@ and (max-width : 1080px){
         height: 120px;
     }
     .header-btns button{
-        min-width: 100px;
-        max-width: 240px;
+        min-width: 120px;
         font-size: 1.2em;
     }
 }
