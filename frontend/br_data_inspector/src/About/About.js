@@ -93,8 +93,6 @@ class About extends React.Component{
                         <br></br>
                         <p><a href="https://www.portaltransparencia.gov.br">Portal da Transparência </a></p>
                         <p><a href="https://www.portaltransparencia.gov.br/entenda-a-gestao-publica/execucao-despesa-publica">EMPENHADO, PAGO E LIQUIDADO. </a></p>
-                        <br></br>
-                        <img src="schema.png" alt="Schema."/>
                     </div>
                     </div>
                 </div>
