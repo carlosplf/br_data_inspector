@@ -61,6 +61,10 @@ class Collector():
         #Download report and get the ZIP filename
         downloaded_report = rpd.download_report(url, arg)
 
+        if not downloaded_report:
+            logging.warning("Stoping cycle for this report...")
+            return
+
         #Extract the ZIP file downloaded and get the CSV filename(s)
         extracted_reports = rpd.extract_file(downloaded_report, inside_file_name)
        

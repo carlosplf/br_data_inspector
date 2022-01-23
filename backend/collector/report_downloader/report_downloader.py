@@ -36,8 +36,13 @@ class ReportDownloader():
         logging.debug("Downloading from Link: %s", link)
         logging.debug("Output filename: %s", zip_filename)
 
-        # TODO: implement some retry method!
-        urllib.request.urlretrieve(link, zip_filename)
+        try:
+            urllib.request.urlretrieve(link, zip_filename)
+        except urllib.error.URLError as e:
+            logging.warning("Couldn't download Report.")
+            logging.warning(e.reason)
+            return None
+
         logging.debug("Done")
         time.sleep(1)
 
