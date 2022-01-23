@@ -193,6 +193,7 @@ class CompanyData extends React.Component {
                     <div className="allContractsData">
                         <h1 className="companyName"> {this.state.data[0]["Nome Contratado"]} </h1>
                         {this.state.summary_card}
+                        <h2 className="allCardsTitle"> Todos os Contratos: </h2>
                         {this.state.all_cards}
                     </div>
                 )
