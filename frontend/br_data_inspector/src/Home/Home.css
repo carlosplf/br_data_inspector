@@ -25,6 +25,7 @@ body, html {
     flex-direction: row;
     vertical-align:middle;
     margin-bottom: 30px;
+    margin-top: 60px;
 }
 
 .pageTitle{

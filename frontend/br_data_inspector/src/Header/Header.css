@@ -85,13 +85,12 @@
 	background-color: #EEE;
 }
 
-#shareBtn{
-	background-color: #42a5f5;
+#contracts-btn{
+    background-color: #1EB100;
 }
 
-#shareBtn:hover{
-	cursor: pointer;
-	background-color: #46a9f9;
+#contracts-btn:hover > a{
+    color: #FFF;
 }
 
 @media only screen 
