@@ -2,6 +2,7 @@ import React from "react";
 import '../Header/Header.css';
 import AppButton from '../Utils/AppButton';
 import { FaShareAlt } from 'react-icons/fa';
+import { Link } from "react-router-dom";
 
 class Header extends React.Component{
     constructor(props){
@@ -39,7 +40,7 @@ class Header extends React.Component{
         return(
             <div className={background_class}>
                 <div className="header-title-box">
-                    <h1>{this.props.header_text}</h1>
+                    <h1> <a href="/home"> BR Data Collector </a> </h1>
                     <div className="header-title-underscore">
                         <div id="color1"><p/></div>
                         <div id="color2"><p/></div>
@@ -50,7 +51,6 @@ class Header extends React.Component{
                     {table_data_button}
                     {share_button}
                     <AppButton btn_type="about-btn"/>
-                    <AppButton btn_type="home-btn"/>
                     <AppButton btn_type="rank-btn"/>
                     <AppButton btn_type="contracts-btn"/>
                 </div>

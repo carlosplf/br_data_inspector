@@ -6,7 +6,7 @@ class AppButton extends React.Component{
     render(){
         if(this.props.btn_type === "home-btn"){
             return(
-                <button id="home-btn" className="page-btn"><Link to="/home"> <p> <FaHome/> Home </p> </Link></button>
+                <button id="home-btn" className="page-btn"><Link to="/home"> <p> <FaHome/> </p> </Link></button>
             );
         }
         else if(this.props.btn_type === "rank-btn"){

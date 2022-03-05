@@ -12,7 +12,6 @@ class RankPage extends React.Component{
                 <Header header_text="Maiores despesas"/>
                 <div className="pageTitleRank">
                     <h2 style={{fontWeight: 'bold'}}>Soma de valores PAGOS por Órgão Subordinado.</h2>
-                    <p>2021: Considerando dados até Junho.</p>
                 </div>
                 <RankTable date_year="2020"/>    
                 <RankTable date_year="2021"/>    

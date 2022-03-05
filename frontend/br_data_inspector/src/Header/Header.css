@@ -12,6 +12,11 @@
     align-self: left;
 }
 
+.header-title-box a{
+    text-decoration: none;
+    color: #202020;
+}
+
 .header-title-box p{
     color: #202020;
     margin-left: 20px;
@@ -24,7 +29,7 @@
 	flex-direction: row-reverse;
 	position:absolute; right: 0;	
     float: right;	
-    width: 100%;
+    width: 50%;
 	height: 80px;
 	align-items: flex-start;
 }
@@ -96,7 +101,11 @@
 	text-decoration: none;
 	color: #012169;
     display: inline block;
-	font-size: 1.1em;
+	font-size: 1.2em;
+}
+.page-btn p{
+	color: #012169;
+	font-size: 1.2em;
 }
 
 .page-btn a:hover{
@@ -126,10 +135,16 @@ and (max-width : 1080px){
     .header_light_mode{
         height: 120px;
     }
+
+    .header-title-box{
+        margin-top: 20px;
+    }
+
     .header-btns{
         height: 120px;
     }
+    
     .header-btns button{
-        font-size: 1.2em;
+        font-size: 1.4em;
     }
 }
