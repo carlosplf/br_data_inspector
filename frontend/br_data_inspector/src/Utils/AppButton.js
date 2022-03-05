@@ -11,12 +11,12 @@ class AppButton extends React.Component{
         }
         else if(this.props.btn_type === "rank-btn"){
             return(
-                <button id="rank-btn" className="page-btn"><Link to="/rank"> Maiores Despesas </Link></button>
+                <button id="rank-btn" className="page-btn"><Link to="/rank"> Ranking </Link></button>
             );
         }
         else if(this.props.btn_type === "contracts-btn"){
             return(
-                <button id="contracts-btn" className="page-btn"><Link to="/contracts"> Contratos e Empresas </Link></button>
+                <button id="contracts-btn" className="page-btn"><Link to="/contracts"> Contratos </Link></button>
             );
         }
         else if(this.props.btn_type === "about-btn"){

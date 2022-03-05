@@ -192,7 +192,7 @@ class Home extends React.Component{
 
                     <div className="contentContainer">
 
-                        <Header header_text="BR Data Collector - 0.1" handle_modal={this.handleOpenDataModal}/>
+                        <Header header_text="BR Data Collector" handle_modal={this.handleOpenDataModal}/>
 
                         <div className="titleContainer">
                             <span className="pageTitle">Pesquisar por: </span>
@@ -202,7 +202,7 @@ class Home extends React.Component{
                                     <Typing.Backspace delay={1000} count={22} />
                                     <span className="pageTitleSpam">Ministério da Economia.</span>
                                     <Typing.Backspace delay={1000} count={24} />
-                                    <span className="pageTitleSpam">Comando do Exército.</span>\
+                                    <span className="pageTitleSpam">Comando do Exército.</span>
                                     <Typing.Backspace delay={1000} count={24} />
                                     <span className="pageTitleSpam">Universidade Federal de São Carlos.</span>
                                     <Typing.Backspace delay={1000} count={36} />
@@ -229,14 +229,6 @@ class Home extends React.Component{
                         />
 
                         <button id="search-btn" onClick={this.handleSearch}>Pesquisar</button>
-
-                        <div className="helpCenter">
-                            <p className="topic"> <FaAngleRight/> O que posso pesquisar?</p>
-                            <p className="info">Você pode pesquisar por qualquer Órgão FEDERAL.</p>
-                            <p className="info">Exemplo: Ministérios, Faculdades Federais, Polícia Federal, etc.</p>
-                            <p className="topic"> <FaAngleRight/> Quais dados o sistema me mostra?</p>
-                            <p className="info">Por enquanto, o sistema coleta e mostra dados de: Despesas, Licitações e Contratos.</p>
-                        </div>
 
                     </div>
                 </div>

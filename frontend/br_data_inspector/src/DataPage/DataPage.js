@@ -202,7 +202,6 @@ class DataPage extends React.Component {
                         show_table_data={false}
                         header_text="Resumo de Despesas"
                         handle_modal={this.handleOpenDataModal}
-                        dark_background={true}
                     />
 
                     <CreateCustomLink

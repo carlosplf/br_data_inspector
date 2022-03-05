@@ -38,7 +38,14 @@ class Header extends React.Component{
         const share_button = this.showShareButton();
         return(
             <div className={background_class}>
-                <h1>{this.props.header_text}</h1>
+                <div className="header-title-box">
+                    <h1>{this.props.header_text}</h1>
+                    <div className="header-title-underscore">
+                        <div id="color1"><p/></div>
+                        <div id="color2"><p/></div>
+                        <div id="color3"><p/></div>
+                    </div>
+                </div>
                 <div className="header-btns">
                     {table_data_button}
                     {share_button}

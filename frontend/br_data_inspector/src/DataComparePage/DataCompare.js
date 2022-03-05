@@ -237,7 +237,6 @@ class DataCompare extends React.Component{
 						show_share_button={false}
 						header_text="Comparação entre Instituições"
 						handle_modal={this.handleOpenDataModal}
-						dark_background={true}
 					/>
 
                     <CreateCustomLink show={this.state.show_custom_link_modal} handleClose={this.handleCloseCLModal}/>

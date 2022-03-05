@@ -3,8 +3,9 @@
 }
 
 .monthPicker1 select{
-    font-size: 1.2em;
-	border-radius: 6px;
+    font-size: 1.4em;
+    border-width: 0px;
+    border-bottom: 1px solid;
     height: 30px;
     background-color: #fff;
 }
@@ -14,14 +15,15 @@
 }
 
 .monthPicker2 select{
-    font-size: 1.2em;
-	border-radius: 6px;
+    font-size: 1.4em;
+    border-width: 0px;
+    border-bottom: 1px solid;
     height: 30px;
     background-color: #fff;
 }
 
 .monthPickerLabel {
-    color: #fff;
+    color: #202020;
     font-size: 1.2em;
 }
 
@@ -62,7 +64,7 @@ and (max-width : 1080px){
     }
 
     .monthPickerLabel {
-        color: #fff;
+        color: #202020;
         font-size: 1.4em;
     }
 

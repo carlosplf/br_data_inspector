@@ -2,32 +2,21 @@
     display: flex;
     width: 100%;
     height: 80px;
-    background-color: rgba(40,40,40,0.2);
     float: left;
     margin-bottom: 20px;
 }
 
-.header_dark_mode{
-    display: flex;
-    width: 100%;
-    height: 80px;
-    background-color: rgba(40,40,40,1);
-    float: left;
-    margin-bottom: 20px;
+.header-title-box h1{
+    color: #202020;
+    margin-left: 20px;
+    align-self: left;
 }
 
-.header_light_mode h1{
-    color: #FFF;
-    margin-left: 40px;
-	width: 60%;
-    align-self: center;
-}
-
-.header_dark_mode h1{
-    color: #FFF;
-    margin-left: 40px;
-	width: 60%;
-    align-self: center;
+.header-title-box p{
+    color: #202020;
+    margin-left: 20px;
+    align-self: left;
+    margin-top: -20px;
 }
 
 .header-btns{
@@ -35,14 +24,46 @@
 	flex-direction: row-reverse;
 	position:absolute; right: 0;	
     float: right;	
-    width: 40%;
+    width: 100%;
 	height: 80px;
 	align-items: flex-start;
 }
 
 .header-btns button{
-    min-width: 120px;
     font-size: 1.2em;
+}
+
+.header-title-box{
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+}
+
+.header-title-underscore{
+    display: flex;
+    width: 100%;
+    max-width: 300px;
+    flex-direction: row;
+    margin-top: -14px;
+}
+
+#color1{
+    margin-left: 20px;
+    width: 100%;
+    background-color: #009739;
+    height: 10px;
+}
+
+#color2{
+    background-color: #FEDD00;
+    width: 100%;
+    height: 10px;
+}
+
+#color3{
+    background-color: #012169;
+    width: 100%;
+    height: 10px;
 }
 
 #all-data-btn{
@@ -62,43 +83,43 @@
 }
 
 .page-btn{
-	height: 60px;
 	margin-left: 20px;
 	margin-right: 10px;
-	margin-top: 0px;
-	color: #202020;
-	background-color: #DDD;
-	border-radius: 4px;
-	border-width: 0px;
-	font-size: 30px;
+	margin-top: 10px;
     align-self: center;
+    vertical-align: middle;
+    background-color: rgba(0,0,0,0);
+    border-width: 0px;
 }
 
 .page-btn a{
 	text-decoration: none;
-	color: #222;
+	color: #012169;
     display: inline block;
-    vertical-align: middle;
+	font-size: 1.1em;
 }
 
-.page-btn:hover{
-	background-color: #EEE;
+.page-btn a:hover{
+    cursor: pointer;
 }
 
 #contracts-btn{
-    background-color: #1EB100;
+    background-color: #012169;
+    border-radius: 10px;
+    height: 40px;
 }
 
-#contracts-btn:hover > a{
+#contracts-btn a{
     color: #FFF;
+}
+
+#contracts-btn:hover{
+    background-color: #214189;
 }
 
 @media only screen 
 and (max-width : 1080px){ 
     .header{
-        height: 120px;
-    }
-    .header_dark_mode{
         height: 120px;
     }
     
@@ -109,7 +130,6 @@ and (max-width : 1080px){
         height: 120px;
     }
     .header-btns button{
-        min-width: 120px;
         font-size: 1.2em;
     }
 }

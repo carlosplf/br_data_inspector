@@ -69,7 +69,7 @@ class About extends React.Component{
         else{
             return(
                 <div className="aboutPage">
-                    <Header header_text="Sobre" dark_background={true}/>
+                    <Header header_text="Sobre"/>
                     <div className="container">
                     <div className="pureText">
                         <p align="justify">
@@ -84,6 +84,18 @@ class About extends React.Component{
                         <p align="justify">
                             O BR Data Collector é um sistema de código aberto, criado por Carlos Pereira Lopes Filho,
                             e sem qualquer ligação com qualquer empresa ou negócio.
+                        </p>
+                        <p id="what-to-search" align="justify">
+                            O que posso pesquisar: 
+                        </p>
+                        <p align="justify">
+                            O sistema possui dados de Despesas de Órgãos Federais, Contratos e Empresas contratadas.
+                        </p>
+                        <p align="justify">
+                            Ao pesquisar por qualquer órgão FEDERAL, o sistema deve retornar com dados de Despesas, Contratos publicados no período selecionado e categorias de gastos.
+                        </p>
+                        <p align="justify">
+                            O sistema também permite que o usuário pesquise por Empresas contratadas por instituições FEDERAIS, de acordo com os Contratos publicados.
                         </p>
                         <br></br>
                         <p><a id="githubIcon" href="https://github.com/carlosplf/br_data_inspector"><FaGithub/></a></p>
