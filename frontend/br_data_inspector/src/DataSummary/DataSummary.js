@@ -28,7 +28,7 @@ class DataSummary extends React.Component{
         "202103": "Março/21",
         "202104": "Abril/21",
         "202105": "Maio/21",
-        "202106": "Junho/21"
+        "202106": "Junho/21",
         "202107": "Julho/21",
         "202108": "Agosto/21",
         "202109": "Setembro/21",
