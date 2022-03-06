@@ -114,30 +114,20 @@ and (max-width : 1080px){
         width: 80%;
     }
 
-    .month-picker table{
-        margin-left: auto;
-    }
-
-    .month-picker td{
-        min-width: 200px;
-        font-size: 38px;
-        padding-bottom: 10px;
-    }
-
     input[type=checkbox] {
         transform: scale(3);
     }
 
     #search-btn{
-        font-size: 30px;
-        width: 80%;
-        height: 60px;
-        margin-top: 80px;
+        font-size: 2.8em;
+        width: 60%;
+        height: 120px;
+        margin-top: 200px;
     }
 
     .titleContainer{
         margin-top: 200px;
-        font-size: 1em;
+        font-size: 1.2em;
     }
 }
 
