@@ -9,7 +9,7 @@ services:
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
       - /etc/ssl/certs:/etc/ssl/certs
-      - backend_log:/home/carlos/Projects/br_data_inspector/backend/logs
+      - backend_log:/br_data_inspector/backend/logs
     depends_on:
       - mongo
       - redis
