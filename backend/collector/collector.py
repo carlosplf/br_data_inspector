@@ -1,6 +1,7 @@
 from collector.report_downloader import report_downloader
 from collector.csv_converter import csv_converter
 from collector.db_connector import db_connector
+from collector.db_connector import redis_connector
 from collector.data_updater import data_updater
 import json
 import logging
@@ -23,6 +24,7 @@ class Collector():
         """
         rpd = report_downloader.ReportDownloader()
         rpd.clear_download_folder()
+        self.__remove_reports_downloads()
 
         task_list = self.__parse_tasklist()
 
@@ -61,6 +63,10 @@ class Collector():
         #Download report and get the ZIP filename
         downloaded_report = rpd.download_report(url, arg)
 
+        if not downloaded_report:
+            logging.warning("Stoping cycle for this report...")
+            return
+
         #Extract the ZIP file downloaded and get the CSV filename(s)
         extracted_reports = rpd.extract_file(downloaded_report, inside_file_name)
        
@@ -70,6 +76,7 @@ class Collector():
             data_as_dict = csv_c.csv_to_dict(DOWNLOADS_PATH + single_report)
             self.__insert_to_db(data_as_dict, db_name)
 
+        self.__register_report_downloaded(url, arg)
         logging.debug("Finished cycle.")
 
     def update_all_dates_in_task_list(self):
@@ -117,3 +124,53 @@ class Collector():
             db_c.insert_data(data_as_dict[data_key])
         
         logging.debug("Done")
+
+    def __remove_reports_downloads(self):
+        """
+        Remove from Redis information about downloaded reports.
+        """
+        rc = redis_connector.RedisConnector()
+        rc.connect()
+        rc.set("downloaded_reports", json.dumps({"downloaded_reports": []}))
+
+    def __register_report_downloaded(self, report_url, report_url_arg):
+        """
+        Based on the Downloaded Report, save at the RedisDB the information about the Report.
+        The format saved on Redis is:
+            {
+                "downloaded_reports": [
+                    {
+                        "url": "url_to_report",
+                        "info": "some info about the report"
+                    },
+                ]
+            }
+        Args:
+            report_url: (str) Report URL
+            report_url_arg: (str) Report URL arg
+        """
+        logging.debug("Registering downloaded report...")
+        report_url = report_url + report_url_arg
+        
+        rc = redis_connector.RedisConnector()
+        rc.connect()
+        
+        downloaded_report_info = {}
+        already_in_redis = rc.get("downloaded_reports")
+        
+        if already_in_redis:
+            downloaded_report_info = json.loads(already_in_redis)
+        else:
+            downloaded_report_info["downloaded_reports"] = []
+
+        downloaded_report_info["downloaded_reports"].append(
+            {
+                "url": report_url,
+                "info": ""
+            }
+        )
+
+        return rc.set("downloaded_reports", json.dumps(downloaded_report_info))
+
+        
+        

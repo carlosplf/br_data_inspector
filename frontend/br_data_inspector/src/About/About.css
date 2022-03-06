@@ -12,6 +12,11 @@
     text-align: center;
 }
 
+#what-to-search{
+    font-weight: bold;
+    margin-top: 60px;
+}
+
 #githubIcon{
     font-size: 36pt;
     margin: 20px;
@@ -22,6 +27,11 @@
     font-size: 38pt;
     margin: 20px;
     cursor: pointer;
+}
+
+.reportLink{
+    text-align: left;
+    font-size: 0.6em;
 }
 
 

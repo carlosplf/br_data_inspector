@@ -7,7 +7,8 @@ class ContractsRank extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: true
+            loading: true,
+            show: false
         };
     }
 
@@ -117,22 +118,38 @@ class ContractsRank extends React.Component {
         return all_rows;
     }
 
+    toggleShowCard = () => {
+        console.log("Toggle!");
+        this.setState(prevState => ({
+            show: !prevState.show
+          }));
+    }
+
     render() {
         if (this.state.loading){
             return (<h3 className="loadingMessage"> Buscando Rank para {this.props.year}... </h3>)
         }
 
+        let table_class = "tableShow";
+        let expand_text_value = "Esconder tabela";
+        if (!this.state.show){
+            table_class = "tableHide";
+            expand_text_value = "Mostrar tabela"
+        }
+
         const all_rows = this.buildTableRows();
         const table = this.buildTable(all_rows);
+
         return (
             <div className="contractsRankCard">
                 <p className="cardTitle">
-                    Empresas que mais receberam considerando contratos publicados
-                    em {this.props.year}:
+                    Empresas que mais receberam em {this.props.year} (contratos publicados):
                 </p>
-                {table}
+                <p onClick={this.toggleShowCard} className="toggleTable"> {expand_text_value} </p>
+                <div className={table_class}>{table}</div>
             </div>
         );
+    
     }
 }
 

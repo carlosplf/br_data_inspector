@@ -31,7 +31,6 @@ class CompanyPage extends React.Component {
                     show_table_data={false}
                     header_text="Contratos da empresa"
                     handle_modal={this.handleOpenDataModal}
-                    dark_background={true}
                 />
                 <div className="companyDataBlock">
                     <CompanyData cnpj={this.state.cnpj}/>

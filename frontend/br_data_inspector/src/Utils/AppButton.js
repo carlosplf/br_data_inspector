@@ -1,18 +1,17 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { FaHome } from 'react-icons/fa';
-import { FaMedal } from 'react-icons/fa';
 
 class AppButton extends React.Component{
     render(){
         if(this.props.btn_type === "home-btn"){
             return(
-                <button id="home-btn" className="page-btn"><Link to="/home"> <FaHome/> </Link></button>
+                <button id="home-btn" className="page-btn"><Link to="/home"> <p> <FaHome/> </p> </Link></button>
             );
         }
         else if(this.props.btn_type === "rank-btn"){
             return(
-                <button id="rank-btn" className="page-btn"><Link to="/rank"> Maiores Despesas </Link></button>
+                <button id="rank-btn" className="page-btn"><Link to="/rank"> Ranking </Link></button>
             );
         }
         else if(this.props.btn_type === "contracts-btn"){
@@ -27,7 +26,7 @@ class AppButton extends React.Component{
         }
         else{
             return(
-                <span></span>
+                <p></p>
             )
         }
     }

@@ -18,7 +18,7 @@ class RankTable extends React.Component{
     frontend_port = process.env.REACT_APP_FRONTEND_PORT; 
 
     url_dates_2020 = "&dates=202001-202002-202003-202004-202005-202006-202007-202008-202009-202010-202011-202012";
-    url_dates_2021 = "&dates=202101-202102-202103-202104-202105-202106";
+    url_dates_2021 = "&dates=202101-202102-202103-202104-202105-202106-202107-202108-202109-202110-202111-202112";
 
     componentDidMount(){
         this.requestDataFromAPI();
@@ -103,9 +103,9 @@ class RankTable extends React.Component{
             const data_table = this.buildTable();
             return(
                 <div className="tableDiv">
-                    <p>
+                    <p className="tableObs">
                         Tabela com entidades classificadas como Subordinadas, ordenadas
-                        pela soma de valores recebidos (PAGO) em {this.props.date_year}.
+                        pela soma de valores PAGOs em {this.props.date_year}.
                     </p>
                     {data_table}
                 </div>

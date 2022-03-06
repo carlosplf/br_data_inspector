@@ -110,3 +110,8 @@ def get_engine_status():
     di = data_inspector.DataInspector(db)
     status_return["total_expenses"] = di.get_count_entries()
     return status_return
+
+@app.route('/downloaded_reports')
+def get_downloaded_reports():
+    di = data_inspector.DataInspector(None)
+    return di.get_downloaded_reports()

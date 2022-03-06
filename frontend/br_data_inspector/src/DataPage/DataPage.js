@@ -185,7 +185,6 @@ class DataPage extends React.Component {
                         show_table_data={false}
                         header_text="Resumo de Despesas"
                         handle_modal={this.handleOpenDataModal}
-                        dark_background={true}
                     />
                     <h1> Ops, sem dados para o período :( </h1>
                 </div>
@@ -202,7 +201,6 @@ class DataPage extends React.Component {
                         show_table_data={false}
                         header_text="Resumo de Despesas"
                         handle_modal={this.handleOpenDataModal}
-                        dark_background={true}
                     />
 
                     <CreateCustomLink

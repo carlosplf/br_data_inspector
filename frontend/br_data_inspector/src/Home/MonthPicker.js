@@ -127,6 +127,42 @@ class MonthPicker extends React.Component{
             'month': 'Junho',
             'year': '2021',
             'year_month': '202106'
+        },
+        {
+            'array_position': 19,
+            'month': 'Julho',
+            'year': '2021',
+            'year_month': '202107'
+        },
+        {
+            'array_position': 20,
+            'month': 'Agosto',
+            'year': '2021',
+            'year_month': '202108'
+        },
+        {
+            'array_position': 21,
+            'month': 'Setembro',
+            'year': '2021',
+            'year_month': '202109'
+        },
+        {
+            'array_position': 22,
+            'month': 'Outubro',
+            'year': '2021',
+            'year_month': '202110'
+        },
+        {
+            'array_position': 23,
+            'month': 'Novembro',
+            'year': '2021',
+            'year_month': '202111'
+        },
+        {
+            'array_position': 24,
+            'month': 'Dezembro',
+            'year': '2021',
+            'year_month': '202112'
         }
     ]
 

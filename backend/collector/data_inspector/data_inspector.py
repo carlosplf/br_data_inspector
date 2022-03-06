@@ -86,6 +86,11 @@ class DataInspector():
         result = self.db_connector.query(filter=query_filter)
         return transform_data_in_list(query_result=result, entity_type=entity_type, remove_duplicated=False)
 
+    def get_downloaded_reports(self):
+        rc = redis_connector.RedisConnector()
+        rc.connect()
+        return (json.loads(rc.get("downloaded_reports")))
+
     def get_entity_rank(self, entity_type=None, rank_size=20, date_year=2020):
         """
         Get the Entity Rank from RedisDB.

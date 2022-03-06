@@ -121,7 +121,6 @@ class ContractsPage extends React.Component {
                         show_table_data={false}
                         header_text="Contratos e Empresas"
                         handle_modal={undefined}
-                        dark_background={true}
                     />
 
                     <h3 className="contractsPageTitle"> Pesquisar por empresa contratada: </h3>

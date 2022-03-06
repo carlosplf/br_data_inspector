@@ -10,3 +10,61 @@
 .allContractsData{
     width: 90%;
 }
+
+.companyName{
+    text-align: center;
+}
+
+.summaryCard{
+    border-radius: 10px;
+  	background: #202020;
+    color: #eee;
+    margin: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 20px;
+}
+
+.summaryTitle{
+    font-size: 1.6em;
+    text-align: center;
+}
+
+.buyersTable table{
+    width: 100%;
+    background-color: #eee;
+    border-radius: 10px;
+    padding: 20px;
+    color: #202020;
+    padding-bottom: 20px;
+    font-size: 1.0em;
+}
+
+.buyersTable th, td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.buyerQtd{
+    text-align: right;
+}
+
+.qtdHeader{
+    text-align: right;
+}
+
+.buyerTotal{
+    text-align: right;
+}
+
+.totalHeader{
+    text-align: right;
+}
+
+.nameHeader{
+    text-align: left;
+}
+
+.allCardsTitle{
+    text-align: center;
+    margin-top: 40px;
+}
