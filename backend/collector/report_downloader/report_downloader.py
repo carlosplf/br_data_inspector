@@ -7,6 +7,8 @@ import ssl
 import os
 
 
+DOWNLOAD_RETRIES = 3
+
 class ReportDownloader():
     def __init__(self):
         self.reports_downloaded = []
@@ -36,14 +38,24 @@ class ReportDownloader():
         logging.debug("Downloading from Link: %s", link)
         logging.debug("Output filename: %s", zip_filename)
 
-        try:
-            urllib.request.urlretrieve(link, zip_filename)
-        except urllib.error.URLError as e:
-            logging.warning("Couldn't download Report.")
-            logging.warning(e.reason)
-            return None
+        try_number = 0
 
+        while True:
+            
+            if try_number == DOWNLOAD_RETRIES:
+                logging.warning("Falied to download: maximum retries. Returning empty.")
+                return None
+
+            try:
+                urllib.request.urlretrieve(link, zip_filename)
+                break
+            except urllib.error.URLError as e:
+                logging.warning("Couldn't download Report.")
+                logging.warning(e.reason)
+                try_number += 1
+        
         logging.debug("Done")
+        
         time.sleep(1)
 
         self.reports_downloaded.append(zip_filename)
