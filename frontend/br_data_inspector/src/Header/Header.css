@@ -32,10 +32,7 @@
     width: 50%;
 	height: 80px;
 	align-items: flex-start;
-}
-
-.header-btns button{
-    font-size: 1.2em;
+    margin-right: 40px;
 }
 
 .header-title-box{
@@ -101,15 +98,31 @@
 	text-decoration: none;
 	color: #012169;
     display: inline block;
-	font-size: 1.2em;
+	font-size: 1.4em;
 }
 .page-btn p{
 	color: #012169;
 	font-size: 1.2em;
 }
 
-.page-btn a:hover{
+.page-btn:hover{
     cursor: pointer;
+}
+
+.page-btn::after{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 4px;
+    bottom: 0;
+    left: 0;
+    background-color: #012169;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.page-btn:hover::after{
+    transform: scaleX(1);
 }
 
 #contracts-btn{
@@ -161,8 +174,8 @@ and (max-width : 1080px){
     .header-btns{
         height: 10%;
     }
-    
-    .header-btns button{
-        font-size: 1.8em;
+
+    .page-btn{
+        font-size: 1.6em;
     }
 }

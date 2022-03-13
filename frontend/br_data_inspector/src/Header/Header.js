@@ -1,6 +1,5 @@
 import React from "react";
 import '../Header/Header.css';
-import AppButton from '../Utils/AppButton';
 import { FaShareAlt } from 'react-icons/fa';
 import { Link } from "react-router-dom";
 
@@ -50,9 +49,15 @@ class Header extends React.Component{
                 <div className="header-btns">
                     {table_data_button}
                     {share_button}
-                    <AppButton btn_type="about-btn"/>
-                    <AppButton btn_type="rank-btn"/>
-                    <AppButton btn_type="contracts-btn"/>
+                    <div className="page-btn">
+                        <a href="/about"> Sobre </a>
+                    </div>
+                    <div className="page-btn">
+                        <a href="/rank"> Ranking </a>
+                    </div>
+                    <div className="page-btn">
+                        <a href="/contracts"> Contratos </a>
+                    </div>
                 </div>
             </div>
         )
