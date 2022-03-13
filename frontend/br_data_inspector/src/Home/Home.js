@@ -195,21 +195,9 @@ class Home extends React.Component{
                         <Header header_text="BR Data Collector" handle_modal={this.handleOpenDataModal}/>
 
                         <div className="titleContainer">
-                            <span className="pageTitle">Pesquisar por: </span>
-                            <Typing hideCursor={true} speed={30}>
-                                <div>
-                                    <span className="pageTitleSpam">Ministério da Saúde.</span>
-                                    <Typing.Backspace delay={1000} count={22} />
-                                    <span className="pageTitleSpam">Ministério da Economia.</span>
-                                    <Typing.Backspace delay={1000} count={24} />
-                                    <span className="pageTitleSpam">Comando do Exército.</span>
-                                    <Typing.Backspace delay={1000} count={24} />
-                                    <span className="pageTitleSpam">Universidade Federal de São Carlos.</span>
-                                    <Typing.Backspace delay={1000} count={36} />
-                                    <span className="pageTitleSpam">Agência Espacial Brasileira.</span>
-                                </div>
-                            </Typing>
+                            <span className="pageTitle">Pesquise uma Instituição Federal </span>
                         </div>
+
                         <SearchEntity
                             search_id="search_1"
                             show={true}
