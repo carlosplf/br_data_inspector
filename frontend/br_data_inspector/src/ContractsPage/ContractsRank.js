@@ -8,7 +8,7 @@ class ContractsRank extends React.Component {
         super(props);
         this.state = {
             loading: true,
-            show: false
+            show: true
         };
     }
 
