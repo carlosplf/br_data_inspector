@@ -12,6 +12,7 @@ import CreateCustomLink from "../CustomLink/CreateCustomLink.js";
 import ExpensesTable from "../Expenses/ExpensesTable.js";
 import LoadingBar from "react-top-loading-bar";
 import ContractsData from "../ContractsData/ContractsData";
+import BiddingsData from "../BiddingsData/BiddingsData";
 
 //Component responsible of showing info about a single Entity searched.
 class DataPage extends React.Component {
@@ -220,7 +221,7 @@ class DataPage extends React.Component {
                     <DataSummary
                         dates={this.dates_to_search}
                         name={this.state.data[0]["Nome Órgão Subordinado"]}
-                        key={this.entity_id}
+                        entity_id={this.entity_id}
                         data={this.state.data}
                         values_summary={this.state.values_summary}
                         data_keys={this.state.data_keys}
@@ -236,10 +237,18 @@ class DataPage extends React.Component {
                         entity_name={
                             this.state.data[0]["Nome Órgão Subordinado"]
                         }
+                        entity_id={this.entity_id}
                         data={this.state.data}
                     />
 
                     <ContractsData
+                        dates={this.dates_to_search}
+                        entity_id={
+                            this.state.data[0]["Código Órgão Subordinado"]
+                        }
+                    />
+                    
+                    <BiddingsData
                         dates={this.dates_to_search}
                         entity_id={
                             this.state.data[0]["Código Órgão Subordinado"]

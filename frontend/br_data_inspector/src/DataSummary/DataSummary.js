@@ -54,6 +54,7 @@ class DataSummary extends React.Component{
 
     render(){
         const dates_list = this.processDates();
+        console.log(this.props.entity_id)
         return(
             <div className="data-summary">
                 <h2>{this.props.name}</h2>
@@ -61,6 +62,13 @@ class DataSummary extends React.Component{
                     <p id="monthsSelectedLabel">Meses selecionados:</p>
                     <div className="listMonthsSelected">
                         {dates_list}
+                    </div>
+                    <br></br>
+                    <div className="dataLinks">
+                        <p>Informações na página:</p> 
+                        <a className="sectionlink" href={"#expensesData" + this.props.entity_id}>Despesas</a>
+                        <a className="sectionlink" href={"#contractsData" + this.props.entity_id}>Contratos</a>
+                        <a className="sectionlink" href={"#biddingsData" + this.props.entity_id}>Licitações</a>
                     </div>
                 </div>
                 <h3>Valores gastos no período:</h3>

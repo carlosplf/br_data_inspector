@@ -85,7 +85,7 @@ class ExpensesTable extends React.Component{
     render(){
         const data_table = this.buildTable();
         return(
-            <div className="expensesBlock">
+            <div className="expensesBlock" id={"expensesData" + this.props.entity_id}>
                 <h1> Elementos de Despesas: </h1>
                 <h3> {this.props.entity_name}</h3>
                 {data_table}
