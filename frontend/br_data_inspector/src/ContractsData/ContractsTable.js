@@ -13,6 +13,10 @@ class ContractsTable extends React.Component {
         };
     }
 
+    componentDidMount(){
+        this.createUniqueID(); 
+    }
+
     formatNumbers(x) {
         x = x.slice(0, -2);
         if (!x) {
@@ -22,7 +26,12 @@ class ContractsTable extends React.Component {
     }
 
     //For all contracts, create a unique ID for each one.
+    //TODO: Calling createUniqueID in every render. Should call only
+    //when have all the Data collected.
     createUniqueID() {
+        if(this.state.ids_created){
+            return;
+        }
         var new_all_contracts = [];
         this.props.contracts_data.forEach((item) => {
             item["ID"] =
@@ -39,8 +48,8 @@ class ContractsTable extends React.Component {
         });
 
         this.setState({
-            all_contracts: sorted_contracts_array,
             ids_created: true,
+            all_contracts: sorted_contracts_array
         });
     }
 
@@ -77,7 +86,7 @@ class ContractsTable extends React.Component {
         if (this.state.expandedRows.includes(item["ID"])) {
             itemRows.push(
                 <tr className="expandedTR" key={"row-expanded-" + item["ID"]}>
-                    <td colspan="5" className="expandedRow">
+                    <td colSpan="5" className="expandedRow">
                         <div className="moreInfo">
                             <h3> Detalhes: </h3>
                             <p>CNPJ: {item["CNPJ Contratado"]}</p>
@@ -130,14 +139,7 @@ class ContractsTable extends React.Component {
 
     render() {
         let allItemRows = [];
-
-        if (
-            !this.state.ids_created ||
-            this.state.all_contracts.length != this.props.contracts_data.length
-        ) {
-            this.createUniqueID();
-        }
-
+       
         this.state.all_contracts.forEach((item) => {
             const perItemRows = this.renderItem(item);
             allItemRows = allItemRows.concat(perItemRows);

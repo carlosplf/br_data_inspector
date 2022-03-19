@@ -31,21 +31,21 @@ class BiddingsData extends React.Component{
 		var all_promises = [];
 		var month_date = "";
 
-		for(var i=0; i<this.props.dates.length; i++){
+		for(var i=0; i<this.props.dates.length;){
 			all_promises = [];
 
 			for (var j=0; j<this.batch_request_size; j++){
 
-				if(!this.props.dates[j+i]){
+				if(!this.props.dates[i]){
 					break;
 				}
 
-				month_date = this.props.dates[j+i];
+				month_date = this.props.dates[i];
 
 				//For each month_date iteration step, request data for Entity 1 and 2.
 				all_promises.push(this.requestDataFromAPI(month_date));
 
-				i += j;
+				i++;
 			};
 
 			//Wait a batch of requests to finish.
@@ -84,7 +84,7 @@ class BiddingsData extends React.Component{
 			return <h1> Buscando dados de Licitações... </h1>
         }
 
-        if(this.state.data.length == 0){
+        if(this.state.data.length === 0){
             return <h1> Nenhuma licitação foi aberta no período. </h1>
         }
 

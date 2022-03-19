@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-	XYPlot,
 	XAxis,
 	YAxis,
 	VerticalGridLines,
@@ -102,7 +101,7 @@ class DataBarChartComparison extends React.Component{
 			dataset_all_months_and_keys.push(this.sumByMonth(entity_1_or_2, single_key));
 		});
         
-        var entity_1_or_2 = 2;
+        entity_1_or_2 = 2;
 		this.keys_to_show.forEach(single_key => {
 			dataset_all_months_and_keys.push(this.sumByMonth(entity_1_or_2, single_key));
 		});
@@ -143,7 +142,7 @@ class DataBarChartComparison extends React.Component{
                     }}
                     onValueMouseOut={(datapoint, event) => {this.setState({show_hint: false})}}
                     color={this.graph_bar_colors[i]}
-                    style={{strokeWidth: 12}, {marginLeft: 10}}
+                    style={{strokeWidth: 12, marginLeft: 10}}
                     data={prepared_data[i]}
                 />
 			);

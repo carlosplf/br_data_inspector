@@ -1,8 +1,6 @@
 import React from "react";
 import DataSummary from "../DataSummary/DataSummary.js";
 import { withRouter } from "react-router-dom";
-import ReactModal from "react-modal";
-import ModalContent from "../DataPage/ModalContent";
 import DataBarChart from "../DataChart/DataBarChart";
 import queryString from "query-string";
 import Header from "../Header/Header";
@@ -119,10 +117,7 @@ class DataPage extends React.Component {
 
     //For each API response data, concatenate with already collected data in state.
     processData(api_response) {
-        if (api_response["data"].length === 0) {
-            console.log("Empty data. Skipping...");
-        }
-        if (!this.state.data) {
+        if (api_response["data"].length !== 0 && !this.state.data) {
             return api_response["data"];
         }
         return this.state.data.concat(api_response["data"]);

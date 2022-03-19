@@ -14,6 +14,10 @@ class BiddingsTable extends React.Component {
         };
     }
 
+    componentDidMount(){
+        this.createUniqueID(); 
+    }
+
     formatNumbers(x) {
         x = x.slice(0, -2);
         if (!x) {
@@ -24,6 +28,9 @@ class BiddingsTable extends React.Component {
 
     //For all Biddings, create a unique ID for each one.
     createUniqueID() {
+        if(this.state.ids_created){
+            return;
+        }
         var new_all_biddings = [];
         this.props.biddings_data.forEach((item) => {
             item["ID"] =
@@ -38,10 +45,10 @@ class BiddingsTable extends React.Component {
                 parseFloat(a["Valor Licitação"])
             );
         });
-
+        
         this.setState({
-            all_biddings: sorted_biddings_array,
             ids_created: true,
+            all_biddings: sorted_biddings_array
         });
     }
 
@@ -79,7 +86,7 @@ class BiddingsTable extends React.Component {
         if (this.state.expandedRows.includes(item["ID"])) {
             itemRows.push(
                 <tr className="expandedTR" key={"row-expanded-" + item["ID"]}>
-                    <td colspan="5" className="expandedRow">
+                    <td colSpan="5" className="expandedRow">
                         <div className="moreInfo">
                             <h3> Detalhes: </h3>
                             <p>{item["Objeto"]}</p>
@@ -116,13 +123,6 @@ class BiddingsTable extends React.Component {
 
     render() {
         let allItemRows = [];
-
-        if (
-            !this.state.ids_created ||
-            this.state.all_biddings.length != this.props.biddings_data.length
-        ) {
-            this.createUniqueID();
-        }
 
         this.state.all_biddings.forEach((item) => {
             const perItemRows = this.renderItem(item);

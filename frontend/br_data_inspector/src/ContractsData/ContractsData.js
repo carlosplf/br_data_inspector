@@ -85,7 +85,7 @@ class ContractsData extends React.Component{
 			return <h1> Buscando dados de Contratos... </h1>
         }
 
-        if(this.state.data.length == 0){
+        if(this.state.data.length === 0){
             return <h1> Sem contratos para o período. </h1>
         }
 

@@ -6,10 +6,6 @@ class DataSummary extends React.Component{
 
     /* This Component show the sums of values for the rendered Transactions Table. */
 
-    constructor(props){
-        super(props);
-    }
-
     date_map = {
         "202001": "Janeiro/20",
         "202002": "Fevereiro/20",
@@ -46,7 +42,7 @@ class DataSummary extends React.Component{
     processDates(){
         var dates_list = this.props.dates.map( (d) => {
             return(
-                <spam key={d} className="monthSelected"> {this.date_map[d]} </spam>
+                <p key={d} className="monthSelected"> {this.date_map[d]} </p>
             )
         })
         return dates_list;
@@ -54,7 +50,6 @@ class DataSummary extends React.Component{
 
     render(){
         const dates_list = this.processDates();
-        console.log(this.props.entity_id)
         return(
             <div className="data-summary">
                 <h2>{this.props.name}</h2>
