@@ -18,7 +18,7 @@
     font-size: 1.2em;
 }
 
-.normalTR td:hover{
+.normalTR:hover{
     cursor: pointer;
     background-color: #606060;
 }
@@ -43,13 +43,20 @@
     font-size: 0.8em;
 }
 
-.columnValor{
-    text-align: end;
-    width: 24%;
+.columnObjectHeader{
+    width: 50%;
 }
 
-.columnLicitacao{
-    width: 20%;
+.columnIdHeader{
+    width: 10%;
+}
+
+.columnStatusHeader{
+    width: 15%;
+}
+
+.columnValueHeader{
+    width: 25%;
 }
 
 @media only screen 

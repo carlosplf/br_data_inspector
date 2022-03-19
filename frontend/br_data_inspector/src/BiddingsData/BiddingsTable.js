@@ -68,7 +68,7 @@ class BiddingsTable extends React.Component {
                     {<FaAngleRight />}
                     {item["Número Licitação"]}
                 </td>
-                <td className="columnAbertura">{item["Objeto"].substring(0,64)}...</td>
+                <td className="columnAbertura">{item["Objeto"].substring(8,68)}...</td>
                 <td className="columnStatus">{item["Situação Licitação"]}</td>
                 <td className="columnValor">
                     R$ {this.formatNumbers(item["Valor Licitação"])}
@@ -85,6 +85,7 @@ class BiddingsTable extends React.Component {
                             <p>{item["Objeto"]}</p>
                             <p>Modalidade: {item["Modalidade Compra"]}</p>
                             <p>Situação: {item["Situação Licitação"]}</p>
+                            <p>Data da Abertura: {item["Data Abertura"]}</p>
                             <p>Data do Resultado: {item["Data Resultado Compra"]}</p>
                         </div>
                     </td>
@@ -101,10 +102,10 @@ class BiddingsTable extends React.Component {
                 <table>
                     <tbody>
                         <tr>
-                            <th> Licitação </th>
-                            <th> Data de Abertura </th>
-                            <th> Status </th>
-                            <th> Valor Final da Compra </th>
+                            <th className="columnIdHeader"> Licitação </th>
+                            <th className="columnObjectHeader"> Objeto </th>
+                            <th className="columnStatusHeader"> Status </th>
+                            <th className="columnValueHeader"> Valor Final da Compra </th>
                         </tr>
                         {table_rows}
                     </tbody>

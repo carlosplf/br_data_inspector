@@ -65,13 +65,13 @@ class DataSummary extends React.Component{
                     </div>
                     <br></br>
                     <div className="dataLinks">
-                        <p>Informações na página:</p> 
+                        <p> Informações coletadas:</p> 
                         <a className="sectionlink" href={"#expensesData" + this.props.entity_id}>Despesas</a>
                         <a className="sectionlink" href={"#contractsData" + this.props.entity_id}>Contratos</a>
                         <a className="sectionlink" href={"#biddingsData" + this.props.entity_id}>Licitações</a>
                     </div>
                 </div>
-                <h3>Valores gastos no período:</h3>
+                <h3>Soma de valores para o período:</h3>
                 {this.props.data_keys.map(key => (
                     <p key={key}>{key}: { this.formatNumbers(this.props.values_summary[key])}</p>
                     ))}
