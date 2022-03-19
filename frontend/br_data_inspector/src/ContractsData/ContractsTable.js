@@ -102,6 +102,7 @@ class ContractsTable extends React.Component {
                                 {item["Data Início Vigência"]}
                             </p>
                             <p>Válido até: {item["Data Fim Vigência"]}</p>
+                            <p>Data da Publicação no DOU: {item["Data Publicação DOU"]}</p>
                             <p>Situação: {item["Situação Contrato"]}</p>
                             <p>
                                 Valor Inicial: R${" "}
