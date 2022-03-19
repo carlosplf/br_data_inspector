@@ -14,7 +14,7 @@ class BiddingsTable extends React.Component {
             previous_length: 0
         };
     }
-
+    
     componentDidMount(){
         this.createUniqueID();
     }

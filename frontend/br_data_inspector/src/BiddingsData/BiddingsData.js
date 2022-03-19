@@ -36,9 +36,7 @@ class BiddingsData extends React.Component{
 
 			for (var j=0; j<this.batch_request_size; j++){
 
-				if(!this.props.dates[i]){
-					break;
-				}
+				if(!this.props.dates[i]) break;
 
 				month_date = this.props.dates[i];
 
