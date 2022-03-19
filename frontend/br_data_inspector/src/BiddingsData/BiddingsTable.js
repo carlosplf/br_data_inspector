@@ -11,11 +11,19 @@ class BiddingsTable extends React.Component {
             ids_created: false,
             expandedRows: [],
             all_biddings: [],
+            previous_length: 0
         };
     }
 
     componentDidMount(){
-        this.createUniqueID(); 
+        this.createUniqueID();
+    }
+    
+    componentDidUpdate(){
+        //IF enter this conditional, we have new data to define IDs and sort.
+        if(this.state.previous_length !== this.props.biddings_data.length){
+            this.createUniqueID();
+        }
     }
 
     formatNumbers(x) {
@@ -28,9 +36,9 @@ class BiddingsTable extends React.Component {
 
     //For all Biddings, create a unique ID for each one.
     createUniqueID() {
-        if(this.state.ids_created){
-            return;
-        }
+        
+        this.setState({previous_length: this.props.biddings_data.length});
+        
         var new_all_biddings = [];
         this.props.biddings_data.forEach((item) => {
             item["ID"] =
@@ -47,7 +55,6 @@ class BiddingsTable extends React.Component {
         });
         
         this.setState({
-            ids_created: true,
             all_biddings: sorted_biddings_array
         });
     }

@@ -10,11 +10,8 @@ class ContractsTable extends React.Component {
             ids_created: false,
             expandedRows: [],
             all_contracts: [],
+            previous_length: 0
         };
-    }
-
-    componentDidMount(){
-        this.createUniqueID(); 
     }
 
     formatNumbers(x) {
@@ -25,13 +22,22 @@ class ContractsTable extends React.Component {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
-    //For all contracts, create a unique ID for each one.
-    //TODO: Calling createUniqueID in every render. Should call only
-    //when have all the Data collected.
-    createUniqueID() {
-        if(this.state.ids_created){
-            return;
+    componentDidMount(){
+        this.createUniqueID();
+    }
+    
+    componentDidUpdate(){
+        //IF enter this conditional, we have new data to define IDs and sort.
+        if(this.state.previous_length !== this.props.contracts_data.length){
+            this.createUniqueID();
         }
+    }
+
+    //For all contracts, create a unique ID for each one.
+    createUniqueID() {
+
+        this.setState({previous_length: this.props.contracts_data.length});
+
         var new_all_contracts = [];
         this.props.contracts_data.forEach((item) => {
             item["ID"] =
@@ -47,10 +53,7 @@ class ContractsTable extends React.Component {
             );
         });
 
-        this.setState({
-            ids_created: true,
-            all_contracts: sorted_contracts_array
-        });
+        this.setState({all_contracts: sorted_contracts_array});
     }
 
     handleRowClick(rowId) {
@@ -138,6 +141,7 @@ class ContractsTable extends React.Component {
     }
 
     render() {
+
         let allItemRows = [];
        
         this.state.all_contracts.forEach((item) => {
@@ -145,7 +149,7 @@ class ContractsTable extends React.Component {
             allItemRows = allItemRows.concat(perItemRows);
         });
 
-        const full_table = this.buildTable(allItemRows);
+        let full_table = this.buildTable(allItemRows);
 
         return <div className="contractsTableContainer">{full_table}</div>;
     }
