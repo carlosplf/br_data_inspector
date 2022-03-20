@@ -18,5 +18,12 @@
         "link": "https://www.portaltransparencia.gov.br/download-de-dados/licitacoes/",
         "args": ["202001", "202002", "202003"],
         "inside_file_name": "_Licitaç╞o.csv"
+    },
+    "task_4":{
+        "task_name": "Biddings Reports",
+        "db_name": "biddings-companies-data",
+        "link": "https://www.portaltransparencia.gov.br/download-de-dados/licitacoes/",
+        "args": ["202001", "202002", "202003"],
+        "inside_file_name": "_ParticipantesLicitaç╞o.csv"
     }
 }
