@@ -42,7 +42,7 @@ class CompaniesInfo extends React.Component{
     renderItem(item) {
         const itemRows = [
             <tr>
-                <td>{item["CNPJ Participante"]}</td>
+                <td><a href={"/company?cnpj=" + item["CNPJ Participante"]}>{item["CNPJ Participante"]}</a></td>
                 <td>{item["Nome Participante"]}</td>
                 <td>{item["Flag Vencedor"]}</td>
             </tr>,

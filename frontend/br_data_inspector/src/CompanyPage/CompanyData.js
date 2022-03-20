@@ -182,6 +182,12 @@ class CompanyData extends React.Component {
 
         else{
 
+            if(this.state.data.length === 0){
+                return (
+                    <h1> A empresa buscada não possui Contratos. </h1>
+                )
+            }
+
             if(!this.state.all_cards_rendered){
                 return (
                     <h1> Rendering cards... </h1>
