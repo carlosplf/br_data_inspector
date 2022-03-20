@@ -1,5 +1,6 @@
 import React from 'react';
 import '../BiddingsData/CompaniesInfo.css';
+import '../BiddingsData/BiddingLoading.css';
 
 
 class CompaniesInfo extends React.Component{
@@ -8,7 +9,8 @@ class CompaniesInfo extends React.Component{
         super(props);
         this.state = {
             data: [],
-            show_data: false
+            show_data: false,
+            loading: true
         }
     }
     
@@ -27,7 +29,7 @@ class CompaniesInfo extends React.Component{
 		return new Promise((resolve, reject) => {
 			return fetch(request_url).then(response => response.json()).then(data => {
 				if (data) {
-                    resolve(this.setState({data: data["data"]}));
+                    resolve(this.setState({data: data["data"], loading: false}));
 				} else {
 					reject(new Error('Request failed. Empty Data return.'))
 				}
@@ -70,13 +72,25 @@ class CompaniesInfo extends React.Component{
         let allItemRows = [];
         let full_table = [];
         
-        if(this.state.data.length === 0){
+        if(this.state.data.length === 0 && this.state.loading === true){
             return(
-                <div className="searchingBiddingCompanies">
-                    <p>Buscando informações dos participantes...</p>
+                <div className="biddingLoading">
+                    <svg viewBox="25 25 50 50">
+                        <circle cx="50" cy="50" r="20"></circle>
+                    </svg>
+                    <p>Buscando Informações de empresas participantes...</p>
                 </div>
             )
         }
+
+        else if(this.state.data.length === 0 && this.state.loading === false){
+            return(
+                <div className="noBiddingCompaniesFound">
+                    <p>Nenhuma informação de empresas participantes encontrada :(</p>
+                </div>
+            )
+        }
+
         else{
         
             this.state.data.forEach((item) => {
