@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { FaAngleRight } from "react-icons/fa";
 import '../BiddingsData/BiddingsTable.css';
+import CompaniesInfo from '../BiddingsData/CompaniesInfo.js';
 
 
 class BiddingsTable extends React.Component {
@@ -14,7 +15,7 @@ class BiddingsTable extends React.Component {
             previous_length: 0
         };
     }
-    
+
     componentDidMount(){
         this.createUniqueID();
     }
@@ -99,8 +100,14 @@ class BiddingsTable extends React.Component {
                             <p>{item["Objeto"]}</p>
                             <p>Modalidade: {item["Modalidade Compra"]}</p>
                             <p>Situação: {item["Situação Licitação"]}</p>
+                            <p>N. Processo: {item["Número Processo"]}</p>
                             <p>Data da Abertura: {item["Data Abertura"]}</p>
                             <p>Data do Resultado: {item["Data Resultado Compra"]}</p>
+                            <CompaniesInfo
+                                entity_id={this.props.entity_id}
+                                bidding_id={item["Número Licitação"]}
+                                process_id={item["Número Processo"]}
+                            />
                         </div>
                     </td>
                 </tr>

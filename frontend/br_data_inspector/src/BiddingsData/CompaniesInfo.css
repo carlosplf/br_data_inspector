@@ -1,0 +1,18 @@
+.biddingCompaniesInfo{
+    background-color: #66bb6a;
+    align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 10px;
+}
+
+.biddingCompaniesInfo table{
+    color: #202020;
+    font-size: 1.0em;
+}
+
+.biddingCompaniesInfo h3{
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}

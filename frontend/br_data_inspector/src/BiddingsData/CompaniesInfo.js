@@ -1,0 +1,99 @@
+import React from 'react';
+import '../BiddingsData/CompaniesInfo.css';
+
+
+class CompaniesInfo extends React.Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+            data: [],
+            show_data: false
+        }
+    }
+    
+    api_url = process.env.REACT_APP_API_URL;
+    api_port = process.env.REACT_APP_API_PORT;
+
+    componentDidMount(){
+        this.requestDataFromAPI();
+    }
+	
+    //Call Backend API and retrieve data about Companies for a specific Bidding.
+	requestDataFromAPI(){
+		var base_url = this.api_url + ":" + this.api_port;
+		var request_url = base_url + "/biddings/companies/" + this.props.entity_id + "/" + this.props.bidding_id + "/" + this.props.process_id;
+
+		return new Promise((resolve, reject) => {
+			return fetch(request_url).then(response => response.json()).then(data => {
+				if (data) {
+                    resolve(this.setState({data: data["data"]}));
+				} else {
+					reject(new Error('Request failed. Empty Data return.'))
+				}
+			}, error => {
+				reject(new Error('Request failed.'))
+			})
+		})
+	}
+    
+    renderItem(item) {
+        const itemRows = [
+            <tr>
+                <td>{item["CNPJ Participante"]}</td>
+                <td>{item["Nome Participante"]}</td>
+                <td>{item["Flag Vencedor"]}</td>
+            </tr>,
+        ];
+        return itemRows;
+    }
+    
+    buildTable(table_rows) {
+        return (
+            <div className="biddingsTable">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th className="columnCompanyCNPJ"> CNPJ </th>
+                            <th className="columnCompanyName"> Nome </th>
+                            <th className="columnCompanyWon"> Ganhou </th>
+                        </tr>
+                        {table_rows}
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
+
+
+    render(){
+        let allItemRows = [];
+        let full_table = [];
+        
+        if(this.state.data.length === 0){
+            return(
+                <div className="searchingBiddingCompanies">
+                    <p>Buscando informações dos participantes...</p>
+                </div>
+            )
+        }
+        else{
+        
+            this.state.data.forEach((item) => {
+                const perItemRows = this.renderItem(item);
+                allItemRows = allItemRows.concat(perItemRows);
+            });
+        
+            full_table = this.buildTable(allItemRows);
+            
+            return(
+                <div className="biddingCompaniesInfo">
+                    <h3> Empresas participantes </h3>
+                    {full_table}
+                </div>
+            )
+        }
+    }
+}
+
+export default CompaniesInfo;

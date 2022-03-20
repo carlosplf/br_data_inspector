@@ -58,7 +58,7 @@ class BiddingsData extends React.Component{
         this.setState({data: new_data, loading: false, requests_done: requests_done});
     }
 
-	//Call Backend API and retrieve data about Contracts
+	//Call Backend API and retrieve data about Biddings
 	requestDataFromAPI(month_date){
 		var base_url = this.api_url + ":" + this.api_port;
 		var request_url = base_url + "/biddings/" + this.props.entity_id + "/" + month_date;
@@ -92,7 +92,7 @@ class BiddingsData extends React.Component{
 					<h1> Licitações abertas no período: </h1>
                 	<p id="clickToExpand">(clique na linha para expandir)</p>
 					<h3 id="entityName">{this.props.entity_name}</h3>
-                    <BiddingsTable biddings_data={this.state.data}/>
+                    <BiddingsTable entity_id={this.props.entity_id} biddings_data={this.state.data}/>
                 </div>
             );
         }
