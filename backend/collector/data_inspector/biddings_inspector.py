@@ -5,7 +5,8 @@ from collector.db_connector import redis_connector
 from collector.data_inspector.utils import transform_data_in_list
 
 
-CONTRACTS_DB_NAME = "biddings-data"
+BIDDINGS_DB_NAME = "biddings-data"
+BIDDINGS_COMPANIES_DB_NAME = "biddings-companies-data"
 
 
 class BiddingsInspector():
@@ -14,12 +15,12 @@ class BiddingsInspector():
         self.db_connection = None
         self.redis_connection = None
 
-    def __connect_mongo_db(self):
+    def __connect_mongo_db(self, db_name):
         if self.db_connection:
             return
 
         self.db_connection = db_connector.DbConnector()
-        self.db_connection.connect(CONTRACTS_DB_NAME)
+        self.db_connection.connect(db_name)
 
     def __connect_redis_db(self):
         if self.redis_connection:
@@ -40,7 +41,7 @@ class BiddingsInspector():
         logging.debug("Geting Biddings for " + entity_id)
 
         if not self.db_connection:
-            self.__connect_mongo_db()
+            self.__connect_mongo_db(BIDDINGS_DB_NAME)
 
         query_filter = {"Código Órgão": str(entity_id)}
 
@@ -53,6 +54,30 @@ class BiddingsInspector():
         if close_date != "":
             closed_date_formated = close_date[4:6] + "/" + close_date[0:4]
             query_filter["Data Resultado Compra"] = {"$regex": str(closed_date_formated)}
+
+        result = self.db_connection.query(filter=query_filter)
+
+        return transform_data_in_list(query_result=result, entity_type=None, remove_duplicated=False)
+
+    def get_bidding_companies(self, bidding_id, entity_id, process_id):
+        """
+        Get the Companies that took part in a Bidding process.
+        Args:
+            bidding_id: (str) Bidding ID.
+            entity_id: (str) Entity ID.
+            process_id: (str) Process ID.
+        """
+
+        logging.debug("Geting Companies for Bidding " + bidding_id)
+
+        if not self.db_connection:
+            self.__connect_mongo_db(BIDDINGS_COMPANIES_DB_NAME)
+
+        query_filter = {
+            "Código Órgão": str(entity_id),
+            "Número Licitação": str(bidding_id),
+            "Número Processo": str(process_id),
+        }
 
         result = self.db_connection.query(filter=query_filter)
 
