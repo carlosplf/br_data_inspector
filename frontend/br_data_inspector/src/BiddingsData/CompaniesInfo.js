@@ -40,8 +40,9 @@ class CompaniesInfo extends React.Component{
 	}
     
     renderItem(item) {
+        let tr_class = ((item["Flag Vencedor"] == "SIM") ? "winnerTr" : "looserTr");
         const itemRows = [
-            <tr>
+            <tr className={tr_class}>
                 <td><a href={"/company?cnpj=" + item["CNPJ Participante"]}>{item["CNPJ Participante"]}</a></td>
                 <td>{item["Nome Participante"]}</td>
                 <td>{item["Flag Vencedor"]}</td>

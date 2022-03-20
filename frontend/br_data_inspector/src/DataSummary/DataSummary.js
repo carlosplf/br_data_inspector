@@ -60,7 +60,6 @@ class DataSummary extends React.Component{
                     </div>
                     <br></br>
                     <div className="dataLinks">
-                        <p> Informações coletadas:</p> 
                         <a className="sectionlink" href={"#expensesData" + this.props.entity_id}>Despesas</a>
                         <a className="sectionlink" href={"#contractsData" + this.props.entity_id}>Contratos</a>
                         <a className="sectionlink" href={"#biddingsData" + this.props.entity_id}>Licitações</a>
