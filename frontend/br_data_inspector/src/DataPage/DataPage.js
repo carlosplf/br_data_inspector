@@ -36,7 +36,7 @@ class DataPage extends React.Component {
 
     entity_id = 0;
     dates_to_search = [];
-    batch_request_size = 2;
+    batch_request_size = 4;
     api_url = process.env.REACT_APP_API_URL;
     api_port = process.env.REACT_APP_API_PORT;
 
@@ -66,20 +66,19 @@ class DataPage extends React.Component {
         var all_promises = [];
         var month_date = "";
 
-        for (var i = 0; i < this.dates_to_search.length; i++) {
+        for (var i=0; i<this.dates_to_search.length;) {
             all_promises = [];
 
-            for (var j = 0; j < this.batch_request_size; j++) {
-                if (!this.dates_to_search[j + i]) {
-                    break;
-                }
+            for (var j=0; j<this.batch_request_size; j++) {
+                
+                if (!this.dates_to_search[i]) break
 
-                month_date = this.dates_to_search[j + i];
+                month_date = this.dates_to_search[i];
 
                 //For each month_date iteration step, request data for Entity 1 and 2.
                 all_promises.push(this.requestDataFromAPI(month_date));
 
-                i += j;
+                i++;
             }
 
             //Wait a batch of requests to finish.
