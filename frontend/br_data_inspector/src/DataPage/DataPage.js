@@ -212,14 +212,16 @@ class DataPage extends React.Component {
                         }}
                     />
 
-                    <DataSummary
-                        dates={this.dates_to_search}
-                        name={this.state.data[0]["Nome Órgão Subordinado"]}
-                        entity_id={this.entity_id}
-                        data={this.state.data}
-                        values_summary={this.state.values_summary}
-                        data_keys={this.state.data_keys}
-                    />
+                    <div className="summaryContainer">
+                        <DataSummary
+                            dates={this.dates_to_search}
+                            name={this.state.data[0]["Nome Órgão Subordinado"]}
+                            entity_id={this.entity_id}
+                            data={this.state.data}
+                            values_summary={this.state.values_summary}
+                            data_keys={this.state.data_keys}
+                        />
+                    </div>
 
                     <DataBarChart
                         data_keys={this.state.data_keys}

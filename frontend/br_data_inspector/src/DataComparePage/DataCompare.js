@@ -36,7 +36,7 @@ class DataCompare extends React.Component{
 
 	entity_id1 = 0;
     entity_id2 = 0;
-	batch_request_size = 2;
+	batch_request_size = 4;
 	dates_to_search = [];
     api_url = process.env.REACT_APP_API_URL;
     api_port = process.env.REACT_APP_API_PORT;
@@ -101,22 +101,20 @@ class DataCompare extends React.Component{
 		var all_promises = [];
 		var month_date = "";
 
-		for(var i=0; i<this.dates_to_search.length; i++){
+		for(var i=0; i<this.dates_to_search.length;){
 			all_promises = [];
 
 			for (var j=0; j<this.batch_request_size; j++){
 
-				if(!this.dates_to_search[j+i]){
-					break;
-				}
+				if(!this.dates_to_search[i]) break
 
-				month_date = this.dates_to_search[j+i];
+				month_date = this.dates_to_search[i];
 
 				//For each month_date iteration step, request data for Entity 1 and 2.
 				all_promises.push(this.doAPIRequest(this.entity_id1, 1, month_date));
 				all_promises.push(this.doAPIRequest(this.entity_id2, 2, month_date));
 
-				i += j;
+				i++;
 			};
 
 			//Wait a batch of requests to finish.
@@ -249,10 +247,30 @@ class DataCompare extends React.Component{
                     />
 
 					<div className="summary-container">
-						<DataSummary dates={this.dates_to_search} name={this.state.data1[0]["Nome Órgão Subordinado"]} key={this.entity_id1} data={this.state.data1} values_summary={this.state.values_summary1} data_keys={this.state.data_keys}/>
+
+						<DataSummary
+                            entity_id={this.state.data1[0]["Código Órgão Subordinado"]}
+                            dates={this.dates_to_search}
+                            name={this.state.data1[0]["Nome Órgão Subordinado"]}
+                            key={this.entity_id1}
+                            data={this.state.data1}
+                            values_summary={this.state.values_summary1}
+                            data_keys={this.state.data_keys}
+                        />
+                        
                         <div className="summary-separator"></div>
-                        <DataSummary dates={this.dates_to_search} name={this.state.data2[0]["Nome Órgão Subordinado"]} key={this.entity_id2} data={this.state.data2} values_summary={this.state.values_summary2} data_keys={this.state.data_keys}/>
-					</div>
+                        
+                        <DataSummary
+                            entity_id={this.state.data2[0]["Código Órgão Subordinado"]}
+                            dates={this.dates_to_search} 
+                            name={this.state.data2[0]["Nome Órgão Subordinado"]}
+                            key={this.entity_id2}
+                            data={this.state.data2}
+                            values_summary={this.state.values_summary2}
+                            data_keys={this.state.data_keys}
+                        />
+					
+                    </div>
 
 					<DataBarChartComparison
 						data_keys={this.state.data_keys}
@@ -262,8 +280,16 @@ class DataCompare extends React.Component{
                     />
 
                     <div className="expensesContainer">
-                        <ExpensesTable entity_name={this.state.data1[0]["Nome Órgão Subordinado"]} data={this.state.data1}/>
-                        <ExpensesTable entity_name={this.state.data2[0]["Nome Órgão Subordinado"]} data={this.state.data2}/>
+                        <ExpensesTable
+                            entity_id={this.state.data1[0]["Código Órgão Subordinado"]}
+                            entity_name={this.state.data1[0]["Nome Órgão Subordinado"]}
+                            data={this.state.data1}
+                        />
+                        <ExpensesTable
+                            entity_id={this.state.data2[0]["Código Órgão Subordinado"]}
+                            entity_name={this.state.data2[0]["Nome Órgão Subordinado"]}
+                            data={this.state.data2}
+                        />
                     </div>
 
 					<div className="contractsContainer">

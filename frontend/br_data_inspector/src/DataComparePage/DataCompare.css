@@ -44,3 +44,12 @@
 .contractsContainer .contractsBlock{
     width: 100%;
 }
+
+@media only screen
+and (max-width : 1600px){
+
+    .summary-container{
+        flex-direction: column;
+        width: 90%;
+    }
+}

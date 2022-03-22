@@ -15,6 +15,10 @@
 	cursor: pointer;
 }
 
+.summaryContainer{
+    width: 90%;
+}
+
 .search-results{
     display: flex;
     flex-wrap: wrap;
