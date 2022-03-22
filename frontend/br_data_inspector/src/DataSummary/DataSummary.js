@@ -1,5 +1,6 @@
 import React from "react";
 import "../DataSummary/DataSummary.css";
+import { FaHandPointRight } from "react-icons/fa";
 
 
 class DataSummary extends React.Component{
@@ -58,11 +59,10 @@ class DataSummary extends React.Component{
                     <div className="listMonthsSelected">
                         {dates_list}
                     </div>
-                    <br></br>
                     <div className="dataLinks">
-                        <a className="sectionlink" href={"#expensesData" + this.props.entity_id}>Despesas</a>
-                        <a className="sectionlink" href={"#contractsData" + this.props.entity_id}>Contratos</a>
-                        <a className="sectionlink" href={"#biddingsData" + this.props.entity_id}>Licitações</a>
+                        <a className="sectionlink" href={"#expensesData" + this.props.entity_id}><FaHandPointRight style={{textDecoration: 'none', marginRight: '6px', verticalAlign: 'middle'}}/>Despesas</a>
+                        <a className="sectionlink" href={"#contractsData" + this.props.entity_id}><FaHandPointRight style={{textDecoration: 'none', marginRight: '6px', verticalAlign: 'middle'}}/>Contratos</a>
+                        <a className="sectionlink" href={"#biddingsData" + this.props.entity_id}><FaHandPointRight style={{textDecoration: 'none', marginRight: '6px', verticalAlign: 'middle'}}/>Licitações</a>
                     </div>
                 </div>
                 <h3>Soma de valores para o período:</h3>
