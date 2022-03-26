@@ -60,7 +60,7 @@ class ContractsInspector():
 
         query_result = self.db_connection.query(filter=query_filter)
 
-        return transform_data_in_list(query_result=query_result, entity_type=None, remove_duplicated=False)
+        return transform_data_in_list(query_result=query_result, key_field="", remove_duplicated=False)
 
     def get_contracts_by_cnpj(self, company_cnpj):
         """
@@ -81,7 +81,7 @@ class ContractsInspector():
 
         query_result = self.db_connection.query(filter=query_filter)
 
-        return transform_data_in_list(query_result=query_result, entity_type=None, remove_duplicated=False)
+        return transform_data_in_list(query_result=query_result, key_field="", remove_duplicated=False)
 
     def get_contracts_by_entity(self, entity_id="", date=""):
         """
@@ -109,7 +109,7 @@ class ContractsInspector():
 
         result = self.db_connection.query(filter=query_filter)
 
-        return transform_data_in_list(query_result=result, entity_type=None, remove_duplicated=False)
+        return transform_data_in_list(query_result=result, key_field="", remove_duplicated=False)
 
     def get_contracts_by_year(self, field_to_filter="Data Publicação DOU", date_year=2020):
         """
@@ -130,7 +130,7 @@ class ContractsInspector():
 
         result = self.db_connection.query(filter=query_filter)
 
-        return transform_data_in_list(query_result=result, entity_type=None, remove_duplicated=False)
+        return transform_data_in_list(query_result=result, key_field="", remove_duplicated=False)
 
     def get_all_contracts(self):
         """
@@ -145,7 +145,7 @@ class ContractsInspector():
 
         result = self.db_connection.query(filter=query_filter)
 
-        return transform_data_in_list(query_result=result, entity_type=None, remove_duplicated=False)
+        return transform_data_in_list(query_result=result, key_field="", remove_duplicated=False)
 
     def get_companies_list_from_redis(self):
         """
