@@ -117,9 +117,9 @@ class DataProcessor():
             date_year: INT year filtering.
         """
 
-        if not date_year:
-            date_filter_str = "alltime"
-        else:
+        date_filter_str = "alltime"
+        
+        if date_year:
             date_filter_str = str(date_year)
 
         key_name = base_name + "_" + date_filter_str
