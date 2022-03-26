@@ -54,6 +54,15 @@ class BiddingProcessor():
         Return:
             (dict) Dict with all the calculated info.
         """
+        #TODO: get all Biddings that a Company participated.
+        #1=> Collect the Bidding IDs from Companies Bidding DB.
+        #2=> Collect details about the Biddings with the Bidding ID.
+        #3=> Check if we have duplicated entries for a Company in a Bidding.
+        #4=> Put together some data and numbers about the Company.
+        #   4.1=> number of Biddings ithat the Company participated.
+        #   4.2=> number of Won biddings and Win rate.
+        #   4.3=> total value (BRL) earned in Biddings.
+        #5=> Return a DICT with the informations about the Company.
         pass
 
     def build_companies_bidding_list(self):
