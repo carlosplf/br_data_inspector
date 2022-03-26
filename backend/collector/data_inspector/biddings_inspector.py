@@ -82,3 +82,20 @@ class BiddingsInspector():
         result = self.db_connection.query(filter=query_filter)
 
         return transform_data_in_list(query_result=result, entity_type=None, remove_duplicated=False)
+
+    def get_all_companies(self):
+        """
+        Get all Companies IDs in the Companies Bidding Database.
+        Return:
+            (list) List of dicts with the Ids and Names of the Companies.
+        """        
+        
+        self.__connect_mongo_db(BIDDINGS_COMPANIES_DB_NAME)
+        
+        query_fields = {
+            "CNPJ Participante": 1,
+            "Nome Participante": 1
+        }
+
+        result = self.db_connection.query(filter={}, fields=query_fields)
+        return transform_data_in_list(query_result=result, key_field="CNPJ Participante", remove_duplicated=True)
