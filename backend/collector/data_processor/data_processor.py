@@ -11,7 +11,7 @@ EXPENSES_DB_NAME = "expenses-data"
 CONTRACTS_DB_NAME = "contarcts-data"
 
 
-#TODO: Break this class in two classes. ExpensesProcessor and ContractsProcessor.
+# TODO: Break this class in two classes. ExpensesProcessor and ContractsProcessor.
 class DataProcessor():
     def __init__(self):
         self.db_connector = None
@@ -36,12 +36,12 @@ class DataProcessor():
         contracts_summary_dict = {}
         contracts_summary_list = []
 
-        #TODO: this could be in separated method.
+        # TODO: this could be in separated method.
         for single_contract in all_contracts:
             previous_total_value = 0
             contracts_count = 0
             if single_contract["CNPJ Contratado"] in contracts_summary_dict.keys():
-                previous_total_value  = contracts_summary_dict[single_contract["CNPJ Contratado"]]["Total recebido"]
+                previous_total_value = contracts_summary_dict[single_contract["CNPJ Contratado"]]["Total recebido"]
                 contracts_count = contracts_summary_dict[single_contract["CNPJ Contratado"]]["Quantidade de contratos"]
 
             single_contract_value = float(single_contract["Valor Final Compra"].replace(",", "."))
@@ -53,7 +53,7 @@ class DataProcessor():
                 "Quantidade de contratos": contracts_count + 1
             }
 
-        #TODO: need a better logic for this. Just passing the dict to list to use the already implemented methods.
+        # TODO: need a better logic for this. Just passing the dict to list to use the already implemented methods.
         for k in contracts_summary_dict.keys():
             contracts_summary_list.append(contracts_summary_dict[k])
 
@@ -118,7 +118,7 @@ class DataProcessor():
         """
 
         date_filter_str = "alltime"
-        
+
         if date_year:
             date_filter_str = str(date_year)
 
@@ -185,7 +185,7 @@ class DataProcessor():
         key_name = self.__build_key_name(base_name)
 
         return self.redis_connector.set(key_name, json.dumps(all_entities))
-    
+
     def create_companies_list(self):
         """
         Create a list with all Companies (Name, CNPJ), removing duplicated.
