@@ -119,3 +119,42 @@ class BiddingsInspector():
         result = self.db_connection.query(filter=query_filter)
 
         return transform_data_in_list(query_result=result)
+
+    def get_bidding(self, bidding_id=None, ug_id=None, process_id=None, entity_id=None):
+        """
+        Get a Bidding using some filed to filtering.
+        OBS.: Filtering by the process_id will give you a unique Bidding.
+        Args:
+            bidding_id: (str) Bidding ID in Database.
+            ug_id: (str) "Código UG" in Database.
+            process_id: (str) Number of the Bidding Process in Databse.
+            entity_id: (str) "Código Órgão" in Databse.
+        Return:
+            (list) of Dicts with all the Biddings that match the filtering.
+        """
+
+        if not self.db_connection:
+            self.__connect_mongo_db(BIDDINGS_DB_NAME)
+
+        query_filter = {}
+
+        if bidding_id:
+            query_filter["Número Licitação"] = str(bidding_id)
+
+        if ug_id:
+            query_filter["Código UG"] = str(ug_id)
+
+        if process_id:
+            query_filter["Número Processo"] = str(process_id)
+
+        if entity_id:
+            query_filter["Código Órgão"] = str(entity_id)
+
+        if not query_filter:
+            return []
+
+        logging.debug("Geting specific Bid details. Filters: {}".format(str(query_filter)))
+
+        result = self.db_connection.query(filter=query_filter)
+
+        return transform_data_in_list(query_result=result)

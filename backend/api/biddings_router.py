@@ -31,6 +31,13 @@ def search_biddings(entity_id):
     return response
 
 
+@biddings_router.route('/biddings/process_id/<process_id>')
+def search_bidding_by_process(process_id):
+    bi = biddings_inspector.BiddingsInspector()
+    response = {"data": bi.get_bidding(process_id=process_id)}
+    return response
+
+
 @biddings_router.route('/biddings/companies/<entity_id>/<bidding_id>/<process_id>')
 def search_companies_for_bidding(entity_id, bidding_id, process_id):
     bi = biddings_inspector.BiddingsInspector()
