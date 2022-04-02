@@ -13,7 +13,7 @@ class AllBiddingsDetailsModal extends React.Component {
         }
     }
     
-	batch_request_size = 2;
+	batch_request_size = 4;
     api_url = process.env.REACT_APP_API_URL;
     api_port = process.env.REACT_APP_API_PORT;
     
@@ -75,24 +75,31 @@ class AllBiddingsDetailsModal extends React.Component {
         let background_color = "#ff9d9d";
         this.state.data.forEach((item) => {
             background_color = "ff9d9d";
-            if(this.props.processes_info[idx]["flag"] === 'SIM'){
-                background_color = "9ED88A";
+            try{
+                if(this.props.processes_info[idx]["flag"] === 'SIM'){
+                    background_color = "9ED88A";
+                }
+
+                all_cards = all_cards.concat(
+                    <div className="singleBiddingInfo" style={{backgroundColor: background_color}}>
+                        {Object.keys(item).map((k, index) => (
+                            <p>{k}: {item[k]}</p>
+                        ))}
+                    </div>
+                );
+                idx++;
             }
-            all_cards = all_cards.concat(
-                <div className="singleBiddingInfo" style={{backgroundColor: background_color}}>
-                    {Object.keys(item).map((k, index) => (
-                        <p>{k}: {item[k]}</p>
-                    ))}
-                </div>
-            );
-            idx++;
+            catch(e){
+                console.error(e);
+                console.log("Skipping Bidding details...");
+            }
         });
         return all_cards;
     }
 
     render(){
 
-        let completed_perc = ((100*this.state.requests_done)/(this.props.processes_info.length));
+        let completed_perc = ((100*this.state.requests_done)/(this.props.processes_info.length)).toFixed(2);
 
         if(this.state.loading){
             return(
