@@ -51,7 +51,7 @@ class Header extends React.Component{
                         <a href="/rank"> Ranking </a>
                     </div>
                     <div className="page-btn">
-                        <a href="/contracts"> Contratos </a>
+                        <a href="/contracts"> EMPRESAS </a>
                     </div>
                 </div>
             </div>
