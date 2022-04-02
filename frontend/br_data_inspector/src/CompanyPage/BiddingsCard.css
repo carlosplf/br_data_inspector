@@ -1,0 +1,38 @@
+.biddingsCard{
+    border-radius: 10px;
+  	background: #66bb6a;
+    color: #202020;
+    margin: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.biddingsNumbersCard{
+    border-radius: 10px;
+  	background: #eee;
+    color: #202020;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 20px;
+    width: 98%;
+    margin-top: 20px;
+}
+
+#showInfo{
+    margin-top: 40px;
+    font-size: 1.4em;
+    padding: 10px;
+    width: 40%;
+    border-radius: 10px;
+    border-color: rgba(0,0,0,0);
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#showInfo:hover{
+    background-color: #eee;
+    cursor: pointer;
+}
