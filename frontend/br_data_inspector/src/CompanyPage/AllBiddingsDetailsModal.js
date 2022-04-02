@@ -13,7 +13,7 @@ class AllBiddingsDetailsModal extends React.Component {
         }
     }
     
-	batch_request_size = 4;
+	batch_request_size = 2;
     api_url = process.env.REACT_APP_API_URL;
     api_port = process.env.REACT_APP_API_PORT;
     

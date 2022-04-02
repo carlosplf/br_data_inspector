@@ -75,7 +75,7 @@ class BiddingsCard extends React.Component {
         });
 
         biddings_summary["wins"] = wins;
-        biddings_summary["win_rate"] = 100*(wins/this.state.data.length) + "%";
+        biddings_summary["win_rate"] = (100*(wins/this.state.data.length)).toFixed(2) + "%";
         biddings_summary["processes_info"] = all_processes_info;
 
         return biddings_summary;
