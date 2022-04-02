@@ -105,7 +105,7 @@ class AllBiddingsDetailsModal extends React.Component {
 
         let completed_perc = ((100*this.state.requests_done)/(this.props.processes_info.length)).toFixed(2);
 
-        if(true){
+        if(this.state.loading){
             return(
                 <div className="allBiddingsDetailsModal">
                     <div className="modalBody">
