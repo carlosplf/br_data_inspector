@@ -18,7 +18,6 @@ class AllBiddingsDetailsModal extends React.Component {
     api_port = process.env.REACT_APP_API_PORT;
     
     componentDidMount() {
-        console.log(this.props.processes_info);
         this.doBatchRequests();
     }
 	
@@ -72,8 +71,13 @@ class AllBiddingsDetailsModal extends React.Component {
     appendData(data_received){
         let new_data = this.state.data;
 
-        //Use the process_id as key to store data.
-        new_data[data_received[0]["Número Processo"]] = data_received[0];
+        try{
+            //Use the process_id as key to store data.
+            new_data[data_received[0]["Número Processo"]] = data_received[0];
+        }catch(e){
+            console.error(e);
+            console.log("Could not set process_id. Empty return?");
+        }
 		
         let requests_done = this.state.requests_done + 1;
         
