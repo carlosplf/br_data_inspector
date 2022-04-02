@@ -25,7 +25,6 @@ class ContractsPage extends React.Component {
     
     //Handle selected item on SearchField
     handleOnSelect = (item) => {
-        console.log(item["id"]);
         this.setState({search_id: item["id"]});
     }
     

@@ -151,8 +151,6 @@ class CompanyData extends React.Component {
             )
         });
 
-        console.log(buyers_info);
-
         return(
             <div className="summaryCard">
                 <h3 className="summaryTitle">Resumo dos contratos</h3>

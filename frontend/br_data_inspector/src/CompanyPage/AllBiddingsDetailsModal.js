@@ -18,7 +18,6 @@ class AllBiddingsDetailsModal extends React.Component {
     api_port = process.env.REACT_APP_API_PORT;
     
     componentDidMount() {
-        console.log(this.props.processes_info);
         this.doBatchRequests();
     }
 	
@@ -106,14 +105,14 @@ class AllBiddingsDetailsModal extends React.Component {
 
         let completed_perc = ((100*this.state.requests_done)/(this.props.processes_info.length)).toFixed(2);
 
-        if(this.state.loading){
+        if(true){
             return(
                 <div className="allBiddingsDetailsModal">
                     <div className="modalBody">
                         <h1> Detalhes das Licitações: </h1>
                         <button onClick={this.props.callBackCloseModal} id="closeButton"> Fechar </button>
-                        <p>Loading...</p>
-                        <p>{completed_perc}%</p>
+                        <p id="loadingMsg">Buscando mais informações...</p>
+                        <p id="loadingPerc">{completed_perc}%</p>
                     </div>
                 </div>
             );

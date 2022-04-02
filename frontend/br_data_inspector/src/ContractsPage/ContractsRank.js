@@ -119,7 +119,6 @@ class ContractsRank extends React.Component {
     }
 
     toggleShowCard = () => {
-        console.log("Toggle!");
         this.setState(prevState => ({
             show: !prevState.show
           }));

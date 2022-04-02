@@ -49,8 +49,6 @@ class About extends React.Component{
     }
 
     buildDownloadedReportsList(data){
-        console.log(data);
-
         let all_reports = []
         
         data["downloaded_reports"].forEach((item) => {

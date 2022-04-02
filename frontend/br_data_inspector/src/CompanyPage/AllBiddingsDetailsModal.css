@@ -12,13 +12,13 @@
 .modalBody{
     background-color: #fefefe;
     margin: 15% auto;
-    margin-top: 10px;
+    margin-top: 40px;
     padding: 20px;
     width: 80%;
     border-radius: 10px;
     color: #202020;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    height: auto;
+    min-height: auto;
 }
 
 .singleBiddingInfo{
@@ -43,3 +43,38 @@
     background-color: #ff5f5f;
     cursor: pointer;
 }
+
+#loadingMsg{
+    font-size: 1.4em;
+}
+
+#loadingPerc{
+    font-size: 1.6em;
+}
+
+@media only screen
+and (max-width : 1080px){
+    #loadingMsg{
+        font-size: 1.6em;
+    }
+
+    #loadingPerc{
+        font-size: 2.8em;
+    }
+
+    h1{
+        font-size: 2.8em;
+    }
+    
+    #closeButton{
+        position: relative;
+        top: -80px;
+        right: -84%;
+        font-size: 2.2em;
+        border-color: rgba(0,0,0,0);
+        border-radius: 4px;
+        background-color: #ff3f3f;
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.19);
+    }
+}
+
