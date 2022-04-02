@@ -52,12 +52,22 @@ class BiddingsCard extends React.Component {
     }
 
     calculateBiddings(){
+        /* 
+         * This Bidding and processes and structures can be confusing.
+         * Biddings can be duplicated, since the Bidding itself can contain
+         * more than 1 item.
+         * 
+         * A Company can Win a item inside the Bidding, but lose others.
+         * The bidding_summary stores the basic info for each item disputed
+         * by a company. So we can have repeated Process Numbers, but not the
+         * same Item ID in the same Process Number.
+         */
 
         let biddings_summary = {
             "total": this.state.data.length,
             "wins": 0,
             "win_rate": 0,
-            "processes_info": [],
+            "processes_info": {},
         };
         
         if(this.state.data.length === 0){
@@ -65,13 +75,20 @@ class BiddingsCard extends React.Component {
         }
         
         let wins = 0;
-        let all_processes_info = [];
+        let all_processes_info = {};
         
         this.state.data.forEach((item)=> {
-            if(item["Flag Vencedor"] === "SIM"){
-                wins++;
-            }
-            all_processes_info = all_processes_info.concat({"process_id": item["Número Processo"], "flag": item["Flag Vencedor"]});
+
+            if(item["Flag Vencedor"] === "SIM") wins++;
+
+            let process_key = item["Número Processo"] + item["Código Item Compra"];
+
+            all_processes_info[process_key] = {
+                "process_id": item["Número Processo"],
+                "flag": item["Flag Vencedor"],
+                "cod_item": item["Código Item Compra"],
+                "item": item["Descrição Item Compra"]
+            };
         });
 
         biddings_summary["wins"] = wins;

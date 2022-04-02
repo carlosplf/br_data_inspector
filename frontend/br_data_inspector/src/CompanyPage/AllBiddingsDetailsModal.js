@@ -9,7 +9,7 @@ class AllBiddingsDetailsModal extends React.Component {
         this.state = {
             loading: true,
 			requests_done: 0,
-            data: []
+            data: {}
         }
     }
     
@@ -18,21 +18,24 @@ class AllBiddingsDetailsModal extends React.Component {
     api_port = process.env.REACT_APP_API_PORT;
     
     componentDidMount() {
+        console.log(this.props.processes_info);
         this.doBatchRequests();
     }
 	
     async doBatchRequests(){
-		var all_promises = [];
-		var process_id = "";
+		let all_promises = [];
+		let process_id = "";
 
-		for(var i=0; i<this.props.processes_info.length;){
+        let processes_info_keys = Object.keys(this.props.processes_info);
+
+		for(var i=0; i< processes_info_keys.length;){
 			all_promises = [];
 
 			for (var j=0; j<this.batch_request_size; j++){
 
-				if(!this.props.processes_info[i]) break;
+				if(!this.props.processes_info[processes_info_keys[i]]) break;
 
-				process_id = this.props.processes_info[i]["process_id"];
+				process_id = this.props.processes_info[processes_info_keys[i]]["process_id"];
 
 				all_promises.push(this.requestDataFromAPI(process_id));
 
@@ -67,27 +70,59 @@ class AllBiddingsDetailsModal extends React.Component {
 	}
 
     appendData(data_received){
-        var new_data = this.state.data.concat(data_received);
-		var requests_done = this.state.requests_done + 1;
-        let loading_state = (requests_done === this.props.processes_info.length) ? false : true;
+        let new_data = this.state.data;
+
+        //Use the process_id as key to store data.
+        new_data[data_received[0]["Número Processo"]] = data_received[0];
+		
+        let requests_done = this.state.requests_done + 1;
+        
+        let loading_state = (requests_done === Object.keys(this.props.processes_info).length) ? false : true;
+        
         this.setState({data: new_data, loading: loading_state, requests_done: requests_done});
     }
 
     buildDetailsInfo(){
+        /*
+         * To build the card for each Bidding that the Company disputed, we
+         * consider the basic info received as props as the key for all the
+         * items.
+         * A Company can dispute more than 1 item in the same Bidding process.
+         * So the process ID can be duplicated, but we can't have the same
+         * Item ID in the same Process ID.
+         *
+         * For each Item disputed, we collect the Bidding process information
+         * and use it to build the card.
+         *
+         * We can have 5 items in the props.processes_info, and 2 items in the
+         * state.data, for example. This ir normal considering the a Bidding can
+         * have more then 1 item.
+         */
         let all_cards = [];
         let idx = 0;
         let background_color = "#ff9d9d";
-        this.state.data.forEach((item) => {
+
+        //For each item disputes... received as props.
+        Object.keys(this.props.processes_info).forEach((key) => {
             background_color = "ff9d9d";
             try{
-                if(this.props.processes_info[idx]["flag"] === 'SIM'){
+                if(this.props.processes_info[key]["flag"] === 'SIM'){
                     background_color = "9ED88A";
                 }
 
+                //For each item disputed, get the corresponding Bidding information
+                //stored in the this.state.data.
+                let bidding_details = this.state.data[this.props.processes_info[key]["process_id"]];
+                
+
+                //For each item, build the summary card, using data from props and state.
                 all_cards = all_cards.concat(
                     <div className="singleBiddingInfo" style={{backgroundColor: background_color}}>
-                        {Object.keys(item).map((k, index) => (
-                            <p>{k}: {item[k]}</p>
+
+                        <p>Item da Compra: {this.props.processes_info[key]["item"]}</p>
+                        <p>Código do Item: {this.props.processes_info[key]["cod_item"]}</p>
+                        {Object.keys(bidding_details).map((k, index) => (
+                            <p>{k}: {bidding_details[k]}</p>
                         ))}
                     </div>
                 );
@@ -103,7 +138,7 @@ class AllBiddingsDetailsModal extends React.Component {
 
     render(){
 
-        let completed_perc = ((100*this.state.requests_done)/(this.props.processes_info.length)).toFixed(2);
+        let completed_perc = ((100*this.state.requests_done)/(Object.keys(this.props.processes_info).length)).toFixed(2);
 
         if(this.state.loading){
             return(
