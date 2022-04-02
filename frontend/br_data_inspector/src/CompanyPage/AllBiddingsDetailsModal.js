@@ -13,11 +13,12 @@ class AllBiddingsDetailsModal extends React.Component {
         }
     }
     
-	batch_request_size = 2;
+	batch_request_size = 6;
     api_url = process.env.REACT_APP_API_URL;
     api_port = process.env.REACT_APP_API_PORT;
     
     componentDidMount() {
+        console.log(this.props.processes_info);
         this.doBatchRequests();
     }
 	
@@ -25,18 +26,18 @@ class AllBiddingsDetailsModal extends React.Component {
 		var all_promises = [];
 		var process_id = "";
 
-		for(var i=0; i<this.props.processes_info.length; i++){
+		for(var i=0; i<this.props.processes_info.length;){
 			all_promises = [];
 
 			for (var j=0; j<this.batch_request_size; j++){
 
-				if(!this.props.processes_info[j+i]) break;
+				if(!this.props.processes_info[i]) break;
 
-				process_id = this.props.processes_info[j+i]["process_id"];
+				process_id = this.props.processes_info[i]["process_id"];
 
 				all_promises.push(this.requestDataFromAPI(process_id));
 
-				i += j;
+				i++;
 			};
 
 			//Wait a batch of requests to finish.
@@ -46,6 +47,10 @@ class AllBiddingsDetailsModal extends React.Component {
 	
     //Call Backend API and retrieve data about Contracts
 	requestDataFromAPI(process_id){
+
+        //Some process IDs have a '/' character.
+        process_id = process_id.replace("/", "_");
+
 		var base_url = this.api_url + ":" + this.api_port;
 		var request_url = base_url + "/biddings/process_id/" + process_id;
 
