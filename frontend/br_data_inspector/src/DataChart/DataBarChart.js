@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-	XYPlot,
 	XAxis,
 	YAxis,
 	VerticalGridLines,
@@ -114,7 +113,7 @@ class DataBarChart extends React.Component{
                     }}
                     onValueMouseOut={(datapoint, event) => {this.setState({show_hint: false})}}
                     color={this.graph_bar_colors[i]}
-                    style={{strokeWidth: 12}, {marginLeft: 10}}
+                    style={{strokeWidth: 12, marginLeft: 10}}
                     data={prepared_data[i]}
                 />
 			);

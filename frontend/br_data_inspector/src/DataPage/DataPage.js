@@ -1,8 +1,6 @@
 import React from "react";
 import DataSummary from "../DataSummary/DataSummary.js";
 import { withRouter } from "react-router-dom";
-import ReactModal from "react-modal";
-import ModalContent from "../DataPage/ModalContent";
 import DataBarChart from "../DataChart/DataBarChart";
 import queryString from "query-string";
 import Header from "../Header/Header";
@@ -12,6 +10,7 @@ import CreateCustomLink from "../CustomLink/CreateCustomLink.js";
 import ExpensesTable from "../Expenses/ExpensesTable.js";
 import LoadingBar from "react-top-loading-bar";
 import ContractsData from "../ContractsData/ContractsData";
+import BiddingsData from "../BiddingsData/BiddingsData";
 
 //Component responsible of showing info about a single Entity searched.
 class DataPage extends React.Component {
@@ -37,7 +36,7 @@ class DataPage extends React.Component {
 
     entity_id = 0;
     dates_to_search = [];
-    batch_request_size = 2;
+    batch_request_size = 4;
     api_url = process.env.REACT_APP_API_URL;
     api_port = process.env.REACT_APP_API_PORT;
 
@@ -67,20 +66,19 @@ class DataPage extends React.Component {
         var all_promises = [];
         var month_date = "";
 
-        for (var i = 0; i < this.dates_to_search.length; i++) {
+        for (var i=0; i<this.dates_to_search.length;) {
             all_promises = [];
 
-            for (var j = 0; j < this.batch_request_size; j++) {
-                if (!this.dates_to_search[j + i]) {
-                    break;
-                }
+            for (var j=0; j<this.batch_request_size; j++) {
+                
+                if (!this.dates_to_search[i]) break
 
-                month_date = this.dates_to_search[j + i];
+                month_date = this.dates_to_search[i];
 
                 //For each month_date iteration step, request data for Entity 1 and 2.
                 all_promises.push(this.requestDataFromAPI(month_date));
 
-                i += j;
+                i++;
             }
 
             //Wait a batch of requests to finish.
@@ -118,10 +116,7 @@ class DataPage extends React.Component {
 
     //For each API response data, concatenate with already collected data in state.
     processData(api_response) {
-        if (api_response["data"].length === 0) {
-            console.log("Empty data. Skipping...");
-        }
-        if (!this.state.data) {
+        if (api_response["data"].length !== 0 && !this.state.data) {
             return api_response["data"];
         }
         return this.state.data.concat(api_response["data"]);
@@ -217,14 +212,16 @@ class DataPage extends React.Component {
                         }}
                     />
 
-                    <DataSummary
-                        dates={this.dates_to_search}
-                        name={this.state.data[0]["Nome Órgão Subordinado"]}
-                        key={this.entity_id}
-                        data={this.state.data}
-                        values_summary={this.state.values_summary}
-                        data_keys={this.state.data_keys}
-                    />
+                    <div className="summaryContainer">
+                        <DataSummary
+                            dates={this.dates_to_search}
+                            name={this.state.data[0]["Nome Órgão Subordinado"]}
+                            entity_id={this.entity_id}
+                            data={this.state.data}
+                            values_summary={this.state.values_summary}
+                            data_keys={this.state.data_keys}
+                        />
+                    </div>
 
                     <DataBarChart
                         data_keys={this.state.data_keys}
@@ -236,10 +233,18 @@ class DataPage extends React.Component {
                         entity_name={
                             this.state.data[0]["Nome Órgão Subordinado"]
                         }
+                        entity_id={this.entity_id}
                         data={this.state.data}
                     />
 
                     <ContractsData
+                        dates={this.dates_to_search}
+                        entity_id={
+                            this.state.data[0]["Código Órgão Subordinado"]
+                        }
+                    />
+                    
+                    <BiddingsData
                         dates={this.dates_to_search}
                         entity_id={
                             this.state.data[0]["Código Órgão Subordinado"]

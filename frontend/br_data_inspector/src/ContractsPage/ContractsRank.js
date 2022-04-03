@@ -8,7 +8,7 @@ class ContractsRank extends React.Component {
         super(props);
         this.state = {
             loading: true,
-            show: false
+            show: true
         };
     }
 
@@ -119,7 +119,6 @@ class ContractsRank extends React.Component {
     }
 
     toggleShowCard = () => {
-        console.log("Toggle!");
         this.setState(prevState => ({
             show: !prevState.show
           }));

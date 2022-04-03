@@ -23,6 +23,7 @@ test.py
 
 #Log files
 logs/*
+backend/logs/*
 
 # Distribution / packaging
 .Python

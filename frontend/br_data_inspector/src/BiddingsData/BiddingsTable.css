@@ -3,15 +3,15 @@
     margin-bottom: 60px;
 }
 
-.contractsTableContainer{
+.biddingsTableContainer{
     width: 80%;
 }
 
-.contractsTable{
+.biddingsTable{
     width: 100%;
 }
 
-.contractsTable table{
+.biddingsTable table{
     width: 100%;
     color: #fff;
     padding-bottom: 20px;
@@ -43,18 +43,25 @@
     font-size: 0.8em;
 }
 
-.columnValor{
-    text-align: end;
-    width: 24%;
+.columnObjectHeader{
+    width: 50%;
 }
 
-.columnLicitacao{
-    width: 20%;
+.columnIdHeader{
+    width: 10%;
+}
+
+.columnStatusHeader{
+    width: 15%;
+}
+
+.columnValueHeader{
+    width: 25%;
 }
 
 @media only screen 
 and (max-width : 1080px){ 
-    .contractsTable tr {
+    .biddingsTable tr {
         font-size: 20px;
     }
 }

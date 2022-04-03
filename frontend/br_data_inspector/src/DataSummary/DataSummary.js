@@ -1,14 +1,11 @@
 import React from "react";
 import "../DataSummary/DataSummary.css";
+import { FaHandPointRight } from "react-icons/fa";
 
 
 class DataSummary extends React.Component{
 
     /* This Component show the sums of values for the rendered Transactions Table. */
-
-    constructor(props){
-        super(props);
-    }
 
     date_map = {
         "202001": "Janeiro/20",
@@ -46,7 +43,7 @@ class DataSummary extends React.Component{
     processDates(){
         var dates_list = this.props.dates.map( (d) => {
             return(
-                <spam key={d} className="monthSelected"> {this.date_map[d]} </spam>
+                <p key={d} className="monthSelected"> {this.date_map[d]} </p>
             )
         })
         return dates_list;
@@ -62,8 +59,13 @@ class DataSummary extends React.Component{
                     <div className="listMonthsSelected">
                         {dates_list}
                     </div>
+                    <div className="dataLinks">
+                        <a className="sectionlink" href={"#expensesData" + this.props.entity_id}><FaHandPointRight style={{textDecoration: 'none', marginRight: '6px', verticalAlign: 'middle'}}/>Despesas</a>
+                        <a className="sectionlink" href={"#contractsData" + this.props.entity_id}><FaHandPointRight style={{textDecoration: 'none', marginRight: '6px', verticalAlign: 'middle'}}/>Contratos</a>
+                        <a className="sectionlink" href={"#biddingsData" + this.props.entity_id}><FaHandPointRight style={{textDecoration: 'none', marginRight: '6px', verticalAlign: 'middle'}}/>Licitações</a>
+                    </div>
                 </div>
-                <h3>Valores gastos no período:</h3>
+                <h3>Soma de valores para o período:</h3>
                 {this.props.data_keys.map(key => (
                     <p key={key}>{key}: { this.formatNumbers(this.props.values_summary[key])}</p>
                     ))}

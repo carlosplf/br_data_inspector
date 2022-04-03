@@ -10,6 +10,7 @@ class ContractsTable extends React.Component {
             ids_created: false,
             expandedRows: [],
             all_contracts: [],
+            previous_length: 0
         };
     }
 
@@ -21,8 +22,22 @@ class ContractsTable extends React.Component {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
+    componentDidMount(){
+        this.createUniqueID();
+    }
+    
+    componentDidUpdate(){
+        //IF enter this conditional, we have new data to define IDs and sort.
+        if(this.state.previous_length !== this.props.contracts_data.length){
+            this.createUniqueID();
+        }
+    }
+
     //For all contracts, create a unique ID for each one.
     createUniqueID() {
+
+        this.setState({previous_length: this.props.contracts_data.length});
+
         var new_all_contracts = [];
         this.props.contracts_data.forEach((item) => {
             item["ID"] =
@@ -38,10 +53,7 @@ class ContractsTable extends React.Component {
             );
         });
 
-        this.setState({
-            all_contracts: sorted_contracts_array,
-            ids_created: true,
-        });
+        this.setState({all_contracts: sorted_contracts_array});
     }
 
     handleRowClick(rowId) {
@@ -77,7 +89,7 @@ class ContractsTable extends React.Component {
         if (this.state.expandedRows.includes(item["ID"])) {
             itemRows.push(
                 <tr className="expandedTR" key={"row-expanded-" + item["ID"]}>
-                    <td colspan="5" className="expandedRow">
+                    <td colSpan="5" className="expandedRow">
                         <div className="moreInfo">
                             <h3> Detalhes: </h3>
                             <p>CNPJ: {item["CNPJ Contratado"]}</p>
@@ -90,6 +102,7 @@ class ContractsTable extends React.Component {
                                 {item["Data Início Vigência"]}
                             </p>
                             <p>Válido até: {item["Data Fim Vigência"]}</p>
+                            <p>Data da Publicação no DOU: {item["Data Publicação DOU"]}</p>
                             <p>Situação: {item["Situação Contrato"]}</p>
                             <p>
                                 Valor Inicial: R${" "}
@@ -129,21 +142,15 @@ class ContractsTable extends React.Component {
     }
 
     render() {
+
         let allItemRows = [];
-
-        if (
-            !this.state.ids_created ||
-            this.state.all_contracts.length != this.props.contracts_data.length
-        ) {
-            this.createUniqueID();
-        }
-
+       
         this.state.all_contracts.forEach((item) => {
             const perItemRows = this.renderItem(item);
             allItemRows = allItemRows.concat(perItemRows);
         });
 
-        const full_table = this.buildTable(allItemRows);
+        let full_table = this.buildTable(allItemRows);
 
         return <div className="contractsTableContainer">{full_table}</div>;
     }

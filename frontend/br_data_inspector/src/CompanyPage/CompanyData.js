@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import BiddingsCard from "../CompanyPage/BiddingsCard.js";
 import "../CompanyPage/CompanyData.css";
 
 class CompanyData extends React.Component {
@@ -150,8 +151,6 @@ class CompanyData extends React.Component {
             )
         });
 
-        console.log(buyers_info);
-
         return(
             <div className="summaryCard">
                 <h3 className="summaryTitle">Resumo dos contratos</h3>
@@ -182,6 +181,12 @@ class CompanyData extends React.Component {
 
         else{
 
+            if(this.state.data.length === 0){
+                return (
+                    <h1> A empresa buscada não possui Contratos. </h1>
+                )
+            }
+
             if(!this.state.all_cards_rendered){
                 return (
                     <h1> Rendering cards... </h1>
@@ -193,6 +198,7 @@ class CompanyData extends React.Component {
                     <div className="allContractsData">
                         <h1 className="companyName"> {this.state.data[0]["Nome Contratado"]} </h1>
                         {this.state.summary_card}
+                        <BiddingsCard cnpj={this.props.cnpj}/>
                         <h2 className="allCardsTitle"> Todos os Contratos: </h2>
                         {this.state.all_cards}
                     </div>

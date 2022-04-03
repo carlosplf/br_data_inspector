@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from '../Header/Header';
 import '../RankPage/RankTable.css';
 
 
@@ -28,19 +27,19 @@ class RankTable extends React.Component{
         if(this.state.loading || !this.state.data){
             return <spam></spam>
         }
-        console.log("Data: ", this.state.data);
 
         var dates_param = this.url_dates_2020;
+        var table_row_base_url = "";
 
-        if(this.props.date_year == 2021){
+        if(this.props.date_year === 2021){
             dates_param = this.url_dates_2021;
         }
 
-        if (this.frontend_port == 80){
-            var table_row_base_url = this.frontend_url + "/details?id=";
+        if (this.frontend_port === 80){
+            table_row_base_url = this.frontend_url + "/details?id=";
         }
         else{
-            var table_row_base_url = this.frontend_url + ":" + this.frontend_port + "/details?id=";
+            table_row_base_url = this.frontend_url + ":" + this.frontend_port + "/details?id=";
         }
 
         var data_table = this.state.data["data"].map((row, i)=> {

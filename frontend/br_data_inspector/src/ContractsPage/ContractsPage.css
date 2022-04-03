@@ -17,3 +17,13 @@
 .contractsPageTitle{
     font-size: 1.8em;
 }
+
+.obsDiv{
+    margin-top: 40px;
+    width: 60%;
+    text-align: justify;
+}
+
+.obsMessage{
+    font-size: 1.4em;
+}

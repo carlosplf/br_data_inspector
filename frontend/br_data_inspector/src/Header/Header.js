@@ -1,20 +1,14 @@
 import React from "react";
 import '../Header/Header.css';
-import AppButton from '../Utils/AppButton';
 import { FaShareAlt } from 'react-icons/fa';
-import { Link } from "react-router-dom";
 
 class Header extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
     showShareButton(){
         if(this.props.show_share_button){
             return <button id="shareBtn" className="page-btn" onClick={this.props.handleShareButton}><FaShareAlt/></button>
         }
         else{
-            <spam/>
+            <p/>
         }
     }
 
@@ -23,7 +17,7 @@ class Header extends React.Component{
             return <button id="all-data-btn" className="page-btn" onClick={this.props.handle_modal}>Mostrar dados</button>
         }
         else{
-            return <spam/>
+            return <p/>
         }
     }
 
@@ -50,9 +44,15 @@ class Header extends React.Component{
                 <div className="header-btns">
                     {table_data_button}
                     {share_button}
-                    <AppButton btn_type="about-btn"/>
-                    <AppButton btn_type="rank-btn"/>
-                    <AppButton btn_type="contracts-btn"/>
+                    <div className="page-btn">
+                        <a href="/about"> Sobre </a>
+                    </div>
+                    <div className="page-btn">
+                        <a href="/rank"> Ranking </a>
+                    </div>
+                    <div className="page-btn">
+                        <a href="/contracts"> EMPRESAS </a>
+                    </div>
                 </div>
             </div>
         )

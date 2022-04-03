@@ -2,11 +2,6 @@ import React from 'react';
 
 
 class DataChartLabel extends React.Component{
-	constructor(props){
-		//Should receive the data Keys and Colors as props
-		super(props);
-	}
-	
 	createLabels(){
 		var all_labels = [];
 		for (var j=0;j<this.props.entities.length; j++){

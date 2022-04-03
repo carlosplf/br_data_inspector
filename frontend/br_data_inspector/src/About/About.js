@@ -49,8 +49,6 @@ class About extends React.Component{
     }
 
     buildDownloadedReportsList(data){
-        console.log(data);
-
         let all_reports = []
         
         data["downloaded_reports"].forEach((item) => {
@@ -104,6 +102,7 @@ class About extends React.Component{
                         {this.state.reports}
                         <br></br>
                         <p><a href="https://www.portaltransparencia.gov.br">Portal da Transparência </a></p>
+                        <p><a href="https://www.portaltransparencia.gov.br/entenda-a-gestao-publica/licitacoes-e-contratacoes">LICITAÇÕES E CONTRATAÇÕES </a></p>
                         <p><a href="https://www.portaltransparencia.gov.br/entenda-a-gestao-publica/execucao-despesa-publica">EMPENHADO, PAGO E LIQUIDADO. </a></p>
                     </div>
                     </div>

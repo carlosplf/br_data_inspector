@@ -57,7 +57,7 @@ class DataInspector():
 
         result = self.db_connector.query(filter=query_filter)
 
-        return transform_data_in_list(query_result=result, entity_type=None, remove_duplicated=False)
+        return transform_data_in_list(query_result=result, key_field="", remove_duplicated=False)
 
     def get_entity_data(self, entity_id="", entity_type=None, date="", date_regex=False):
         """
@@ -84,7 +84,7 @@ class DataInspector():
         logging.debug(query_filter)
 
         result = self.db_connector.query(filter=query_filter)
-        return transform_data_in_list(query_result=result, entity_type=entity_type, remove_duplicated=False)
+        return transform_data_in_list(query_result=result, key_field="", remove_duplicated=False)
 
     def get_downloaded_reports(self):
         rc = redis_connector.RedisConnector()
@@ -150,12 +150,14 @@ class DataInspector():
             filter_date = self.__parse_date(date)
             query_filter = {"Ano e mês do lançamento": filter_date}
 
+        key_field = "Código Órgão " + entity_type
+
         query_fields = {
             "Código Órgão " + entity_type: 1,
             "Nome Órgão " + entity_type: 1
         }
         result = self.db_connector.query(filter=query_filter, fields=query_fields)
-        return transform_data_in_list(query_result=result, entity_type=entity_type, remove_duplicated=True)
+        return transform_data_in_list(query_result=result, key_field=key_field, remove_duplicated=True)
 
     def search_entity(self, search_term=None, entity_type=None, date=None):
         """

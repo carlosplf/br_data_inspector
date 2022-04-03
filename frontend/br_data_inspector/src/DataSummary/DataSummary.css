@@ -1,20 +1,56 @@
 .data-summary{
 	border-radius: 10px;
   	background: #dddddd;
-  	width: 90%;
+  	width: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin-top: 20px;
     box-sizing: border-box;
     padding: 20px;
 }
 
-.monthsList{
-	font-size: 14pt;
-}
-
 h2{
 	font-size: 20pt;
 	margin-bottom: 10px;
+}
+
+h3{
+	font-size: 1.4em;
+	margin-top: 40px;
+}
+
+#sectionLinksLabel{
+    font-size: 1.2em;
+    text-decoration: underline;
+}
+
+.dataLinks{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.sectionLink{
+    text-decoration: underline;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: normal;
+    font-size: 1.4em;
+    background-color: #012169;
+    color: #fff;
+    margin-right: 8px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    padding: 6px;
+	border-radius: 6px;
+    width: 200px;
+    height: 30px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.19);
+}
+
+.sectionLink:hover{
+    mouse-cursos: pointer;
+    background-color: #214189;
 }
 
 .listMonthsSelected{
@@ -25,18 +61,19 @@ h2{
 }
 
 #monthsSelectedLabel {
-    font-weight: bold;
     font-size: 1.2em;
+    text-decoration: underline;
 }
+
 .monthSelected{
     font-weight: normal;
-    font-size: 16px;
+    font-size: 1.0em;
     background-color: #bbb;
-    margin-left: 2px;
-    margin-right: 2px;
-    margin-top: 10px;;
+    margin-right: 8px;
+    margin-top: -10px;;
     padding: 2px;
 	border-radius: 6px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.19);
 }
 
 @media only screen
@@ -45,13 +82,27 @@ and (max-width : 1080px){
         margin-top: 40px;
     }
 
+    .sectionLink{
+        font-size: 1.8em;
+    }
+    
+    .dataLinks{
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    #monthSelectedLabel{
+        font-size: 1.0em;
+    }
+
     .monthsList{
         font-size: 14px;
     }
 
     .monthSelected{
         font-weight: normal;
-        font-size: 14px;
+        font-size: 1.4em;
+        margin-top: 10px;
     }
 
     h2{

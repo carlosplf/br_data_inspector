@@ -7,11 +7,9 @@ import Loading from '../Utils/Loading';
 import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import { FaAngleRight } from "react-icons/fa";
 import 'react-toastify/dist/ReactToastify.css';
 import '../Home/Home.css';
 import TagManager from 'react-gtm-module';
-import Typing from 'react-typing-animation';
 
 
 const tagManagerArgs = {
@@ -142,14 +140,16 @@ class Home extends React.Component{
 
     render(){
 
+        var url_string = "";
+
         // If true, we have results to show!
         if (this.state.show_results){
             this.buildTableDateParam();
             if(!this.state.compare){
-                var url_string = "/details?id=" + this.state.search_id + "&dates=" + this.dates_url_param;
+                url_string = "/details?id=" + this.state.search_id + "&dates=" + this.dates_url_param;
             }
             else{
-                var url_string = "/compare?id1=" + this.state.search_id + "&id2=" + this.state.search_id_2 + "&dates=" + this.dates_url_param;
+                url_string = "/compare?id1=" + this.state.search_id + "&id2=" + this.state.search_id_2 + "&dates=" + this.dates_url_param;
             }
             return (
                 <Redirect to={url_string}/>
@@ -172,7 +172,7 @@ class Home extends React.Component{
 
         // Entities list collected, time to show the Home page.
         if(!this.first_load && !this.state.loading && !this.show_results){
-            if (this.items.length == 0){
+            if (this.items.length === 0){
                 this.prepareItems("Subordinado");
             }
             return(
@@ -195,21 +195,9 @@ class Home extends React.Component{
                         <Header header_text="BR Data Collector" handle_modal={this.handleOpenDataModal}/>
 
                         <div className="titleContainer">
-                            <span className="pageTitle">Pesquisar por: </span>
-                            <Typing hideCursor={true} speed={30}>
-                                <div>
-                                    <span className="pageTitleSpam">Ministério da Saúde.</span>
-                                    <Typing.Backspace delay={1000} count={22} />
-                                    <span className="pageTitleSpam">Ministério da Economia.</span>
-                                    <Typing.Backspace delay={1000} count={24} />
-                                    <span className="pageTitleSpam">Comando do Exército.</span>
-                                    <Typing.Backspace delay={1000} count={24} />
-                                    <span className="pageTitleSpam">Universidade Federal de São Carlos.</span>
-                                    <Typing.Backspace delay={1000} count={36} />
-                                    <span className="pageTitleSpam">Agência Espacial Brasileira.</span>
-                                </div>
-                            </Typing>
+                            <span className="pageTitle">Pesquise uma Instituição Federal </span>
                         </div>
+
                         <SearchEntity
                             search_id="search_1"
                             show={true}
