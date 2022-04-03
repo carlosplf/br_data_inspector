@@ -48,7 +48,7 @@ class ContractsPage extends React.Component {
         });
     }
 
-    //Call Backend API and retrieve data about Entities
+    //Call Backend API and request a list of all Companies and CNPJs.
     requestAllCompaniesFromAPI() {
         var base_url = this.api_url + ":" + this.api_port;
         var request_url = base_url + "/companies/list";
@@ -130,7 +130,14 @@ class ContractsPage extends React.Component {
                         items={this.items}
                         handleOnSelect={this.handleOnSelect}
                     />
+
                     <button id="search-btn" onClick={this.handleSearch}>Pesquisar</button>
+                    
+                    <div className="obsDiv">
+                        <p className="obsMessage"> Não achou a empresa que procura? A busca considera 
+                            apenas empresas com ao menos um contrato publicado com uma Instituição Federal.
+                        </p>
+                    </div>
 
                     <div className="contractsDataBlock">
                         <ContractsRank year="2020" />

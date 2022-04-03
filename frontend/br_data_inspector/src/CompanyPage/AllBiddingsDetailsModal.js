@@ -72,6 +72,9 @@ class AllBiddingsDetailsModal extends React.Component {
         let new_data = this.state.data;
 
         try{
+            //TODO: Understand why in some cases we don't have data about the Bidding,
+            //even with an Process ID.
+
             //Use the process_id as key to store data.
             new_data[data_received[0]["Número Processo"]] = data_received[0];
         }catch(e){
