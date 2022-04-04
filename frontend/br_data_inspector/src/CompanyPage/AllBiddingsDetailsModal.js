@@ -128,6 +128,7 @@ class AllBiddingsDetailsModal extends React.Component {
 
                         <p>Item da Compra: {this.props.processes_info[key]["item"]}</p>
                         <p>Código do Item: {this.props.processes_info[key]["cod_item"]}</p>
+                        <p>Ganhou: {this.props.processes_info[key]["flag"]}</p>
                         {Object.keys(bidding_details).map((k, index) => (
                             <p>{k}: {bidding_details[k]}</p>
                         ))}
