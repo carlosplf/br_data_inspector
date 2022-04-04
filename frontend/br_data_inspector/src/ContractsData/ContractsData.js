@@ -17,7 +17,7 @@ class ContractsData extends React.Component{
 		};
 	}
 
-	batch_request_size = 2;
+	batch_request_size = 6;
     api_url = process.env.REACT_APP_API_URL;
     api_port = process.env.REACT_APP_API_PORT;
 
@@ -32,21 +32,19 @@ class ContractsData extends React.Component{
 		var all_promises = [];
 		var month_date = "";
 
-		for(var i=0; i<this.props.dates.length; i++){
+		for(var i=0; i<this.props.dates.length;){
 			all_promises = [];
 
 			for (var j=0; j<this.batch_request_size; j++){
 
-				if(!this.props.dates[j+i]){
-					break;
-				}
+				if(!this.props.dates[i]) break;
 
-				month_date = this.props.dates[j+i];
+				month_date = this.props.dates[i];
 
 				//For each month_date iteration step, request data for Entity 1 and 2.
 				all_promises.push(this.requestDataFromAPI(month_date));
 
-				i += j;
+				i++;
 			};
 
 			//Wait a batch of requests to finish.
