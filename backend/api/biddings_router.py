@@ -43,6 +43,9 @@ def search_bidding_by_process(process_id):
 
 @biddings_router.route('/biddings/companies/<entity_id>/<bidding_id>/<process_id>')
 def search_companies_for_bidding(entity_id, bidding_id, process_id):
+    # Some process IDs can come with a '/' char. The frontend should replace
+    # it for '_'.
+    process_id = process_id.replace("_", "/")
     bi = biddings_inspector.BiddingsInspector()
     response = {"data": bi.get_bidding_companies(bidding_id, entity_id, process_id)}
     return response
