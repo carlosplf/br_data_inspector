@@ -92,7 +92,7 @@ class ContractsTable extends React.Component {
                     <td colSpan="5" className="expandedRow">
                         <div className="moreInfo">
                             <h3> Detalhes: </h3>
-                            <p>CNPJ: {item["CNPJ Contratado"]}</p>
+                            <p><a href={"/company?cnpj=" + item["CNPJ Contratado"]}>CNPJ: {item["CNPJ Contratado"]}</a></p>
                             <p>Modalidade: {item["Modalidade Compra"]}</p>
                             <p>
                                 Assinatura: {item["Data Assinatura Contrato"]}

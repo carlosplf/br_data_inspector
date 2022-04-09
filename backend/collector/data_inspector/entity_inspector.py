@@ -1,11 +1,10 @@
 import logging
 import json
-from collector.db_connector import db_connector
 from collector.db_connector import redis_connector
 from collector.data_inspector.utils import transform_data_in_list
 
 
-class DataInspector():
+class EntityInspector():
 
     def __init__(self, db_connector):
         self.db_connector = db_connector
@@ -30,35 +29,7 @@ class DataInspector():
         }
         count_result = self.db_connector.count_entries(query_filter=db_filter)
         return count_result
-
-    def get_contracts_by_entity(self, entity_id="", date=""):
-        """
-        Return all contracts for a Single Entity for a date.
-        Args:
-            entity_id: (str) ID number of the Entity
-            date: (str) date format YYYYMM
-        """
-        logging.debug("Geting Contracts for " + entity_id + " filtering by " + date)
-
-        query_filter = {
-            "Código Órgão": str(entity_id)
-        }
-
-        if not date:
-            logging.warning("Didn't receive a date to filter... Returning no contracts.")
-            return []
-
-        date_formated = date[4:6] + "/" + date[0:4]
-
-        query_filter["Data Publicação DOU"] = {"$regex": str(date_formated)}
-
-        logging.debug(query_filter)
-        print(query_filter)
-
-        result = self.db_connector.query(filter=query_filter)
-
-        return transform_data_in_list(query_result=result, key_field="", remove_duplicated=False)
-
+    
     def get_entity_data(self, entity_id="", entity_type=None, date="", date_regex=False):
         """
         Get all data from an entity within a specific date.

@@ -9,7 +9,11 @@ class AllBiddingsDetailsModal extends React.Component {
         this.state = {
             loading: true,
 			requests_done: 0,
-            data: {}
+            data: {},
+            //the data_formated state control when to call
+            //the adjustBiddingsValues() function.
+            //It should be called with all data loaded, and once.
+            data_formated: false
         }
     }
     
@@ -109,6 +113,8 @@ class AllBiddingsDetailsModal extends React.Component {
         let idx = 0;
         let background_color = "#ff9d9d";
 
+        if(!this.state.data_formated) this.adjustBiddingsValues();
+
         //For each item disputes... received as props.
         Object.keys(this.props.processes_info).forEach((key) => {
             background_color = "ff9d9d";
@@ -120,7 +126,6 @@ class AllBiddingsDetailsModal extends React.Component {
                 //For each item disputed, get the corresponding Bidding information
                 //stored in the this.state.data.
                 let bidding_details = this.state.data[this.props.processes_info[key]["process_id"]];
-                
 
                 //For each item, build the summary card, using data from props and state.
                 all_cards = all_cards.concat(
@@ -128,6 +133,7 @@ class AllBiddingsDetailsModal extends React.Component {
 
                         <p>Item da Compra: {this.props.processes_info[key]["item"]}</p>
                         <p>Código do Item: {this.props.processes_info[key]["cod_item"]}</p>
+                        <p>Ganhou: {this.props.processes_info[key]["flag"]}</p>
                         {Object.keys(bidding_details).map((k, index) => (
                             <p>{k}: {bidding_details[k]}</p>
                         ))}
@@ -141,6 +147,41 @@ class AllBiddingsDetailsModal extends React.Component {
             }
         });
         return all_cards;
+    }
+
+    adjustBiddingsValues() {
+        /*
+         * Format some values inside Biggind data.
+         * => Price value ('Valor Licitação') is formated to BRL.
+         * => Object value if formated and the word 'Objeto' is
+         * removed from value.
+         */
+
+        if(this.state.data_formated) return;
+
+        let original_value = "";
+        let new_value = "";
+
+        let all_biddings = this.state.data;
+
+        Object.keys(all_biddings).forEach((k) => {
+            
+            original_value = all_biddings[k]["Valor Licitação"];
+            new_value = original_value.slice(0, -2);
+            new_value = new_value.replace("R$", "");
+            
+            if(!new_value){
+                all_biddings[k]["Valos Licitação"] = 0;
+            }
+            
+            all_biddings[k]["Valor Total Formatado"] = "R$" + new_value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+            //remove the word 'Objeto' from field value.
+            all_biddings[k]["Objeto"] = all_biddings[k]["Objeto"].slice(4,10000);
+                
+        });
+
+        this.setState({data: all_biddings, data_formated: true});
     }
 
     render(){

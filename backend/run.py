@@ -43,12 +43,20 @@ args = parser.parse_args()
 
 
 def call_collector():
+    """
+    Call the Collector.collect_all method. TRhis will check the task_list json file,
+    and collect all the data and save it to DBs.
+    """
     logging.debug("Starting Collector...")
     my_collector = collector.Collector()
     my_collector.collect_all()
 
 
 def call_data_processor():
+    """
+    Call the DataProcessor methods and create the lists and indexes from Data already in
+    the DBs. This methods can take some time to run properly.
+    """
     my_dp = data_processor.DataProcessor()
     my_dp.create_entities_list("Subordinado")
     my_dp.create_biggest_spenders_rank(20, 2020)
