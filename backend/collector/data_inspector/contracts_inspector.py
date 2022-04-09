@@ -85,7 +85,7 @@ class ContractsInspector():
 
     def get_contracts_by_entity(self, entity_id="", date=""):
         """
-        Return all contracts for a Single Entity for a date. Date filter is applied at publication Date.
+        Return all contracts for a Single Entity for a date. Date filter is applied at publish Date.
         Args:
             entity_id: (str) ID number of the Entity
             date: (str) date format YYYYMM
