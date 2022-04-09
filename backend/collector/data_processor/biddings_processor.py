@@ -44,40 +44,7 @@ class BiddingProcessor():
             all_companies_data.append(company_data)
 
         self.redis_connector.set(redis_key_name, json.dumps(all_companies_data))
-
-    def __calculate_company_biddings(self, company_id):
-        """
-        For a single Company, get all Bidding processes and calculate the values and
-        win/loss rates.
-        Args:
-            (str) Company CNPJ (ID).
-        Return:
-            (dict) Dict with all the calculated info.
-        """
-        # TODO: get all Biddings that a Company participated.
-        # 1=> Collect the Bidding IDs from Companies Bidding DB.
-        # 2=> Collect details about the Biddings with the Bidding ID.
-        # 3=> Check if we have duplicated entries for a Company in a Bidding.
-        # 4=> Put together some data and numbers about the Company.
-        #   4.1=> number of Biddings ithat the Company participated.
-        #   4.2=> number of Won biddings and Win rate.
-        #   4.3=> total value (BRL) earned in Biddings.
-        # 5=> Return a DICT with the informations about the Company.
-        pass
-
-    def __collect_bidding_ids(self, company_id):
-        """
-        Based on a Company ID, call DataInspector to retrieve the Biddings IDs
-        and Entity IDs that this Company participated.
-        This pair of IDs (Bidding + Entity) is important because a Bidding ID can
-        be equal in different Entities.
-        Args:
-            (str): Company ID (CNPJ)
-        Return:
-            (list): List of DICST {Bidding IDS, Entity IDS}.
-        """
-        pass
-
+    
     def build_companies_bidding_list(self):
         """
         Create a simple list of Names and IDS (CNPJ) of Companies inside Redis.

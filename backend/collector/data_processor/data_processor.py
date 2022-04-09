@@ -11,7 +11,6 @@ EXPENSES_DB_NAME = "expenses-data"
 CONTRACTS_DB_NAME = "contarcts-data"
 
 
-# TODO: Break this class in two classes. ExpensesProcessor and ContractsProcessor.
 class DataProcessor():
     def __init__(self):
         self.db_connector = None
