@@ -23,8 +23,11 @@ class CompaniesInfo extends React.Component{
 	
     //Call Backend API and retrieve data about Companies for a specific Bidding.
 	requestDataFromAPI(){
-		var base_url = this.api_url + ":" + this.api_port;
-		var request_url = base_url + "/biddings/companies/" + this.props.entity_id + "/" + this.props.bidding_id + "/" + this.props.process_id;
+        //Some process IDs have a '/' character. Lets replace it with "_", and the API will change it back.
+        let process_id = this.props.process_id.replace("/", "_");
+		
+        var base_url = this.api_url + ":" + this.api_port;
+		var request_url = base_url + "/biddings/companies/" + this.props.entity_id + "/" + this.props.bidding_id + "/" + process_id;
 
 		return new Promise((resolve, reject) => {
 			return fetch(request_url).then(response => response.json()).then(data => {
@@ -40,9 +43,9 @@ class CompaniesInfo extends React.Component{
 	}
     
     renderItem(item) {
-        let tr_class = ((item["Flag Vencedor"] == "SIM") ? "winnerTr" : "looserTr");
+        let tr_class = ((item["Flag Vencedor"] === "SIM") ? "winnerTr" : "looserTr");
         const itemRows = [
-            <tr className={tr_class}>
+            <tr id={item["CNPJ Participante"]} className={tr_class}>
                 <td><a href={"/company?cnpj=" + item["CNPJ Participante"]}>{item["CNPJ Participante"]}</a></td>
                 <td>{item["Nome Participante"]}</td>
                 <td>{item["Flag Vencedor"]}</td>
