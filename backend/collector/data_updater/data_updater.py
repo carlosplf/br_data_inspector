@@ -1,4 +1,4 @@
-from collector.data_inspector import data_inspector
+from collector.data_inspector import entity_inspector
 from collector.db_connector import db_connector
 import logging
 
@@ -25,7 +25,7 @@ class DataUpdater():
         my_db = db_connector.DbConnector()
         my_db.connect(db_name)
 
-        my_dai = data_inspector.DataInspector(my_db)
+        my_dai = entity_inspector.EntityInspector(my_db)
         count_result = my_dai.get_count_for_date(date=date)
 
         if count_result <= threshold:

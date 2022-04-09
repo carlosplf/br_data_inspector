@@ -3,7 +3,7 @@ import json
 
 from collector.db_connector import db_connector
 from collector.db_connector import redis_connector
-from collector.data_inspector import data_inspector
+from collector.data_inspector import entity_inspector
 from collector.data_inspector import contracts_inspector
 
 
@@ -157,7 +157,7 @@ class DataProcessor():
         Args:
             spender_id: (int OR str) Entity ID ('ID Órgão Suberdinado')
         """
-        di = data_inspector.DataInspector(self.db_connector)
+        di = entity_inspector.EntityInspector(self.db_connector)
         return di.get_entity_data(entity_id=spender_id, entity_type=entity_type, date=date, date_regex=date_regex)
 
     def create_entities_list(self, entity_type=None):
@@ -173,7 +173,7 @@ class DataProcessor():
             return
 
         logging.debug("Creating Entities list...")
-        di = data_inspector.DataInspector(self.db_connector)
+        di = entity_inspector.EntityInspector(self.db_connector)
         all_entities = di.get_all_entities(
             entity_type=entity_type,
             date=None
