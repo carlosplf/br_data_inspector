@@ -1,6 +1,7 @@
 from flask import request
 from flask import Blueprint
 from collector.data_inspector import entity_inspector
+from collector.data_inspector import utils_inspector
 from collector.db_connector import db_connector
 from collector.custom_link import custom_link
 
@@ -79,5 +80,5 @@ def get_real_url(custom_url):
 
 @expenses_router.route('/downloaded_reports')
 def get_downloaded_reports():
-    di = entity_inspector.EntityInspector(None)
-    return di.get_downloaded_reports()
+    ui = utils_inspector.UtilsInspector(None)
+    return ui.get_downloaded_reports()
