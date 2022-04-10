@@ -1,4 +1,4 @@
-from collector.data_inspector import entity_inspector
+from collector.data_inspector import utils_inspector
 from collector.db_connector import db_connector
 import logging
 
@@ -25,8 +25,11 @@ class DataUpdater():
         my_db = db_connector.DbConnector()
         my_db.connect(db_name)
 
-        my_dai = entity_inspector.EntityInspector(my_db)
-        count_result = my_dai.get_count_for_date(date=date)
+        my_ui = utils_inspector.UtilsInspector(my_db)
+        count_result = my_ui.get_count_for_date(db_name, date)
+        
+        if count_result < 0:
+            return True
 
         if count_result <= threshold:
             log_message = "Didn't find enough data for " + date + ". Returnning False."
