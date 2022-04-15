@@ -9,6 +9,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 90%;
 }
 
 .biddingsNumbersCard{
@@ -17,22 +18,22 @@
     color: #202020;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 20px;
-    width: 98%;
+    width: 94%;
     margin-top: 20px;
 }
 
-#showInfo{
+#showBiddingsInfo{
     margin-top: 20px;
     font-size: 1.4em;
     padding: 10px;
     width: 40%;
     border-radius: 10px;
     border-color: rgba(0,0,0,0);
-    background-color: #f;
+    background-color: #eee;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#showInfo:hover{
-    background-color: #eee;
+#showBiddingsInfo:hover{
+    background-color: #ddd;
     cursor: pointer;
 }

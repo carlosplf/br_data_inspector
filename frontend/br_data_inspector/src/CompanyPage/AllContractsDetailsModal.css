@@ -1,4 +1,4 @@
-.allBiddingsDetailsModal{
+.allContractsDetailsModal{
     position: fixed;
     z-index: 1;
     left: 0;
@@ -9,7 +9,7 @@
     background-color: rgba(0,0,0,0.4);
 }
 
-.biddingsModalBody{
+.contractsModalBody{
     background-color: #fefefe;
     margin: 15% auto;
     margin-top: 40px;
@@ -21,12 +21,12 @@
     min-height: auto;
 }
 
-.biddingsModalBody h1{
+.contractsModalBody h1{
     margin-left: 20px;
     color: #282828;
 }
 
-.singleBiddingInfo{
+.singleContractInfo{
     background-color: #eee;
     padding: 10px;
     margin: 10px;

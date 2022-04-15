@@ -1,13 +1,14 @@
-.contractCard{
+.contractsCard{
     border-radius: 10px;
   	background: #eee;
     color: #202020;
     margin: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 20px;
-}
-
-.allContractsData{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 90%;
 }
 
@@ -15,13 +16,14 @@
     text-align: center;
 }
 
-.summaryCard{
+.contractsNumbersCard{
     border-radius: 10px;
   	background: #202020;
     color: #eee;
     margin: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 20px;
+    width: 94%;
 }
 
 .summaryTitle{
@@ -67,4 +69,21 @@
 .allCardsTitle{
     text-align: center;
     margin-top: 40px;
+}
+
+#showContractsInfo{
+    margin-top: 20px;
+    font-size: 1.4em;
+    padding: 10px;
+    width: 40%;
+    border-radius: 10px;
+    border-color: rgba(0,0,0,0);
+    background-color: #222222;
+    color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#showContractsInfo:hover{
+    background-color: #383838;
+    cursor: pointer;
 }

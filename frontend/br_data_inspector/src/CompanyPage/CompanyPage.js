@@ -1,9 +1,10 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import CompanyData from "../CompanyPage/CompanyData";
+import ContractsCard from "../CompanyPage/ContractsCard.js";
+import BiddingsCard from "../CompanyPage/BiddingsCard.js";
 import Header from "../Header/Header";
-import "../CompanyPage/CompanyPage.css";
 import queryString from "query-string";
+import "../CompanyPage/CompanyPage.css";
 
 class CompanyPage extends React.Component {
     constructor(props) {
@@ -33,7 +34,8 @@ class CompanyPage extends React.Component {
                     handle_modal={this.handleOpenDataModal}
                 />
                 <div className="companyDataBlock">
-                    <CompanyData cnpj={this.state.cnpj}/>
+                    <ContractsCard cnpj={this.state.cnpj}/>
+                    <BiddingsCard cnpj={this.state.cnpj}/>
                 </div>
             </div>
         )

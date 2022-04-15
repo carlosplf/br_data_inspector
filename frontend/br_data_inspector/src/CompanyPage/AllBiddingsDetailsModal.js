@@ -1,5 +1,4 @@
 import React from "react";
-import BiddingDetails from "../CompanyPage/BiddingDetails.js";
 import "../CompanyPage/AllBiddingsDetailsModal.css";
 
 
@@ -191,7 +190,7 @@ class AllBiddingsDetailsModal extends React.Component {
         if(this.state.loading){
             return(
                 <div className="allBiddingsDetailsModal">
-                    <div className="modalBody">
+                    <div className="biddingsModalBody">
                         <h1> Detalhes das Licitações: </h1>
                         <button onClick={this.props.callBackCloseModal} id="closeButton"> Fechar </button>
                         <p id="loadingMsg">Buscando mais informações...</p>
@@ -206,7 +205,7 @@ class AllBiddingsDetailsModal extends React.Component {
 
             return(
                 <div className="allBiddingsDetailsModal">
-                    <div className="modalBody">
+                    <div className="biddingsModalBody">
                         <h1> Detalhes das Licitações: </h1>
                         <button onClick={this.props.callBackCloseModal} id="closeButton"> Fechar </button>
                         {biddings_info}
