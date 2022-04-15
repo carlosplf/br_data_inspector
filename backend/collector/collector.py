@@ -32,16 +32,30 @@ class Collector():
         # be extracted from inside the downloaded ZIP file.
         inside_file_name = None
 
+        # When "change_fields" is present on tasks_list, this value is changed
+        # to true, when the filters are applied.
+        change_fields = False
+        fields_names = []
+
         for key in task_list:
             url = task_list[key]["link"]
             db_name = task_list[key]["db_name"]
 
             for arg in task_list[key]["args"]:
+
                 if "inside_file_name" in task_list[key]:
                     inside_file_name = arg + task_list[key]["inside_file_name"]
-                self.do_report_full_cycle(url, arg, db_name, inside_file_name)
 
-    def do_report_full_cycle(self, url, arg, db_name, inside_file_name):
+                if "change_fields" in task_list[key]:
+                    change_fields = True
+                    fields_names = task_list[key]["change_fields"]
+
+                self.do_report_full_cycle(
+                    url, arg, db_name, inside_file_name,
+                    change_fields, fields_names
+                )
+
+    def do_report_full_cycle(self, url, arg, db_name, inside_file_name, change_fields=False, fields_names=[]):
         """
         Do a full cycle for a report (task). Download, extract, proccess and save
         to DB.
@@ -51,6 +65,10 @@ class Collector():
             db_name: (str) mongo db name to save data
             inside_file_name: (str) indicates the only file that
                 should be extracted from ZIP file.
+            change_fields: (list) indicates if the system need to
+                change any field name from data.
+            fields_names: (list) in case of True change_fields, these
+                should be the fields to be changed.
         """
 
         logging.debug("Starting full cycle...")
@@ -73,7 +91,8 @@ class Collector():
         # For loop is necessary, because we can get multiple CSVs inside
         # the ZIP file.
         for single_report in extracted_reports:
-            data_as_dict = csv_c.csv_to_dict(DOWNLOADS_PATH + single_report)
+            data_as_dict = csv_c.csv_to_dict(DOWNLOADS_PATH + single_report,
+                                             change_fields, fields_names)
             self.__insert_to_db(data_as_dict, db_name)
 
         self.__register_report_downloaded(url, arg)

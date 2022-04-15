@@ -8,7 +8,7 @@ from collector.data_inspector import contracts_inspector
 
 
 EXPENSES_DB_NAME = "expenses-data"
-CONTRACTS_DB_NAME = "contarcts-data"
+CONTRACTS_DB_NAME = "contracts-data"
 
 
 class DataProcessor():
@@ -31,6 +31,7 @@ class DataProcessor():
         ci = contracts_inspector.ContractsInspector()
 
         all_contracts = ci.get_contracts_by_year("Data Publicação DOU", date_year)
+        print(all_contracts)
 
         contracts_summary_dict = {}
         contracts_summary_list = []

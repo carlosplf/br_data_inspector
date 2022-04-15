@@ -3,27 +3,33 @@
         "task_name": "Expenses Reports",
         "db_name": "expenses-data",
         "link": "https://www.portaltransparencia.gov.br/download-de-dados/despesas-execucao/",
-        "args": ["202001", "202002", "202003"]
+        "args": ["202001", "202002", "202003", "202004", "202005", "202006", "202007", "202008", "202009", "202010", "202011", "202012", "202101", "202102", "202103", "202104", "202105", "202106", "202107", "202108", "202109", "202110", "202111", "202112"]
     },
     "task_2":{
         "task_name": "Contracts Reports",
         "db_name": "contracts-data",
         "link": "https://www.portaltransparencia.gov.br/download-de-dados/compras/",
-        "args": ["202001", "202002", "202003"],
+        "args": ["202001", "202002", "202003", "202004", "202005", "202006", "202007", "202008", "202009", "202010", "202011", "202012", "202101", "202102", "202103", "202104", "202105", "202106", "202107", "202108", "202109", "202110", "202111", "202112"],
         "inside_file_name": "_Compras.csv"
+        "change_fields": [
+            {
+                "current_field": "Código Contratado",
+                "new_field": "CNPJ Contratado"
+            }
+        ]
     },
     "task_3":{
         "task_name": "Biddings Reports",
         "db_name": "biddings-data",
         "link": "https://www.portaltransparencia.gov.br/download-de-dados/licitacoes/",
-        "args": ["202001", "202002", "202003"],
+        "args": ["202001", "202002", "202003", "202004", "202005", "202006", "202007", "202008", "202009", "202010", "202011", "202012", "202101", "202102", "202103", "202104", "202105", "202106", "202107", "202108", "202109", "202110", "202111", "202112"],
         "inside_file_name": "_Licitaç╞o.csv"
     },
     "task_4":{
         "task_name": "Biddings Reports",
         "db_name": "biddings-companies-data",
         "link": "https://www.portaltransparencia.gov.br/download-de-dados/licitacoes/",
-        "args": ["202001", "202002", "202003"],
+        "args": ["202001", "202002", "202003", "202004", "202005", "202006", "202007", "202008", "202009", "202010", "202011", "202012", "202101", "202102", "202103", "202104", "202105", "202106", "202107", "202108", "202109", "202110", "202111", "202112"],
         "inside_file_name": "_ParticipantesLicitaç╞o.csv"
     }
 }
