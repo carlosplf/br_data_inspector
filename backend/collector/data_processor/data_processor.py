@@ -8,7 +8,7 @@ from collector.data_inspector import contracts_inspector
 
 
 EXPENSES_DB_NAME = "expenses-data"
-CONTRACTS_DB_NAME = "contarcts-data"
+CONTRACTS_DB_NAME = "contracts-data"
 
 
 class DataProcessor():
@@ -39,14 +39,14 @@ class DataProcessor():
         for single_contract in all_contracts:
             previous_total_value = 0
             contracts_count = 0
-            if single_contract["CNPJ Contratado"] in contracts_summary_dict.keys():
-                previous_total_value = contracts_summary_dict[single_contract["CNPJ Contratado"]]["Total recebido"]
-                contracts_count = contracts_summary_dict[single_contract["CNPJ Contratado"]]["Quantidade de contratos"]
+            if single_contract["Código Contratado"] in contracts_summary_dict.keys():
+                previous_total_value = contracts_summary_dict[single_contract["Código Contratado"]]["Total recebido"]
+                contracts_count = contracts_summary_dict[single_contract["Código Contratado"]]["Quantidade de contratos"]
 
             single_contract_value = float(single_contract["Valor Final Compra"].replace(",", "."))
 
-            contracts_summary_dict[single_contract["CNPJ Contratado"]] = {
-                "CNPJ": single_contract["CNPJ Contratado"],
+            contracts_summary_dict[single_contract["Código Contratado"]] = {
+                "CNPJ": single_contract["Código Contratado"],
                 "Nome": single_contract["Nome Contratado"],
                 "Total recebido": previous_total_value + single_contract_value,
                 "Quantidade de contratos": contracts_count + 1
@@ -204,7 +204,7 @@ class DataProcessor():
         for item in all_contracts:
             companies_dict[item["Nome Contratado"]] = {
                 "Nome": item["Nome Contratado"],
-                "CNPJ": item["CNPJ Contratado"]
+                "CNPJ": item["Código Contratado"]
             }
 
         for k in companies_dict.keys():

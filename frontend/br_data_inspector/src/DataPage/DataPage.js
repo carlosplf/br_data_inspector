@@ -126,12 +126,9 @@ class DataPage extends React.Component {
     requestDataFromAPI(month_date) {
         var base_url = this.api_url + ":" + this.api_port;
         var request_url =
-            base_url +
-            "/" +
-            this.props.entity_type.toLowerCase() +
-            "/" +
-            month_date +
-            "/" +
+            base_url + "/" +
+            this.props.entity_type.toLowerCase() + "/" +
+            month_date + "/" +
             this.entity_id;
 
         return new Promise((resolve, reject) => {

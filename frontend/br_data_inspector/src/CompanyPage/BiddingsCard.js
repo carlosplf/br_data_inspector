@@ -1,6 +1,5 @@
 import React from "react";
 import "../CompanyPage/BiddingsCard.css";
-import BiddingDetails from "../CompanyPage/BiddingDetails.js";
 import AllBiddingsDetailsModal from "../CompanyPage/AllBiddingsDetailsModal";
 
 
@@ -108,16 +107,6 @@ class BiddingsCard extends React.Component {
             </div>
         );
     }
-
-    buildAllBiddingDetails(biddings_summary){
-        let all_bidding_details = [];
-        biddings_summary["processes_ids"].forEach((item) => {
-            all_bidding_details = all_bidding_details.concat(
-                <BiddingDetails process_id={item}/>
-            )
-        });
-        return all_bidding_details;
-    }
     
     render(){
 
@@ -153,11 +142,11 @@ class BiddingsCard extends React.Component {
             return(
                 <div className="biddingsCard">
                     
-                    <h2 className="summaryTitle"> Resumo das licitações </h2>
+                    <h2 className="summaryTitle"> LICITAÇÕES </h2>
                     
                     {biddings_card}
 
-                    <button id="showInfo" onClick={this.showHideModal}> Mostrar detalhes </button>
+                    <button id="showBiddingsInfo" onClick={this.showHideModal}> Mostrar detalhes </button>
 
                     {all_bidding_details}
                         

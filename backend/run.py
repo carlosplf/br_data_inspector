@@ -5,11 +5,11 @@ from collector import collector
 from collector.data_processor import data_processor
 
 
-#Path running local
-LOG_FILE="./logs/br_data_collector_backend_log"
+# Path running local
+LOG_FILE = "./logs/br_data_collector_backend_log"
 
-#Path for docker container
-#LOG_FILE="/br_data_inspector/backend/logs/br_data_collector_backend_log"
+# Path for docker container
+# LOG_FILE = "/br_data_inspector/backend/logs/br_data_collector_backend_log"
 
 formatter = logging.Formatter('%(asctime)s  %(name)s  %(levelname)s: %(message)s')
 
@@ -37,7 +37,7 @@ parser.add_argument("-c", "--collect",
                     help="Run Collector and collect data from Gov.",
                     action="store_true")
 parser.add_argument("-u", "--update",
-                    help="Check if have some dates without data collected and collect it.",
+                    help="Checks if the system has some missing data and collect it.",
                     action="store_true")
 args = parser.parse_args()
 

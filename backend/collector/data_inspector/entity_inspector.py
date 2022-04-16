@@ -10,26 +10,6 @@ class EntityInspector():
         self.db_connector = db_connector
         self.redis_connector = None
 
-    def get_count_entries(self):
-        """
-        Return the total number of entries for a collection.
-        """
-        count_result = self.db_connector.count_entries(query_filter={})
-        return count_result
-
-    def get_count_for_date(self, date=""):
-        """
-        Given a specific date, check how many entries we have at the DB.
-        Args:
-            date: (str)"YYYYMM"
-        """
-        filter_date = date[:4] + "/" + date[4:]
-        db_filter = {
-            "Ano e mês do lançamento": filter_date
-        }
-        count_result = self.db_connector.count_entries(query_filter=db_filter)
-        return count_result
-    
     def get_entity_data(self, entity_id="", entity_type=None, date="", date_regex=False):
         """
         Get all data from an entity within a specific date.
@@ -56,11 +36,6 @@ class EntityInspector():
 
         result = self.db_connector.query(filter=query_filter)
         return transform_data_in_list(query_result=result, key_field="", remove_duplicated=False)
-
-    def get_downloaded_reports(self):
-        rc = redis_connector.RedisConnector()
-        rc.connect()
-        return (json.loads(rc.get("downloaded_reports")))
 
     def get_entity_rank(self, entity_type=None, rank_size=20, date_year=2020):
         """

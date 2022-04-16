@@ -1,17 +1,17 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
-import BiddingsCard from "../CompanyPage/BiddingsCard.js";
-import "../CompanyPage/CompanyData.css";
+import AllContractsDetailsModal from "../CompanyPage/AllContractsDetailsModal.js";
+import "../CompanyPage/ContractsCard.css";
 
-class CompanyData extends React.Component {
+class ContractsCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: true,
             data: undefined,
             all_cards_rendered: false,
-            all_cards: undefined,
             summary_values: undefined,
-            summary_card: undefined
+            summary_card: undefined,
+            show_details: false,
         };
     }
 
@@ -20,6 +20,10 @@ class CompanyData extends React.Component {
 
     componentDidMount() {
         this.requestDataFromAPI(this.props.cnpj);
+    }
+    
+    showHideModal = () => {
+       this.setState({show_details: !this.state.show_details}) 
     }
     
     formatNumber(x) {
@@ -47,7 +51,7 @@ class CompanyData extends React.Component {
                 .then(
                     (data) => {
                         if (data) {
-                            resolve(this.setState({data: data["data"]}));
+                            resolve(this.setState({loading: false, data: data["data"]}));
                         } else {
                             reject(
                                 console.log(
@@ -62,48 +66,20 @@ class CompanyData extends React.Component {
                 );
         });
     }
-
-    renderCard(contract_item){
-        return(
-            <div key={Math.random().toString(16)} className="contractCard">
-                <p> CNPJ: {contract_item["CNPJ Contratado"]}</p>
-                <p> Nome: {contract_item["Nome Contratado"]}</p>
-                <p> Modalidade da Licitação: {contract_item["Modalidade Compra Licitação"]}</p>
-                <p> Modalidade da Compra: {contract_item["Modalidade Compra"]}</p>
-                <p> Nome UG: {contract_item["Nome UG"]}</p>
-                <p> Nome do Órgão: {contract_item["Nome Órgão"]}</p>
-                <p> Nome do Órgão Superior: {contract_item["Nome Órgão Superior"]}</p>
-                <p> Número Licitação: {contract_item["Número Licitação"]}</p>
-                <p> Número do Contrato: {contract_item["Número do Contrato"]}</p>
-                <p> {contract_item["Objeto"]}</p>
-                <p> Situação Contrato: {contract_item["Situação Contrato"]}</p>
-                <p> Data da Assinatura: {contract_item["Data Assinatura Contrato"]}</p>
-                <p> Início da vigência: {contract_item["Data Início Vigência"]}</p>
-                <p> Fim da vigência: {contract_item["Data Fim Vigência"]}</p>
-                <p> Valor Inicial Compra: R$ {this.formatNumber(contract_item["Valor Inicial Compra"])}</p>
-                <p> Valor Final Compra: R$ {this.formatNumber(contract_item["Valor Final Compra"])}</p>
-            </div>
-        )
-    }
-
+    
     buildCards(){
-        let all_cards = [];
         let summary_values = {
             "total recebido": 0,
             "quantidade": 0
         }
         
         this.state.data.forEach((item) => {
-            const singleCard = this.renderCard(item);
-            all_cards = all_cards.concat(singleCard);
             summary_values = this.updateTotalValues(item, summary_values);
         });
 
         let buyers_summary = this.calculateBiggestBuyers();
-        
         let summary_card = this.buildSummaryCard(summary_values, buyers_summary);
-        
-        this.setState({all_cards_rendered: true, all_cards: all_cards, summary_values: summary_values, summary_card: summary_card});
+        return summary_card;    
     }
 
     //Based on Contracts data, see who bought most from the Company.
@@ -152,8 +128,8 @@ class CompanyData extends React.Component {
         });
 
         return(
-            <div className="summaryCard">
-                <h3 className="summaryTitle">Resumo dos contratos</h3>
+            <div className="contractsNumbersCard">
+                <h3 className="summaryTitle">CONTRATOS</h3>
                 <p>Período considerado: Jan/2020 - Dez/2021 </p>
                 <p>Valor total fechado em contratos: R$ {this.formatNumber(summary_values["total recebido"])}</p>
                 <p>Valor total de contratos fechados: {summary_values["quantidade"]}</p>
@@ -172,36 +148,40 @@ class CompanyData extends React.Component {
     }
     
     render(){
-        if(this.state.data !== undefined && !this.state.all_cards_rendered){
-            this.buildCards();
-        }
+
+        let all_contracts_details = null;
+
+        if(this.state.loading){ return (<h1> Loading... </h1>); }
         
-        if(this.state.data === undefined){
-            return (<h1> Loading... </h1>);
-        }
-
         else{
-
+            
             if(this.state.data.length === 0){
-                return (
-                    <h1> A empresa buscada não possui Contratos. </h1>
-                )
-            }
-
-            if(!this.state.all_cards_rendered){
-                return (
-                    <h1> Rendering cards... </h1>
+                return(
+                    <div className="contractsCard">
+                        <h3> A empresa buscada não possui dados com o Governo Federal. </h3>
+                    </div>
                 )
             }
             
             else{
+
+                if(this.state.show_details){
+                    all_contracts_details = <AllContractsDetailsModal
+                        data={this.state.data}
+                        callBackCloseModal={this.showHideModal}
+                    />
+                }
+
+                else{ all_contracts_details = null; }
+                
+                let summary_card = this.buildCards();
+                
                 return(
-                    <div className="allContractsData">
+                    <div className="contractsCard">
                         <h1 className="companyName"> {this.state.data[0]["Nome Contratado"]} </h1>
-                        {this.state.summary_card}
-                        <BiddingsCard cnpj={this.props.cnpj}/>
-                        <h2 className="allCardsTitle"> Todos os Contratos: </h2>
-                        {this.state.all_cards}
+                        {summary_card}
+                        <button id="showContractsInfo" onClick={this.showHideModal}> Mostrar detalhes </button>
+                        {all_contracts_details}
                     </div>
                 )
             }
@@ -209,4 +189,4 @@ class CompanyData extends React.Component {
     }
 }
 
-export default withRouter(CompanyData);
+export default ContractsCard;

@@ -1,5 +1,4 @@
 import React from "react";
-import BiddingDetails from "../CompanyPage/BiddingDetails.js";
 import "../CompanyPage/AllBiddingsDetailsModal.css";
 
 
@@ -187,15 +186,20 @@ class AllBiddingsDetailsModal extends React.Component {
     render(){
 
         let completed_perc = ((100*this.state.requests_done)/(Object.keys(this.props.processes_info).length)).toFixed(2);
-
+        let completed_perc_str = "" + parseInt(completed_perc) + "%";
+        
         if(this.state.loading){
             return(
                 <div className="allBiddingsDetailsModal">
-                    <div className="modalBody">
+                    <div className="biddingsModalBody">
                         <h1> Detalhes das Licitações: </h1>
                         <button onClick={this.props.callBackCloseModal} id="closeButton"> Fechar </button>
-                        <p id="loadingMsg">Buscando mais informações...</p>
-                        <p id="loadingPerc">{completed_perc}%</p>
+                        <div className="loadingBlock">
+                            <p id="loadingMsg">Buscando mais informações...</p>
+                                <div className="loadingBar">
+                                    <div style={{width: completed_perc_str}} className="loadingBarProgress"/>
+                                </div>
+                        </div>
                     </div>
                 </div>
             );
@@ -206,7 +210,7 @@ class AllBiddingsDetailsModal extends React.Component {
 
             return(
                 <div className="allBiddingsDetailsModal">
-                    <div className="modalBody">
+                    <div className="biddingsModalBody">
                         <h1> Detalhes das Licitações: </h1>
                         <button onClick={this.props.callBackCloseModal} id="closeButton"> Fechar </button>
                         {biddings_info}

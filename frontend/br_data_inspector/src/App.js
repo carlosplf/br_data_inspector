@@ -28,6 +28,9 @@ class App extends React.Component {
     return(
       <Router>
         <Switch>
+          <Route exact path="/">
+              <Home/>
+          </Route>
           <Route path="/home">
             <Home />
           </Route>

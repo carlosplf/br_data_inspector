@@ -76,7 +76,7 @@ class ContractsInspector():
             self.__connect_mongo_db()
 
         query_filter = {
-            "CNPJ Contratado": str(company_cnpj)
+            "Código Contratado": str(company_cnpj)
         }
 
         query_result = self.db_connection.query(filter=query_filter)
