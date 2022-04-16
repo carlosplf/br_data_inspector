@@ -24,7 +24,7 @@ class AllContractsDetailsModal extends React.Component{
     renderCard(contract_item){
         return(
             <div key={Math.random().toString(16)} className="singleContractInfo">
-                <p style={{fontWeight: "bold"}}> CNPJ: {contract_item["CNPJ Contratado"]}</p>
+                <p style={{fontWeight: "bold"}}> CNPJ: {contract_item["Código Contratado"]}</p>
                 <p> Nome: {contract_item["Nome Contratado"]}</p>
                 <p> Modalidade da Licitação: {contract_item["Modalidade Compra Licitação"]}</p>
                 <p> Modalidade da Compra: {contract_item["Modalidade Compra"]}</p>

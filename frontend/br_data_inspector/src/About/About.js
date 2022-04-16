@@ -87,7 +87,7 @@ class About extends React.Component{
                             O que posso pesquisar? 
                         </p>
                         <p align="justify">
-                            O sistema possui dados de Despesas de Órgãos Federais, Contratos e Empresas contratadas.
+                            O sistema possui dados de Despesas de Órgãos Federais, Contratos, Licitações e Empresas contratadas.
                         </p>
                         <p align="justify">
                             Ao pesquisar por qualquer órgão FEDERAL, o sistema irá retornar com dados de Despesas, Contratos e Licitações. O usuário deve selecionar um período para a busca.

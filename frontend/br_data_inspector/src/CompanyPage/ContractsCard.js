@@ -1,5 +1,4 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 import AllContractsDetailsModal from "../CompanyPage/AllContractsDetailsModal.js";
 import "../CompanyPage/ContractsCard.css";
 
@@ -152,14 +151,16 @@ class ContractsCard extends React.Component {
 
         let all_contracts_details = null;
 
-        if(this.state.loading){
-            return (<h1> Loading... </h1>);
-        }
+        if(this.state.loading){ return (<h1> Loading... </h1>); }
         
         else{
             
             if(this.state.data.length === 0){
-                return (<h1> A empresa buscada não possui Contratos. </h1>)
+                return(
+                    <div className="contractsCard">
+                        <h3> A empresa buscada não possui dados com o Governo Federal. </h3>
+                    </div>
+                )
             }
             
             else{
@@ -171,9 +172,7 @@ class ContractsCard extends React.Component {
                     />
                 }
 
-                else {
-                    all_contracts_details = null;
-                }
+                else{ all_contracts_details = null; }
                 
                 let summary_card = this.buildCards();
                 
