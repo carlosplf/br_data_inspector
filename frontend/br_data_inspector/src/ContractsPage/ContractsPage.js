@@ -6,6 +6,7 @@ import ContractsRank from "../ContractsPage/ContractsRank";
 import Header from "../Header/Header";
 import SearchEntity from "../Home/SearchEntity";
 import "../ContractsPage/ContractsPage.css";
+import Loading from "../Utils/Loading.js";
 
 class ContractsPage extends React.Component {
     constructor(props) {
@@ -96,7 +97,7 @@ class ContractsPage extends React.Component {
         
         if (this.state.loading){
             return (
-                <h1> Buscando índice de Empresas... </h1>
+                <Loading message="Buscando índice de empresas..."/>
             )
         }
         
