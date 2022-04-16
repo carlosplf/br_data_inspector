@@ -1,4 +1,5 @@
 import csv
+import logging
 
 
 class CSVConverter():
@@ -28,7 +29,8 @@ class CSVConverter():
                 data = self.__change_field_name(data, single_change["current_field"], single_change["new_field"])
 
         return data
-
+    
+    # TODO: Deprecated. This method was created and is maybe no longer necessary.
     def __change_field_name(self, entries, current_field, new_field):
         """
         Some entries can come with different field names.
@@ -42,6 +44,8 @@ class CSVConverter():
             (dict) Dict with the same number and sctrure from entries.
         """
         new_entries = {}
+
+        logging.info("Changing field name. From {} to {}".format(current_field, new_field))
 
         for key, value in entries.items():
             new_entries[key] = value

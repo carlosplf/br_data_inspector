@@ -40,7 +40,7 @@ class BiddingProcessor():
         # For each Company, get all Biddings that it participated, the value and the Win/Loss.
         for single_company in all_companies_list:
             logging.debug("Calculating Biddings and Win rate for {}".format(single_company["Nome Participante"]))
-            company_data = self.__calculate_company_biddings(single_company["CNPJ Participante"])
+            company_data = self.__calculate_company_biddings(single_company["Código Participante"])
             all_companies_data.append(company_data)
 
         self.redis_connector.set(redis_key_name, json.dumps(all_companies_data))

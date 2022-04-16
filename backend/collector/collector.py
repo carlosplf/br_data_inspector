@@ -22,6 +22,8 @@ class Collector():
         Collect all reports based on the Task List (task_list.json file).
         Collect, parse as dict and save to DB.
         """
+        logging.debug("==> STARTING to collect all reports in tasks_list.json...")
+
         rpd = report_downloader.ReportDownloader()
         rpd.clear_download_folder()
         self.__remove_reports_downloads()
@@ -40,6 +42,10 @@ class Collector():
         for key in task_list:
             url = task_list[key]["link"]
             db_name = task_list[key]["db_name"]
+            
+            change_fields = False
+            fields_names = []
+            inside_file_name = None
 
             for arg in task_list[key]["args"]:
 
@@ -54,6 +60,8 @@ class Collector():
                     url, arg, db_name, inside_file_name,
                     change_fields, fields_names
                 )
+
+        logging.debug("==> FINISHED to collect all reports in tasks_list.json...")
 
     def do_report_full_cycle(self, url, arg, db_name, inside_file_name, change_fields=False, fields_names=[]):
         """

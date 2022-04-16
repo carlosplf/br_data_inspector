@@ -92,12 +92,12 @@ class BiddingsInspector():
         self.__connect_mongo_db(BIDDINGS_COMPANIES_DB_NAME)
 
         query_fields = {
-            "CNPJ Participante": 1,
+            "Código Participante": 1,
             "Nome Participante": 1
         }
 
         result = self.db_connection.query(filter={}, fields=query_fields)
-        return transform_data_in_list(query_result=result, key_field="CNPJ Participante", remove_duplicated=True)
+        return transform_data_in_list(query_result=result, key_field="Código Participante", remove_duplicated=True)
 
     def get_bidding_by_company(self, company_id):
         """
@@ -113,7 +113,7 @@ class BiddingsInspector():
             self.__connect_mongo_db(BIDDINGS_COMPANIES_DB_NAME)
 
         query_filter = {
-            "CNPJ Participante": str(company_id)
+            "Código Participante": str(company_id)
         }
 
         result = self.db_connection.query(filter=query_filter)
