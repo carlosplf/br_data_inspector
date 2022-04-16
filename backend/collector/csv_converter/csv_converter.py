@@ -1,12 +1,13 @@
 import csv
 import logging
+import os
 
 
 class CSVConverter():
     def __init__(self):
         pass
 
-    def csv_to_dict(self, filename, change_fields=False, fields_names=[]):
+    def csv_to_dict(self, filename, change_fields=False, fields_names=[], delete_after=False):
         """
         Convert a CSV to a dict.
         Args:
@@ -15,6 +16,7 @@ class CSVConverter():
                 change any field name from data.
             fields_names: (list) in case of True change_fields, these
                 should be the fields to be changed.
+            delete_after: (bool) After processing the CSV file, delete it.
         """
         data = {}
         with open(filename, encoding='ISO-8859-1') as csv_file:
@@ -27,6 +29,9 @@ class CSVConverter():
         if change_fields:
             for single_change in fields_names:
                 data = self.__change_field_name(data, single_change["current_field"], single_change["new_field"])
+
+        if delete_after:
+            os.remove(filename)
 
         return data
     

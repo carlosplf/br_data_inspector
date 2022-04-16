@@ -76,7 +76,7 @@ class ReportDownloader():
         for file in self.reports_downloaded:
             self.extract_file(file)
 
-    def extract_file(self, filename, extract_only_filename=None):
+    def extract_file(self, filename, extract_only_filename=None, delete_after=False):
         """
         Extract a single ZIP file.
         Args:
@@ -97,6 +97,9 @@ class ReportDownloader():
             else:
                 all_files_inside = [extract_only_filename]
                 zip_ref.extract(extract_only_filename, "./downloads")
+
+        if delete_after:
+            os.remove(filename)
 
         return all_files_inside
 

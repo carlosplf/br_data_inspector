@@ -42,7 +42,7 @@ class Collector():
         for key in task_list:
             url = task_list[key]["link"]
             db_name = task_list[key]["db_name"]
-            
+
             change_fields = False
             fields_names = []
             inside_file_name = None
@@ -94,13 +94,13 @@ class Collector():
             return
 
         # Extract the ZIP file downloaded and get the CSV filename(s)
-        extracted_reports = rpd.extract_file(downloaded_report, inside_file_name)
+        extracted_reports = rpd.extract_file(downloaded_report, inside_file_name, True)
 
         # For loop is necessary, because we can get multiple CSVs inside
         # the ZIP file.
         for single_report in extracted_reports:
             data_as_dict = csv_c.csv_to_dict(DOWNLOADS_PATH + single_report,
-                                             change_fields, fields_names)
+                                             change_fields, fields_names, True)
             self.__insert_to_db(data_as_dict, db_name)
 
         self.__register_report_downloaded(url, arg)
