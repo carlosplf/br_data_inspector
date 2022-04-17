@@ -2,14 +2,14 @@ import pymongo
 
 
 MONGO_ADDRESS = "mongo"
-#MONGO_ADDRESS = "127.0.0.1"
+# MONGO_ADDRESS = "127.0.0.1"
 
 
 class DbConnector():
     def __init__(self):
         self.myclient = None
         self.mydb = None
-        self.mucol = None
+        self.mycol = None
 
     def connect(self, db_name):
         self.myclient = pymongo.MongoClient(connect=False, host=MONGO_ADDRESS, port=27017)
