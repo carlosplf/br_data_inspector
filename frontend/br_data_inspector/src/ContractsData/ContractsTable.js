@@ -79,7 +79,7 @@ class ContractsTable extends React.Component {
                     {<FaAngleRight />}
                     {item["Número Licitação"]}
                 </td>
-                <td className="columnContratado">{item["Nome Contratado"]}</td>
+                <td className="columnContratado">{item["Nome Contratado"].substring(0, 40)}</td>
                 <td className="columnValor">
                     R$ {this.formatNumbers(item["Valor Final Compra"])}
                 </td>
