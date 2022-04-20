@@ -55,6 +55,7 @@ h3{
     mouse-cursos: pointer;
     background-color: #ddd;
     color: #202020;
+    transition: background-color 0.5s;
 }
 
 .listMonthsSelected{
