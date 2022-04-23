@@ -129,7 +129,6 @@ class DataBarChart extends React.Component{
 
 		return (
 			<div className="DataBarChart">
-            <link rel="stylesheet" href="https://unpkg.com/react-vis/dist/style.css"/>
 				<DataChartLabel entities={entities} keys={this.keys_to_show} colors={this.graph_bar_colors}/>
 				<FlexibleWidthXYPlot xType="ordinal" style={{marginTop: 20}} height={600} margin={{left: 120}}>
 				<VerticalGridLines />
