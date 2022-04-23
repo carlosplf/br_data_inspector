@@ -109,7 +109,6 @@ class AllBiddingsDetailsModal extends React.Component {
          * have more then 1 item.
          */
         let all_cards = [];
-        let idx = 0;
         let background_color = "#ff9d9d";
 
         if(!this.state.data_formated) this.adjustBiddingsValues();
@@ -138,7 +137,6 @@ class AllBiddingsDetailsModal extends React.Component {
                         ))}
                     </div>
                 );
-                idx++;
             }
             catch(e){
                 console.error(e);

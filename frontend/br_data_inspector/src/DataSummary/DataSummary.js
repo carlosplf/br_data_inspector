@@ -1,6 +1,5 @@
 import React from "react";
 import "../DataSummary/DataSummary.css";
-import { FaHandPointRight } from "react-icons/fa";
 
 
 class DataSummary extends React.Component{

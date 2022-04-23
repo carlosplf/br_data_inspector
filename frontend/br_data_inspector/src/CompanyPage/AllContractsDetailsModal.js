@@ -3,10 +3,6 @@ import "../CompanyPage/AllContractsDetailsModal.css";
 
 
 class AllContractsDetailsModal extends React.Component{
-    constructor(props){
-        super(props);
-    }
-    
     formatNumber(x) {
         x = parseFloat(x).toFixed(2).toString()
         let splited_number = x.split(".");
