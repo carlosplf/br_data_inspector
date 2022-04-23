@@ -1,0 +1,24 @@
+.expensesChart{
+    padding: 0px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.expensesChartHint{
+    background-color: rgba(30,30,30,0.8);
+    border-radius: 4px;
+    padding: 4px;
+    color: #fff;
+}
+
+.chartContainer{
+    width: 40%;
+    height: auto;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    flex-direction: column;
+}

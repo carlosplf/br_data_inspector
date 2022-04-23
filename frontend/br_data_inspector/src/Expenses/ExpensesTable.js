@@ -1,5 +1,6 @@
 import React from 'react';
 import '../Expenses/ExpensesTable.css';
+import ExpensesChart from "../Expenses/ExpensesChart.js"
 
 class ExpensesTable extends React.Component{
     formatNumbers(x) {
@@ -33,9 +34,7 @@ class ExpensesTable extends React.Component{
 		return expenses_summary;
 	}
 
-    buildTable(){
-
-        var expenses_data_as_dict = this.buildExpensesDict();
+    buildTable(expenses_data_as_dict){
 
         var data_array = Object.keys(expenses_data_as_dict).map((key, i)=> {
             return {
@@ -83,11 +82,14 @@ class ExpensesTable extends React.Component{
     }
 
     render(){
-        const data_table = this.buildTable();
+        let expenses_as_dict = this.buildExpensesDict();
+        let data_table = this.buildTable(expenses_as_dict);
+        
         return(
             <div className="expensesBlock" id={"expensesData" + this.props.entity_id}>
                 <h1> Elementos de Despesas: </h1>
                 <h3> {this.props.entity_name}</h3>
+                <ExpensesChart expenses={expenses_as_dict} total_in_expenses={this.total_in_expenses} expenses_shares={[{angle:1}]}/>
                 {data_table}
             </div>
         )
