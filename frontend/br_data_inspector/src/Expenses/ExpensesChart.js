@@ -31,20 +31,19 @@ class ExpensesChart extends React.Component{
             
             chart_label = single_entry["Nome"] + " (" + share.toString() + "%)";
 
-            // If a share of an expense is lower than 10%, don't create label.
-            // TODO: implement label on hover and fix this.
             expenses_shares = expenses_shares.concat(
                 {
                     angle: share,
                     label: chart_label,
                 }
             );
-            
         });
         return expenses_shares;
     }
 
     showHint() {
+        // Buid Hints for RadialChart. The Component state defines when to
+        // render the Hint or not.
         if(!this.state.show_hint) return null;
 
         let hint_values = {
@@ -52,9 +51,7 @@ class ExpensesChart extends React.Component{
         }
 
         return(
-           <Hint
-                value={this.state.show_hint}
-            >
+           <Hint value={this.state.show_hint}>
                 <div className="expensesChartHint">
                     <p>{this.state.show_hint.label} </p>
                 </div>
@@ -84,7 +81,6 @@ class ExpensesChart extends React.Component{
                         onSeriesMouseOut={v => this.setState({show_hint: false})}
                     >
                         {hint}
-
                     </RadialChart>
                 </div>
             </div>
