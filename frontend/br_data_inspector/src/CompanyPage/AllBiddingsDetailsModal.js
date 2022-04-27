@@ -207,8 +207,8 @@ class AllBiddingsDetailsModal extends React.Component {
             let biddings_info = this.buildDetailsInfo();
 
             return(
-                <div className="allBiddingsDetailsModal">
-                    <div className="biddingsModalBody">
+                <div onClick={this.props.callBackCloseModal} className="allBiddingsDetailsModal">
+                    <div onClick={e => e.stopPropagation()} className="biddingsModalBody">
                         <h1> Detalhes das Licitações: </h1>
                         <button onClick={this.props.callBackCloseModal} id="closeButton"> Fechar </button>
                         {biddings_info}
