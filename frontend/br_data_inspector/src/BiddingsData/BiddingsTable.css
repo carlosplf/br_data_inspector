@@ -4,11 +4,15 @@
 }
 
 .biddingsTableContainer{
-    width: 80%;
+    width: 90%;
 }
 
 .biddingsTable{
     width: 100%;
+    padding: 10px;
+    background-color: #606060;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
 
 .biddingsTable table{
@@ -41,22 +45,6 @@
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: 0.8em;
-}
-
-.columnObjectHeader{
-    width: 50%;
-}
-
-.columnIdHeader{
-    width: 10%;
-}
-
-.columnStatusHeader{
-    width: 15%;
-}
-
-.columnValueHeader{
-    width: 25%;
 }
 
 @media only screen 

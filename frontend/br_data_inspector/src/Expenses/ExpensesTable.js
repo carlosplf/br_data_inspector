@@ -69,10 +69,10 @@ class ExpensesTable extends React.Component{
                 <table>
                 <tbody>
                     <tr>
-                        <th> ID </th>
-                        <th> Nome </th>
-                        <th> Valor PAGO </th>
-                        <th> Fatia </th>
+                        <th id="idHead"> ID </th>
+                        <th id="nameHead"> Nome </th>
+                        <th id="paidHead"> Valor PAGO </th>
+                        <th id="shareHead"> Fatia </th>
                     </tr>
                     {data_table}
                 </tbody>

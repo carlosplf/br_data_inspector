@@ -4,11 +4,15 @@
 }
 
 .contractsTableContainer{
-    width: 80%;
+    width: 90%;
 }
 
 .contractsTable{
     width: 100%;
+    padding: 10px;
+    background-color: #606060;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
 
 .contractsTable table{
