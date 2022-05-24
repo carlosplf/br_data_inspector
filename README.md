@@ -15,11 +15,11 @@ The project is currently available at [brdata.online](https://brdata.online)
 
 ## How to run
 
-### Dev environment
+### Development environment
 
 To run the backend (data collector and API), please visit the [backend folder page](backend)
 
-To run the frontend, just run `npm install` and `npm start`.
+To run the frontend, just run `npm install` and `npm start`. Just make sure that the `frontend/br_data_inspector` folder contains a `.env` file.
 
 
 ![alt text](screenshots/schema.png "Project Schema")
