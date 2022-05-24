@@ -6,6 +6,10 @@ The BR Data Collector Backend is responsible for collecting all the data from Br
 
 The backend can run with or without Docker containers. Let's look into the non-Docker approach.
 
+The MongoDB and RedisDB addresses are set into the db_connection files. Please change `collector/db_connector/db_connector.py` and `collector/db_connector/redis_connector.py` to connect in a local DB instance.
+
+*For Dev environment, DBs paths should be passed as args in a future release.*
+
 First, create a virtualenv and install all the requirements.
 
 `python3 -m venv ./env; source ./env/bin/activate`

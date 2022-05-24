@@ -13,4 +13,13 @@ investments.
 The project is currently available at [brdata.online](https://brdata.online)
 
 
+## How to run
+
+### Dev environment
+
+To run the backend (data collector and API), please visit the [backend folder page](backend)
+
+To run the frontend, just run `npm install` and `npm start`.
+
+
 ![alt text](screenshots/schema.png "Project Schema")
