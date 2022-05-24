@@ -31,7 +31,7 @@ class RankTable extends React.Component{
         var dates_param = this.url_dates_2020;
         var table_row_base_url = "";
 
-        if(this.props.date_year === 2021){
+        if(this.props.date_year === "2021"){
             dates_param = this.url_dates_2021;
         }
 
