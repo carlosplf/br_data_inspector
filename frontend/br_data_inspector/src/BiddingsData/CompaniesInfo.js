@@ -56,7 +56,7 @@ class CompaniesInfo extends React.Component{
     
     buildTable(table_rows) {
         return (
-            <div className="biddingsTable">
+            <div className="biddingsTableDetails">
                 <table>
                     <tbody>
                         <tr>

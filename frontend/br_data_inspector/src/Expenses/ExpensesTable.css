@@ -11,20 +11,36 @@
     padding-bottom: 20px;
 }
 
-.expensesBlock td{
-    border: 1px solid black;
-}
-
-.expensesBlock th{
-    border: 1px solid black;
-}
-
 .expensesTable{
-    width: 80%;
+    width: 90%;
+    background-color: #bbb;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.expensesTable th{
+    font-size: 1.2em;
+    padding: 10px;
 }
 
 .expensesTable table{
     width: 100%;
+}
+
+#idHead{
+    text-align: left;
+}
+
+#nameHead{
+    text-align: left;
+}
+
+#paidHead{
+    text-align: right;
+}
+
+#shareHead{
+    text-align: right;
 }
 
 .nameColumn{

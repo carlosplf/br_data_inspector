@@ -26,9 +26,24 @@
     width: 100%;
 }
 
+.toggleContainer{
+    border-radius: 10px;
+  	background: #323232;
+    color: #fff;
+    padding: 10px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19);
+}
+
+.toggleContainer:hover{
+  	background: #525252;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19);
+}
+
 .toggleTable{
-    width: 120px;
+    font-size: 1.2em;
     text-decoration: underline;
+    height: 20px;
 }
 
 .toggleTable:hover{

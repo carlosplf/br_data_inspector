@@ -116,10 +116,12 @@ class DataPage extends React.Component {
 
     //For each API response data, concatenate with already collected data in state.
     processData(api_response) {
-        if (api_response["data"].length !== 0 && !this.state.data) {
-            return api_response["data"];
-        }
-        return this.state.data.concat(api_response["data"]);
+
+        let data = ((this.state.data === undefined) ? []: this.state.data)
+
+        if(api_response["data"].length === 0) return data;
+        
+        return data.concat(api_response["data"]);
     }
 
     //Call Backend API and retrieve data about Entities

@@ -109,7 +109,6 @@ class AllBiddingsDetailsModal extends React.Component {
          * have more then 1 item.
          */
         let all_cards = [];
-        let idx = 0;
         let background_color = "#ff9d9d";
 
         if(!this.state.data_formated) this.adjustBiddingsValues();
@@ -138,7 +137,6 @@ class AllBiddingsDetailsModal extends React.Component {
                         ))}
                     </div>
                 );
-                idx++;
             }
             catch(e){
                 console.error(e);
@@ -209,8 +207,8 @@ class AllBiddingsDetailsModal extends React.Component {
             let biddings_info = this.buildDetailsInfo();
 
             return(
-                <div className="allBiddingsDetailsModal">
-                    <div className="biddingsModalBody">
+                <div onClick={this.props.callBackCloseModal} className="allBiddingsDetailsModal">
+                    <div onClick={e => e.stopPropagation()} className="biddingsModalBody">
                         <h1> Detalhes das Licitações: </h1>
                         <button onClick={this.props.callBackCloseModal} id="closeButton"> Fechar </button>
                         {biddings_info}

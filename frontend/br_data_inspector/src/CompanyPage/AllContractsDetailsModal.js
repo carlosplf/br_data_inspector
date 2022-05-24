@@ -3,10 +3,6 @@ import "../CompanyPage/AllContractsDetailsModal.css";
 
 
 class AllContractsDetailsModal extends React.Component{
-    constructor(props){
-        super(props);
-    }
-    
     formatNumber(x) {
         x = parseFloat(x).toFixed(2).toString()
         let splited_number = x.split(".");
@@ -59,8 +55,8 @@ class AllContractsDetailsModal extends React.Component{
         let contracts_info = this.renderAllCards();
 
         return(
-            <div className="allContractsDetailsModal">
-                <div className="contractsModalBody">
+            <div onClick={this.props.callBackCloseModal} className="allContractsDetailsModal">
+                <div onClick={e => e.stopPropagation()} className="contractsModalBody">
                     <h1> Detalhes dos Contratos: </h1>
                     <button onClick={this.props.callBackCloseModal} id="closeButton"> Fechar </button>
                     {contracts_info}

@@ -1,6 +1,5 @@
 import React from "react";
 import "../DataSummary/DataSummary.css";
-import { FaHandPointRight } from "react-icons/fa";
 
 
 class DataSummary extends React.Component{
@@ -53,22 +52,24 @@ class DataSummary extends React.Component{
         const dates_list = this.processDates();
         return(
             <div className="data-summary">
-                <h2>{this.props.name}</h2>
-                <div className="monthsListLabel">
-                    <p id="monthsSelectedLabel">Meses selecionados:</p>
-                    <div className="listMonthsSelected">
-                        {dates_list}
-                    </div>
-                    <div className="dataLinks">
-                        <a className="sectionlink" href={"#expensesData" + this.props.entity_id}><FaHandPointRight style={{textDecoration: 'none', marginRight: '6px', verticalAlign: 'middle'}}/>Despesas</a>
-                        <a className="sectionlink" href={"#contractsData" + this.props.entity_id}><FaHandPointRight style={{textDecoration: 'none', marginRight: '6px', verticalAlign: 'middle'}}/>Contratos</a>
-                        <a className="sectionlink" href={"#biddingsData" + this.props.entity_id}><FaHandPointRight style={{textDecoration: 'none', marginRight: '6px', verticalAlign: 'middle'}}/>Licitações</a>
-                    </div>
+                <div className="dsNavBar">
+                    <a className="sectionlink" href={"#expensesData" + this.props.entity_id}>Despesas</a>
+                    <a className="sectionlink" href={"#contractsData" + this.props.entity_id}>Contratos</a>
+                    <a className="sectionlink" href={"#biddingsData" + this.props.entity_id}>Licitações</a>
                 </div>
-                <h3>Soma de valores para o período:</h3>
-                {this.props.data_keys.map(key => (
-                    <p key={key}>{key}: { this.formatNumbers(this.props.values_summary[key])}</p>
-                    ))}
+                <div className="dsData">
+                    <h2>{this.props.name}</h2>
+                    <div className="monthsListLabel">
+                        <p id="monthsSelectedLabel">Meses selecionados:</p>
+                        <div className="listMonthsSelected">
+                            {dates_list}
+                        </div>
+                    </div>
+                    <h3>Soma de valores para o período:</h3>
+                    {this.props.data_keys.map(key => (
+                        <p key={key}>{key}: { this.formatNumbers(this.props.values_summary[key])}</p>
+                        ))}
+                </div>
             </div>
         )
     }

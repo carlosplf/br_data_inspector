@@ -103,7 +103,7 @@ class BiddingsCard extends React.Component {
                 <p>Período considerado: Jan/2020 - Dez/2021 </p>
                 <p>Participações em Licitações: {biddings_summary["total"]}</p>
                 <p>Licitações ganhas: {biddings_summary["wins"]}</p>
-                <p>Taxa de ganho: {biddings_summary["win_rate"]}</p>
+                <strong>Taxa de ganho: {biddings_summary["win_rate"]}</strong>
             </div>
         );
     }

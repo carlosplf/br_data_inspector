@@ -8,7 +8,7 @@ class ContractsRank extends React.Component {
         super(props);
         this.state = {
             loading: true,
-            show: true
+            show: false
         };
     }
 
@@ -144,7 +144,9 @@ class ContractsRank extends React.Component {
                 <p className="cardTitle">
                     Empresas que mais receberam em {this.props.year} (contratos publicados):
                 </p>
-                <p onClick={this.toggleShowCard} className="toggleTable"> {expand_text_value} </p>
+                <div className="toggleContainer">
+                    <spam onClick={this.toggleShowCard} className="toggleTable"> {expand_text_value} </spam>
+                </div>
                 <div className={table_class}>{table}</div>
             </div>
         );
