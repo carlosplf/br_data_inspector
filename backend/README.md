@@ -24,6 +24,38 @@ to collect data and save it.
 Running `run.py --collect` will collect and save all the data present in the `task_list.json` file. The task_list file tells the software which
 reports should be collected and saved.
 
+
+**The task_list.json file:**
+
+```python
+{
+    "task_1":{
+        "task_name": "Expenses Reports",
+        "db_name": "expenses-data",
+        "link": "https://www.portaltransparencia.gov.br/download-de-dados/despesas-execucao/",
+        "args": ["202001", "202002"],
+    },
+    "task_2":{
+
+        # Name of the Task.
+        "task_name": "Contracts Reports",
+
+        # The collection name where data will be saved.
+        "db_name": "contracts-data",
+
+        # Base link to the report page.
+        "link": "https://www.portaltransparencia.gov.br/download-de-dados/compras/",
+
+        # Args to iterate. In this case, list of dates.
+        "args": ["202001", "202002"],
+
+        # If there is only a single file inside the downloaded ZIP file that
+        # the software should extract.
+        "inside_file_name": "_Compras.csv"
+    }
+}
+```
+
 Running `run.py --createlists` will create all the entities lists, rankings and indexes necessary to run the full software. This lists are basically
 consolidations of the already collected data, and avoid the software to process all the data everytime that the API/Frontend requests for the list of
 all entities, for example. The lists are saved into a **RedisDB** instance, and not at the MongoDB.
