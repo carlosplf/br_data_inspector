@@ -56,8 +56,8 @@ reports should be collected and saved.
 }
 ```
 
-Running `run.py --createlists` will create all the entities lists, rankings and indexes necessary to run the full software. This lists are basically
-consolidations of the already collected data, and avoid the software to process all the data everytime that the API/Frontend requests for the list of
+Running `run.py --createlists` will create all the entities lists, rankings and indexes necessary to run the full software. These lists are basically
+consolidations of the already collected data, and avoid the software to process all the data everytime that the API/Frontend requests the list of
 all entities, for example. The lists are saved into a **RedisDB** instance, and not at the MongoDB.
 
 ### Modules:
