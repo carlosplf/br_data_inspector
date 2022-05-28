@@ -67,9 +67,7 @@ class AllBiddingsDetailsModal extends React.Component {
 					reject(new Error('Request failed. Empty Data return.'))
 				}
 			}).catch((message) => { 
-                console.log("Error collecting more info about Bidding: ", message);
-                console.log("Skipping...");
-                return {};
+                throw "Error collecting more info about Bidding.";
             });
 		})
 	}
