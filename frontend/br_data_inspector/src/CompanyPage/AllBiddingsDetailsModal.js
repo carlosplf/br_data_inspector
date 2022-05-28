@@ -54,7 +54,7 @@ class AllBiddingsDetailsModal extends React.Component {
 	requestDataFromAPI(process_id){
 
         //Some process IDs have a '/' character.
-        process_id = process_id.replace("/", "_");
+        process_id = process_id.replaceAll("/", "_");
 
 		var base_url = this.api_url + ":" + this.api_port;
 		var request_url = base_url + "/biddings/process_id/" + process_id;
@@ -67,7 +67,7 @@ class AllBiddingsDetailsModal extends React.Component {
 					reject(new Error('Request failed. Empty Data return.'))
 				}
 			}).catch((message) => { 
-                throw "Error collecting more info about Bidding.";
+                console.log("Error collecting more info about Bidding.");
             });
 		})
 	}
