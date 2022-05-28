@@ -33,6 +33,7 @@ class AllContractsDetailsModal extends React.Component{
 
         let csv_item = [];
 
+        // TODO: Iterate dict keys to build CSV Headers and Data.
         this.props.data.forEach((item) =>{
 
             csv_item = [[
@@ -103,7 +104,7 @@ class AllContractsDetailsModal extends React.Component{
                 <div onClick={e => e.stopPropagation()} className="contractsModalBody">
                     <h1> Detalhes dos Contratos: </h1>
                     <button onClick={this.props.callBackCloseModal} id="closeButton"> Fechar </button>
-                    <CSVLink className="downloadButton" data={csv_data} >Download CSV</CSVLink>
+                    <CSVLink className="downloadButton" filename="contracts_data.csv" data={csv_data} >Download CSV</CSVLink>
                     {contracts_info}
                 </div>
             </div>
