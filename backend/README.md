@@ -10,6 +10,8 @@ The MongoDB and RedisDB addresses are set into the db_connection files. Please c
 
 *For development environment, DBs paths should be passed as args in a future release.*
 
+To run MondoDB and RedisDB inside Docker container: `docker-compose -f docker/docker-compose-dev.yml up -d mongo redis` at the project root folder.
+
 First, create a virtualenv and install all the requirements.
 
 `python3 -m venv ./env; source ./env/bin/activate`
