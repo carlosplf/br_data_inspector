@@ -8,11 +8,13 @@ The backend can run with or without Docker containers. Let's look into the non-D
 
 The MongoDB and RedisDB addresses are set into the db_connection files. Please change `collector/db_connector/db_connector.py` and `collector/db_connector/redis_connector.py` to connect in a local DB instance.
 
-*For development environment, DBs paths should be passed as args in a future release.*
+#### Running development environment:
 
-To run MondoDB and RedisDB inside Docker container: `docker-compose -f docker/docker-compose-dev.yml up -d mongo redis` at the project root folder.
+You can start MongoDB and RedisDB as services, or using Docker. To start the DBs using docker, run: `docker-compose -f docker/docker-compose-dev.yml up -d mongo redis` at the project **root folder**.
 
-First, create a virtualenv and install all the requirements.
+Please, remember to change the DB adress to localhost inside the files `collector/db_connector/db_connector.py` and `collector/db_connector/redis_connector.py`. *(in future releases, the DB address should be set as run.py args.)*
+
+Create a virtualenv and install all the requirements:
 
 `python3 -m venv ./env; source ./env/bin/activate`
 
