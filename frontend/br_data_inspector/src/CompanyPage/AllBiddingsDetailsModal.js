@@ -66,9 +66,9 @@ class AllBiddingsDetailsModal extends React.Component {
 				} else {
 					reject(new Error('Request failed. Empty Data return.'))
 				}
-			}, error => {
-				reject(new Error('Request failed.'))
-			})
+			}).catch((message) => { 
+                console.log(message);
+            });
 		})
 	}
 
@@ -120,7 +120,6 @@ class AllBiddingsDetailsModal extends React.Component {
             csv_items = csv_items.concat([new_csv_entry]);
         });
         
-        console.log(csv_items);
         return csv_items;
     }
 
