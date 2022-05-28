@@ -10,6 +10,8 @@ The MongoDB and RedisDB addresses are set into the db_connection files. Please c
 
 *For development environment, DBs paths should be passed as args in a future release.*
 
+To run MondoDB and RedisDB inside Docker container: `docker-compose -f docker/docker-compose-dev.yml up -d mongo redis` at the project root folder.
+
 First, create a virtualenv and install all the requirements.
 
 `python3 -m venv ./env; source ./env/bin/activate`
@@ -56,8 +58,8 @@ reports should be collected and saved.
 }
 ```
 
-Running `run.py --createlists` will create all the entities lists, rankings and indexes necessary to run the full software. This lists are basically
-consolidations of the already collected data, and avoid the software to process all the data everytime that the API/Frontend requests for the list of
+Running `run.py --createlists` will create all the entities lists, rankings and indexes necessary to run the full software. These lists are basically
+consolidations of the already collected data, and avoid the software to process all the data everytime that the API/Frontend requests the list of
 all entities, for example. The lists are saved into a **RedisDB** instance, and not at the MongoDB.
 
 ### Modules:

@@ -1,4 +1,5 @@
 import React from "react";
+import {CSVLink} from 'react-csv';
 import "../CompanyPage/AllBiddingsDetailsModal.css";
 
 
@@ -53,7 +54,7 @@ class AllBiddingsDetailsModal extends React.Component {
 	requestDataFromAPI(process_id){
 
         //Some process IDs have a '/' character.
-        process_id = process_id.replace("/", "_");
+        process_id = process_id.replaceAll("/", "_");
 
 		var base_url = this.api_url + ":" + this.api_port;
 		var request_url = base_url + "/biddings/process_id/" + process_id;
@@ -65,9 +66,9 @@ class AllBiddingsDetailsModal extends React.Component {
 				} else {
 					reject(new Error('Request failed. Empty Data return.'))
 				}
-			}, error => {
-				reject(new Error('Request failed.'))
-			})
+			}).catch((message) => { 
+                console.log("Error collecting more info about Bidding.");
+            });
 		})
 	}
 
@@ -90,6 +91,36 @@ class AllBiddingsDetailsModal extends React.Component {
         let loading_state = (requests_done === Object.keys(this.props.processes_info).length) ? false : true;
         
         this.setState({data: new_data, loading: loading_state, requests_done: requests_done});
+    }
+
+    buildCSV(){
+
+        let csv_items = [];
+        let csv_header = [];
+        let new_csv_entry = [];
+        let build_hearders = true;
+
+        Object.keys(this.props.processes_info).forEach((key) => {
+            //For each item disputed, get the corresponding Bidding information
+            //stored in the this.state.data.
+            let bidding_details = this.state.data[this.props.processes_info[key]["process_id"]];
+
+            new_csv_entry = [];
+
+            Object.keys(bidding_details).forEach((inner_key) => {
+                if(build_hearders){ csv_header = csv_header.concat(inner_key); }
+                new_csv_entry = new_csv_entry.concat(bidding_details[inner_key]);
+            });
+
+            if(csv_header.length !== 0 && build_hearders){
+                csv_items = csv_items.concat([csv_header]);
+                build_hearders = false;
+            }
+
+            csv_items = csv_items.concat([new_csv_entry]);
+        });
+        
+        return csv_items;
     }
 
     buildDetailsInfo(){
@@ -205,12 +236,14 @@ class AllBiddingsDetailsModal extends React.Component {
         else{
             
             let biddings_info = this.buildDetailsInfo();
+            let csv_data = this.buildCSV();
 
             return(
                 <div onClick={this.props.callBackCloseModal} className="allBiddingsDetailsModal">
                     <div onClick={e => e.stopPropagation()} className="biddingsModalBody">
                         <h1> Detalhes das Licitações: </h1>
                         <button onClick={this.props.callBackCloseModal} id="closeButton"> Fechar </button>
+                        <CSVLink className="downloadButton" filename="biddings_data.csv" data={csv_data} >Download CSV</CSVLink>
                         {biddings_info}
                     </div>
                 </div>

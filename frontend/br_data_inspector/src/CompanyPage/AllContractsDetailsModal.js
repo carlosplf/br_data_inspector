@@ -1,4 +1,5 @@
 import React from "react";
+import {CSVLink} from 'react-csv';
 import "../CompanyPage/AllContractsDetailsModal.css";
 
 
@@ -15,6 +16,49 @@ class AllContractsDetailsModal extends React.Component{
             "," +
             splited_number[1]
         );
+    }
+
+    buildCSV(){
+
+        let csv_items = [
+            [
+                "CNPJ", "Nome", "Modalidade Licitação", "Modalidade Compra",
+                "Nome UG", "Nome Órgão", "Nome Órgão Superior",
+                "Número Licitação", "Número do Contrato", "Objeto",
+                "Situação do Contrato", "Data da Assinatura",
+                "Início da Vigência", "Fim da Vigência",
+                "Valor Inicial da Compra", "Valor Final da Compra"
+            ]
+        ]
+
+        let csv_item = [];
+
+        // TODO: Iterate dict keys to build CSV Headers and Data.
+        this.props.data.forEach((item) =>{
+
+            csv_item = [[
+                item["Código Contratado"],
+                item["Nome Contratado"],
+                item["Modalidade Compra Licitação"],
+                item["Modalidade Compra"],
+                item["Nome UG"],
+                item["Nome Órgão"],
+                item["Nome Órgão Superior"],
+                item["Número Licitação"],
+                item["Número do Contrato"],
+                item["Objeto"],
+                item["Situação Contrato"],
+                item["Data Assinatura Contrato"],
+                item["Data Início Vigência"],
+                item["Data Fim Vigência"],
+                this.formatNumber(item["Valor Inicial Compra"]),
+                this.formatNumber(item["Valor Final Compra"])
+            ]];
+
+            csv_items = csv_items.concat(csv_item);
+            csv_item = [];
+        });
+        return csv_items;
     }
     
     renderCard(contract_item){
@@ -53,12 +97,14 @@ class AllContractsDetailsModal extends React.Component{
     render(){
 
         let contracts_info = this.renderAllCards();
+        let csv_data = this.buildCSV();
 
         return(
             <div onClick={this.props.callBackCloseModal} className="allContractsDetailsModal">
                 <div onClick={e => e.stopPropagation()} className="contractsModalBody">
                     <h1> Detalhes dos Contratos: </h1>
                     <button onClick={this.props.callBackCloseModal} id="closeButton"> Fechar </button>
+                    <CSVLink className="downloadButton" filename="contracts_data.csv" data={csv_data} >Download CSV</CSVLink>
                     {contracts_info}
                 </div>
             </div>
