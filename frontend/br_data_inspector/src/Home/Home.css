@@ -3,6 +3,9 @@ body, html {
     min-height: 100%;
 }
 
+.newsWarning{
+    font-size: 1.8em;
+}
 
 .contentContainer{
     /*background-image: url('../images/home-background.jpg');*/
