@@ -22,12 +22,12 @@ class CompareButton extends React.Component{
     render(){
         if(this.state.plus_or_minus){
             return(
-                <button id="compare-btn" onClick={this.handleClick}><FaPlus/></button>
+                <button id="compare-btn-add" onClick={this.handleClick}>Comparar entitades</button>
             )
         }
         else{
             return(
-                <button id="compare-btn" onClick={this.handleClick}><FaMinus/></button>
+                <button id="compare-btn-remove" onClick={this.handleClick}>Remover comparação</button>
             )
         }
     }
