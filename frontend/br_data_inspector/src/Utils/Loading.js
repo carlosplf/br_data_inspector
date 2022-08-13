@@ -4,7 +4,7 @@ import '../Utils/Loading.css';
 
 class Loading extends React.Component{
     render(){
-        let message = "Bucando Dados...";
+        let message = "Buscando Dados...";
 
         if(this.props.message) message = this.props.message
 
