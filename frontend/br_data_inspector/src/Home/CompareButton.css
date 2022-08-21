@@ -1,20 +1,36 @@
-#compare-btn{
-	font-size: 20px;
+#compare-btn-add{
+	font-size: 1.0em;
+    padding: 10px;
 	margin-top: 60px;
 	color: #202020;
-	background-color: #CCC;
+	background-color: #66bb6a;
+	border-radius: 6px;
+	border-width: 0px;
+}
+
+#compare-btn-add:hover{
+	background-color: #76cb7a;
+	cursor: pointer;
+}
+
+#compare-btn-remove{
+	font-size: 1.0em;
+	margin-top: 60px;
+    padding: 10px;
+	color: #202020;
+	background-color: #ef5350;
 	border-radius: 4px;
 	border-width: 0px;
 }
 
-#compare-btn:hover{
-	background-color: #DDD;
+#compare-btn-remove:hover{
+	background-color: #ff867c;
 	cursor: pointer;
 }
 
 @media only screen
 and (max-width : 1080px){
-    #compare-btn{
+    #compare-btn-add{
         font-size: 40px;
     }
 }

@@ -44,7 +44,7 @@ class BiddingProcessor():
             all_companies_data.append(company_data)
 
         self.redis_connector.set(redis_key_name, json.dumps(all_companies_data))
-    
+
     def build_companies_bidding_list(self):
         """
         Create a simple list of Names and IDS (CNPJ) of Companies inside Redis.

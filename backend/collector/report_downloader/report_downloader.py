@@ -9,6 +9,7 @@ import os
 
 DOWNLOAD_RETRIES = 3
 
+
 class ReportDownloader():
     def __init__(self):
         self.reports_downloaded = []
@@ -41,7 +42,7 @@ class ReportDownloader():
         try_number = 0
 
         while True:
-            
+
             if try_number == DOWNLOAD_RETRIES:
                 logging.warning("Falied to download: maximum retries. Returning empty.")
                 return None
@@ -53,9 +54,9 @@ class ReportDownloader():
                 logging.warning("Couldn't download Report.")
                 logging.warning(e.reason)
                 try_number += 1
-        
+
         logging.debug("Done")
-        
+
         time.sleep(1)
 
         self.reports_downloaded.append(zip_filename)
@@ -89,7 +90,7 @@ class ReportDownloader():
         logging.debug("Extracting file: " + filename)
 
         all_files_inside = []
-        
+
         with zipfile.ZipFile(filename, 'r') as zip_ref:
             if not extract_only_filename:
                 all_files_inside = zip_ref.namelist()
