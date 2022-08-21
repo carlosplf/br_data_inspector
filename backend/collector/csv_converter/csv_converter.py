@@ -34,7 +34,7 @@ class CSVConverter():
             os.remove(filename)
 
         return data
-    
+
     # TODO: Deprecated. This method was created and is maybe no longer necessary.
     def __change_field_name(self, entries, current_field, new_field):
         """

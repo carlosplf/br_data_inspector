@@ -1,9 +1,6 @@
 from collector.db_connector import redis_connector
 
 
-"""
-Using DB 2 in Redis for Custom Links.
-"""
 class CustomLink:
     def __init__(self):
         self.redis_connection = redis_connector.RedisConnector()

@@ -27,7 +27,7 @@ class DataUpdater():
 
         my_ui = utils_inspector.UtilsInspector(my_db)
         count_result = my_ui.get_count_for_date(db_name, date)
-        
+
         if count_result < 0:
             return True
 

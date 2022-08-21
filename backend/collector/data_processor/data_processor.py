@@ -41,7 +41,10 @@ class DataProcessor():
             contracts_count = 0
             if single_contract["Código Contratado"] in contracts_summary_dict.keys():
                 previous_total_value = contracts_summary_dict[single_contract["Código Contratado"]]["Total recebido"]
-                contracts_count = contracts_summary_dict[single_contract["Código Contratado"]]["Quantidade de contratos"]
+                contracts_count = contracts_summary_dict[
+                    single_contract["Código Contratado"]
+                ]
+                ["Quantidade de contratos"]
 
             single_contract_value = float(single_contract["Valor Final Compra"].replace(",", "."))
 
