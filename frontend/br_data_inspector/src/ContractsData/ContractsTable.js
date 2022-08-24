@@ -71,7 +71,7 @@ class ContractsTable extends React.Component {
         const clickCallback = () => this.handleRowClick(item["ID"]);
         const itemRows = [
             <tr
-                className="normalTR"
+                className="contractsNormalTR"
                 onClick={clickCallback}
                 key={"row-data-" + item["ID"]}
             >
