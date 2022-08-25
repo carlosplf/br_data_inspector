@@ -10,38 +10,31 @@
 .contractsTable{
     width: 100%;
     padding: 10px;
-    background-color: #FFF;
+    background-color: #606060;
     border-radius: 8px;
     margin-bottom: 20px;
 }
 
 .contractsTable table{
     width: 100%;
-    color: #000;
+    color: #fff;
     padding-bottom: 20px;
     font-size: 1.2em;
 }
 
-.contractsTable table th{
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
-
-.contractsNormalTR:hover{
+.normalTR:hover{
     cursor: pointer;
-    background-color: #CCC;
+    background-color: #606060;
 }
 
-.contractsNormalTR{
-    background-color: #FFF;
+.normalTR{
+    background-color: #363636;
     height: 30px;
 }
 
 .expandedRow {
     width: 100%;
-    padding: 10px;
 }
-
 
 .moreInfo{
     border-radius: 10px;

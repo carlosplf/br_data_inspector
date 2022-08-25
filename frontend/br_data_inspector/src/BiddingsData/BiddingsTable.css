@@ -10,30 +10,25 @@
 .biddingsTable{
     width: 100%;
     padding: 10px;
-    background-color: #FFF;
+    background-color: #606060;
     border-radius: 8px;
     margin-bottom: 20px;
 }
 
 .biddingsTable table{
     width: 100%;
-    color: #000;
+    color: #fff;
     padding-bottom: 20px;
     font-size: 1.2em;
 }
 
-.biddingsTable table th{
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
-
-.biddingsNormalTR:hover{
+.normalTR:hover{
     cursor: pointer;
-    background-color: #CCC;
+    background-color: #606060;
 }
 
-.biddingsNormalTR{
-    background-color: #FFF;
+.normalTR{
+    background-color: #363636;
     height: 30px;
 }
 
