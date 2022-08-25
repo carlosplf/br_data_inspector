@@ -1,6 +1,6 @@
 .expensesBlock  {
     border-radius: 10px;
-  	background: #dddddd;
+  	background: #282828;
   	width: 90%;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -9,11 +9,12 @@
     align-items: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding-bottom: 20px;
+    color: #FFF;
 }
 
 .expensesTable{
     width: 90%;
-    background-color: #bbb;
+    background-color: #fff;
     border-radius: 8px;
     padding: 10px;
 }

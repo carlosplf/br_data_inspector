@@ -75,7 +75,7 @@ class BiddingsTable extends React.Component {
         const clickCallback = () => this.handleRowClick(item["ID"]);
         const itemRows = [
             <tr
-                className="normalTR"
+                className="biddingsNormalTR"
                 onClick={clickCallback}
                 key={"row-data-" + item["ID"]}
             >
