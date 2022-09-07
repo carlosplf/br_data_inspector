@@ -69,45 +69,43 @@ class About extends React.Component{
                 <div className="aboutPage">
                     <Header header_text="Sobre"/>
                     <div className="container">
-                        <div className="aboutCard">
-                            <div className="pureText">
-                                <h1 align="justify" id="aboutTitle"> Sobre o projeto </h1>
-                                <p align="justify">
-                                    O BR Data Collector coleta dados abertos do Governo Federal do Brasil, através
-                                    dos relatórios em formato CSV disponíveis no Portal da Transparência.
-                                </p>
-                                <p align="justify">
-                                    O sistema construído coleta os dados de alguns relatórios específicos periodicamente,
-                                    e disponibiliza através de suas páginas algumas informações para que os usuários possam
-                                    consultar e visualizar.
-                                </p>
-                                <p align="justify">
-                                    O BR Data Collector é um sistema de código aberto, criado por Carlos Pereira Lopes Filho,
-                                    e sem qualquer ligação com qualquer empresa ou negócio.
-                                </p>
-                                <p id="what-to-search" align="justify">
-                                    O que posso pesquisar? 
-                                </p>
-                                <p align="justify">
-                                    O sistema possui dados de Despesas de Órgãos Federais, Contratos, Licitações e Empresas contratadas.
-                                </p>
-                                <p align="justify">
-                                    Ao pesquisar por qualquer órgão FEDERAL, o sistema irá retornar com dados de Despesas, Contratos e Licitações. O usuário deve selecionar um período para a busca.
-                                </p>
-                                <p align="justify">
-                                    O sistema também permite que o usuário pesquise por Empresas contratadas por instituições FEDERAIS. A busca deve retornar detalhes
-                                    dos Contratos e Licitações publicadas.
-                                </p>
-                                <br></br>
-                                <p><a id="githubIcon" href="https://github.com/carlosplf/br_data_inspector"><FaGithub/></a></p>
-                                <br></br>
-                                <h3 class="reportsTitle">De onde os dados vieram:</h3>
-                                {this.state.reports}
-                                <br></br>
-                                <p><a href="https://www.portaltransparencia.gov.br">Portal da Transparência </a></p>
-                                <p><a href="https://www.portaltransparencia.gov.br/entenda-a-gestao-publica/licitacoes-e-contratacoes">LICITAÇÕES E CONTRATAÇÕES </a></p>
-                                <p><a href="https://www.portaltransparencia.gov.br/entenda-a-gestao-publica/execucao-despesa-publica">EMPENHADO, PAGO E LIQUIDADO. </a></p>
-                            </div>
+                        <div className="pureText">
+                            <h1 align="justify" id="aboutTitle"> Sobre o projeto </h1>
+                            <p align="justify">
+                                O BR Data Collector coleta dados abertos do Governo Federal do Brasil, através
+                                dos relatórios em formato CSV disponíveis no Portal da Transparência.
+                            </p>
+                            <p align="justify">
+                                O sistema construído coleta os dados de alguns relatórios específicos periodicamente,
+                                e disponibiliza através de suas páginas algumas informações para que os usuários possam
+                                consultar e visualizar.
+                            </p>
+                            <p align="justify">
+                                O BR Data Collector é um sistema de código aberto, criado por Carlos Pereira Lopes Filho,
+                                e sem qualquer ligação com qualquer empresa ou negócio.
+                            </p>
+                            <p id="what-to-search" align="justify">
+                                O que posso pesquisar? 
+                            </p>
+                            <p align="justify">
+                                O sistema possui dados de Despesas de Órgãos Federais, Contratos, Licitações e Empresas contratadas.
+                            </p>
+                            <p align="justify">
+                                Ao pesquisar por qualquer órgão FEDERAL, o sistema irá retornar com dados de Despesas, Contratos e Licitações. O usuário deve selecionar um período para a busca.
+                            </p>
+                            <p align="justify">
+                                O sistema também permite que o usuário pesquise por Empresas contratadas por instituições FEDERAIS. A busca deve retornar detalhes
+                                dos Contratos e Licitações publicadas.
+                            </p>
+                            <br></br>
+                            <p><a id="githubIcon" href="https://github.com/carlosplf/br_data_inspector"><FaGithub/></a></p>
+                            <br></br>
+                            <h3 class="reportsTitle">De onde os dados vieram:</h3>
+                            {this.state.reports}
+                            <br></br>
+                            <p><a href="https://www.portaltransparencia.gov.br">Portal da Transparência </a></p>
+                            <p><a href="https://www.portaltransparencia.gov.br/entenda-a-gestao-publica/licitacoes-e-contratacoes">LICITAÇÕES E CONTRATAÇÕES </a></p>
+                            <p><a href="https://www.portaltransparencia.gov.br/entenda-a-gestao-publica/execucao-despesa-publica">EMPENHADO, PAGO E LIQUIDADO. </a></p>
                         </div>
                     </div>
                 </div>
