@@ -33,4 +33,7 @@ and (max-width : 1080px){
     #compare-btn-add{
         font-size: 40px;
     }
+    #compare-btn-remove{
+        font-size: 40px;
+    }
 }
