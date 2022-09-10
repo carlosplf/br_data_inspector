@@ -1,8 +1,20 @@
 .rankTable{
     border-radius: 10px;
     padding: 20px;
-    width: 100%;
-    background-color: #eeeeee;
+    background-color: #FFF;
+}
+
+.rankTableContainer{
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #282828;
+    margin-bottom: 60px;
+}
+
+.rankTableTitle{
+    color: #FFF; 
+    text-align: center;
+    margin-bottom: 40px;
 }
 
 .rankTable table{
@@ -28,6 +40,6 @@
 
 .tableDiv p{
     margin-top: 40px;
-    font-size: 1.2em;
+    font-size: 1.6em;
     width: 100%;
 }

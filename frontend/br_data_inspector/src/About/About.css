@@ -3,6 +3,7 @@
     justify-content: center;
     width: 100%;
     background-color: #FFF;
+    margin-top:80px; 
 }
 
 .aboutCard{
@@ -56,5 +57,8 @@
 and (max-width : 1080px){
     .pureText{
         width: 90%;
+    }
+    .container{
+        margin-top: 20%;
     }
 }

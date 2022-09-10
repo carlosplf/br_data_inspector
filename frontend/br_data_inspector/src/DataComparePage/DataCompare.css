@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: nowrap;
     width: 90%;
-    margin-top: 20px;
+    margin-top: 100px;
 }
 
 .summary-container.data-summary{
@@ -46,10 +46,11 @@
 }
 
 @media only screen
-and (max-width : 1600px){
+and (max-width : 1080px){
 
     .summary-container{
         flex-direction: column;
         width: 90%;
+        margin-top: 20%;
     }
 }

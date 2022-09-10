@@ -4,6 +4,7 @@
     flex-wrap: wrap;
 	flex-direction: column;
     align-items: center;
+    margin-top: 120px;
 }
 
 .contractsDataBlock{
@@ -26,4 +27,49 @@
 
 .obsMessage{
     font-size: 1.4em;
+    font-style: italic;
+}
+
+#search-company-btn {
+    background-image: linear-gradient(to right, #009739 0%, #FEDD00  51%, #009739  100%);
+    margin: 10px;
+    margin-top: 40px;
+    width: 300px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    border-radius: 10px;
+    display: block;
+    border-style: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#search-company-btn:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+    color: #202020;
+}
+
+@media only screen
+and (max-width : 1080px){
+    .contractsDataPage{
+        margin-top: 20%;
+    }
+
+    .contractsPageTitle{
+        font-size:2.2em;
+    }
+    
+    #search-company-btn{
+        font-size: 2.8em;
+        width: 60%;
+        height: 120px;
+        margin-top: 120px;
+    }
 }
