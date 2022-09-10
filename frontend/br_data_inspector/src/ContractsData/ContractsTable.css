@@ -10,25 +10,30 @@
 .contractsTable{
     width: 100%;
     padding: 10px;
-    background-color: #606060;
+    background-color: #FFF;
     border-radius: 8px;
     margin-bottom: 20px;
 }
 
 .contractsTable table{
     width: 100%;
-    color: #fff;
+    color: #000;
     padding-bottom: 20px;
     font-size: 1.2em;
 }
 
-.normalTR:hover{
-    cursor: pointer;
-    background-color: #606060;
+.contractsTable table th{
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
-.normalTR{
-    background-color: #363636;
+.contractsNormalTR:hover{
+    cursor: pointer;
+    background-color: #CCC;
+}
+
+.contractsNormalTR{
+    background-color: #FFF;
     height: 30px;
 }
 

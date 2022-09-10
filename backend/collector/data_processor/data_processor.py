@@ -32,28 +32,7 @@ class DataProcessor():
 
         all_contracts = ci.get_contracts_by_year("Data Publicação DOU", date_year)
 
-        contracts_summary_dict = {}
-        contracts_summary_list = []
-
-        # TODO: this could be in separated method.
-        for single_contract in all_contracts:
-            previous_total_value = 0
-            contracts_count = 0
-            if single_contract["Código Contratado"] in contracts_summary_dict.keys():
-                previous_total_value = contracts_summary_dict[single_contract["Código Contratado"]]["Total recebido"]
-                contracts_count = contracts_summary_dict[
-                    single_contract["Código Contratado"]
-                ]
-                ["Quantidade de contratos"]
-
-            single_contract_value = float(single_contract["Valor Final Compra"].replace(",", "."))
-
-            contracts_summary_dict[single_contract["Código Contratado"]] = {
-                "CNPJ": single_contract["Código Contratado"],
-                "Nome": single_contract["Nome Contratado"],
-                "Total recebido": previous_total_value + single_contract_value,
-                "Quantidade de contratos": contracts_count + 1
-            }
+        contracts_summary_dict, contracts_summary_list = self.__iterate_contracts(all_contracts)
 
         # TODO: need a better logic for this. Just passing the dict to list to use the already implemented methods.
         for k in contracts_summary_dict.keys():
@@ -64,6 +43,31 @@ class DataProcessor():
 
         redis_key_name = "biggest_receivers_" + str(date_year)
         return self.redis_connector.set(redis_key_name, json.dumps(sized_rank))
+
+    def __iterate_contracts(self, all_contracts):
+
+        contracts_summary_dict = {}
+        contracts_summary_list = []
+
+        for single_contract in all_contracts:
+            previous_total_value = 0
+            contracts_count = 0
+            if single_contract["Código Contratado"] in contracts_summary_dict.keys():
+                previous_total_value = contracts_summary_dict[single_contract["Código Contratado"]]["Total recebido"]
+                contracts_count = contracts_summary_dict[
+                    single_contract["Código Contratado"]
+                ]["Quantidade de contratos"]
+
+            single_contract_value = float(single_contract["Valor Final Compra"].replace(",", "."))
+
+            contracts_summary_dict[single_contract["Código Contratado"]] = {
+                "CNPJ": single_contract["Código Contratado"],
+                "Nome": single_contract["Nome Contratado"],
+                "Total recebido": previous_total_value + single_contract_value,
+                "Quantidade de contratos": contracts_count + 1
+            }
+
+        return contracts_summary_dict, contracts_summary_list
 
     def create_biggest_spenders_rank(self, rank_size=10, date_year=2020):
         """

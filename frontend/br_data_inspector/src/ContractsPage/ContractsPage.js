@@ -132,7 +132,7 @@ class ContractsPage extends React.Component {
                         handleOnSelect={this.handleOnSelect}
                     />
 
-                    <button id="search-btn" onClick={this.handleSearch}>Pesquisar</button>
+                    <button id="search-company-btn" onClick={this.handleSearch}>Pesquisar</button>
                     
                     <div className="obsDiv">
                         <p className="obsMessage"> Não achou a empresa que procura? A busca considera 

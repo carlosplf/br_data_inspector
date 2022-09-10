@@ -8,7 +8,7 @@ class ContractsRank extends React.Component {
         super(props);
         this.state = {
             loading: true,
-            show: true
+            show: false
         };
     }
 
@@ -93,7 +93,7 @@ class ContractsRank extends React.Component {
             <tr>
                 <td className="valueCNPJ">
                     {" "}
-                    <Link to={link_to}> {item["CNPJ"]} </Link>
+                    <Link to={link_to}> {this.checkCNPJSize(item["CNPJ"])} </Link>
                 </td>
                 <td className="valueName">{item["Nome"]}</td>
                 <td className="valueTotal">
@@ -104,6 +104,11 @@ class ContractsRank extends React.Component {
                 </td>
             </tr>
         );
+    }
+
+    checkCNPJSize(cnpj) {
+        let MAX_SIZE = 18
+        return cnpj.substring(0, MAX_SIZE);
     }
 
     buildTableRows() {

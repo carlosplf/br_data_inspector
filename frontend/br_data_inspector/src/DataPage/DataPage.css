@@ -17,6 +17,7 @@
 
 .summaryContainer{
     width: 90%;
+    margin-top: 120px;
 }
 
 .search-results{
@@ -43,4 +44,11 @@
 .shareBtn:hover{
 	cursor: pointer;
 	background-color: #77cc7b;
+}
+
+@media only screen
+and (max-width : 1080px){
+    .summaryContainer{
+        margin-top: 20%;
+    }
 }
