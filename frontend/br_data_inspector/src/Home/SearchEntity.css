@@ -17,11 +17,14 @@
 
 @media only screen 
 and (max-width : 1080px){
+    
     .SearchEntity {
         margin-top: 80px;
         width: 80%;
     }
+    
     .SearchEntity input{
-        height: 60px;
+        height: 80px;
+        font-size: 1.4em;
     }
 }

@@ -125,6 +125,15 @@ class BiddingsCard extends React.Component {
         else{
 
             biddings_summary = this.calculateBiddings();
+
+            /* If this condition is true, it means that the API returned zero biddings for the company. */
+            if(biddings_summary["total"] === 0){
+                return(
+                    <div className="biddingsCard">
+                        <h2 className="loadingBiddingsTitle"> A empresa não participou de nenhuma licitação no período.</h2>
+                    </div>
+                )
+            }
             
             if(this.state.show_details){
                 all_bidding_details = <AllBiddingsDetailsModal 
