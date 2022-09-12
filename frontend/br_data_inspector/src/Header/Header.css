@@ -9,8 +9,8 @@
     height: 80px;
     float: left;
     margin-bottom: 20px;
-    background: rgba(255,255,255,.75);
-    backdrop-filter: blur(5px)
+    background: rgba(255,255,255,.80);
+    backdrop-filter: blur(10px)
 }
 
 .header-title-box h1{
