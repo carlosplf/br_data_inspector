@@ -6,10 +6,10 @@ from collector.data_processor import data_processor
 
 
 # Path running local
-LOG_FILE = "./logs/br_data_collector_backend_log"
+# LOG_FILE = "./logs/br_data_collector_backend_log"
 
 # Path for docker container
-# LOG_FILE = "/br_data_inspector/backend/logs/br_data_collector_backend_log"
+LOG_FILE = "/br_data_inspector/backend/logs/br_data_collector_backend_log"
 
 formatter = logging.Formatter('%(asctime)s  %(name)s  %(levelname)s: %(message)s')
 
