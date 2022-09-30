@@ -53,10 +53,33 @@ class About extends React.Component{
         
         data["downloaded_reports"].forEach((item) => {
             all_reports = all_reports.concat(
-                <a href={item["url"]}><p className="reportLink">{item["url"]}</p></a>
+                <tr>
+                    <td>
+                        <a href={item["url"]}><p className="reportLink">{item["url"]}</p></a>
+                    </td>
+                    <td className="reportsDateColumn">
+                        <p>{item["datetime"].slice(0,-7)}</p>
+                    </td>
+                </tr>
             )
         });
-        this.setState({reports: all_reports, loading: false});
+        this.setState({reports: this.buildDownloadedReportsTable(all_reports), loading: false});
+    }
+
+    buildDownloadedReportsTable(all_reports){
+        return(
+            <div className="reportsTable">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th className="reportLinkColumn"> Link </th>
+                            <th className="reportsDateColumn"> Data do download</th>
+                        </tr>
+                        {all_reports}
+                    </tbody>
+                </table>
+            </div>
+        )
     }
 
     render(){
@@ -100,7 +123,7 @@ class About extends React.Component{
                             <br></br>
                             <p><a id="githubIcon" href="https://github.com/carlosplf/br_data_inspector"><FaGithub/></a></p>
                             <br></br>
-                            <h3 class="reportsTitle">De onde os dados vieram:</h3>
+                            <h3 class="reportsTitle">Últimos reports coletados:</h3>
                             {this.state.reports}
                             <br></br>
                             <p><a href="https://www.portaltransparencia.gov.br">Portal da Transparência </a></p>

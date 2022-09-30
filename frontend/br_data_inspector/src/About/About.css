@@ -52,6 +52,17 @@
     font-size: 0.6em;
 }
 
+.reportsTable{
+    margin-top: 60px;
+}
+
+.reportsTable p{
+    font-size: 1.2em;
+}
+
+.reportsDateColumn{
+    min-width: 200px;
+}
 
 @media only screen 
 and (max-width : 1080px){

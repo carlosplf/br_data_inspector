@@ -194,7 +194,7 @@ class Home extends React.Component{
 
                         <Header header_text="BR Data Collector" handle_modal={this.handleOpenDataModal}/>
 
-                        <span className="newsWarning"> &#127881; Agora com dados até Abril de 2022! &#127881; </span>
+                        <span className="newsWarning"> &#127881; Agora com dados de 2022! &#127881; </span>
                         
                         <div className="titleContainer">
                             <span className="pageTitle">Pesquise uma Instituição Federal </span>
