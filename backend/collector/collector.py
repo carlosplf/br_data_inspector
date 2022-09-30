@@ -5,9 +5,15 @@ from collector.db_connector import redis_connector
 from collector.data_updater import data_updater
 import json
 import logging
+import datetime
 
-TASKS_FILENAME = "task_list.json"
-DOWNLOADS_PATH = "./downloads/"
+# Local paths
+# TASKS_FILENAME = "task_list.json"
+# DOWNLOADS_PATH = "./downloads/"
+
+# Docker containers paths
+TASKS_FILENAME = "/br_data_inspector/backend/task_list.json"
+DOWNLOADS_PATH = "/br_data_inspector/backend/downloads/"
 
 
 class Collector():
@@ -117,10 +123,16 @@ class Collector():
         for task in task_list:
             url = task_list[task]["link"]
             db_name = task_list[task]["db_name"]
-            for arg in task_list[task]["args"]:
-                self.update_single_date(url, arg, db_name)
+            inside_file_name = None
 
-    def update_single_date(self, url, arg, db_name):
+            for arg in task_list[task]["args"]:
+                
+                if "inside_file_name" in task_list[task]:
+                    inside_file_name = arg + task_list[task]["inside_file_name"]
+                
+                self.update_single_date(url, arg, db_name, inside_file_name)
+
+    def update_single_date(self, url, arg, db_name, inside_file_name):
         """
         Collect data for a single date.
         Args:
@@ -130,7 +142,7 @@ class Collector():
 
         if not du.check_data_for_date(arg, db_name, 0):
             logging.debug(str("Should collect data for date: " + arg))
-            self.do_report_full_cycle(url, arg, db_name)
+            self.do_report_full_cycle(url, arg, db_name, inside_file_name)
 
         else:
             logging.debug("The system has enough data for that... Skipping.")
@@ -194,7 +206,8 @@ class Collector():
         downloaded_report_info["downloaded_reports"].append(
             {
                 "url": report_url,
-                "info": ""
+                "info": "",
+                "datetime": str(datetime.datetime.now())
             }
         )
 
