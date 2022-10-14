@@ -188,6 +188,54 @@ class MonthPicker extends React.Component{
             'year': '2022',
             'year_month': '202204'
         },
+        {
+            'array_position': 29,
+            'month': 'Maio',
+            'year': '2022',
+            'year_month': '202205'
+        },
+        {
+            'array_position': 30,
+            'month': 'Junho',
+            'year': '2022',
+            'year_month': '202206'
+        },
+        {
+            'array_position': 31,
+            'month': 'Julho',
+            'year': '2022',
+            'year_month': '202207'
+        },
+        {
+            'array_position': 32,
+            'month': 'Agosto',
+            'year': '2022',
+            'year_month': '202208'
+        },
+        {
+            'array_position': 33,
+            'month': 'Setembro',
+            'year': '2022',
+            'year_month': '202209'
+        },
+        {
+            'array_position': 34,
+            'month': 'Outubro',
+            'year': '2022',
+            'year_month': '202210'
+        },
+        {
+            'array_position': 35,
+            'month': 'Novembro',
+            'year': '2022',
+            'year_month': '202211'
+        },
+        {
+            'array_position': 36,
+            'month': 'Dezembro',
+            'year': '2022',
+            'year_month': '202212'
+        },
     ]
 
     firstMonthSelected = (event) => {

@@ -14,7 +14,7 @@
     min-height: 300px;
     background-color: rgba(240,240,240,1);
     margin: 15% auto;
-    margin-top: 30%;
+    margin-top: 180px;
     padding: 20px;
     width: 80%;
     border-radius: 10px;
@@ -121,6 +121,9 @@ and (max-width : 1080px){
         border-radius: 4px;
         background-color: #ff3f3f;
         box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.19);
+    }
+    .biddingsModalBody{
+        margin-top: 30%;
     }
 }
 

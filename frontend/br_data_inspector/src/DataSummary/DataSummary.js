@@ -35,6 +35,14 @@ class DataSummary extends React.Component{
         "202202": "Fevereiro/22",
         "202203": "Março/22",
         "202204": "Abril/22",
+        "202205": "Maio/22",
+        "202206": "Junho/22",
+        "202207": "Julho/22",
+        "202208": "Agosto/22",
+        "202209": "Setembro/22",
+        "202210": "Outubro/22",
+        "202211": "Novembro/22",
+        "202212": "Dezembro/22",
     }
 
     formatNumbers(x) {

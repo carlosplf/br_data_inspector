@@ -1,6 +1,6 @@
 .data-summary{
 	border-radius: 10px;
-  	background: #ddd;
+  	background: #fff;
   	width: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin-top: 20px;
@@ -53,9 +53,9 @@ h3{
 
 .sectionLink:hover{
     mouse-cursos: pointer;
-    background-color: #ddd;
+    background-color: #fff;
     color: #202020;
-    transition: background-color 0.5s;
+    transition: background-color 0.8s;
 }
 
 .listMonthsSelected{
@@ -73,10 +73,13 @@ h3{
 .monthSelected{
     font-weight: normal;
     font-size: 1.0em;
-    background-color: #bbb;
+    color: #fff;
+    background-color: #012169;
     margin-right: 8px;
     margin-top: -10px;;
     padding: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
 	border-radius: 6px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.19);
 }

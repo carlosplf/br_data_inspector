@@ -9,6 +9,11 @@ import os
 
 DOWNLOAD_RETRIES = 3
 
+# Running local
+# DOWNLOAD_EXTRACT_PATH = "./downloads"
+# Running in Docker container
+DOWNLOAD_EXTRACT_PATH = "/br_data_inspector/backend/downloads"
+
 
 class ReportDownloader():
     def __init__(self):
@@ -94,10 +99,10 @@ class ReportDownloader():
         with zipfile.ZipFile(filename, 'r') as zip_ref:
             if not extract_only_filename:
                 all_files_inside = zip_ref.namelist()
-                zip_ref.extractall("./downloads")
+                zip_ref.extractall(DOWNLOAD_EXTRACT_PATH)
             else:
                 all_files_inside = [extract_only_filename]
-                zip_ref.extract(extract_only_filename, "./downloads")
+                zip_ref.extract(extract_only_filename, DOWNLOAD_EXTRACT_PATH)
 
         if delete_after:
             os.remove(filename)
