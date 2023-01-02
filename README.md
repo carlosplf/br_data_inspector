@@ -10,7 +10,7 @@ The main objective of this projects is provide a easy to use and easy to search 
 check how the government institutions expend the money, what contracts were signed and more details about
 investments.
 
-The project is currently available at [brdata.online](https://brdata.online)
+The project is currently available at [brdata.site](https://brdata.site)
 
 
 ## How to run

@@ -1,4 +1,4 @@
-REACT_APP_API_URL = "https://brdata.online"
+REACT_APP_API_URL = "https://brdata.site"
 REACT_APP_API_PORT = "8080"
-REACT_APP_FRONTEND_URL = "https://brdata.online"
+REACT_APP_FRONTEND_URL = "https://brdata.site"
 REACT_APP_FRONTEND_PORT = "443"

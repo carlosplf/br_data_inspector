@@ -2,11 +2,11 @@ FROM node:12-alpine
 RUN apk add --no-cache npm nginx
 WORKDIR /br_data_inspector
 COPY ./ .
-RUN mkdir /var/www/brdata.online/
+RUN mkdir /var/www/brdata.site/
 RUN npm install --prefix /br_data_inspector/frontend/br_data_inspector
 RUN cp /br_data_inspector/docker/config_files/env-prod /br_data_inspector/frontend/br_data_inspector/.env
 RUN npm run build --prefix /br_data_inspector/frontend/br_data_inspector
-RUN cp -r /br_data_inspector/frontend/br_data_inspector/build /var/www/brdata.online/
+RUN cp -r /br_data_inspector/frontend/br_data_inspector/build /var/www/brdata.site/
 RUN cp /br_data_inspector/docker/nginx_files/frontend-nginx-prod.conf /etc/nginx/http.d/default.conf
 CMD ["nginx", "-g", "daemon off;"]
 
