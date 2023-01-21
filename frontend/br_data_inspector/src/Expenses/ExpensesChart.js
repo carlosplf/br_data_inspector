@@ -1,13 +1,12 @@
 import React from 'react';
 import {
-    RadialChart,
     Hint,
-    XYPlot,
     XAxis,
     YAxis,
     HorizontalGridLines,
     VerticalGridLines,
-    AreaSeries
+    AreaSeries,
+    FlexibleXYPlot,
 } from 'react-vis';
 import "../Expenses/ExpensesChart.css";
 
@@ -18,8 +17,17 @@ class ExpensesChart extends React.Component{
         super(props);
         this.state = {
             show_hint: false,
+            hint_name: "",
+            hint_data: {},
         }
     }
+    
+    hint_datapoint = {
+        x: 2,
+        y: 600
+    }
+
+    expenses_chart_threshold = 0.05;
 
     orderDates(){
         let new_dates = [];
@@ -44,7 +52,7 @@ class ExpensesChart extends React.Component{
             
             share = (parseFloat(single_entry["Valor Pago"])/parseFloat(this.props.total_in_expenses));
 
-            if(share > 0.05){
+            if(share > this.expenses_chart_threshold){
                 expenses_with_big_shares.push(single_entry["Codigo"]);
             }
         });
@@ -54,7 +62,6 @@ class ExpensesChart extends React.Component{
     
     //Group expenses by the "Código Elemento de Despesa" ID and by the Date.
 	buildExpensesDict(allowed_expenses){
-        console.log(allowed_expenses);
         this.total_in_expenses = 0;
 		var expenses_summary = {}
         let entry_date = "";
@@ -107,7 +114,7 @@ class ExpensesChart extends React.Component{
                     {
                         y: expenses_dict_by_date[cod_despesa][data_lancamento]["Valor Pago"],
                         x: dates.indexOf(date_as_int),
-                        className: expenses_dict_by_date[cod_despesa][data_lancamento]["Nome"]
+                        name: expenses_dict_by_date[cod_despesa][data_lancamento]["Nome"]
                     }
                 );
             });
@@ -119,14 +126,34 @@ class ExpensesChart extends React.Component{
 
 
     buildSeriesFromData(expenses_data_for_chart){
+
+        let new_hint_data = {};
+        let current_hint_data = {};
+
         return expenses_data_for_chart.map(x => {
 
             x = x.sort(function(first, second) {
-                return second.x - first.x;
+                return first.x - second.x;
             });
 
             return(
                 <AreaSeries
+                    onNearestXY={(datapoint, event) => {
+                        current_hint_data = this.state.hint_data;
+                        new_hint_data = {
+                            x: datapoint["x"],
+                            y: datapoint["y"]
+                        }
+                        if(!current_hint_data[datapoint["name"]]){
+                            current_hint_data[datapoint["name"]] = {}
+                        }
+                        current_hint_data[datapoint["name"]] = new_hint_data
+                        this.setState({
+                            hint_name: x[0]["name"],
+                            show_hint: true,
+                            hint_data: current_hint_data
+                        });
+                    }}
                     data={x}
                     opacity={0.5}
                     style={{}}
@@ -134,27 +161,90 @@ class ExpensesChart extends React.Component{
             )
         });
     }
+    
+    buildHint(){
+        let hint_entries = [];
+        let hint_position = {};
+        let max_y_value = this.getMaxY();
+        let formated_y_value = 0;
+        let formated_date = "";
+        Object.keys(this.state.hint_data).forEach((k) => {
+            hint_position = {x: this.state.hint_data[k]["x"], y: max_y_value*0.9}
+            formated_y_value = this.formatNumbers(this.state.hint_data[k]["y"]);
+            formated_date = this.formatMonthYear(this.props.dates[this.state.hint_data[k]["x"]]);
+            hint_entries.push(
+                <p>
+                    {k}: Valor: R${formated_y_value} - Mês: {formated_date}
+                </p>
+            ); 
+        });
+        return(
+            <Hint className="expensesChartHint" value={hint_position}>
+                {hint_entries}
+            </Hint>
+        );
+    }
+
+    getMaxY(){
+        let max_y_value = 0;
+        
+        Object.keys(this.state.hint_data).forEach((k) => {
+            if(this.state.hint_data[k]["y"] > max_y_value){
+                max_y_value = this.state.hint_data[k]["y"]
+            }
+        });
+
+        return max_y_value;
+    }
+    
+    formatNumbers(x) {
+        /* Given a integer value, format for currency. */
+        if (!x) {return 0}
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    formatMonthYear(x){
+        /* Given a Month and Year date using the format YYYYMM, format for MM/YYYY. */
+        let year = x.substr(0,4);
+        let month = x.substr(4,6);
+        return "" + month + "/" + year;
+    }
+    
+    showHint(){
+        /*  Return a Hint Object based on 'show_hint' state and Datapoint values. */        
+        if (this.state.show_hint){
+            return(this.buildHint());
+        }
+        else{
+            return null;
+        }
+    }
 
     render(){
         let allowed_expenses = this.getExpensesByShare();
         let expenses_dict = this.buildExpensesDict(allowed_expenses);
         let new_chart_data = this.buildChartData(expenses_dict);
         new_chart_data = this.buildSeriesFromData(new_chart_data);
+        const hint = this.showHint();
 
         return(
             <div className="expensesChart">
                 <div className="chartContainer">
-                    <XYPlot
-                        width={800}
+                    <FlexibleXYPlot
                         margin={{left: 100}}
-                        height={800}
-                        stackBy="y">
+                        height={400}
+                        stackBy="y"
+                        onMouseLeave={(datapoint, event) => {
+                            this.setState({hint_name: "", show_hint: false, hint_data: {}})}
+                        }>
                         <HorizontalGridLines />
                         <VerticalGridLines />
                         {new_chart_data}
-                        <XAxis />
+                        {hint}
+                        <XAxis hideTicks/>
                         <YAxis />
-                    </XYPlot>
+                    </FlexibleXYPlot>
+                    <p className="chartInfo">Mostrando somente gastos acima de {this.expenses_chart_threshold*100}%.</p>
                 </div>
             </div>
         );
