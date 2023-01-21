@@ -234,6 +234,7 @@ class DataPage extends React.Component {
                         }
                         entity_id={this.entity_id}
                         data={this.state.data}
+                        dates={this.dates_to_search}
                     />
 
                     <ContractsData

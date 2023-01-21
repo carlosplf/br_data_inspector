@@ -15,6 +15,7 @@ class ExpensesTable extends React.Component{
 	buildExpensesDict(){
         this.total_in_expenses = 0;
 		var expenses_summary = {}
+
 		this.props.data.forEach(single_line => {
 
             //Sum all values so we can calculate the share of an expense.
@@ -27,7 +28,8 @@ class ExpensesTable extends React.Component{
 			}
 			var new_entry = {
 				"Nome": single_line["Nome Elemento de Despesa"],
-				"Valor Pago": parseFloat(single_line["Valor Pago (R$)"]) + previous_total_value
+				"Valor Pago": parseFloat(single_line["Valor Pago (R$)"]) + previous_total_value,
+                "Codigo": single_line["Código Elemento de Despesa"]
 			}
 			expenses_summary[single_line["Código Elemento de Despesa"]] = new_entry
 		});
@@ -89,7 +91,7 @@ class ExpensesTable extends React.Component{
             <div className="expensesBlock" id={"expensesData" + this.props.entity_id}>
                 <h1> Elementos de Despesas: </h1>
                 <h3> {this.props.entity_name}</h3>
-                <ExpensesChart expenses={expenses_as_dict} total_in_expenses={this.total_in_expenses} expenses_shares={[{angle:1}]}/>
+                <ExpensesChart expenses={expenses_as_dict} total_in_expenses={this.total_in_expenses} expenses_shares={[{angle:1}]} raw_data={this.props.data} dates={this.props.dates}/>
                 {data_table}
             </div>
         )
