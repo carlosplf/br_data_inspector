@@ -10,11 +10,9 @@ import CompanyPage from './CompanyPage/CompanyPage';
 
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route
 } from "react-router-dom";
-
-require('dotenv').config({ path: require('find-config')('.env') })
 
 class App extends React.Component {
   constructor(props) { 
@@ -27,35 +25,17 @@ class App extends React.Component {
   render(){
     return(
       <Router>
-        <Switch>
-          <Route exact path="/">
-              <Home/>
-          </Route>
-          <Route path="/home">
-            <Home />
-          </Route>
-          <Route path="/details">
-            <DataPage key={this.state.search_id} entity_type="Subordinado" entity_id={this.state.search_id}/>
-          </Route> 
-          <Route path="/compare">
-            <DataCompare entity_type="Subordinado"/>
-          </Route>
-          <Route path="/rank">
-            <RankPage/>          
-          </Route>
-          <Route path="/contracts">
-            <ContractsPage/>          
-          </Route>
-          <Route path="/company">
-            <CompanyPage/>          
-          </Route>
-          <Route path="/about">
-            <About/>          
-          </Route>
-          <Route path="/custom_link">
-            <CustomLinkRouter/>
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/home" element={<Home/>}/>
+          <Route path="/details" element={<DataPage key={this.state.search_id} entity_type="Subordinado" entity_id={this.state.search_id}/>}/>
+          <Route path="/compare" element={<DataCompare entity_type="Subordinado"/>}/>
+          <Route path="/rank" element={<RankPage/>}/>
+          <Route path="/contracts" element={<ContractsPage/>}/>
+          <Route path="/company" element={<CompanyPage/>}/>
+          <Route path="/about" element={<About/>}/>
+          <Route path="/custom_link" element={<CustomLinkRouter/>}/>
+        </Routes>
       </Router>
     );
   }

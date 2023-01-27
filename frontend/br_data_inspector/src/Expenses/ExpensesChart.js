@@ -21,11 +21,6 @@ class ExpensesChart extends React.Component{
             hint_data: {},
         }
     }
-    
-    hint_datapoint = {
-        x: 2,
-        y: 600
-    }
 
     expenses_chart_threshold = 0.05;
 
@@ -43,6 +38,7 @@ class ExpensesChart extends React.Component{
     }
 
     getExpensesByShare(){
+        // Select only the expenses that have a share greater then expenses_chart_threshold.
         let expenses_with_big_shares = [];
         let share = 0.0;
 
@@ -60,8 +56,8 @@ class ExpensesChart extends React.Component{
         return expenses_with_big_shares;
     }
     
-    //Group expenses by the "Código Elemento de Despesa" ID and by the Date.
 	buildExpensesDict(allowed_expenses){
+        //Group expenses by the "Código Elemento de Despesa" ID and by the Date.
         this.total_in_expenses = 0;
 		var expenses_summary = {}
         let entry_date = "";
@@ -83,10 +79,12 @@ class ExpensesChart extends React.Component{
             this.total_in_expenses += parseFloat(single_line["Valor Pago (R$)"]);
 
 			var previous_total_value = 0;
-			if (expenses_summary[cod_despesa][entry_date]){
+			
+            if (expenses_summary[cod_despesa][entry_date]){
 				//Dict already contains an expense with a valid value. Sum.
 				previous_total_value = parseFloat(expenses_summary[cod_despesa][entry_date]["Valor Pago"]);
 			}
+
 			var new_entry = {
 				"Nome": single_line["Nome Elemento de Despesa"],
 				"Valor Pago": parseFloat(single_line["Valor Pago (R$)"]) + previous_total_value
@@ -99,10 +97,13 @@ class ExpensesChart extends React.Component{
 	}
 
     buildChartData(expenses_dict_by_date){
+        /*
+        * Based on the dates searched and the data received, build the data dict that needs to be considered
+        * in building the chart.
+        * Note that the data is not ready yet to be shown. The Component needs to build the Data Series.
+        */
         let expenses_by_cod = [];
         let expenses_data_for_chart = [];
-        let chart_label = "";
-        let share = 0.0;
         let dates = this.orderDates();
 
         Object.keys(expenses_dict_by_date).forEach((cod_despesa) => {
@@ -126,7 +127,7 @@ class ExpensesChart extends React.Component{
 
 
     buildSeriesFromData(expenses_data_for_chart){
-
+        // Based on the data that must be shown in the chart, build the Data Series.   
         let new_hint_data = {};
         let current_hint_data = {};
 
@@ -163,6 +164,10 @@ class ExpensesChart extends React.Component{
     }
     
     buildHint(){
+        /*
+        * The Hint Obj must be built based on the information stored in the Component State hint_data.
+        * This information is changed based on the mouse over event and other user interations.
+        */
         let hint_entries = [];
         let hint_position = {};
         let max_y_value = this.getMaxY();
@@ -186,32 +191,31 @@ class ExpensesChart extends React.Component{
     }
 
     getMaxY(){
+        // Get the maximum value iside a dict considering a specific key.
         let max_y_value = 0;
-        
         Object.keys(this.state.hint_data).forEach((k) => {
             if(this.state.hint_data[k]["y"] > max_y_value){
                 max_y_value = this.state.hint_data[k]["y"]
             }
         });
-
         return max_y_value;
     }
     
     formatNumbers(x) {
-        /* Given a integer value, format for currency. */
+        // Given a integer value, format for currency.
         if (!x) {return 0}
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
     formatMonthYear(x){
-        /* Given a Month and Year date using the format YYYYMM, format for MM/YYYY. */
+        // Given a Month and Year date using the format YYYYMM, change to MM/YYYY.
         let year = x.substr(0,4);
         let month = x.substr(4,6);
         return "" + month + "/" + year;
     }
     
     showHint(){
-        /*  Return a Hint Object based on 'show_hint' state and Datapoint values. */        
+        // Return a Hint Object or NULL, based on 'show_hint' state and Datapoint values.
         if (this.state.show_hint){
             return(this.buildHint());
         }

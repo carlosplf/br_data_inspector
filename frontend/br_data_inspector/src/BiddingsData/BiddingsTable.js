@@ -1,5 +1,4 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 import { FaAngleRight } from "react-icons/fa";
 import '../BiddingsData/BiddingsTable.css';
 import CompaniesInfo from '../BiddingsData/CompaniesInfo.js';
@@ -148,4 +147,4 @@ class BiddingsTable extends React.Component {
         return <div className="biddingsTableContainer">{full_table}</div>;
     }
 }
-export default withRouter(BiddingsTable);
+export default BiddingsTable;

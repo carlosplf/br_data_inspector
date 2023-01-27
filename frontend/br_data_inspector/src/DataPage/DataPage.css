@@ -15,7 +15,11 @@
 	cursor: pointer;
 }
 
-.summaryContainer{
+.no-data-message{
+	margin-top: 400px;
+}
+
+.summary-container{
     width: 90%;
     margin-top: 120px;
 }

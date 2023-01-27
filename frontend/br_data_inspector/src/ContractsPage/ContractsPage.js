@@ -1,6 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
-import { withRouter } from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import ContractsRank from "../ContractsPage/ContractsRank";
 import Header from "../Header/Header";
@@ -91,7 +90,7 @@ class ContractsPage extends React.Component {
         if (this.state.show_results){
             let url_string = "/company?cnpj=" + this.state.search_id;
             return (
-                <Redirect to={url_string}/>
+                <Navigate to={url_string} replace={true}/>
             );
         }
         
@@ -150,4 +149,4 @@ class ContractsPage extends React.Component {
     }
 }
 
-export default withRouter(ContractsPage);
+export default ContractsPage;

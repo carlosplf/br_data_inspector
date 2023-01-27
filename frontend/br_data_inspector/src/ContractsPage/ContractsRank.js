@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { withRouter } from "react-router-dom";
 import "../ContractsPage/ContractsRank.css";
 
 class ContractsRank extends React.Component {
@@ -159,4 +158,4 @@ class ContractsRank extends React.Component {
     }
 }
 
-export default withRouter(ContractsRank);
+export default ContractsRank;

@@ -1,8 +1,6 @@
 .summary-container{
-    display: flex;
-    flex-wrap: nowrap;
     width: 90%;
-    margin-top: 100px;
+    margin-top: 120px;
 }
 
 .summary-container.data-summary{
@@ -12,6 +10,10 @@
 
 .summary-separator{
     width: 2%;
+}
+
+.no-data-message{
+	margin-top: 400px;
 }
 
 .expensesContainer{
