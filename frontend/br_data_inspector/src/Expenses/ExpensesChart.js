@@ -77,10 +77,10 @@ class ExpensesChart extends React.Component{
 		var expenses_summary = {}
         let entry_date = "";
         let cod_despesa = "";
-		this.props.raw_data.forEach(single_line => {
+		this.props.raw_data.forEach(data_entry => {
 
-            entry_date = single_line["Ano e mês do lançamento"];
-            cod_despesa = single_line["Código Elemento de Despesa"];
+            entry_date = data_entry["Ano e mês do lançamento"];
+            cod_despesa = data_entry["Código Elemento de Despesa"];
 
             if(!allowed_expenses.includes(cod_despesa)){
                 return;
@@ -91,7 +91,7 @@ class ExpensesChart extends React.Component{
 			}
 
             //Sum all values so we can calculate the share of an expense.
-            this.total_in_expenses += parseFloat(single_line["Valor Pago (R$)"]);
+            this.total_in_expenses += parseFloat(data_entry["Valor Pago (R$)"]);
 
 			var previous_total_value = 0;
 			
@@ -101,8 +101,8 @@ class ExpensesChart extends React.Component{
 			}
 
 			var new_entry = {
-				"Nome": single_line["Nome Elemento de Despesa"],
-				"Valor Pago": parseFloat(single_line["Valor Pago (R$)"]) + previous_total_value
+				"Nome": data_entry["Nome Elemento de Despesa"],
+				"Valor Pago": parseFloat(data_entry["Valor Pago (R$)"]) + previous_total_value
 			}
 
             expenses_summary[cod_despesa][entry_date] = new_entry;
@@ -189,25 +189,46 @@ class ExpensesChart extends React.Component{
             )
         });
     }
-    
-    buildHint(){
+
+    sumExpensesMonth(date_to_sum){
+        let total_value = 0;
+        this.props.raw_data.forEach(data_entry => {
+            if(data_entry["Ano e mês do lançamento"] === date_to_sum){
+                total_value += parseFloat(data_entry["Valor Pago (R$)"]);
+            }
+        });
+        return total_value;
+    }
+
+    buildHint(chart_data){
         /*
-        * The Hint Obj must be built based on the information stored in the Component State hint_data.
+        * The Hint Obj must be built based on the data that is ploted.
         * This information is changed based on the mouse over event and other user interations.
+        * chart_data: dict with all the data ploted.
         */
         let hint_entries = [];
         let formated_y_value = 0;
         let formated_date = "";
+        let expense_share_by_month = 0;
 
-        Object.keys(this.state.hint_data).forEach((k) => {
-            formated_y_value = this.formatNumbers(this.state.hint_data[k]["y"]);
-            formated_date = this.formatMonthYear(this.props.dates[this.state.hint_data[k]["x"]]);
+        // The Hint event is triggered based on the NearestX point.
+        // The datapoint.x value is the X axis value.
+        let x_index = this.state.hint_datapoint.x;
+        
+        let total_values_for_the_month = this.sumExpensesMonth(
+            this.formatMonthYear(this.props.dates[x_index])
+        );
+        
+        chart_data.forEach((data_entry) => {
+            expense_share_by_month = ((data_entry[x_index].y/total_values_for_the_month)*100).toFixed(2);
+            formated_y_value = this.formatNumbers(data_entry[x_index].y);
+            formated_date = this.formatMonthYear(this.props.dates[x_index]);
             hint_entries.push(
                 <div className="hintLine">
-                    <div className="hintCircleColor" style={{backgroundColor: this.map_series_colors[k]}}></div>
+                    <div className="hintCircleColor" style={{backgroundColor: this.map_series_colors[data_entry[x_index].name]}}></div>
                     <spam className="hintSeparator">
                         <p>
-                            {k}: Valor: R${formated_y_value} - Mês: {formated_date}
+                            {data_entry[x_index].name}: Valor: R${formated_y_value} - Mês: {formated_date} ({expense_share_by_month}%)
                         </p>
                     </spam>
                 </div>
@@ -241,13 +262,13 @@ class ExpensesChart extends React.Component{
         // Given a Month and Year date using the format YYYYMM, change to MM/YYYY.
         let year = x.substr(0,4);
         let month = x.substr(4,6);
-        return "" + month + "/" + year;
+        return "" + year + "/" + month;
     }
     
-    showHint(){
+    showHint(chart_data){
         // Return a Hint Object or NULL, based on 'show_hint' state and Datapoint values.
         if (this.state.show_hint){
-            return(this.buildHint());
+            return(this.buildHint(chart_data));
         }
         else{
             return null;
@@ -259,7 +280,7 @@ class ExpensesChart extends React.Component{
         let expenses_dict = this.buildExpensesDict(allowed_expenses);
         let new_chart_data = this.buildChartData(expenses_dict);
         let chart_series = this.buildSeriesFromData(new_chart_data);
-        let hint = this.showHint();
+        let hint = this.showHint(new_chart_data);
 
         return(
             <div className="expensesChart">
