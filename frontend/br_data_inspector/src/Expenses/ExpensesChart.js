@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-    Hint,
     XAxis,
     YAxis,
     HorizontalGridLines,
     VerticalGridLines,
     AreaSeries,
     FlexibleXYPlot,
+    Crosshair,
 } from 'react-vis';
 import "../Expenses/ExpensesChart.css";
 
@@ -19,8 +19,22 @@ class ExpensesChart extends React.Component{
             show_hint: false,
             hint_name: "",
             hint_data: {},
+            build_chart: true
         }
     }
+
+    chart_colors = [
+        "#66bb6a",
+        "#4db6ac",
+        "#4dd0e1",
+        "#4fc3f7",
+        "#64b5f6",
+        "#7986cb"
+    ];
+
+    map_series_colors = {};
+
+    color_idx = 0;
 
     expenses_chart_threshold = 0.05;
 
@@ -127,12 +141,22 @@ class ExpensesChart extends React.Component{
 
 
     buildSeriesFromData(expenses_data_for_chart){
-        // Based on the data that must be shown in the chart, build the Data Series.   
+        // Based on the data that must be shown in the chart, build the Data Series.
         let new_hint_data = {};
         let current_hint_data = {};
+        let series_color = "000000";
+        this.color_idx = 0;
 
         return expenses_data_for_chart.map(x => {
+            
+            series_color = this.chart_colors[this.color_idx];
+            this.map_series_colors[x[0]["name"]] = series_color;
+            this.color_idx = this.color_idx + 1;
 
+            if(this.color_idx >= this.chart_colors.length){
+                this.color_idx = 0;
+            }
+            
             x = x.sort(function(first, second) {
                 return first.x - second.x;
             });
@@ -143,7 +167,7 @@ class ExpensesChart extends React.Component{
                         current_hint_data = this.state.hint_data;
                         new_hint_data = {
                             x: datapoint["x"],
-                            y: datapoint["y"]
+                            y: datapoint["y"],
                         }
                         if(!current_hint_data[datapoint["name"]]){
                             current_hint_data[datapoint["name"]] = {}
@@ -152,9 +176,11 @@ class ExpensesChart extends React.Component{
                         this.setState({
                             hint_name: x[0]["name"],
                             show_hint: true,
-                            hint_data: current_hint_data
+                            hint_data: current_hint_data,
+                            hint_datapoint: datapoint
                         });
                     }}
+                    color={series_color}
                     data={x}
                     opacity={0.5}
                     style={{}}
@@ -169,24 +195,27 @@ class ExpensesChart extends React.Component{
         * This information is changed based on the mouse over event and other user interations.
         */
         let hint_entries = [];
-        let hint_position = {};
-        let max_y_value = this.getMaxY();
         let formated_y_value = 0;
         let formated_date = "";
+
         Object.keys(this.state.hint_data).forEach((k) => {
-            hint_position = {x: this.state.hint_data[k]["x"], y: max_y_value*0.9}
             formated_y_value = this.formatNumbers(this.state.hint_data[k]["y"]);
             formated_date = this.formatMonthYear(this.props.dates[this.state.hint_data[k]["x"]]);
             hint_entries.push(
-                <p>
-                    {k}: Valor: R${formated_y_value} - Mês: {formated_date}
-                </p>
+                <div className="hintLine">
+                    <div className="hintCircleColor" style={{backgroundColor: this.map_series_colors[k]}}></div>
+                    <spam className="hintSeparator">
+                        <p>
+                            {k}: Valor: R${formated_y_value} - Mês: {formated_date}
+                        </p>
+                    </spam>
+                </div>
             ); 
         });
         return(
-            <Hint className="expensesChartHint" value={hint_position}>
-                {hint_entries}
-            </Hint>
+            <Crosshair className="crossHair" values={[this.state.hint_datapoint]}>
+                <div className="expensesChartHint">{hint_entries}</div>
+            </Crosshair>
         );
     }
 
@@ -224,12 +253,12 @@ class ExpensesChart extends React.Component{
         }
     }
 
-    render(){
+    render(){  
         let allowed_expenses = this.getExpensesByShare();
         let expenses_dict = this.buildExpensesDict(allowed_expenses);
         let new_chart_data = this.buildChartData(expenses_dict);
-        new_chart_data = this.buildSeriesFromData(new_chart_data);
-        const hint = this.showHint();
+        let chart_series = this.buildSeriesFromData(new_chart_data);
+        let hint = this.showHint();
 
         return(
             <div className="expensesChart">
@@ -238,12 +267,10 @@ class ExpensesChart extends React.Component{
                         margin={{left: 100}}
                         height={400}
                         stackBy="y"
-                        onMouseLeave={(datapoint, event) => {
-                            this.setState({hint_name: "", show_hint: false, hint_data: {}})}
-                        }>
+                        >
                         <HorizontalGridLines />
                         <VerticalGridLines />
-                        {new_chart_data}
+                        {chart_series}
                         {hint}
                         <XAxis hideTicks/>
                         <YAxis />
