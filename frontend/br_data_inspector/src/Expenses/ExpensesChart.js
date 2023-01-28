@@ -236,7 +236,10 @@ class ExpensesChart extends React.Component{
         });
         return(
             <Crosshair className="crossHair" values={[this.state.hint_datapoint]}>
-                <div className="expensesChartHint">{hint_entries.reverse()}</div>
+                <div className="expensesChartHint">
+                    <p className="hintMonth">Mês: {this.formatMonthYear(this.props.dates[x_index])}</p>
+                    {hint_entries.reverse()}
+                </div>
             </Crosshair>
         );
     }
