@@ -9,7 +9,7 @@
 
 .contractsTable{
     width: 100%;
-    padding: 10px;
+    padding: 0px;
     background-color: #FFF;
     border-radius: 8px;
     margin-bottom: 20px;
@@ -25,6 +25,8 @@
 .contractsTable table th{
     padding-bottom: 10px;
     padding-top: 10px;
+    font-size: 1.2em;
+    padding-left: 0px;
 }
 
 .contractsNormalTR:hover{
@@ -35,6 +37,7 @@
 .contractsNormalTR{
     background-color: #FFF;
     height: 30px;
+    font-size: 0.8em;
 }
 
 .expandedRow {
@@ -55,6 +58,7 @@
 .columnValor{
     text-align: end;
     width: 24%;
+    padding-right: 20px;
 }
 
 .columnLicitacao{

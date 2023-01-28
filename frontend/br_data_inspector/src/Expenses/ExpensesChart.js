@@ -32,6 +32,7 @@ class ExpensesChart extends React.Component{
         "#7986cb"
     ];
 
+    // This variable is redundant. Need to store color data more efficiently.
     map_series_colors = {};
 
     color_idx = 0;
@@ -214,7 +215,7 @@ class ExpensesChart extends React.Component{
         });
         return(
             <Crosshair className="crossHair" values={[this.state.hint_datapoint]}>
-                <div className="expensesChartHint">{hint_entries}</div>
+                <div className="expensesChartHint">{hint_entries.reverse()}</div>
             </Crosshair>
         );
     }
@@ -267,7 +268,9 @@ class ExpensesChart extends React.Component{
                         margin={{left: 100}}
                         height={400}
                         stackBy="y"
-                        >
+                        onMouseLeave={(datapoint, event) => {
+                            this.setState({hint_name: "", show_hint: false, hint_data: {}})}
+                        }>
                         <HorizontalGridLines />
                         <VerticalGridLines />
                         {chart_series}
