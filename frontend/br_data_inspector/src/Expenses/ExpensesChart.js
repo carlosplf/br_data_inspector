@@ -289,6 +289,7 @@ class ExpensesChart extends React.Component{
                         margin={{left: 100}}
                         height={400}
                         stackBy="y"
+                        xType="linear"
                         onMouseLeave={(datapoint, event) => {
                             this.setState({hint_name: "", show_hint: false, hint_data: {}})}
                         }>
@@ -296,8 +297,8 @@ class ExpensesChart extends React.Component{
                         <VerticalGridLines />
                         {chart_series}
                         {hint}
-                        <XAxis hideTicks/>
-                        <YAxis />
+                        <XAxis title={"Mês"}/>
+                        <YAxis title={"Valor"}/>
                     </FlexibleXYPlot>
                     <p className="chartInfo">Mostrando somente gastos acima de {this.expenses_chart_threshold*100}%.</p>
                 </div>
