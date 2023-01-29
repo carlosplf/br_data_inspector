@@ -72,18 +72,25 @@ class ExpensesChart extends React.Component{
     }
     
 	buildExpensesDict(allowed_expenses){
-        //Group expenses by the "Código Elemento de Despesa" ID and by the Date.
+        /*
+        * Group expenses by the "Código Elemento de Despesa" ID and by the Date.
+        * "allowed_expenses" is the list with the expenses codes that represents a
+        * share bigger then the threshold.
+        */
         this.total_in_expenses = 0;
 		var expenses_summary = {}
         let entry_date = "";
         let cod_despesa = "";
+
 		this.props.raw_data.forEach(data_entry => {
 
             entry_date = data_entry["Ano e mês do lançamento"];
             cod_despesa = data_entry["Código Elemento de Despesa"];
 
             if(!allowed_expenses.includes(cod_despesa)){
-                return;
+                // We use the '-1' expense code to classify all expenses bellow threshold.
+                cod_despesa = "-1";
+                data_entry["Nome Elemento de Despesa"] = "Outros";
             }
 
             if (!expenses_summary[cod_despesa]){
@@ -233,7 +240,7 @@ class ExpensesChart extends React.Component{
                         <div className="hintCircleColor" style={{backgroundColor: this.map_series_colors[expense_name]}}></div>
                         <spam className="hintSeparator">
                             <p>
-                                {expense_name}: Valor: R${formated_y_value} ({expense_share_by_month}%)
+                                {expense_name}: R${formated_y_value} ({expense_share_by_month}%)
                             </p>
                         </spam>
                     </div>
