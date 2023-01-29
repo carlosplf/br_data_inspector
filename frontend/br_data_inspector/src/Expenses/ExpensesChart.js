@@ -145,7 +145,7 @@ class ExpensesChart extends React.Component{
         // Based on the data that must be shown in the chart, build the Data Series.
         let new_hint_data = {};
         let current_hint_data = {};
-        let series_color = "000000";
+        let series_color = "#000000";
         this.color_idx = 0;
 
         return expenses_data_for_chart.map(x => {
@@ -208,7 +208,7 @@ class ExpensesChart extends React.Component{
         */
         let hint_entries = [];
         let formated_y_value = 0;
-        let formated_date = "";
+        let expense_name = "";
         let expense_share_by_month = 0;
 
         // The Hint event is triggered based on the NearestX point.
@@ -218,26 +218,32 @@ class ExpensesChart extends React.Component{
         let total_values_for_the_month = this.sumExpensesMonth(
             this.formatMonthYear(this.props.dates[x_index])
         );
+
+        let month_as_str = this.getMonthName(this.props.dates[x_index]);
         
         chart_data.forEach((data_entry) => {
-            expense_share_by_month = ((data_entry[x_index].y/total_values_for_the_month)*100).toFixed(2);
-            formated_y_value = this.formatNumbers(data_entry[x_index].y);
-            formated_date = this.formatMonthYear(this.props.dates[x_index]);
-            hint_entries.push(
-                <div className="hintLine">
-                    <div className="hintCircleColor" style={{backgroundColor: this.map_series_colors[data_entry[x_index].name]}}></div>
-                    <spam className="hintSeparator">
-                        <p>
-                            {data_entry[x_index].name}: Valor: R${formated_y_value} - Mês: {formated_date} ({expense_share_by_month}%)
-                        </p>
-                    </spam>
-                </div>
-            ); 
+            
+            // Check we the expense exists for this date (x_index).
+            if(data_entry[x_index]){
+                expense_share_by_month = ((data_entry[x_index].y/total_values_for_the_month)*100).toFixed(2);
+                formated_y_value = this.formatNumbers(data_entry[x_index].y);
+                expense_name = data_entry[x_index].name;
+                hint_entries.push(
+                    <div className="hintLine">
+                        <div className="hintCircleColor" style={{backgroundColor: this.map_series_colors[expense_name]}}></div>
+                        <spam className="hintSeparator">
+                            <p>
+                                {expense_name}: Valor: R${formated_y_value} ({expense_share_by_month}%)
+                            </p>
+                        </spam>
+                    </div>
+                ); 
+            }
         });
         return(
             <Crosshair className="crossHair" values={[this.state.hint_datapoint]}>
                 <div className="expensesChartHint">
-                    <p className="hintMonth">Mês: {this.formatMonthYear(this.props.dates[x_index])}</p>
+                    <p className="hintMonth">{month_as_str}</p>
                     {hint_entries.reverse()}
                 </div>
             </Crosshair>
@@ -266,6 +272,19 @@ class ExpensesChart extends React.Component{
         let year = x.substr(0,4);
         let month = x.substr(4,6);
         return "" + year + "/" + month;
+    }
+
+    getMonthName(current_date){
+        // Receiving current_date as YYYYMM.
+        let year = current_date.substr(0,4);
+        let month = current_date.substr(4,6);
+        let my_date = new Date(year, parseInt(month) - 1, '01');
+        let date_to_str =  my_date.toLocaleString('pt-BR', {month: 'long', year: 'numeric'});
+        return this.upperCaseFirstLetter(date_to_str);
+    }
+
+    upperCaseFirstLetter(text){
+        return text[0].toUpperCase() + text.slice(1).toLowerCase();
     }
     
     showHint(chart_data){
