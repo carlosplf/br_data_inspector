@@ -81,16 +81,18 @@ class ExpensesChart extends React.Component{
 		var expenses_summary = {}
         let entry_date = "";
         let cod_despesa = "";
-
+        let expense_name = "";
+        
 		this.props.raw_data.forEach(data_entry => {
 
             entry_date = data_entry["Ano e mês do lançamento"];
             cod_despesa = data_entry["Código Elemento de Despesa"];
+            expense_name = data_entry["Nome Elemento de Despesa"];
 
             if(!allowed_expenses.includes(cod_despesa)){
                 // We use the '-1' expense code to classify all expenses bellow threshold.
                 cod_despesa = "-1";
-                data_entry["Nome Elemento de Despesa"] = "Outros";
+                expense_name = "Outros";
             }
 
             if (!expenses_summary[cod_despesa]){
@@ -108,7 +110,7 @@ class ExpensesChart extends React.Component{
 			}
 
 			var new_entry = {
-				"Nome": data_entry["Nome Elemento de Despesa"],
+				"Nome": expense_name,
 				"Valor Pago": parseFloat(data_entry["Valor Pago (R$)"]) + previous_total_value
 			}
 
