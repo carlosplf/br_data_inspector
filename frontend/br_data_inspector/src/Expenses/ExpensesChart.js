@@ -329,7 +329,7 @@ class ExpensesChart extends React.Component{
                         {chart_series}
                         {hint}
                         <XAxis title={"Mês"}/>
-                        <YAxis title={"Valor"}/>
+                        <YAxis title={"Soma valores"}/>
                     </FlexibleXYPlot>
                     <p className="chartInfo">Mostrando somente gastos acima de {this.expenses_chart_threshold*100}%.</p>
                 </div>
