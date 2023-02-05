@@ -36,7 +36,7 @@
     align-self: center;
     margin-left: -2px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 8px 0 rgba(0, 0, 0, 0.1);
-  }
+}
 
 .hintSeparator {
     margin-left: 10px;
@@ -53,5 +53,15 @@ and (max-width : 1080px){
     }
     .DataBarChart {
         margin-top: 60px;
+    }
+    .hintBox {
+        min-width: 240px;
+    }
+    .hintSeparator p{
+        font-size: 1.4em;
+    }
+    .hintBarColor {
+        height: 140px;
+        margin-right: 10px;
     }
 }
