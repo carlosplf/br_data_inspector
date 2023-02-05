@@ -1,13 +1,11 @@
 import React from 'react';
 import DataSummary from "../DataSummary/DataSummary.js";
-import { withRouter } from 'react-router-dom'
 import DataBarChartComparison from '../DataChart/DataBarChartComparison.js';
 import Header from '../Header/Header';
 import Loading from '../Utils/Loading';
 import '../DataComparePage/DataCompare.css';
 import CreateCustomLink from '../CustomLink/CreateCustomLink.js';
 import ExpensesTable from '../Expenses/ExpensesTable.js';
-import queryString from 'query-string';
 import LoadingBar from 'react-top-loading-bar';
 import ContractsData from '../ContractsData/ContractsData';
 
@@ -52,12 +50,12 @@ class DataCompare extends React.Component{
 	getURLParams(){
 		// This route URL receives the Entity ID and the Dates for query as arguments.
 		// Example: "http://localhost:3000/table?id=26236&dates=202001-202003-202002"
-		const value = queryString.parse(this.props.location.search);
-		const entity_id1 = value.id1;
-        const entity_id2 = value.id2;
+		const queryParameters = new URLSearchParams(window.location.search);
+		const entity_id1 = queryParameters.get("id1");;
+        const entity_id2 = queryParameters.get("id2");
 		this.entity_id1 = entity_id1;
         this.entity_id2 = entity_id2;
-		this.dates_to_search = value.dates.split("-");
+		this.dates_to_search = queryParameters.get("dates").split("-");
 	}
 
 	sumData(data_slot){
@@ -216,9 +214,8 @@ class DataCompare extends React.Component{
 						show_share_button={true}
 						header_text="Comparação de Despesas"
 						handle_modal={this.handleOpenDataModal}
-						dark_background={true}
 					/>
-                    <h1> Ops, sem dados para o período :( </h1>
+                    <h1 className="no-data-message"> Ops, sem dados para o período &#128533; </h1>
                 </div>
             )
         }
@@ -284,11 +281,13 @@ class DataCompare extends React.Component{
                             entity_id={this.state.data1[0]["Código Órgão Subordinado"]}
                             entity_name={this.state.data1[0]["Nome Órgão Subordinado"]}
                             data={this.state.data1}
+							dates={this.dates_to_search}
                         />
                         <ExpensesTable
                             entity_id={this.state.data2[0]["Código Órgão Subordinado"]}
                             entity_name={this.state.data2[0]["Nome Órgão Subordinado"]}
                             data={this.state.data2}
+							dates={this.dates_to_search}
                         />
                     </div>
 
@@ -310,4 +309,4 @@ class DataCompare extends React.Component{
     }
 }
 
-export default withRouter(DataCompare);
+export default DataCompare;

@@ -16,7 +16,9 @@ class DataBarChart extends React.Component{
 	constructor (props) {
 		super(props);
         this.state = {
-            show_hint: false
+            show_hint: false,
+            datapoint: null,
+            series_name: "",
         }
 	}
 
@@ -85,13 +87,20 @@ class DataBarChart extends React.Component{
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
-    showHint(datapoint){
+    showHint(){
         /*  Return a Hint Object based on 'show_hint' state and Datapoint values. */        
         if (this.state.show_hint){
+            const month_as_str = this.getMonthName(this.state.datapoint.x);
             return(
-                <Hint className="hintBox" value={this.hint_datapoint}>
-                    <p>Valor: R${this.formatNumbers(this.hint_datapoint.y)}</p>
-                    <p>Mês: {this.hint_datapoint.x}</p>
+                <Hint className="hintBox" value={this.state.datapoint}>
+                    <div className="hintLine">
+                        <div className="hintBarColor" style={{backgroundColor: this.state.series_color}}></div>
+                        <spam className="hintSeparator">
+                            <p>{this.state.series_name}</p>
+                            <p style={{fontWeight: "bold"}}>R${this.formatNumbers(this.state.datapoint.y)}</p>
+                            <p>{month_as_str}</p>
+                        </spam>
+                    </div>
                 </Hint>
             );
         }
@@ -99,17 +108,35 @@ class DataBarChart extends React.Component{
             return null;
         }
     }
+    
+    getMonthName(current_date){
+        // Receiving current_date as YYYYMM.
+        let year = current_date.substr(0,4);
+        let month = current_date.substr(4,6);
+        let my_date = new Date(year, parseInt(month) - 1, '01');
+        let date_to_str =  my_date.toLocaleString('pt-BR', {month: 'long', year: 'numeric'});
+        return this.upperCaseFirstLetter(date_to_str);
+    }
+    
+    upperCaseFirstLetter(text){
+        return text[0].toUpperCase() + text.slice(1).toLowerCase();
+    }
 
 	createDataSeries(){
 		//Create the VerticalDataSeries objects for the chart.
 		var all_data_series = []
 		var prepared_data = this.createDatasetBarGraph(this.keys_to_show);
 		for (var i=0; i<prepared_data.length; i++){
+            const series_id = i;
+
 			all_data_series.push(
 				<VerticalBarSeries key={i}
                     onValueMouseOver={(datapoint, event) => {
-                        this.hint_datapoint = datapoint;
-                        this.setState({show_hint: true});
+                        this.setState({show_hint: true,
+                            datapoint: datapoint,
+                            series_name: this.keys_to_show[series_id],
+                            series_color: this.graph_bar_colors[series_id]
+                        });
                     }}
                     onValueMouseOut={(datapoint, event) => {this.setState({show_hint: false})}}
                     color={this.graph_bar_colors[i]}

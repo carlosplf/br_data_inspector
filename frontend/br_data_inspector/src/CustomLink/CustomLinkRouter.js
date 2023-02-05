@@ -1,6 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import queryString from 'query-string';
 
 
@@ -44,7 +43,7 @@ class CustomLinkRouter extends React.Component{
         if(!this.state.loading){
             const path = this.adjustRealURL();
             return(
-                    <Redirect to={path}/>
+                this.props.history.push(path)
             )
         }
         else{
@@ -55,4 +54,4 @@ class CustomLinkRouter extends React.Component{
     }
 }
 
-export default withRouter(CustomLinkRouter);
+export default CustomLinkRouter;

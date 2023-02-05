@@ -1,5 +1,4 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 import "../ContractsData/ContractsTable.css";
 import { FaAngleRight } from "react-icons/fa";
 
@@ -155,4 +154,4 @@ class ContractsTable extends React.Component {
         return <div className="contractsTableContainer">{full_table}</div>;
     }
 }
-export default withRouter(ContractsTable);
+export default ContractsTable;

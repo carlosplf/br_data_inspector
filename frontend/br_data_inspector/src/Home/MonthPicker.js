@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import '../Home/MonthPicker.css';
 
 
@@ -309,4 +308,4 @@ class MonthPicker extends React.Component{
     }
 }
 
-export default withRouter(MonthPicker);
+export default MonthPicker;

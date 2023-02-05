@@ -1,9 +1,7 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 import ContractsCard from "../CompanyPage/ContractsCard.js";
 import BiddingsCard from "../CompanyPage/BiddingsCard.js";
 import Header from "../Header/Header";
-import queryString from "query-string";
 import "../CompanyPage/CompanyPage.css";
 
 class CompanyPage extends React.Component {
@@ -18,8 +16,8 @@ class CompanyPage extends React.Component {
 
     //Expected URL: https://domain.com/company?cnpj=111222333444
     getURLParams() {
-        const value = queryString.parse(this.props.location.search);
-        const company_cnpj = value.cnpj;
+        const queryParameters = new URLSearchParams(window.location.search);
+        const company_cnpj = queryParameters.get("cnpj");
         this.setState({cnpj: company_cnpj});
     }
 
@@ -42,4 +40,4 @@ class CompanyPage extends React.Component {
     }
 }
 
-export default withRouter(CompanyPage);
+export default CompanyPage;

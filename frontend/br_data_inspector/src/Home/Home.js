@@ -4,8 +4,7 @@ import MonthPicker from '../Home/MonthPicker';
 import Header from '../Header/Header';
 import CompareButton from '../Home/CompareButton';
 import Loading from '../Utils/Loading';
-import { Redirect } from "react-router-dom";
-import { withRouter } from 'react-router-dom';
+import { Navigate } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../Home/Home.css';
@@ -54,8 +53,8 @@ class Home extends React.Component{
         }));
     }
 
-    //Callback when a Entity is selected from Autocomplete search.
-    handleSearch = (item) => {
+    //Callback when a Search button is pressed.
+    handleSearch = () => {
         if (this.selected_dates.length === 0){
             console.log("Alert, no date selected!");
             toast.warn('Selecione uma data', {
@@ -152,7 +151,7 @@ class Home extends React.Component{
                 url_string = "/compare?id1=" + this.state.search_id + "&id2=" + this.state.search_id_2 + "&dates=" + this.dates_url_param;
             }
             return (
-                <Redirect to={url_string}/>
+                <Navigate to={url_string} replace={true}/>
             );
         }
 
@@ -194,10 +193,9 @@ class Home extends React.Component{
 
                         <Header header_text="BR Data Collector" handle_modal={this.handleOpenDataModal}/>
 
-                        <span className="newsWarning"> &#127881; Agora com dados de 2022! &#127881; </span>
                         
                         <div className="titleContainer">
-                            <span className="pageTitle">Pesquise uma Instituição Federal </span>
+                            <span className="pageTitle">Pesquise por uma Instituição Federal </span>
                         </div>
 
                         <SearchEntity
@@ -227,4 +225,4 @@ class Home extends React.Component{
     }
 }
 
-export default withRouter(Home);
+export default Home;

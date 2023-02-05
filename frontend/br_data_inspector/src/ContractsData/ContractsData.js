@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import ContractsTable from '../ContractsData/ContractsTable';
 import '../ContractsData/ContractsData.css';
 
@@ -100,4 +99,4 @@ class ContractsData extends React.Component{
 	}
 }
 
-export default withRouter(ContractsData);
+export default ContractsData;

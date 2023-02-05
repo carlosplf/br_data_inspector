@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import BiddingsTable from '../BiddingsData/BiddingsTable';
 import '../BiddingsData/BiddingsData.css';
 
@@ -99,4 +98,4 @@ class BiddingsData extends React.Component{
 	}
 }
 
-export default withRouter(BiddingsData);
+export default BiddingsData;
