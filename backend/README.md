@@ -2,23 +2,33 @@
 
 The BR Data Collector Backend is responsible for collecting all the data from Brazil Government platforms, process all of it and save into the DBs.
 
-### How to run:
+## How to run:
 
 The backend can run with or without Docker containers. Let's look into the non-Docker approach.
 
 The MongoDB and RedisDB addresses are set into the db_connection files. Please change `collector/db_connector/db_connector.py` and `collector/db_connector/redis_connector.py` to connect in a local DB instance.
 
-#### Running development environment:
+### Running development environment:
+
+#### Databases:
 
 You can start MongoDB and RedisDB as services, or using Docker. To start the DBs using docker, run: `docker-compose -f docker/docker-compose-dev.yml up -d mongo redis` at the project **root folder**.
 
 Please, remember to change the DB adress to localhost inside the files `collector/db_connector/db_connector.py` and `collector/db_connector/redis_connector.py`. *(in future releases, the DB address should be set as run.py args.)*
+
+#### Logs and Downloads:
+
+It's needed to change the path to the `logs` folder at `/backend/collector/collector.py` and change the path to `downloads` at `collector/report_downloader/report_downloader.py` and `/backend/collector/collector.py`.
+
+#### Python requirements:
 
 Create a virtualenv and install all the requirements:
 
 `python3 -m venv ./env; source ./env/bin/activate`
 
 `pip install -r requirements.txt`
+
+#### Backend and API
 
 The main files that controlls all the backend routines are `run.py` and `run_api.py`.
 
@@ -64,15 +74,4 @@ Running `run.py --createlists` will create all the entities lists, rankings and 
 consolidations of the already collected data, and avoid the software to process all the data everytime that the API/Frontend requests the list of
 all entities, for example. The lists are saved into a **RedisDB** instance, and not at the MongoDB.
 
-### Modules:
-
-The Backend structure depends on some modules:
-- api (respond to HTTP requests)
-- collector/data_inspector (interface to search things into DB)
-- collector/data_processor (process data and create the indexes and lists)
-- collector/csv_converter (process the CSV and generated valid Pythons structure)
-- collector/report_downloader (download reports from internet)
-- collector/db_connector (create the connections with the DBs (Mongo and Redis))
-- collector/db_updater (routine to update the DBs in case of data is missing)
-
-Each module should have its own documentation.
+The `run_api.py` file will run the backend API to serve the frontend. The API is built using Flask.
