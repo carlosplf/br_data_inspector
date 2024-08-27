@@ -8,16 +8,15 @@ import logging
 import datetime
 
 # Local paths
-# TASKS_FILENAME = "task_list.json"
-# DOWNLOADS_PATH = "./downloads/"
+TASKS_FILENAME = "task_list.json"
+DOWNLOADS_PATH = "./downloads/"
 
 # Docker containers paths
-TASKS_FILENAME = "/br_data_inspector/backend/task_list.json"
-DOWNLOADS_PATH = "/br_data_inspector/backend/downloads/"
+# TASKS_FILENAME = "/br_data_inspector/backend/task_list.json"
+# DOWNLOADS_PATH = "/br_data_inspector/backend/downloads/"
 
 
-class Collector():
-
+class Collector:
     def __init__(self):
         self.db_connection = None
         self.extracted_reports = None
@@ -54,7 +53,6 @@ class Collector():
             inside_file_name = None
 
             for arg in task_list[key]["args"]:
-
                 if "inside_file_name" in task_list[key]:
                     inside_file_name = arg + task_list[key]["inside_file_name"]
 
@@ -63,13 +61,14 @@ class Collector():
                     fields_names = task_list[key]["change_fields"]
 
                 self.do_report_full_cycle(
-                    url, arg, db_name, inside_file_name,
-                    change_fields, fields_names
+                    url, arg, db_name, inside_file_name, change_fields, fields_names
                 )
 
         logging.debug("==> FINISHED to collect all reports in tasks_list.json...")
 
-    def do_report_full_cycle(self, url, arg, db_name, inside_file_name, change_fields=False, fields_names=[]):
+    def do_report_full_cycle(
+        self, url, arg, db_name, inside_file_name, change_fields=False, fields_names=[]
+    ):
         """
         Do a full cycle for a report (task). Download, extract, proccess and save
         to DB.
@@ -105,8 +104,9 @@ class Collector():
         # For loop is necessary, because we can get multiple CSVs inside
         # the ZIP file.
         for single_report in extracted_reports:
-            data_as_dict = csv_c.csv_to_dict(DOWNLOADS_PATH + single_report,
-                                             change_fields, fields_names, True)
+            data_as_dict = csv_c.csv_to_dict(
+                DOWNLOADS_PATH + single_report, change_fields, fields_names, True
+            )
             self.__insert_to_db(data_as_dict, db_name)
 
         self.__register_report_downloaded(url, arg)
@@ -126,10 +126,9 @@ class Collector():
             inside_file_name = None
 
             for arg in task_list[task]["args"]:
-                
                 if "inside_file_name" in task_list[task]:
                     inside_file_name = arg + task_list[task]["inside_file_name"]
-                
+
                 self.update_single_date(url, arg, db_name, inside_file_name)
 
     def update_single_date(self, url, arg, db_name, inside_file_name):
@@ -204,11 +203,7 @@ class Collector():
             downloaded_report_info["downloaded_reports"] = []
 
         downloaded_report_info["downloaded_reports"].append(
-            {
-                "url": report_url,
-                "info": "",
-                "datetime": str(datetime.datetime.now())
-            }
+            {"url": report_url, "info": "", "datetime": str(datetime.datetime.now())}
         )
 
         return rc.set("downloaded_reports", json.dumps(downloaded_report_info))

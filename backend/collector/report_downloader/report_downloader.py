@@ -10,12 +10,13 @@ import os
 DOWNLOAD_RETRIES = 3
 
 # Running local
-# DOWNLOAD_EXTRACT_PATH = "./downloads"
+DOWNLOAD_EXTRACT_PATH = "./downloads"
+
 # Running in Docker container
-DOWNLOAD_EXTRACT_PATH = "/br_data_inspector/backend/downloads"
+# DOWNLOAD_EXTRACT_PATH = "/br_data_inspector/backend/downloads"
 
 
-class ReportDownloader():
+class ReportDownloader:
     def __init__(self):
         self.reports_downloaded = []
 
@@ -47,7 +48,6 @@ class ReportDownloader():
         try_number = 0
 
         while True:
-
             if try_number == DOWNLOAD_RETRIES:
                 logging.warning("Falied to download: maximum retries. Returning empty.")
                 return None
@@ -96,7 +96,7 @@ class ReportDownloader():
 
         all_files_inside = []
 
-        with zipfile.ZipFile(filename, 'r') as zip_ref:
+        with zipfile.ZipFile(filename, "r") as zip_ref:
             if not extract_only_filename:
                 all_files_inside = zip_ref.namelist()
                 zip_ref.extractall(DOWNLOAD_EXTRACT_PATH)
