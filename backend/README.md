@@ -18,7 +18,7 @@ Please, remember to change the DB adress to localhost inside the files `collecto
 
 #### Logs and Downloads:
 
-It's needed to change the path to the `logs` folder at `/backend/collector/collector.py` and change the path to `downloads` at `collector/report_downloader/report_downloader.py` and `/backend/collector/collector.py`.
+It's needed to check and change the path to the `logs` folder at `/backend/collector/collector.py` and change the path to `downloads` at `collector/report_downloader/report_downloader.py` and `/backend/collector/collector.py`.
 
 #### Python requirements:
 
